@@ -31,29 +31,24 @@ To get started with Minishell, follow these steps:
     ```bash
     ./minishell
     ```
-    ```bash
-    cd minishell
-    ```
-    ```bash
-    cd minishell
-    ```
 ## Usage
+
 Minishell provides a command-line interface where you can enter and execute commands. It supports various features and syntax that you can utilize:
 
 **Executing Commands**: Simply enter a command and press Enter to execute it. For example:
+
     ```bash
    ls -l
     ```
+
 **Built-in Commands**: Minishell supports several built-in commands. Here are a few examples:
     Changing the current working directory:
      ```bash
    cd /path/to/directory
     ```
-echo Hello, world!
      ```bash
    echo Hello, world!
     ```
-echo Hello, world!
      ```bash
    ls -l
     ```
@@ -69,12 +64,9 @@ Piping the output of one command as input to another command:
 **Signal Handling**: Minishell handles signals such as Ctrl-C and Ctrl-\ to terminate running commands or exit Minishell gracefully.
 
 **Environment Variables**: You can manage environment variables using the built-in commands. For example:
-
-Setting a new environment variable:
     ```bash
     export MY_VAR=my_value
      ```
-export PATH=$PATH:/new/path
     ```bash
    export PATH=$PATH:/new/path
      ```
