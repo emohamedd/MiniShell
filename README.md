@@ -22,12 +22,15 @@ To get started with Minishell, follow these steps:
    ```bash
    git clone https://github.com/emohamedd/MiniShell.git
     ```
+2. Navigate to the project directory:
     ```bash
     cd minishell
     ```
+3. Build Minishell using the provided Makefile:
     ```bash
     make
     ```
+4. Run Minishell:
     ```bash
     ./minishell
     ```
