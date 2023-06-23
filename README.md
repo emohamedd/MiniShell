@@ -34,12 +34,15 @@ To get started with Minishell, follow these steps:
 ## Usage
 
 Minishell provides a command-line interface where you can enter and execute commands. It supports various features and syntax that you can utilize:
-**Executing Commands**: Simply enter a command and press Enter to execute it. For example:
-    ```bash
+
+1. Executing Commands: Simply enter a command and press Enter to execute it. For example:
+
+   ```bash
    ls -l
     ```
-**Built-in Commands**: Minishell supports several built-in commands. Here are a few examples:
+2. **Built-in Commands**: Minishell supports several built-in commands. Here are a few examples:
     Changing the current working directory:
+
     ```bash
     cd /path/to/directory
     ```
@@ -49,22 +52,25 @@ Minishell provides a command-line interface where you can enter and execute comm
     ```bash
     ls -l
     ```
-**Redirection and Pipes**: Minishell allows you to redirect input/output and chain commands using pipes. Here are a few examples:
-Redirecting output to a file:
-    ```bash
-    ls -l > output.txt
-     ```
-Piping the output of one command as input to another command:
-     ```bash
-   cat file.txt | grep "pattern"
-     ```
-**Signal Handling**: Minishell handles signals such as Ctrl-C and Ctrl-\ to terminate running commands or exit Minishell gracefully.
+3. **Redirection and Pipes**: Minishell allows you to redirect input/output and chain commands using pipes. Here are a few examples:
+    Redirecting output to a file:
 
-**Environment Variables**: You can manage environment variables using the built-in commands. For example:
+   ```bash
+    ls -l > output.txt
+    ```
+    Piping the output of one command as input to another command:
+
+    ```bash
+    ccat file.txt | grep "pattern"
+    ```
+
+4. **Signal Handling**: Minishell handles signals such as Ctrl-C and Ctrl-\ to terminate running commands or exit Minishell gracefully.
+    **Environment Variables**: You can manage environment variables using the built-in commands. For example:
+
     ```bash
     export MY_VAR=my_value
      ```
     ```bash
-   export PATH=$PATH:/new/path
+    export PATH=$PATH:/new/path
      ```
-**Command History:** Minishell keeps track of command history, allowing you to navigate through previously executed commands using the arrow keys.
+5. **Command History:** Minishell keeps track of command history, allowing you to navigate through previously executed commands using the arrow keys.
