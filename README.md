@@ -1,5 +1,9 @@
 # Minishell
 
+![minishell](https://github.com/emohamedd/MiniShell/assets/102475281/65d50065-be64-4115-8e49-ea0181b09028)
+
+
+
 Welcome to Minishell, The Giga Project  developed as part of the 42 Network curriculum. Minishell is a simplified shell implementation, providing a command-line interface where users can interact with the operating system by executing various commands.
 
 ## Features
