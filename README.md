@@ -34,23 +34,20 @@ To get started with Minishell, follow these steps:
 ## Usage
 
 Minishell provides a command-line interface where you can enter and execute commands. It supports various features and syntax that you can utilize:
-
 **Executing Commands**: Simply enter a command and press Enter to execute it. For example:
-
     ```bash
    ls -l
     ```
-
 **Built-in Commands**: Minishell supports several built-in commands. Here are a few examples:
     Changing the current working directory:
-     ```bash
-   cd /path/to/directory
+    ```bash
+    cd /path/to/directory
     ```
-     ```bash
-   echo Hello, world!
+    ```bash
+    echo Hello, world!
     ```
-     ```bash
-   ls -l
+    ```bash
+    ls -l
     ```
 **Redirection and Pipes**: Minishell allows you to redirect input/output and chain commands using pipes. Here are a few examples:
 Redirecting output to a file:
