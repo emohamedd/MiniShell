@@ -13,6 +13,8 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
+int system(const char* command);
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
