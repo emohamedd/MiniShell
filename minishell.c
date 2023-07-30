@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 19:31:40 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/07/30 19:34:54 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main()
         int i = 0;
         display_prompt();
         input = read_input();
-        str = split_input(input);
+        str = ft_split(input, ' ');
         int j = count_s_lenght(input, ' ');
         
     while (i < j)
