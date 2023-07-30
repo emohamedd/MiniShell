@@ -6,11 +6,11 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 14:50:37 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 14:27:47 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:57:56 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	ft_atoi(const char *str)
 {

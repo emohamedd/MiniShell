@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 19:31:40 by emohamed         ###   ########.fr       */
+/*   Created: 2023/07/30 18:05:55 by emohamed          #+#    #+#             */
+/*   Updated: 2023/07/30 19:29:42 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-int main()
+char **split_input(char *str)
 {
-    char *input;
-    char **str;
-    while(1)
+    char **token = ft_split(str, ' ');
+    if (!token)
     {
-        int i = 0;
-        display_prompt();
-        input = read_input();
-        str = split_input(input);
-        int j = count_s_lenght(input, ' ');
-        
-    while (i < j)
-    {
-        printf("%s\n", str[i]);
-        i++;   
+        perror("Error\n");
+        exit(0);
     }
     
-    }
-    return 0;
 }
