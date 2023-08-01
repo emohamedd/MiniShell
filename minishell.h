@@ -13,7 +13,7 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
-int system(const char* command);
+// int system(const char* command);
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +21,8 @@ int system(const char* command);
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <unistd.h>
+#include "libft/libft.h"
+ #include <sys/wait.h>
 
 
     void display_prompt();

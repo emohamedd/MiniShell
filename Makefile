@@ -25,12 +25,15 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
+	make -C libft
+	$(CC) $(CFLAGS) $(OBJS) libft/libft.a  -o $(NAME) $(LDFLAGS)
 
 clean:
+	make -C libft/ fclean
 	rm -f $(OBJS)
 
 fclean: clean
+	make -C libft/ fclean
 	rm -f $(NAME)
 
 re: fclean all
