@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 21:49:13 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:32:00 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ int main()
         
     while (i < j)
     {
-        printf("%s\n", str[i]);
+        printf("___________\n");
+        printf("\n*   %s%s\n", str[i], "  *");
+        printf("___________\n");
         i++;   
     }
-    
+
     }
     return 0;
 }
