@@ -6,7 +6,7 @@
 /*   By: emmd <emmd@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/08/21 15:28:37 by emmd             ###   ########.fr       */
+/*   Updated: 2023/08/21 15:39:12 by emmd             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,6 @@ int main()
     }
     return 0;
 }
+
+//lez beda bda kayban hadchi db baybqaw dok les cas dyal quote wst mnha expand dak tkhrbiq kaymrd mohim beda bdat katban qadia
+//yalah a hamza byn lia tanta ach endk
