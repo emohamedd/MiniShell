@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmd <emmd@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:21:49 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 18:58:37 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:22:43 by emmd             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*allocat_s(const char *s, char c)
 	return (p);
 }
 
-char	**ft_split(char const *s, char c)
+char	**basic_ft_split(char const *s, char c)
 {
 	char	**p;
 	int		i;

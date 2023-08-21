@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmd <emmd@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 19:26:41 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:27:03 by emmd             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
     void display_prompt();
     char *read_input();
-    char	**ft_split(char const *s, char c);
+    char	**ft_split(char *s);
     char **split_input(char *str);
     int	count_s_lenght(const char *s, char c);
     // size_t	ft_strlen(const char *s);
