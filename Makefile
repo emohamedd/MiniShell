@@ -22,10 +22,10 @@ NAME = minishell
 all: $(NAME)
 
 %.o: %.c
+	make -C libft
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	make -C libft
 	$(CC) $(CFLAGS) $(OBJS) libft/libft.a  -o $(NAME) $(LDFLAGS)
 
 clean:
