@@ -15,6 +15,7 @@
 
 // int system(const char* command);
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
@@ -22,7 +23,7 @@
 #include <readline/history.h>
 #include <unistd.h>
 #include "libft/libft.h"
- #include <sys/wait.h>
+#include <sys/wait.h>
 
 
     void display_prompt();

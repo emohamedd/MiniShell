@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+// #include <direct.h>
 
 void run_echo (char **args)
 {
@@ -39,6 +40,8 @@ void run_cd(char **args)
 
 void run(char *cmd, char **args)
 {
+    char *cwd = getcwd(NULL, 1024);
+
     if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
     {
         run_echo(args);
@@ -47,7 +50,7 @@ void run(char *cmd, char **args)
     {
         run_cd(args);
     }
-    else
+    else if (ft_strncmp(cmd, "ls", ft_strlen("ls")) == 0)
     {
         int pid = fork();
         if (pid == 0)
@@ -58,6 +61,20 @@ void run(char *cmd, char **args)
         {
             wait(NULL);
         }
+    }
+    else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
+    {
+        if (cwd == NULL)
+        {
+            printf ("Get current working directory failed.\n");
+            return ;
+        }
+        printf ("%s\n", cwd);
+        free (cwd);
+    }
+    else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
+    {
+        exit (1);
     }
 }
 
