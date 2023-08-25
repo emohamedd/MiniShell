@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_prompt.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmd <emmd@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:32:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 17:39:01 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/08/25 21:01:11 by emmd             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void display_prompt()
 {
-    write(1, "aminoarab$", 10);
+    write(1, "aminoarab$ ", 11);
 }
