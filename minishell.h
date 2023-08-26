@@ -25,19 +25,20 @@
 #include "libft/libft.h"
 #include <sys/wait.h>
 
+typedef struct s_env
+{
+    char *key;
+    int  is_equal;
+    char *value;
+} t_env;
+
+
 typedef struct s_vars
 {
 	int	count_argiment;
 	char **envp;
-}	t_vars;
-
-typedef struct s_var
-{
-	int	count_string;
-	char *first_string;
-	char *key;
-	char *last_string;
-}	t_var;
+    t_env *env;
+    }	t_vars;
 
     void display_prompt();
     char *read_input();

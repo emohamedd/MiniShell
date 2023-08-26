@@ -77,6 +77,43 @@ int check_argiment(char **args, t_vars *vars, int check)
 	return (count);
 }
 
+void export_cmd(t_vars *vars, char **args) {
+    int count = 0;
+	while (vars->envp[count])
+    {
+        printf ("%s\n", vars->envp[count]);
+        count++;
+    }
+    if (vars->count_argiment > 1)
+    {
+        int i = 1;
+        while (args[i])
+        {
+            if (ft_strchr(args[i], '=') != NULL)
+            {
+                // char var=
+                vars->envp[count] = args[i];
+                count++;
+                printf ("%s\n", args[i]);
+            }
+            i++;
+        }
+        vars->envp[count] = 0;
+    }
+}
+
+void env_cmd(t_vars *vars) {
+    int i = 0;
+    while (i < count_argiment(vars->envp)) {
+        if (vars->env[i].is_equal) {
+            printf("%s", vars->env[i].key);
+            printf("=");
+            printf("%s\n", vars->env[i].value);
+        }
+        i++;
+    }
+}
+
 void run(char *cmd, char **args, t_vars *vars)
 {
     char *cwd = getcwd(NULL, 1024);
@@ -121,39 +158,11 @@ void run(char *cmd, char **args, t_vars *vars)
 	
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 	{
-		int count = 0;
-		while (vars->envp[count])
-		{
-			printf ("%s\n", vars->envp[count]);
-			count++;
-		}
-		if (vars->count_argiment > 1)
-		{
-			int i = 1;
-			while (args[i])
-			{
-				if (check_argiment(args, vars, i) >= 1)
-				{
-					vars->envp[count] = args[i];
-					count++;
-					printf ("%s\n", args[i]);
-				}
-				i++;
-			}
-			vars->envp[count] = 0;
-		}
+		export_cmd(vars, args);
 	}
 	
 	else if (ft_strncmp(cmd, "env", ft_strlen("env")) == 0)
-	{
-		int count = 0;
-		while (vars->envp[count])
-		{
-			printf ("%s\n", vars->envp[count]);
-			count++;
-		}
-		
-	}
+		env_cmd(vars);
 	
 	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
 	{
@@ -192,6 +201,20 @@ void run(char *cmd, char **args, t_vars *vars)
     }
 }
 
+void fell_env_struct(t_vars *vars) {
+    int i = 0;
+    char *key;
+    while (vars->envp[i]) {
+        key = ft_split(vars->envp[i], '=')[0];
+        vars->env[i].key = key;
+        if (ft_strchr(vars->envp[i], '=')) {
+            vars->env[i].is_equal = 1;
+            vars->env[i].value = ft_strchr(vars->envp[i], '=') + 1;
+        }
+        i++;
+    }
+}
+
 int main(int c, char **v, char **env)
 {
     char *input;
@@ -201,6 +224,8 @@ int main(int c, char **v, char **env)
 	(void)v;
 	(void)c;
 	vars.envp = env;
+    vars.env = malloc(sizeof(t_env) * (count_argiment(vars.envp)));
+    fell_env_struct(&vars);
     while(1)
     {
         input = read_input();
