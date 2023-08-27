@@ -6,7 +6,7 @@
 /*   By: emmd <emmd@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:52:36 by emmd              #+#    #+#             */
-/*   Updated: 2023/08/25 21:27:28 by emmd             ###   ########.fr       */
+/*   Updated: 2023/08/27 23:15:15 by emmd             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char **ft_split(char *s)
             while(s[i] && (!is_whitespace(s[i])  || is_special_char(s[i])))
             {
                 //hna kan9lb ela end dyal token
-            printf("%d\n", i);
+            // printf("%d\n", i);
                 i++;
             }
             // exit(1);
