@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 17:40:23 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 17:45:18 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/04 10:58:47 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char *read_input()
 {
-    char *in = readline("");
+    char *in = readline("amineoarab$ ");
     if (in)
         add_history(in);
     return in;
