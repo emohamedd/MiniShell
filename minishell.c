@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/05 17:51:00 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:20:50 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int main()
         int i = 0;
         // display_prompt();
         input = read_input();
+
         str =  ft_split(input);
+       
         
     // while(str[i])
     // {

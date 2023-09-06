@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:31:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/06 10:45:52 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/06 13:01:46 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,67 @@ int size_ar(t_info **arr)
 
 t_info **appand(t_info **token, t_info *info)
 {
-
+    t_info **new;
     int i = 0;
  
-    token = malloc((size_ar(token) + 1) + 1 * sizeof(t_info));
-    info->content = strdup(token[i]->content);
+    new = malloc((size_ar(token) + 2) * sizeof(t_info));
+    // info->content = strdup(token[i]->content);
     // info->type = NULL;
     // info->lenght = strlen(token);
     while(i < size_ar(token))
     {
-        token[i] = info;
+        new[i] = token[i];
         i++;
     }
-    token[i] = info;
-    token[i + 1] = 0;
-    return token;
+    new[i] = info;
+    new[i + 1] = 0;
+    return new;
 }
+
+// t_info **appand(t_info **token, t_info *info)
+// {
+//     int size = size_ar(token);
+//     token = malloc( (size + 2) * sizeof(t_info *));
+
+
+//     token[size] = malloc(sizeof(t_info));
+//     token[size]->content = strdup(info->content); 
+//     // token[size]->type = NULL; 
+//     // token[size]->length = info->length;
+//     token[size + 1] = NULL;
+
+//     return token;
+// }
+// t_info **ft_split(char *s)
+// {
+//     t_info *inf = NULL;
+//     int end = 0;
+//     int start = 0;
+//     int i = 0;
+//     t_info **token = NULL;
+
+//     while (s[i])
+//     {
+//         start = i;
+//         if (is_whitespace(s[i]) || is_a_spchar(s[i]))
+//             end = i;
+//         int token_length = end - start;
+
+//         token = malloc((i + 2) * sizeof(t_info *));
+//         token[i] = malloc(sizeof(t_info));
+//         token[i]->content = (char *)malloc(token_length + 1);
+//         strncpy(token[i]->content, &s[start], token_length);
+//         token[i]->content[token_length] = '\0';
+//         // token[i]->type = NULL;
+//         // token[i]->lenght = token_length;
+//         token[i + 1] = NULL;
+
+//         token = appand(token, inf);
+//         i++;
+//     }
+
+//     return token;
+// }
 
 t_info **ft_split(char *s)
 {
@@ -84,18 +129,26 @@ t_info **ft_split(char *s)
 
     while(s[i])
     {
+        while(s[i])
+        {
         start = i;
         if (is_whitespace(s[i]) || is_a_spchar(s[i]))
-            end = i;
+            {
+                end = i;
+                break;
+            }
+            i++;
+        }
+        i = start;
         int token_lenght = end - start;
-
-       token = malloc(token_lenght + 1);
-
+       inf = malloc(sizeof(t_info));
+       inf->content  =  malloc(token_lenght * sizeof(t_info));
         int j = 0;
-        int v = 0;
+        // int v = 0;
+
        while(start < end)
        {
-            token[v]->content[j] = s[start];
+            inf->content[j] = s[start];
             j++;
             start++;
        }
