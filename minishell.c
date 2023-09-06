@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/04 10:58:57 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:51:00 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,35 @@
 
 int main()
 {
+    t_info *info = NULL;
     char *input;
-    char **str;    
+    t_info **str;    
     while(1)
     {
         int i = 0;
         // display_prompt();
         input = read_input();
-        str = ft_split(input);
+        str =  ft_split(input);
         
-    while (str[i])
-    {
-        printf("___________\n");
-        printf("\n*   %s%s\n", str[i], "  *");
-        printf("___________\n");
-        i++;   
-    }
+    // while(str[i])
+    // {
+    //     printf("%s  ", str[i]);
+    //     i++;
+    // }
+    //  printf("+%s------------------------+%s\n", PURPLE, RESET);
+    // printf("|     %sToken%s          |\n", GREEN, RESET);
+    // printf("+%s------------------------+%s\n", PURPLE, RESET);
 
+    // while (str[i]) {
+    //     printf("| %s%-20s%s |\n", YELLOW, str[i], RESET);
+    //     printf("+%s------------------------+%s\n", PURPLE, RESET);
+    //     i++;
+    // }
+    while(str[i])
+    {
+        printf("Content : %s", info->content);
+        i++;
+    }
     }
     return 0;
 }

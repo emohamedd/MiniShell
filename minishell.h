@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emmd <emmd@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/08/21 15:27:03 by emmd             ###   ########.fr       */
+/*   Updated: 2023/09/06 10:02:57 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,45 @@
 #include <unistd.h>
 
 
+#define RED     "\x1B[31m"
+#define GREEN   "\x1B[32m"
+#define YELLOW  "\x1B[33m"
+#define RESET   "\x1B[0m"
+#define PURPLE  "\x1B[35m"
+
+// enum golbal_token
+// {
+//     WORD,
+//     PIPE ='|',
+//     ENV_VAR = '$',
+//     space = ' ',
+//     DOUBLE_QUOTE = '\"',
+//     SINGLE_QUOTE ='\'',
+//     R_OUT = '>',
+//     R_IN = '<',
+//     DR,
+//     HERE_DOC,
+// }
+
+
+typedef struct s_info
+{
+    char *content;
+    char *type;
+    int lenght;
+    
+} t_info;
+
+// enum state{
+//     IN_SQ,
+//     IN_DQ,
+//     GENR
+// }
+
     void display_prompt();
     char *read_input();
-    char	**ft_split(char *s);
-    char **split_input(char *str);
+    t_info **ft_split(char *s);
+    int split_input(char *str);
     int	count_s_lenght(const char *s, char c);
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
@@ -34,5 +69,6 @@
     // char	*ft_substr(char const *s, unsigned int start, size_t len);
     // char	*ft_strjoin(char const *s1, char const *s2);
     // char	*ft_itoa(int n);
+
 
 #endif
