@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 19:26:41 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:26:46 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,19 @@
 #include "libft/libft.h"
 #include <sys/wait.h>
 
+typedef struct s_vars
+{
+	int	count_argiment;
+	char **envp;
+}	t_vars;
+
+typedef struct s_var
+{
+	int	count_string;
+	char *first_string;
+	char *key;
+	char *last_string;
+}	t_var;
 
     void display_prompt();
     char *read_input();
