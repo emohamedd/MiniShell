@@ -15,7 +15,7 @@
 
 int main()
 {
-    t_info *info = NULL;
+    // t_info *info = NULL;
     char *input;
     t_info **str;    
     while(1)
@@ -43,7 +43,7 @@ int main()
     // }
     while(str[i])
     {
-        printf("Content : %s", info->content);
+        printf("%s\n", str[i]->content);
         i++;
     }
     }

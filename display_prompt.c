@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishell.h"
 
-void display_prompt()
-{
-    write(1, "aminoarab$ ", 11);
-}
+// void display_prompt()
+// {
+//     write(1, "aminoarab$ ", 11);
+// }
