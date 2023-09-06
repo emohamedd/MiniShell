@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/06 10:02:57 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:30:51 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <unistd.h>
+#include <string.h>
 
 
 #define RED     "\x1B[31m"

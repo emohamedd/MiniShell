@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:31:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/06 10:17:16 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/06 10:45:52 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,14 @@ int size_ar(t_info **arr)
 }
 
 
+
 t_info **appand(t_info **token, t_info *info)
 {
-    // int size = 0;
+
     int i = 0;
-    // while(token[i])
-    // {
-    //     i++;
-    // }
-    // size = i;
-    // i = 0;
-    // if (!token)
-    //    malloc(sizeof(t_info));
-    // else
-    // // info = malloc(sizeof(t_info));  
+ 
     token = malloc((size_ar(token) + 1) + 1 * sizeof(t_info));
-    // info->content = strdup(token);
+    info->content = strdup(token[i]->content);
     // info->type = NULL;
     // info->lenght = strlen(token);
     while(i < size_ar(token))
@@ -100,17 +92,17 @@ t_info **ft_split(char *s)
        token = malloc(token_lenght + 1);
 
         int j = 0;
+        int v = 0;
        while(start < end)
        {
-            token[j] = s[start];
+            token[v]->content[j] = s[start];
             j++;
             start++;
        }
-       token[j] = '\0';
-      inf = appand(token, inf);
+       token[j] = 0;
+      token = appand(token, inf);
 
       i++;
     }
-       return inf;
+       return token;
 }
-
