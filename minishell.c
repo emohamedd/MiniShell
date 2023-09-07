@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/06 12:20:50 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/07 11:18:16 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,15 @@ int main()
         input = read_input();
 
         str =  ft_split(input);
-       
-        
-    // while(str[i])
-    // {
-    //     printf("%s  ", str[i]);
-    //     i++;
-    // }
-    //  printf("+%s------------------------+%s\n", PURPLE, RESET);
-    // printf("|     %sToken%s          |\n", GREEN, RESET);
-    // printf("+%s------------------------+%s\n", PURPLE, RESET);
+ 
+    printf("+%s--------------------------------------+|%s\n", PURPLE, RESET);
+    printf("|     %sToken           |       Length%s\n", GREEN, RESET);
+    printf("+%s--------------------------------------+|%s\n", PURPLE, RESET);
 
-    // while (str[i]) {
-    //     printf("| %s%-20s%s |\n", YELLOW, str[i], RESET);
-    //     printf("+%s------------------------+%s\n", PURPLE, RESET);
-    //     i++;
-    // }
-    while(str[i])
+    while (str[i]) 
     {
-        printf("%s\n", str[i]->content);
+        printf("| %s%-20s%s|    %4d%s \n", YELLOW, str[i]->content, YELLOW, str[i]->lenght, YELLOW);
+        printf("+%s--------------------------------------+|%s\n", PURPLE, RESET);
         i++;
     }
     }
