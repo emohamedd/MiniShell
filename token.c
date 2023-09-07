@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:31:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/07 11:06:35 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:04:12 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,18 @@ t_info **ft_split(char *s)
             while (start < i) 
             {
                 inf->content[j] = s[start];
+                if (inf->content[j] == '<')
+                    inf->type = "RDIN";
+                else if (inf->content[j] == '>')
+                    inf->type = "RDOUT";
+                else if (inf->content[j] == '|')
+                    inf->type = "PIPE";
+                else if (inf->content[j] == '\"')
+                    inf->type = "DBCOTE";
+                else if (inf->content[j] == '\'')
+                    inf->type = "SGCOTE";
+                else
+                    inf->type = "str";
                 inf->lenght = strlen(inf->content);
                 j++;
                 start++;
