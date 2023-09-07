@@ -54,8 +54,22 @@ int size_ar(t_info **arr)
 
 t_info **appand(t_info **token, t_info *info, int *token_size) 
 {
+    // (*token_size)++;
+   t_info **new_token = malloc((*token_size + 1) * sizeof(t_info *));
+
+    int i = 0;
+    while (i < *token_size) 
+    {
+        new_token[i] = token[i];
+        i++;
+    }
+    new_token[*token_size] = NULL;
+
+    
+    token = new_token;
     (*token_size)++;
-    token = realloc(token, (*token_size + 1) * sizeof(t_info *));
+
+
     if (token == NULL) 
     {
         printf("Eroor\n");
