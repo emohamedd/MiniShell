@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:31:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/06 13:01:46 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:39:21 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int is_a_spchar(char c)
 {
     char special_chars[] = "\"\'|<>$";
     int i = 0;
-    while (special_chars[i] != '\0') {
+    while (special_chars[i]) {
         if (c == special_chars[i])
             return 1;
         i++;
@@ -33,7 +33,7 @@ int is_a_spchar(char c)
 int is_char(char *str) 
 {
     int i = 0;
-    while (str[i] != '\0') 
+    while (str[i]) 
     {
 
         if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
@@ -92,15 +92,15 @@ t_info **ft_split(char *s)
     token[token_size] = NULL;
 
     int i = 0;
-    while (s[i] != '\0') 
+    while (s[i]) 
     {
-        while (s[i] != '\0' && (is_whitespace(s[i]) || is_a_spchar(s[i])))
+        while (s[i] && (is_whitespace(s[i])))
             i++;
 
-        if (s[i] != '\0') 
+        if (s[i]) 
         {
             int start = i;
-            while (s[i] != '\0' && !is_whitespace(s[i]) && !is_a_spchar(s[i]))
+            while (s[i] && !is_whitespace(s[i]))
                 i++;
             int token_length = i - start;
 
