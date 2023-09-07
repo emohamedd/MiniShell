@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_input.c                                      :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/30 18:05:55 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 19:35:44 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/07 19:47:45 by haarab            #+#    #+#             */
+/*   Updated: 2023/09/07 19:54:41 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-// char **split_input(char *str)
-// {
-//     char **token = ft_split(str, ' ');
-//     if (!token)
-//     {
-//         perror("Error\n");
-//         exit(0);
-//     }
-// }
+void env_cmd(t_vars *vars)
+{
+    int i = 0;
+    while (i < vars->env_number)
+	{
+        if (vars->env[i].is_equal)
+		{
+            printf("%s", vars->env[i].key);
+            printf("=");
+            printf("%s\n", vars->env[i].value);
+        }
+        i++;
+    }
+}
