@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/07 12:08:26 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:35:20 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int main()
 
         str =  ft_split(input);
  
-    printf("+%s--------------------------------------------------+|%s\n", PURPLE, RESET);
+    printf("+%s------------------------------------------------------+|%s\n", PURPLE, RESET);
     printf("|     %sTOKEN         |       LENGHT     |     %sTYPE    %s\n", GREEN, GREEN, GREEN);
-    printf("+%s--------------------------------------------------+|%s\n", PURPLE, RESET);
+    printf("+%s------------------------------------------------------+|%s\n", PURPLE, RESET);
 
     while (str[i]) 
     {
-        printf("| %s%-20s%s|    %4d%s       |      %s\n", YELLOW, str[i]->content, YELLOW, str[i]->lenght, YELLOW, str[i]->type);
-        printf("+%s--------------------------------------------------+|%s\n", PURPLE, RESET);
+        printf("|    %s%s%s           |         %d%s        |      %s\n", YELLOW, str[i]->content, YELLOW, str[i]->lenght, YELLOW, str[i]->type);
+        printf("+%s------------------------------------------------------+|%s\n", PURPLE, RESET);
         i++;
     }
     }

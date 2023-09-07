@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:31:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/07 12:04:12 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:31:05 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,10 @@ t_info **ft_split(char *s)
                     inf->type = "DBCOTE";
                 else if (inf->content[j] == '\'')
                     inf->type = "SGCOTE";
-                else
-                    inf->type = "str";
+                else if (!is_a_spchar(s[i]) && !is_char(s))
+                    inf->type = "AUT";
+                else if (is_char(s))
+                    inf->type = "STR";
                 inf->lenght = strlen(inf->content);
                 j++;
                 start++;
