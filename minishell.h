@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/07 20:10:59 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/08 12:02:15 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 #include <unistd.h>
 #include "libft/libft.h"
 #include <sys/wait.h>
+
+#define GRN  "\x1B[32m"
+#define BLU  "\x1B[34m"
+#define RED  "\x1B[31m"
+#define RESET "\x1B[0m"
 
 typedef struct s_env
 {

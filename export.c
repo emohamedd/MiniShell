@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/07 20:08:28 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/08 12:38:28 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void export_cmd(t_vars *vars, char *args)
 	{
 		while (count < vars->env_number)
 		{
-			printf("%s", vars->env[count].key);
 			if (vars->env[count].is_equal)
 			{
+				printf("%s%s", vars->env[count].key, GRN);
 				printf("=");
-				printf("\"%s\"""\n", vars->env[count].value);
+				printf("\"%s%s\"""\n", vars->env[count].value, RED);
 			}
 			count++;
 		}
@@ -35,9 +35,12 @@ void export_cmd(t_vars *vars, char *args)
 	}
 	count = 0;
 	char *var_ = ft_split(args, '=')[0];
-	while (count < vars->env_number) {
-		if (!ft_strncmp(vars->env[count].key, var_, ft_strlen(var_))) {
-			if (ft_strchr(args, '=') != NULL) {
+	while (count < vars->env_number)
+	{
+		if (!ft_strncmp(vars->env[count].key, var_, ft_strlen(var_)))
+		{
+			if (ft_strchr(args, '=') != NULL)
+			{
 				vars->env[count].value = ft_strchr(args, '=') + 1;
 				return;
 			}
@@ -48,17 +51,24 @@ void export_cmd(t_vars *vars, char *args)
 	count = 0;
 	while (count < vars->env_number)
 	{
-        vars->env[count] = tmp[count];
+		vars->env[count] = tmp[count];
 		count++;
 	}
-	
-	key = ft_split(args, '=')[0];
-	vars->env[count].key = key;
-	value = ft_strchr(args, '=') + 1;
-	if (ft_strchr(args, '=') != NULL) {
-		vars->env[count].is_equal = 1;
-		vars->env[count].value = value;
+	if (ft_isalpha(args[0]) == 1)
+	{
+		key = ft_split(args, '=')[0];
+		vars->env[count].key = key;
+		value = ft_strchr(args, '=') + 1;
+		if (ft_strchr(args, '=') != NULL)
+		{
+			vars->env[count].is_equal = 1;
+			vars->env[count].value = value;
+		}
+		vars->env_number++;
+	}
+	if (ft_isalpha(args[0]) != 1)
+	{
+		printf("`%s' : not a valid identifier\n", args);
 	}
 	free(tmp);
-	vars->env_number++;
 }

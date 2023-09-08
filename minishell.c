@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:52:40 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/07 19:52:41 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/08 17:33:07 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,26 @@ void fell_env_struct(t_vars *vars)
     }
 }
 
+
+
+// char get_path(char *cmd)
+// {
+// 	int i = 0;
+	
+// 	while (i < vars->env_number)
+// 	{
+// 		if (ft_strncmp(vars->env[i], "PATH", ft_strlen("PATH")))
+// 		{
+			
+// 			// if (ft_strncmp(vars->value[i], "bin", ft_strlen("cmd")))
+// 			{
+				
+// 			}
+// 		}
+// 		i++;
+// 	}
+// }
+
 void run(char *cmd, char **args, t_vars *vars)
 {
     char *cwd = getcwd(NULL, 1024);
@@ -50,18 +70,6 @@ void run(char *cmd, char **args, t_vars *vars)
         run_cd(args);
     }
 	
-    else if (ft_strncmp(cmd, "ls", ft_strlen("ls")) == 0)
-    {
-        int pid = fork();
-        if (pid == 0)
-        {
-            execve("/bin/ls", args, NULL);
-        }
-        else
-        {
-            wait(NULL);
-        }
-    }
 	
     else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
     {
@@ -101,6 +109,22 @@ void run(char *cmd, char **args, t_vars *vars)
     {
         exit (1);
     }
+	
+    // else
+    // {
+	// 	cmd = get_path(cmd);
+    //     int pid = fork();
+    //     if (pid == 0)
+    //     {
+	// 		if (cmd == NULL)
+	// 			perrer("command not found");
+	// 		cmd = ft_strjoin("/bin/", cmd);
+    //         if (execve(cmd, args, vars->envp) == -1)
+	// 			perror ("execve: ERROR");
+    //     }
+    //     else
+    //         wait(NULL);
+    // }
 }
 
 
@@ -117,12 +141,15 @@ int main(int c, char **v, char **env)
 	vars.env_number = count_argiment(vars.envp);
     while(1)
     {
-        input = read_input();
+    	input = read_input();
         str = ft_split(input, ' ');
-        char* command = str[0];
-        char **args = str;
-		vars.count_argiment = count_argiment(args);
-        run(command, args, &vars);
+		if (str[0] != NULL)
+		{
+			char* command = str[0];
+			char **args = str;
+			vars.count_argiment = count_argiment(args);
+			run(command, args, &vars);
+		}
     }
     return 0;
 }
