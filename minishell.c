@@ -6,15 +6,13 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:52:40 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/08 21:08:02 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/08 21:58:52 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
- #include <sys/stat.h>
-  #include <sys/types.h>
-       #include <dirent.h>
+
 void run_cd(char **args)
 {
     if (args[1])
@@ -70,7 +68,7 @@ int check_bin(char **path, int count)
 int check_state(char *folder, t_vars __unused *var, char *cmd)
 {
 	struct stat s;
-	struct dirent	*dir_info;
+	struct dirent	*dir_info = NULL;
 	DIR				*dir_str;
 	
 	if (stat(folder, &s) && s.st_mode & S_IFDIR)
@@ -78,7 +76,7 @@ int check_state(char *folder, t_vars __unused *var, char *cmd)
 		dir_str = opendir(folder);
 		if (!dir_info)
 			return (0);
-		dir_info = reddir(dir_str);
+		dir_info = readdir(dir_str);
 		while (dir_info )
 		{
 			if (ft_strncmp(dir_info->d_name, cmd, ft_strlen(cmd)))
@@ -102,6 +100,7 @@ char *check_path(t_vars __unused *var, char **path, char *cmd)
 			return (ft_strjoin("/bin/", cmd));
 		i++;
 	}
+	return (NULL);
 }
 
 char *get_path(t_vars *vars, char *cmd)
@@ -117,7 +116,14 @@ char *get_path(t_vars *vars, char *cmd)
 			// printf ("%d\n", count);
 			path = ft_split(vars->env[i].value, ':');
 			if (check_bin(path, count))
+			{
+				printf ("hna\n");
+				char *str = check_path(vars, path, cmd);
+				printf ("%s\n" , str);
+				
 				return (check_path(vars, path, cmd));
+			
+			}
 			// else 
 				// res = NULL;
 			// printf ("%d\n", check);
@@ -183,18 +189,20 @@ void run(char *cmd, char **args, t_vars *vars)
 	
     else
     {
-		char str;
+		char *str;
 		str = get_path(vars, cmd);
 
-		// printf ("%c\n", str);
+		// printf ("%s\n", str);
         // int pid = fork();
         // if (pid == 0)
         // {
-		// 	if (cmd == NULL)
-		// 		perrer("command not found");
-		// 	cmd = ft_strjoin("/bin/", cmd);
-        //     if (execve(cmd, args, vars->envp) == -1)
-		// 		perror ("execve: ERROR");
+		// 	// if (str == NULL)
+		// 	// 	perrer("command not found");
+		// 	// // cmd = ft_strjoin("/bin/", cmd);
+        //     // if (execve(cmd, args, vars->envp) == -1)
+		// 	// 	perror ("execve: ERROR");
+        //     execve(cmd, args, vars->envp);
+		// 		// perror ("execve: ERROR");
         // }
         // else
         //     wait(NULL);
