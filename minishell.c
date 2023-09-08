@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/07 15:58:52 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:36:25 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,24 @@ int main()
 {
     // t_info *info = NULL;
     char *input;
-    t_info **str;    
+    char **str;   
+    t_info **tokens = NULL; 
     while(1)
     {
         int i = 0;
         // display_prompt();
         input = read_input();
 
-        str =  ft_split(input);
- 
-    printf("+%s----------------------------------------------------------+|%s\n", PURPLE, RESET);
+        str =  make_token(input);
+        tokens = allocat_token(str);
+    printf("+%s--------------------------------------------------------------+|%s\n", PURPLE, RESET);
     printf("|     %sTOKEN         |       LENGHT     |     %sTYPE    %s\n", GREEN, GREEN, GREEN);
-    printf("+%s----------------------------------------------------------+|%s\n", PURPLE, RESET);
+    printf("+%s--------------------------------------------------------------+|%s\n", PURPLE, RESET);
 
     while (str[i]) 
     {
-        printf("|    %s%s%s           |         %d%s        |      %s\n", YELLOW, str[i]->content, YELLOW, str[i]->lenght, YELLOW, str[i]->type);
-        printf("+%s----------------------------------------------------------+|%s\n", PURPLE, RESET);
+        printf("    %s%s%s           |         %d%s        |      %s\n", YELLOW, tokens[i]->content, YELLOW, tokens[i]->lenght, YELLOW, tokens[i]->type);
+        printf("+%s--------------------------------------------------------------+|%s\n", PURPLE, RESET);
         i++;
     }
     }
