@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:21:49 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/08 11:41:02 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:09:40 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*allocat_s(const char *s, char c)
 	return (p);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_token(char *s, char c)
 {
 	char	**p;
 	int		i;
@@ -79,11 +79,3 @@ char	**ft_split(char const *s, char c)
 	p[j] = NULL;
 	return (p);
 }
-
-// int main()
-// {
-// 	char *s = "    Hello           World !     ";
-
-// 	char **str = ft_split(s, ' ');
-// 	printf("%s\n", str[0]);
-// }
