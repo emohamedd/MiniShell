@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_tokens.c                                      :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/08 12:36:44 by emohamed         ###   ########.fr       */
+/*   Created: 2023/05/10 16:21:49 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/08 11:41:02 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "minishell.c"  
-
-
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "minishell.h"
 
 int	count_s_lenght(const char *s, char c)
 {
@@ -58,7 +53,7 @@ char	*allocat_s(const char *s, char c)
 	return (p);
 }
 
-char	**ft_split(char  *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**p;
 	int		i;
@@ -84,55 +79,11 @@ char	**ft_split(char  *s, char c)
 	p[j] = NULL;
 	return (p);
 }
-void make_token(char *s, int *quotestate) 
-{
-    int i = 0;
-    int insg = 0;
-    int indb = 0;
 
-    while (s[i]) 
-    {
-        if ((s[i] == '\'' && !indb))
-        {
-            s[i] = 16;
-            insg = !insg;
-        } 
-        else if ((s[i] == '"' && !insg) )
-        {  
-                
-            s[i] = 16;
-            indb = !indb;
-        }
-        else if (!insg && !indb && s[i] == ' ') 
-            s[i] = 16;
-        i++;
-    }
-    if (insg || indb) 
-        *quotestate = 1;
-     else 
-        *quotestate = 0;
-}
+// int main()
+// {
+// 	char *s = "    Hello           World !     ";
 
-
-
-
-int main() 
-{
-    int i  = 0;
-    char input[] = "echo 'hello     \"$world\"'  '|' echo \"file.txt\" > amine.txt";
-    int quoteState = 0; 
-
-    make_token(input, &quoteState);
-    char **str = ft_split(input, 16);    
-
-    while(str[i])
-    {
-        printf("TOKEN : %s\n", str[i]);
-        printf("Quote %d\n", quoteState);
-        printf("--------------------\n");
-        i++;
-    }
-
-    return 0;
-}
-
+// 	char **str = ft_split(s, ' ');
+// 	printf("%s\n", str[0]);
+// }
