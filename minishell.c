@@ -6,13 +6,15 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:52:40 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/08 17:33:07 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/08 21:08:02 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
+ #include <sys/stat.h>
+  #include <sys/types.h>
+       #include <dirent.h>
 void run_cd(char **args)
 {
     if (args[1])
@@ -36,25 +38,94 @@ void fell_env_struct(t_vars *vars)
     }
 }
 
-
-
-// char get_path(char *cmd)
-// {
-// 	int i = 0;
+int check_bin(char **path, int count)
+{
+	int i = 0;
+	char *bin = "bin";
+	while (i < count)
+	{
+		int j = 0;
+		while (path[i][j])
+		{
+			j++;
+		}
+		j = j - 3;
+		int k = 0;
+		while (path[i][j])
+		{
+			if (path[i][j] == bin[k])
+			{
+				k++;
+			}
+			if (k == 3)
+			{
+				return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+int check_state(char *folder, t_vars __unused *var, char *cmd)
+{
+	struct stat s;
+	struct dirent	*dir_info;
+	DIR				*dir_str;
 	
-// 	while (i < vars->env_number)
-// 	{
-// 		if (ft_strncmp(vars->env[i], "PATH", ft_strlen("PATH")))
-// 		{
-			
-// 			// if (ft_strncmp(vars->value[i], "bin", ft_strlen("cmd")))
-// 			{
-				
-// 			}
-// 		}
-// 		i++;
-// 	}
-// }
+	if (stat(folder, &s) && s.st_mode & S_IFDIR)
+	{
+		dir_str = opendir(folder);
+		if (!dir_info)
+			return (0);
+		dir_info = reddir(dir_str);
+		while (dir_info )
+		{
+			if (ft_strncmp(dir_info->d_name, cmd, ft_strlen(cmd)))
+			{
+				closedir(dir_str);
+				return (1);
+			}
+			dir_info++;
+			dir_info = readdir(dir_str);
+		}
+		closedir(dir_str);
+	}
+	return (0);
+}
+char *check_path(t_vars __unused *var, char **path, char *cmd)
+{
+	int i = 0;
+	while (path[i])
+	{
+		if (check_state(path[i], var, cmd))
+			return (ft_strjoin("/bin/", cmd));
+		i++;
+	}
+}
+
+char *get_path(t_vars *vars, char *cmd)
+{
+	int i = 0;
+	char **path;
+	char *res = NULL;
+	while (i < vars->env_number)
+	{
+		if (ft_strncmp(vars->env[i].key, "PATH", ft_strlen("PATH")) == 0)
+		{
+			int count = count_strings(vars->env[i].value, ':');
+			// printf ("%d\n", count);
+			path = ft_split(vars->env[i].value, ':');
+			if (check_bin(path, count))
+				return (check_path(vars, path, cmd));
+			// else 
+				// res = NULL;
+			// printf ("%d\n", check);
+		}
+		i++;
+	}
+	return (res);
+}
 
 void run(char *cmd, char **args, t_vars *vars)
 {
@@ -110,21 +181,24 @@ void run(char *cmd, char **args, t_vars *vars)
         exit (1);
     }
 	
-    // else
-    // {
-	// 	cmd = get_path(cmd);
-    //     int pid = fork();
-    //     if (pid == 0)
-    //     {
-	// 		if (cmd == NULL)
-	// 			perrer("command not found");
-	// 		cmd = ft_strjoin("/bin/", cmd);
-    //         if (execve(cmd, args, vars->envp) == -1)
-	// 			perror ("execve: ERROR");
-    //     }
-    //     else
-    //         wait(NULL);
-    // }
+    else
+    {
+		char str;
+		str = get_path(vars, cmd);
+
+		// printf ("%c\n", str);
+        // int pid = fork();
+        // if (pid == 0)
+        // {
+		// 	if (cmd == NULL)
+		// 		perrer("command not found");
+		// 	cmd = ft_strjoin("/bin/", cmd);
+        //     if (execve(cmd, args, vars->envp) == -1)
+		// 		perror ("execve: ERROR");
+        // }
+        // else
+        //     wait(NULL);
+    }
 }
 
 

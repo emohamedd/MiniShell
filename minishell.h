@@ -6,13 +6,12 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/08 12:02:15 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/08 19:40:05 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 #define MINISHELL_H
-
 
 #include <stdio.h>
 #include <stdlib.h>
