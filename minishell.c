@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/08 20:52:10 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 10:17:33 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int main()
         input = read_input();
         if (input == NULL)
             return (1);
+            str =  make_token(input);
         if(str)
         {
-            str =  make_token(input);
             tokens = allocat_token(str);
         printf("+%s--------------------------------------------------------------+|%s\n", PURPLE, RESET);
         printf("|     %sTOKEN         |       LENGHT     |     %sTYPE    %s\n", GREEN, GREEN, GREEN);

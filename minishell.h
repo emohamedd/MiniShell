@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/08 16:38:38 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/08 20:54:28 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_info
 // }
 
   char *read_input();
-  t_info **ft_split(char *s);
+  // t_info **ft_split(char *s);
   char **make_token(char *s) ;
   int	count_s_lenght(const char *s, char c);
   char	**ft_split_token(char *s, char c);
