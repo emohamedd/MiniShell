@@ -1,0 +1,9 @@
+config
+*.dSYM
+
+programs/*
+!programs/*.c
+
+results
+minishell_path
+minishell_prefix

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 15:01:55 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:58:05 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_vars
 	void 	export_cmd(t_vars *vars, char *args);
 	void 	check_unset(t_info **args, t_vars *vars, int check);
 	void 	env_cmd(t_vars *vars);
+    void table(char **str, t_info **tokens);
 	int 	count_argiment(char **str);
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);

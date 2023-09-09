@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 15:27:59 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:57:42 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,8 @@ int main(int c, char **v, char **env)
         if(!tokens)
             continue;
 		vars.count_argiment = lenght_of_the_2d(str);
-		run(tokens[0]->content, tokens, &vars);   
+		run(tokens[0]->content, tokens, &vars);
+		table(str, tokens);
         }
     }
     return 0;
