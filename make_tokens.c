@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/08 16:30:01 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 10:57:59 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,15 @@ t_info **allocat_token(char **s)
         else if (inf[i]->content[0] == '\"')
             inf[i]->type = "DBCOTE";
         else if (inf[i]->content[0] == '$')
-            inf[i]->type = "ENV";
+        {
+                char *var = getenv(inf[i]->content + 1);
+                if(!var)
+                    return 0;
+                inf[i]->content = ft_strdup(var);
+                // printf("%s\n", inf[i]->content);
+                inf[i]->type = "ENV_EXPANDED"; 
+                inf[i]->lenght = strlen(inf[i]->content);
+        }
         else if (inf[i]->content[0] == '\'')
             inf[i]->type = "SGCOTE";
         else if (is_char(s[i]))

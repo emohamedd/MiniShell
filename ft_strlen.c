@@ -6,10 +6,11 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 00:14:20 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 14:28:06 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 10:56:12 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 
 size_t	ft_strlen(const char *s)
 {

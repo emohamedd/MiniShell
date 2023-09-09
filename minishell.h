@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/08 20:54:28 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 10:55:59 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_info
   int	count_s_lenght(const char *s, char c);
   char	**ft_split_token(char *s, char c);
   t_info **allocat_token(char **s);
+  char	*ft_strdup(const char *s1);
+  size_t	ft_strlen(const char *s);
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
     // int		ft_atoi(const char *str);
