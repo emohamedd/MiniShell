@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/08 21:42:59 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/09 12:37:01 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ typedef struct s_vars
     t_env *env;
 }	t_vars;
 
+	char	*ft_getenv(char *key, t_vars *vars);
+	void	exec_cmds(t_vars *vars, char *cmd, char **args);
     void	display_prompt();
     char	*read_input();
     char	**ft_split(char const *s, char c);
 	void 	run(char *cmd, char **args, t_vars *vars);
 	void 	fell_env_struct(t_vars *vars);
-	void 	run_cd(char **args);
+	void	run_cd(char **args, t_vars *vars);
 	void 	run_echo (char **args);
 	void 	export_cmd(t_vars *vars, char *args);
 	void 	check_unset(char **args, t_vars *vars, int check);
