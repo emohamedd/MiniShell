@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 10:39:39 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 14:28:09 by emohamed         ###   ########.fr       */
+/*   Created: 2023/05/09 17:33:44 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/09 13:44:45 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void env_cmd(t_vars *vars)
 {
-	char	*stock;
-
-	if (!s || !s[0])
-		return (NULL);
-	if (start >= ft_strlen(s))
-		return ("");
-	if (len > ft_strlen(s))
-		len = ft_strlen(s);
-	stock = ft_strdup(s + start);
-	if (!stock)
-		return (NULL);
-	stock[len] = '\0';
-	return (stock);
+    int i = 0;
+    while (i < vars->env_number)
+	{
+        if (vars->env[i].is_equal)
+		{
+            printf("%s", vars->env[i].key);
+            printf("=");
+            printf("%s\n", vars->env[i].value);
+        }
+        i++;
+    }
 }

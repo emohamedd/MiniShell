@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 10:55:59 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 15:01:55 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,16 @@
 #include <readline/history.h>
 #include <unistd.h>
 #include <string.h>
+#include "libft/libft.h"
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <dirent.h>
 
+#define GRN  "\x1B[32m"
+#define BLU  "\x1B[34m"
+#define RED  "\x1B[31m"
+#define RESET "\x1B[0m"
 
 #define RED     "\x1B[31m"
 #define GREEN   "\x1B[32m"
@@ -48,6 +57,7 @@ typedef struct s_info
     char *content;
     char *type;
     int lenght;
+    int size;
     
 } t_info;
 
@@ -57,14 +67,46 @@ typedef struct s_info
 //     GENR
 // }
 
+typedef struct s_env
+{
+    char *key;
+    int  is_equal;
+    char *value;
+} t_env;
+
+
+typedef struct s_vars
+{
+	int	count_argiment;
+	int env_number;
+	char **envp;
+	char *strarg;
+	char *strvalue;
+    t_env *env;
+}	t_vars;
+
   char *read_input();
   // t_info **ft_split(char *s);
   char **make_token(char *s) ;
+  int lenght_of_the_2d(char **p);
   int	count_s_lenght(const char *s, char c);
-  char	**ft_split_token(char *s, char c);
-  t_info **allocat_token(char **s);
+//   char	**ft_split_token(char *s, char c);
+  t_info **allocat_token(char **s, t_vars *cvars);
   char	*ft_strdup(const char *s1);
-  size_t	ft_strlen(const char *s);
+//   size_t	ft_strlen(const char *s);
+	char	*ft_getenv(char *key, t_vars *vars);
+	void	exec_cmds(t_vars *vars, char *cmd, t_info **args);
+    void	display_prompt();
+    char	*read_input();
+    char	**ft_split(char const *s, char c);
+	void 	run(char *cmd, t_info **args, t_vars *vars);
+	void 	fell_env_struct(t_vars *vars);
+	void	run_cd(t_info **args, t_vars *vars);
+	void 	run_echo (t_info **args);
+	void 	export_cmd(t_vars *vars, char *args);
+	void 	check_unset(t_info **args, t_vars *vars, int check);
+	void 	env_cmd(t_vars *vars);
+	int 	count_argiment(char **str);
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
     // int		ft_atoi(const char *str);
@@ -75,4 +117,6 @@ typedef struct s_info
     // char	*ft_itoa(int n);
 
 
+
+	
 #endif

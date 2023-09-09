@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 11:09:41 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 15:27:49 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,16 @@ char **make_token(char *s)
             else 
                 quotestate = 0;
             
-        token = ft_split_token(s, 16);
+        token = ft_split(s, 16);
     }
     return token;
 }
 
-t_info **allocat_token(char **s)
+t_info **allocat_token(char **s,  t_vars *vars)
 {
     int  i = 0;
-     t_info **inf = malloc(sizeof(t_info*) * lenght_of_the_2d(s)+1);
+   
+     t_info **inf = malloc(sizeof(t_info*) * (lenght_of_the_2d(s)+1));
          if (!inf) 
             {
                 printf("Err\n");
@@ -82,6 +83,7 @@ t_info **allocat_token(char **s)
     {
         inf[i] = malloc(sizeof(t_info));
         inf[i]->content = s[i];
+        inf[i]->size = lenght_of_the_2d(s);
         if (inf[i]->content[0] == '<')
             inf[i]->type = "RDIN";
         else if (inf[i]->content[0] == '>')
@@ -92,7 +94,7 @@ t_info **allocat_token(char **s)
             inf[i]->type = "DBCOTE";
         else if (inf[i]->content[0] == '$')
         {
-                char *var = getenv(inf[i]->content + 1);
+                char *var = ft_getenv(inf[i]->content + 1, vars);
                 if(!var)
                     return 0;
                 inf[i]->content = ft_strdup(var);
@@ -112,14 +114,3 @@ t_info **allocat_token(char **s)
 
 // #include <stdio.h>
 
-// int main()
-// {
-//     int i = 0;
-//     char s[] = "echo amine > \"file txt\"";
-//     char **str = make_token(s);
-//     while(str[i])
-//     {
-//         printf("----> %s\n", str[i]);
-//         i++;
-//     }
-// }

@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 13:28:33 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 14:27:41 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/07 19:48:09 by haarab            #+#    #+#             */
+/*   Updated: 2023/09/09 14:06:45 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
+void check_unset(t_info **args, t_vars *vars, int check)
 {
-	size_t	i;
-	size_t	dlen;
-	size_t	slen;
-	size_t	size;
+	int i = 0;
+	char *key;
 
-	i = 0;
-	dlen = ft_strlen(dst);
-	slen = ft_strlen(src);
-	if (dstsize == 0 || dlen > dstsize)
-		return (dstsize + slen);
-	size = dstsize - dlen - 1;
-	while (i < size)
+	key = args[check]->content;
+	while (i < vars->env_number)
 	{
-		dst[dlen + i] = src[i];
+		if (!ft_strncmp(vars->env[i].key, key, ft_strlen(key)))
+		{
+			while (i < vars->env_number)
+			{
+				vars->env[i] = vars->env[i + 1];
+				i++;
+			}
+			vars->env_number--;
+			return;
+		}
 		i++;
 	}
-	dst[dlen + i] = '\0';
-	return (dlen + slen);
 }

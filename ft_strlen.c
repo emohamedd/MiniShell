@@ -6,18 +6,20 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 00:14:20 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 10:56:12 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 13:09:21 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	ft_strlen(const char *s)
+int count_argiment(char **str)
 {
-	size_t	i;
+	int i;
 
 	i = 0;
-	while (s[i])
+	while (str[i])
+	{
 		i++;
+	}
 	return (i);
 }
