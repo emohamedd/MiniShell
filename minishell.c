@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 17:06:19 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/09 22:51:09 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,12 @@ void run(char *cmd, t_info **args, t_vars *vars)
 	
     else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
     {
-		if (vars->count_argiment > 1)
-			printf ("pwd: too many arguments\n");
-		else
-        	printf ("%s\n", cwd);
+		printf ("%s\n", cwd);
     }
+	
+	// export fiha mochkil args[i]->content katjib l3adad ghalt dyal lea argiment
+	// export a="b" kat3tabrha 2 argiment hadi khasha thandla
+	// 
 	
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 	{
@@ -131,6 +132,10 @@ void run(char *cmd, t_info **args, t_vars *vars)
 }
 
 
+
+//	kayn mochkil fdak strak dyalk dayr mochkil execve 
+//	ls cat ... mra kaykhedmo mera makaykhedmoch
+
 void exec_cmds(t_vars *vars, char *cmd, t_info **args) {
 	int id;
 
@@ -146,6 +151,10 @@ void exec_cmds(t_vars *vars, char *cmd, t_info **args) {
 		waitpid(id, NULL, 0);
 	}
 }
+
+// hadchi fih bzaffff dyal handlaj asat rak ghir msahal hadchi
+
+
 
 int main(int c, char **v, char **env)
 {
