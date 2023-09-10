@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 22:51:09 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/10 12:45:20 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,14 +154,32 @@ void exec_cmds(t_vars *vars, char *cmd, t_info **args) {
 
 // hadchi fih bzaffff dyal handlaj asat rak ghir msahal hadchi
 
+char	**get_cmds(t_info **info)
+{
+	int		len = 0;
+	int		i;
+	char	*cmd = NULL;
+
+	len = (*info)->size;
+	i = 0;
+	while (i < len)
+	{
+		cmd = ft_strjoin(cmd, info[i]->content);
+		cmd = ft_strjoin(cmd, " ");
+		i++;
+	}
+	return (ft_split(cmd, ' '));
+}
 
 
 int main(int c, char **v, char **env)
 {
-	 char **str;
+	char **str;
 	t_vars vars;
-	(void)v;
-	(void)c;
+	char **cmds;
+	
+	cmds = NULL;
+	v += c;
 	vars.envp = env;
     vars.env = malloc(sizeof(t_env) * (count_argiment(vars.envp)));
     fell_env_struct(&vars);
@@ -179,9 +197,12 @@ int main(int c, char **v, char **env)
         tokens = allocat_token(str, &vars);
         if(!tokens)
             continue;
+		cmds = get_cmds(tokens);
+		if (!cmds)
+			return (0);
 		vars.count_argiment = lenght_of_the_2d(str);
 		run(tokens[0]->content, tokens, &vars);
-		// table(str, tokens);
+		table(str, tokens);
         }
     }
     return 0;

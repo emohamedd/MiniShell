@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 17:03:24 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/10 11:27:00 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ char **make_token(char *s)
 
     while (s[i]) 
     {
-            if ((s[i] == '\'' && !indb))
+            if (((s[i] == '\'') && !indb))
             {
                 s[i] = 16;
                 insg = !insg;
             } 
-            else if ((s[i] == '"' && !insg) )
-            {  
-                    
+            else if (((s[i] == '"') && !insg ) )
+            {
+                        
                 s[i] = 16;
                 indb = !indb;
             }
@@ -67,7 +67,8 @@ char **make_token(char *s)
         token = ft_split(s, 16);
     }
     return token;
-}
+    }
+
 
 t_info **allocat_token(char **s,  t_vars *vars)
 {
