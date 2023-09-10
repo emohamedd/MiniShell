@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g
+CFLAGS = 
 LDFLAGS = -lreadline
 
 SRCS = $(wildcard *.c)
