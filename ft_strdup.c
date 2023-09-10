@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_prompt.c                                   :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/30 17:32:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/07/30 17:39:01 by emohamed         ###   ########.fr       */
+/*   Created: 2023/05/09 17:33:44 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/09 13:45:24 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void display_prompt()
+char	*ft_strdup(const char *s1)
 {
-    write(1, "aminoarab$", 10);
+	int		i;
+	char	*p;
+
+	if (!s1)
+		return 0;
+	i = 0;
+	p = malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (!p)
+		return (NULL);
+	while (s1[i])
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
 }

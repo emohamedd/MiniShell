@@ -68,7 +68,7 @@ Minishell provides a command-line interface where you can enter and execute comm
     Piping the output of one command as input to another command:
 
     ```bash
-    ccat file.txt | grep "pattern"
+    cat file.txt | grep "pattern"
     ```
 
 4. **Signal Handling**: Minishell handles signals such as Ctrl-C and Ctrl-\ to terminate running commands or exit Minishell gracefully.
