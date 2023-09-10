@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/10 13:30:09 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/10 15:16:12 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void exec_cmds(t_vars *vars, char *cmd, char **args) {
 
 	id = fork();
 	if (id == 0) {
-		if (execve(get_path(vars, cmd), args, NULL) == -1 ) {
+		if (execve(get_path(vars, cmd), args, vars->envp) == -1 ) {
 			ft_putstr_fd("minishell : ", 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);

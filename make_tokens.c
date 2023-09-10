@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/10 11:27:00 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/10 16:02:48 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,29 +85,29 @@ t_info **allocat_token(char **s,  t_vars *vars)
         inf[i] = malloc(sizeof(t_info));
         inf[i]->content = s[i];
         inf[i]->size = lenght_of_the_2d(s);
-        if (inf[i]->content[0] == '<')
-            inf[i]->type = "RDIN";
-        else if (inf[i]->content[0] == '>')
-            inf[i]->type = "RDOUT";
-        else if (inf[i]->content[0] == '|')
-            inf[i]->type = "PIPE";
-        else if (inf[i]->content[0] == '\"')
-            inf[i]->type = "DBCOTE";
-        else if (inf[i]->content[0] == '$')
-        {
-                char *var = ft_getenv(inf[i]->content + 1, vars);
-                if(!var)
-                    return 0;
-                inf[i]->content = ft_strdup(var);
-                // printf("%s\n", inf[i]->content);
-                inf[i]->type = "ENV_EXPANDED"; 
-                inf[i]->lenght = strlen(inf[i]->content);
-        }
-        else if (inf[i]->content[0] == '\'')
-            inf[i]->type = "SGCOTE";
-        else if (is_char(s[i]))
-            inf[i]->type = "STR";
-        inf[i]->lenght = strlen(inf[i]->content);
+            if (inf[i]->content[0] == '<')
+                inf[i]->type = "RDIN";
+            else if (inf[i]->content[0] == '>')
+                inf[i]->type = "RDOUT";
+            else if (inf[i]->content[0] == '|')
+                inf[i]->type = "PIPE";
+            else if (inf[i]->content[0] == '\"')
+                inf[i]->type = "DBCOTE";
+            else if (inf[i]->content[0] == '$')
+            {
+                char *var = ft_getenv(inf[i]->content + 1, vars);     
+                    if(!var)
+                        return 0;
+                    inf[i]->content = ft_strdup(var);
+                    // printf("%s\n", inf[i]->content);
+                    inf[i]->type = "ENV_EXPANDED"; 
+                    inf[i]->lenght = strlen(inf[i]->content);
+            }
+            else if (inf[i]->content[0] == '\'')
+                inf[i]->type = "SGCOTE";
+            else if (is_char(s[i]))
+                inf[i]->type = "STR";
+            inf[i]->lenght = strlen(inf[i]->content);
         i++;
     }
     return inf;

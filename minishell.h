@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/10 13:31:51 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/10 15:17:17 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_vars
 	void 	env_cmd(t_vars *vars);
     void 	table(char **str, t_info **tokens);
 	int 	count_argiment(char **str);
+    t_info **ft_splite(char *s) ;
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
     // int		ft_atoi(const char *str);
