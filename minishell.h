@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 16:58:05 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/10 13:31:51 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,18 @@ typedef struct s_vars
   char	*ft_strdup(const char *s1);
 //   size_t	ft_strlen(const char *s);
 	char	*ft_getenv(char *key, t_vars *vars);
-	void	exec_cmds(t_vars *vars, char *cmd, t_info **args);
+	void	exec_cmds(t_vars *vars, char *cmd, char **args);
     void	display_prompt();
     char	*read_input();
     char	**ft_split(char const *s, char c);
-	void 	run(char *cmd, t_info **args, t_vars *vars);
+	void 	run(char *cmd, char **args, t_vars *vars);
 	void 	fell_env_struct(t_vars *vars);
-	void	run_cd(t_info **args, t_vars *vars);
-	void 	run_echo (t_info **args);
+	void	run_cd(char **args, t_vars *vars);
+	void 	run_echo (char **args);
 	void 	export_cmd(t_vars *vars, char *args);
-	void 	check_unset(t_info **args, t_vars *vars, int check);
+	void 	check_unset(char **args, t_vars *vars, int check);
 	void 	env_cmd(t_vars *vars);
-    void table(char **str, t_info **tokens);
+    void 	table(char **str, t_info **tokens);
 	int 	count_argiment(char **str);
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
