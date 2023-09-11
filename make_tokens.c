@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/11 14:41:03 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:21:52 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int is_char(char *str)
 {
     int i = 0;
     while (str[i]) 
-    
-    
+
     {
 
         if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
@@ -31,8 +30,7 @@ int lenght_of_the_2d(char **p)
 {
     int i = 0;
     while(p[i])
-    
-    
+
     {
         i++;
     }

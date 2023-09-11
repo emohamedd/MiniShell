@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/11 14:40:09 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:19:59 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void export_cmd(t_vars *vars, char *args)
 	if (ft_isalpha(args[0]) == 1)
 	{
 		key = ft_split(args, '=')[0];
-		vars->env[count].key = skip_quots(key);
+		vars->env[count].key = key;
 		value = ft_strchr(args, '=') + 1;
 		if (ft_strchr(args, '=') != NULL)
 		{
