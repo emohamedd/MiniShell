@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/11 11:43:59 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:59:49 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char **split(char *s, char *delimiters)
                 escaped = !escaped;
             }
         }
-        else if ((!in_quotes && strchr(delimiters, end[i]) != NULL) || (!in_quotes && end[i] == ' ')) 
+        else if ((!in_quotes && strchr(delimiters, end[i]) != NULL) || (!in_quotes && (end[i] == ' ' || end[i] == '\t'))) 
         {
             if (start != end) 
             {
