@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/11 09:02:44 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/11 11:43:59 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int is_char(char *str)
 {
     int i = 0;
     while (str[i]) 
+    
     
     {
 
@@ -31,19 +32,21 @@ int lenght_of_the_2d(char **p)
     int i = 0;
     while(p[i])
     
+    
     {
         i++;
     }
     return i;
 }
 
-char **split(char *s, const char *delimiters) 
+char **split(char *s, char *delimiters) 
 {
     t_info *inf;
 
     int max_tokens = inf->size; // to fix hadi ba9i makanacllokich the right size
     char **tokens = (char **)malloc(max_tokens * sizeof(char *));
     if (!tokens) 
+    
     {
        printf("allocation err\n");
         exit(1);
@@ -67,7 +70,7 @@ char **split(char *s, const char *delimiters)
                 quote_char = '\0';
             } 
             else if (!in_quotes) 
-            {
+            { 
                 in_quotes = 1;
                 quote_char = end[i];
             }
@@ -79,8 +82,8 @@ char **split(char *s, const char *delimiters)
             {
                 escaped = !escaped;
             }
-        } 
-        else if (!in_quotes && strchr(delimiters, end[i]) != NULL) 
+        }
+        else if ((!in_quotes && strchr(delimiters, end[i]) != NULL) || (!in_quotes && end[i] == ' ')) 
         {
             if (start != end) 
             {
@@ -134,6 +137,7 @@ char **split(char *s, const char *delimiters)
                 }
                 tokens[token_count] = (char *)malloc(2 * sizeof(char));
                 if (!tokens[token_count]) 
+                
                 {
                    printf("allocation err\n");
                     exit(1);
@@ -154,16 +158,19 @@ char **split(char *s, const char *delimiters)
     if (start != end) 
     {
         if (token_count >= max_tokens) 
+        
         {
             max_tokens *= 2;
             char **new_tokens = (char **)malloc(max_tokens * sizeof(char *));
             if (!new_tokens) 
+            
             {
                printf("allocation err\n");
                 exit(1);
             }
             int i = 0;
             while (i < token_count) 
+            
             {
                 new_tokens[i] = tokens[i];
                 i++;
@@ -173,6 +180,7 @@ char **split(char *s, const char *delimiters)
         }
         tokens[token_count] = (char *)malloc((end - start + 1) * sizeof(char));
         if (!tokens[token_count]) 
+        
         {
            printf("allocation err\n");
             exit(1);
@@ -187,28 +195,80 @@ char **split(char *s, const char *delimiters)
 }
 
 // hna kan expandi quotes
-char **expand_quotes(char **tokens) 
+char** expand_quotes(char** tokens)
 {
     int i = 0;
-    while (tokens[i] != NULL) 
+    int num_quotes = 0;
+    
+    while (tokens[i]) 
     {
-        if (tokens[i][0] == '\"' && tokens[i][strlen(tokens[i]) - 1] == '\"') 
+        if (strchr(tokens[i], '\"')) 
+        
         {
-            memmove(tokens[i], tokens[i] + 1, strlen(tokens[i]) - 2);
-            tokens[i][strlen(tokens[i]) - 2] = '\0';
+            num_quotes++;
         }
         i++;
     }
-    return tokens;
+
+    char** expanded_tokens = (char**)malloc((i + num_quotes + 1) * sizeof(char*));
+    if (expanded_tokens == NULL) 
+    {
+        return NULL;
+    }
+
+    int j = 0;
+    i = 0;
+    while (tokens[i]) 
+    {
+        char* current_token = tokens[i];
+        if (strchr(current_token, '\"')) 
+        {
+            int token_length = strlen(current_token);
+            char* modified_token = (char*)malloc(token_length * sizeof(char));
+            if (modified_token == NULL) 
+            {
+                return NULL; 
+            }
+
+            int k = 0;
+            int l = 0;
+            while (l < token_length) 
+            {
+                if (current_token[l] != '\"') 
+                {
+                    modified_token[k] = current_token[l];
+                    k++;
+                }
+                l++;
+            }
+            modified_token[k] = '\0';
+            expanded_tokens[j] = modified_token;
+            j++;
+        } else 
+        {
+            expanded_tokens[j] = strdup(current_token);
+            if (expanded_tokens[j] == NULL) 
+            {
+                return NULL; 
+            }
+            j++;
+        }
+        i++;
+    }
+
+
+    expanded_tokens[j] = NULL;
+
+    return expanded_tokens;
 }
+
 
 // hna fin kantokinazi
 char **make_token(char *s) 
 {
-    const char *special_chars = "<>|";
+    char *special_chars = "<>|";
     char **tokens = split(s, special_chars);
     tokens = expand_quotes(tokens);
-
     return tokens;
 }
 
@@ -219,11 +279,13 @@ t_info **allocat_token(char **s,  t_vars *vars)
      t_info **inf = malloc(sizeof(t_info*) * (lenght_of_the_2d(s)+1));
          if (!inf) 
             
+            
             {
                 printf("Err\n");
                 exit(1);
             }
     while(s[i])
+    
     
     {
         inf[i] = malloc(sizeof(t_info));
@@ -238,6 +300,7 @@ t_info **allocat_token(char **s,  t_vars *vars)
             else if (inf[i]->content[0] == '\"')
                 inf[i]->type = "DBCOTE";
             else if (inf[i]->content[0] == '$')
+            
             
             {
                 char *var = ft_getenv(inf[i]->content + 1, vars);     
