@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/10 16:02:48 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/11 09:02:44 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int lenght_of_the_2d(char **p)
 
 char **split(char *s, const char *delimiters) 
 {
-    int max_tokens = 10; // to fix hadi ba9i makanacllokich the right size
+    t_info *inf;
+
+    int max_tokens = inf->size; // to fix hadi ba9i makanacllokich the right size
     char **tokens = (char **)malloc(max_tokens * sizeof(char *));
     if (!tokens) 
     {
@@ -53,12 +55,13 @@ char **split(char *s, const char *delimiters)
     int in_quotes = 0;
     char quote_char = '\0';
     int escaped = 0;
+    int i = 0;
 
-    while (*end != '\0') 
+    while (end[i]) 
     {
-        if (*end == '\'' || *end == '\"') 
+        if (end[i] == '\'' || end[i] == '\"') 
         {
-            if (in_quotes && *end == quote_char) 
+            if (in_quotes && end[i] == quote_char) 
             {
                 in_quotes = 0;
                 quote_char = '\0';
@@ -66,18 +69,18 @@ char **split(char *s, const char *delimiters)
             else if (!in_quotes) 
             {
                 in_quotes = 1;
-                quote_char = *end;
+                quote_char = end[i];
             }
             escaped = 0;
         } 
-        else if (*end == '\\') 
+        else if (end[i] == '\\') 
         {
             if (in_quotes) 
             {
                 escaped = !escaped;
             }
         } 
-        else if (!in_quotes && strchr(delimiters, *end) != NULL) 
+        else if (!in_quotes && strchr(delimiters, end[i]) != NULL) 
         {
             if (start != end) 
             {
@@ -109,7 +112,7 @@ char **split(char *s, const char *delimiters)
                 tokens[token_count][end - start] = '\0';
                 token_count++;
             }
-            if (strchr(delimiters, *end) != NULL) 
+            if (strchr(delimiters, end[i]) != NULL) 
             {
                 if (token_count >= max_tokens) 
                 {
@@ -135,7 +138,7 @@ char **split(char *s, const char *delimiters)
                    printf("allocation err\n");
                     exit(1);
                 }
-                tokens[token_count][0] = *end;
+                tokens[token_count][0] = end[i];
                 tokens[token_count][1] = '\0';
                 token_count++;
             }
@@ -202,7 +205,7 @@ char **expand_quotes(char **tokens)
 // hna fin kantokinazi
 char **make_token(char *s) 
 {
-    const char *special_chars = "<>| ";
+    const char *special_chars = "<>|";
     char **tokens = split(s, special_chars);
     tokens = expand_quotes(tokens);
 

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/10 15:16:12 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:44:14 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,15 +194,15 @@ int main(int c, char **v, char **env)
             str =  make_token(input);
         if(str)
         {
-        tokens = allocat_token(str, &vars);
-        if(!tokens)
-            continue;
-		cmds = get_cmds(tokens);
-		if (!cmds)
-			return (0);
-		vars.count_argiment = lenght_of_the_2d(str);
-		run(tokens[0]->content, cmds, &vars);
-		table(str, tokens);
+			tokens = allocat_token(str, &vars);
+			if(!tokens)
+				continue;
+			cmds = get_cmds(tokens);
+			if (!cmds)
+				return (0);
+			vars.count_argiment = lenght_of_the_2d(str);
+			run(tokens[0]->content, cmds, &vars);
+			table(str, tokens);
         }
     }
     return 0;
