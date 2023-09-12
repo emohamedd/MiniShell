@@ -6,13 +6,13 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/11 15:36:18 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/12 22:37:43 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
+void	setup_redirs(char **args);
 void run_cd(char **args, t_vars *vars)
 {
     if (args[1])
@@ -79,20 +79,12 @@ char *get_path(t_vars *vars, char *cmd)
 void run(char *cmd, char **args, t_vars *vars)
 {
 	char *cwd = getcwd(NULL, 1024);
+	char **e_cmd; // norm
 
     if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
     {
 		// int kl = 2;
         run_echo(args, vars);
-		// kl = ft_strncmp(("$?"), args[1], ft_strlen(args[1]) == 0);
-		// printf("%d\n", kl);
-		// if (kl == 0)
-		// {
-		// 	printf("%d\n", vars->exit_status);
-		// }
-		// printf ("%s\n", args[1]);
-		// if (ft_strncmp(args[1], "$?", ft_strlen("$?")) == 0)
-			// printf ("exit status %d\n", vars->exit_status);
     }
 	
     else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
@@ -135,11 +127,47 @@ void run(char *cmd, char **args, t_vars *vars)
 			i++;
 		}
 	}
-
     else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
         exit (1);
-    else
-		exec_cmds(vars, cmd, args);
+	
+	else
+	{
+		int i = 0;
+		while (args[i] && !strchr(args[i], '>'))
+			i++;
+		e_cmd = ft_calloc(i + 1, sizeof(char*));
+		int	x = 0; // norm
+		while (x < i)
+		{
+			e_cmd[x] = ft_strdup(args[x]);
+			x++;
+		}
+	}
+	// setup_redirs(args);
+	exec_cmds(vars, cmd, e_cmd, args);
+}
+
+void	setup_redirs(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+	{
+		if(!strcmp(args[i], ">"))
+		{
+			++i;
+			int fd = open(args[i], O_CREAT | O_TRUNC | O_RDWR, 0644);
+			dup2(fd, 1);
+		}
+		if (!strcmp(args[i], "<"))
+		{
+			++i;
+			int fd = open(args[i], O_CREAT | O_APPEND | O_RDWR, 0644);
+			dup2(fd, 0);
+		}
+		i++;
+	}	
 }
 
 
@@ -147,14 +175,17 @@ void run(char *cmd, char **args, t_vars *vars)
 //	kayn mochkil fdak strak dyalk dayr mochkil execve 
 //	ls cat ... mra kaykhedmo mera makaykhedmoch
 
-void exec_cmds(t_vars *vars, char *cmd, char **args) {
+void exec_cmds(t_vars *vars, char *cmd, char **args, char **red) 
+{
 	int id;
 	char *path;
 	path = get_path(vars, cmd);
-
+	
+	// printf(">>%s<<\n", path);
 	id = fork();
 	if (id == 0) 
 	{
+		setup_redirs(red);
 		if (path == NULL)
 		{
 			ft_putstr_fd("command not found: ", 2);
@@ -222,13 +253,6 @@ int main(int c, char **v, char **env)
 			run(tokens[0]->content, cmds, &vars);
 			// table(str, tokens);
         }
-		// if (str[0] != NULL)
-		// {
-		// 	char* command = str[0];
-		// 	char **args = str;
-		// 	vars.count_argiment = count_argiment(args);
-		// 	run(command, args, &vars);
-		// }
     }
 	
     return 0;

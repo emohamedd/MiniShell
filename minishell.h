@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/11 15:03:40 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:50:30 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <fcntl.h>
 
 #define GRN  "\x1B[32m"
 #define BLU  "\x1B[34m"
@@ -97,7 +98,7 @@ typedef struct s_vars
   char	*ft_strdup(const char *s1);
 //   size_t	ft_strlen(const char *s);
 	char	*ft_getenv(char *key, t_vars *vars);
-	void	exec_cmds(t_vars *vars, char *cmd, char **args);
+	void	exec_cmds(t_vars *vars, char *, char **, char**);
     void	display_prompt();
     char	*read_input();
     char	**ft_split(char const *s, char c);

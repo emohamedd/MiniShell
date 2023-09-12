@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/11 15:21:52 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:48:54 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,13 +283,11 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 exit(1);
             }
     while(s[i])
-    
-    
     {
         inf[i] = malloc(sizeof(t_info));
         inf[i]->content = s[i];
         inf[i]->size = lenght_of_the_2d(s);
-            if (inf[i]->content[0] == '<')
+            if (inf[i]->content[0] == '<')   
                 inf[i]->type = "RDIN";
             else if (inf[i]->content[0] == '>')
                 inf[i]->type = "RDOUT";
