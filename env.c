@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:33:44 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/09 13:44:45 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:36:52 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void env_cmd(t_vars *vars)
             printf("%s", vars->env[i].key);
             printf("=");
             printf("%s\n", vars->env[i].value);
+			
         }
         i++;
     }

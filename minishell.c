@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/11 12:55:49 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/11 23:07:14 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,11 @@ void run(char *cmd, char **args, t_vars *vars)
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 	{
 		if (!args[1])
-			export_cmd(vars, NULL);
+			export_cmd(vars, NULL, NULL);
 		int i = 1;
 		while (args[i])
 		{
-			export_cmd(vars, args[i]);
+			export_cmd(vars, args[i], args);
 			i++;
 		}
 	}
@@ -157,12 +157,13 @@ void exec_cmds(t_vars *vars, char *cmd, char **args) {
 	{
 		if (path == NULL)
 		{
-			ft_putstr_fd("command not found: ", 2);
-			ft_putendl_fd(cmd, 2);
+			ft_putstr_fd("minishell : ", 2);
+			ft_putstr_fd(cmd, 2);
+			ft_putstr_fd(": command not found\n", 2);
 			exit(127);
 			
 		}
-		else if (execve(path, args, vars->envp) == -1 )
+		else if (execve(path, args, vars->envp) == -1)
 		{
 			perror("execve");
 			exit(126);
@@ -188,6 +189,7 @@ char	**get_cmds(t_info **info)
 	}
 	return (ft_split(cmd, ' '));
 }
+
 int main(int c, char **v, char **env)
 {
 	char **str;
@@ -202,33 +204,33 @@ int main(int c, char **v, char **env)
     fell_env_struct(&vars);
 	vars.env_number = count_argiment(vars.envp);
     char *input;
-    // t_info **tokens = NULL; 
+    t_info **tokens = NULL; 
     while(1)
     {
         input = read_input();
         if (input == NULL)
             return (vars.exit_status);
-		// str =  make_token(input);
-        str = ft_split(input, ' ');
-		// if(str)
-        // {
-		// 	tokens = allocat_token(str, &vars);
-		// 	if(!tokens)
-		// 		continue;
-		// 	cmds = get_cmds(tokens);
-		// 	if (!cmds)
-		// 		return (0);
-		// 	vars.count_argiment = lenght_of_the_2d(str);
-		// 	run(tokens[0]->content, cmds, &vars);
-		// 	// table(str, tokens);
-        // }
-		if (str[0] != NULL)
-		{
-			char* command = str[0];
-			char **args = str;
-			vars.count_argiment = count_argiment(args);
-			run(command, args, &vars);
-		}
+		str =  make_token(input);
+        // str = ft_split(input, ' ');
+		if(str)
+        {
+			tokens = allocat_token(str, &vars);
+			if(!tokens)
+				continue;
+			cmds = get_cmds(tokens);
+			if (!cmds)
+				return (0);
+			vars.count_argiment = lenght_of_the_2d(str);
+			run(tokens[0]->content, cmds, &vars);
+			// table(str, tokens);
+        }
+		// if (str[0] != NULL)
+		// {
+		// 	char* command = str[0];
+		// 	char **args = str;
+		// 	vars.count_argiment = count_argiment(args);
+		// 	run(command, args, &vars);
+		// }
     }
 	
     return 0;

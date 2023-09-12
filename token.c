@@ -6,11 +6,11 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:31:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/08 16:32:38 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:44:19 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishell.h"
 
 
 // int is_whitespace(char c) 
@@ -80,7 +80,7 @@
 //     return token;
 // }
 
-// t_info **ft_split(char *s) 
+// t_info **ft_splite(char *s) 
 // {
 //     int token_size = 0;
 //     t_info **token = malloc((token_size + 1) * sizeof(t_info *));
@@ -145,51 +145,6 @@
 
 //             token = appand(token, inf, &token_size);
 //         }
-//     }
-
-//     return token;
-// }
-
-// t_info **appand(t_info **token, t_info *info)
-// {
-//     int size = size_ar(token);
-//     token = malloc( (size + 2) * sizeof(t_info *));
-
-
-//     token[size] = malloc(sizeof(t_info));
-//     token[size]->content = strdup(info->content); 
-//     // token[size]->type = NULL; 
-//     // token[size]->length = info->length;
-//     token[size + 1] = NULL;
-
-//     return token;
-// }
-// t_info **ft_split(char *s)
-// {
-//     t_info *inf = NULL;
-//     int end = 0;
-//     int start = 0;
-//     int i = 0;
-//     t_info **token = NULL;
-
-//     while (s[i])
-//     {
-//         start = i;
-//         if (is_whitespace(s[i]) || is_a_spchar(s[i]))
-//             end = i;
-//         int token_length = end - start;
-
-//         token = malloc((i + 2) * sizeof(t_info *));
-//         token[i] = malloc(sizeof(t_info));
-//         token[i]->content = (char *)malloc(token_length + 1);
-//         strncpy(token[i]->content, &s[start], token_length);
-//         token[i]->content[token_length] = '\0';
-//         // token[i]->type = NULL;
-//         // token[i]->lenght = token_length;
-//         token[i + 1] = NULL;
-
-//         token = appand(token, inf);
-//         i++;
 //     }
 
 //     return token;

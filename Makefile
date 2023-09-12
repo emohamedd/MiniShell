@@ -6,12 +6,12 @@
 #    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/09 13:09:28 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/11 15:04:21 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g
+CFLAGS = 
 LDFLAGS = -lreadline
 
 SRCS = $(wildcard *.c)

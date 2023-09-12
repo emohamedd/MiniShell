@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/10 18:33:04 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:06:21 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <unistd.h>
 #include <string.h>
 #include "libft/libft.h"
+#include "get_next_line/get_next_line.h"
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -104,11 +105,12 @@ typedef struct s_vars
 	void 	fell_env_struct(t_vars *vars);
 	void	run_cd(char **args, t_vars *vars);
 	void 	run_echo (char **args, t_vars *vars);
-	void 	export_cmd(t_vars *vars, char *args);
+	void 	export_cmd(t_vars *vars, char *args, char **str);
 	void 	check_unset(char **args, t_vars *vars, int check);
 	void 	env_cmd(t_vars *vars);
     void 	table(char **str, t_info **tokens);
 	int 	count_argiment(char **str);
+    // t_info **ft_splite(char *s) ;
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
     // int		ft_atoi(const char *str);
