@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/11 21:06:21 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/12 20:39:18 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_vars
 }	t_vars;
 
   char *read_input();
+  void run_cd(char **args, t_vars *vars);
   // t_info **ft_split(char *s);
   char **make_token(char *s) ;
   int lenght_of_the_2d(char **p);
@@ -110,6 +111,7 @@ typedef struct s_vars
 	void 	env_cmd(t_vars *vars);
     void 	table(char **str, t_info **tokens);
 	int 	count_argiment(char **str);
+	char *get_path(t_vars *vars, char *cmd);
     // t_info **ft_splite(char *s) ;
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:49:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/11 14:46:56 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/12 21:19:25 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ void run_echo (char **args, t_vars *vars)
 {
     int i = 1;
     int check = 0;
-    // int g = 1;
-	// if (args[1] == NULL)
-	// 	return;
+
+	// if (ft_strncmp((args[1]), "$?", ft_strlen("$?") == 0))
+	// {
+	// 		// printf ("hamza\n");
+	// 		printf ("%d\n", vars->exit_status);
+	// 		return ;
+	// }
     while (args[i])
     {
-		// printf ("string ==== %s\n", args[i]);
-        // if (args[i])
-            // g = ft_strncmp(args[i], "-n", ft_strlen("-n"));
-            // g = check_n(args[i]);
         while (check_n(args[i]) == 0)
         {
             check = 1;
