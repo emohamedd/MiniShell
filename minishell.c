@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/13 17:49:17 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:48:05 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ char *get_path(t_vars *vars, char *cmd)
 	return (NULL);
 }
 
-void run(char *cmd, char **args, t_vars *vars)
+void run(char *cmd, char **args, t_vars *vars, char *str)
 {
 	char *cwd = getcwd(NULL, 1024);
 	char **e_cmd; // norm
 
-    if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
+    if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0 && (ft_strchr(str, '>') == 0 && ft_strchr(str, '<') == 0  && ft_strchr(str, '|') == 0 ))
     {
         run_echo(args, vars);
     }
@@ -100,11 +100,11 @@ void run(char *cmd, char **args, t_vars *vars)
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 	{
 		if (!args[1])
-			export_cmd(vars, NULL);
+			export_cmd(vars, NULL, NULL);
 		int i = 1;
 		while (args[i])
 		{
-			export_cmd(vars, args[i]);
+			export_cmd(vars, args[i], args);
 			i++;
 		}
 	}
@@ -183,12 +183,13 @@ void exec_cmds(t_vars *vars, char *cmd, char **args, char **red)
 		setup_redirs(red);
 		if (path == NULL)
 		{
-			ft_putstr_fd("command not found: ", 2);
-			ft_putendl_fd(cmd, 2);
+			ft_putstr_fd("minishell : ", 2);
+			ft_putstr_fd(cmd, 2);
+			ft_putstr_fd(": command not found\n", 2);
 			exit(127);
 			
 		}
-		else if (execve(path, args, vars->envp) == -1 )
+		else if (execve(path, args, vars->envp) == -1)
 		{
 			perror("execve");
 			exit(126);
@@ -214,6 +215,117 @@ char	**get_cmds(t_info **info)
 	}
 	return (ft_split(cmd, ' '));
 }
+
+
+void pipe_commands(t_vars *vars, int d) 
+{
+	int status;
+	char *path;
+    int pipe_fd[2];
+    if (pipe(pipe_fd) == -1) 
+    {
+        perror("pipe");
+        exit(1);
+    }
+	int i = 0;
+	d = d - 1;
+	while (i < d)
+	{
+   		pid_t child1;
+    	child1 = fork();
+		if (child1 == -1) 
+    	{
+        	perror("fork");
+        	exit(1);
+    	}
+		if (child1 == 0) 
+		{
+			close(pipe_fd[0]);
+			// dup2(pipe_fd[1], STDOUT_FILENO);
+			if (dup2(pipe_fd[1], STDOUT_FILENO) == -1) 
+        	{
+            	perror("dup2");
+            	exit(1);
+        	}
+			close(pipe_fd[1]);
+			path = get_path(vars, vars->cmds[i].cmd);
+			execve(path, vars->cmds[i].cmds_args, vars->envp);
+			exit(0);
+		} 
+		else 
+		{
+			close(pipe_fd[1]);
+			// dup2(pipe_fd[0], STDIN_FILENO);
+			if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
+			{
+                perror("dup2");
+                exit(1);
+			}
+			close(pipe_fd[0]);
+			path = get_path(vars, vars->cmds[i + 1].cmd);
+			int id  = fork();
+			if (id == -1) 
+			{
+            	perror("fork");
+            	exit(1);
+        	}
+			if (id  == 0)	
+				execve(path, vars->cmds[i + 1].cmds_args, vars->envp);
+			else
+				waitpid(id, &status, 0);
+			waitpid(child1, &status, 0);
+		}
+		i++;
+	}
+}
+
+
+
+void pipeline(char *str, t_vars *vars)
+{
+	int i = 0;
+	int j = 0;
+	int l = 0;
+	char **ptr;
+	
+	ptr = ft_split(str, ' ');
+	if (!ptr)
+		return;
+	while (ptr[i])
+	{
+		if (ft_strncmp(ptr[i], "|", ft_strlen("|")) != 0)
+		{
+			if (ft_strncmp("|", ptr[i + 1], ft_strlen(ptr[i + 1])) == 0)
+				l++;
+		}
+		if (ft_strncmp(ptr[i], "|", ft_strlen("|")) == 0)
+			l++;
+		i++;
+	}
+
+	vars->cmds = malloc(sizeof(t_cmds) * (l));
+	char **split_pip = ft_split(str, '|');
+	i = 0;
+	int k = 0;
+	while (split_pip[i])
+	{
+		j = 0;
+		char **split_cmd = ft_split(split_pip[i], ' ');
+		while (split_cmd[j])
+		{
+			vars->cmds[i].cmd = split_cmd[0];
+			vars->cmds[i].cmds_args = split_cmd;
+			j++;
+		}
+		i++;
+	}
+	// printf ("%d\n", vars->cmds->size);
+	pipe_commands(vars, i);
+
+}
+
+
+
 int main(int c, char **v, char **env)
 {
 	char **str;
@@ -245,9 +357,24 @@ int main(int c, char **v, char **env)
 			if (!cmds)
 				return (0);
 			vars.count_argiment = lenght_of_the_2d(str);
-			run(tokens[0]->content, cmds, &vars);
+			int fdin = dup(STDIN_FILENO);
+			int fdou = dup(STDOUT_FILENO);
+			if (ft_strchr(input, '|') == NULL)
+				run(tokens[0]->content, cmds, &vars, input);
+			else 
+				pipeline(input, &vars);
+			dup2(fdin, 0);
+			dup2(fdou, 1);
+			// run(tokens[0]->content, cmds, &vars);
 			// table(str, tokens);
         }
+		// if (str[0] != NULL)
+		// {
+		// 	char* command = str[0];
+		// 	char **args = str;
+		// 	vars.count_argiment = count_argiment(args);
+		// 	run(command, args, &vars);
+		// }
     }
 	
     return 0;

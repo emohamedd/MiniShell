@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/11 15:19:59 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:19:41 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,19 @@ char *skip_quotsinquots(char *str)
 		}
 		i++;
 	}
+	// while (str[x])
+	// {
+	// 	if (str[x] != 39)
+	// 	{
+	// 		z++;
+	// 	}
+	// 	x++;
+	// }
 	ptr = malloc(sizeof(char) * ft_strlen(str) - j + 1);
 	// if (!ptr)
 	// 	return (NULL);
 	// // printf("%s == %d\n", str, k);
-	int k = ft_strlen(str);
+	int k = ft_strlen(str) - j;
 	i = 0;
 	j = 0;
 	while(i < k)
@@ -103,7 +111,7 @@ int check_doubelcouts(char *args)
 	return (count);
 }
 
-void export_cmd(t_vars *vars, char *args)
+void export_cmd(t_vars *vars, char *args, char **str)
 {
 	char *key = NULL;
 	char *value;
@@ -174,25 +182,42 @@ void export_cmd(t_vars *vars, char *args)
 	if (ft_isalpha(args[0]) == 1)
 	{
 		key = ft_split(args, '=')[0];
-		vars->env[count].key = key;
-		value = ft_strchr(args, '=') + 1;
-		if (ft_strchr(args, '=') != NULL)
+		// printf ("key === %s ===== %zu\n", key, ft_strlen(key));
+		
+		int d = 0;
+		int p = 0;
+		while (vars->env[d].key)
 		{
-			vars->env[count].is_equal = 1;
-			vars->env[count].value = value;
+			if (ft_strncmp(vars->env[d].key, key, ft_strlen(key)) == 0)
+				p = 1;
+			d++;
 		}
+		if (p != 1)
+		{
+			// // printf ("str === %s\n", key);
+			// printf ("str === %d\n", p);
+			vars->env[count].key = key;
+			value = ft_strchr(args, '=') + 1;
+			if (ft_strchr(args, '=') != NULL)
+			{
+				vars->env[count].is_equal = 1;
+				vars->env[count].value = value;
+			}
+			if (!ft_strchr(args, '=') && p == 1)
+			{
+				// printf ("hdfd\n");
+				vars->env[count].key = args;
+			}
+			vars->env_number++;
+		}
+		// if (vars->env[count].key != key)
 		// else if (vars->env[count].key == key && value == NULL)
 		// {
 		// 	vars->env[count].is_equal = 1;
 		// 	vars->env[count].value = value;
 		// }
-		vars->env_number++;
 	}
-	if (!ft_strchr(args, '='))
-	{
-		vars->env[count].key = args;
-	}
-	if (ft_isalpha(args[0]) != 1)
+	if (ft_isalpha(args[0]) != 1 || check_equal(args) == 1)
 	{
 		printf("export : `%s' : not a valid identifier\n", args);
 	}

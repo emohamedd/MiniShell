@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/12 19:50:30 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:22:35 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ typedef struct s_info
     
 } t_info;
 
+typedef struct s_cmds
+{
+	char *cmd;
+	char **cmds_args;
+} t_cmds;
+
+
 // enum state{
 //     IN_SQ,
 //     IN_DQ,
@@ -85,7 +92,9 @@ typedef struct s_vars
 	char *strarg;
 	char *strvalue;
 	int exit_status;
+	t_cmds *cmds;
     t_env *env;
+	
 }	t_vars;
 
   char *read_input();
@@ -102,11 +111,11 @@ typedef struct s_vars
     void	display_prompt();
     char	*read_input();
     char	**ft_split(char const *s, char c);
-	void 	run(char *cmd, char **args, t_vars *vars);
+	void 	run(char *cmd, char **args, t_vars *vars, char *str);
 	void 	fell_env_struct(t_vars *vars);
 	void	run_cd(char **args, t_vars *vars);
 	void 	run_echo (char **args, t_vars *vars);
-	void 	export_cmd(t_vars *vars, char *args);
+	void 	export_cmd(t_vars *vars, char *args, char **str);
 	void 	check_unset(char **args, t_vars *vars, int check);
 	void 	env_cmd(t_vars *vars);
     void 	table(char **str, t_info **tokens);
