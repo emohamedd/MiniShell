@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/12 20:39:18 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/13 20:06:36 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ typedef struct s_info
     
 } t_info;
 
+typedef struct s_cmds
+{
+	char *cmd;
+	char **cmds_args;
+} t_cmds;
+
+
 // enum state{
 //     IN_SQ,
 //     IN_DQ,
@@ -84,11 +91,12 @@ typedef struct s_vars
 	char *strarg;
 	char *strvalue;
 	int exit_status;
+	t_cmds *cmds;
     t_env *env;
+	
 }	t_vars;
 
   char *read_input();
-  void run_cd(char **args, t_vars *vars);
   // t_info **ft_split(char *s);
   char **make_token(char *s) ;
   int lenght_of_the_2d(char **p);
@@ -102,7 +110,7 @@ typedef struct s_vars
     void	display_prompt();
     char	*read_input();
     char	**ft_split(char const *s, char c);
-	void 	run(char *cmd, char **args, t_vars *vars);
+	void 	run(char *cmd, char **args, t_vars *vars, char *str);
 	void 	fell_env_struct(t_vars *vars);
 	void	run_cd(char **args, t_vars *vars);
 	void 	run_echo (char **args, t_vars *vars);
@@ -111,7 +119,6 @@ typedef struct s_vars
 	void 	env_cmd(t_vars *vars);
     void 	table(char **str, t_info **tokens);
 	int 	count_argiment(char **str);
-	char *get_path(t_vars *vars, char *cmd);
     // t_info **ft_splite(char *s) ;
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);

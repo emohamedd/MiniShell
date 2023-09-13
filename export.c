@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/12 21:20:25 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/11 23:08:19 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int check_equal(char *args)
 {
 	if (args[0] == '=' && args[1] == '\0')
 	{
+		printf ("export: `%s' : not a valid identifier\n", args);
 		return (1);
 	}
 	return (0);
@@ -166,7 +167,6 @@ void export_cmd(t_vars *vars, char *args, char **str)
 			if (ft_strchr(args, '=') != NULL)
 			{
 				vars->env[count].value = ft_strchr(args, '=') + 1;
-				vars->exit_status = 0;
 				return;
 			}
 		}
@@ -208,7 +208,6 @@ void export_cmd(t_vars *vars, char *args, char **str)
 				// printf ("hdfd\n");
 				vars->env[count].key = args;
 			}
-			vars->exit_status = 0;
 			vars->env_number++;
 		}
 		// if (vars->env[count].key != key)
@@ -221,7 +220,6 @@ void export_cmd(t_vars *vars, char *args, char **str)
 	if (ft_isalpha(args[0]) != 1 || check_equal(args) == 1)
 	{
 		printf("export : `%s' : not a valid identifier\n", args);
-		vars->exit_status = 1;
 	}
 	free(tmp);
 	
