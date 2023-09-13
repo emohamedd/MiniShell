@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/13 10:42:42 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:49:17 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void run(char *cmd, char **args, t_vars *vars)
 
     if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
     {
-		// int kl = 2;
         run_echo(args, vars);
     }
 	
@@ -97,11 +96,7 @@ void run(char *cmd, char **args, t_vars *vars)
     {
 		printf ("%s\n", cwd);
     }
-	
-	// export fiha mochkil args[i]->content katjib l3adad ghalt dyal lea argiment
-	// export a="b" kat3tabrha 2 argiment hadi khasha thandla
-	// 
-	
+
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
 	{
 		if (!args[1])
@@ -142,7 +137,7 @@ void run(char *cmd, char **args, t_vars *vars)
 			e_cmd[x] = ft_strdup(args[x]);
 			x++;
 		}
-	exec_cmds(vars, cmd, e_cmd, args);
+		exec_cmds(vars, cmd, e_cmd, args);
 	}
 	// setup_redirs(args);
 }
@@ -163,7 +158,7 @@ void	setup_redirs(char **args)
 		else if (!strcmp(args[i], "<"))
 		{
 			++i;
-			int fd = open(args[i], O_CREAT | O_APPEND | O_RDWR, 0644);
+			int fd = open(args[i], O_RDONLY , 0644);
 			dup2(fd, 0);
 		}
 		i++;
