@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/12 22:37:43 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/13 10:42:42 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,9 @@ void run(char *cmd, char **args, t_vars *vars)
 			e_cmd[x] = ft_strdup(args[x]);
 			x++;
 		}
+	exec_cmds(vars, cmd, e_cmd, args);
 	}
 	// setup_redirs(args);
-	exec_cmds(vars, cmd, e_cmd, args);
 }
 
 void	setup_redirs(char **args)
@@ -160,7 +160,7 @@ void	setup_redirs(char **args)
 			int fd = open(args[i], O_CREAT | O_TRUNC | O_RDWR, 0644);
 			dup2(fd, 1);
 		}
-		if (!strcmp(args[i], "<"))
+		else if (!strcmp(args[i], "<"))
 		{
 			++i;
 			int fd = open(args[i], O_CREAT | O_APPEND | O_RDWR, 0644);
