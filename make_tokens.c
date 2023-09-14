@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/13 20:33:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:11:03 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,18 +276,17 @@ t_info **allocat_token(char **s,  t_vars *vars)
    
      t_info **inf = malloc(sizeof(t_info*) * (lenght_of_the_2d(s)+1));
          if (!inf) 
-            
-            
             {
                 printf("Err\n");
                 exit(1);
             }
+        }
     while(s[i])
     {
         inf[i] = malloc(sizeof(t_info));
         inf[i]->content = s[i];
         inf[i]->size = lenght_of_the_2d(s);
-            if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
+        if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
         {
                 char *str = ft_strtrim(inf[i]->content, "\'");
                 // printf("%s\n", str);

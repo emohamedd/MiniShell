@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/13 20:48:05 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/14 11:42:05 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 	
     else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
     {
-		printf ("%s\n", cwd);
+		printf("%s\n", cwd);
+		vars->exit_status = 0;
     }
 
 	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
@@ -121,6 +122,7 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 			check_unset(args, vars, i);
 			i++;
 		}
+		
 	}
     else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
         exit (1);
@@ -365,8 +367,7 @@ int main(int c, char **v, char **env)
 				pipeline(input, &vars);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
-			// run(tokens[0]->content, cmds, &vars);
-			// table(str, tokens);
+			table(str, tokens);
         }
 		// if (str[0] != NULL)
 		// {
