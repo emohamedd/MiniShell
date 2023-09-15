@@ -6,13 +6,12 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/15 16:07:07 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/15 20:18:07 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	setup_redirs(char **args);
 void run_cd(char **args, t_vars *vars)
 {
     if (args[1])
@@ -145,13 +144,14 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 	// setup_redirs(args);
 }
 
-void	setup_redirs(char **args)
+void	setup_redirs(char **args, t_vars *vars)
 {
 	int	i;
 
 	i = 0;
 	while (args[i])
 	{
+		// printf("***%s***\n", args[i]);
 		if(!strcmp(args[i], ">"))
 		{
 			++i;
@@ -163,6 +163,10 @@ void	setup_redirs(char **args)
 			++i;
 			int fd = open(args[i], O_RDONLY , 0644);
 			dup2(fd, 0);
+		}
+		else if (ft_strchr(args[i], '|'))
+		{
+			pipeline(args, vars);
 		}
 		i++;
 	}	
@@ -179,11 +183,11 @@ void exec_cmds(t_vars *vars, char *cmd, char **args, char **red)
 	char *path;
 	path = get_path(vars, cmd);
 	
+	setup_redirs(red, vars);
 	// printf(">>%s<<\n", path);
 	id = fork();
 	if (id == 0) 
 	{
-		setup_redirs(red);
 		if (path == NULL)
 		{
 			ft_putstr_fd("minishell : ", 2);
@@ -282,18 +286,28 @@ void pipe_commands(t_vars *vars, int d)
 	}
 }
 
+char *swap(char **str)
+{
+    int  i = 0;
+    char *s = NULL;
+    while(str[i])
+    {
+
+      s = ft_strjoin(s, str[i]);
+      i++;
+      if (str[i])
+        s = ft_strjoin(s, " ");
+    }
+    return s;
+}
 
 
-void pipeline(char *str, t_vars *vars)
+void  pipeline(char **ptr, t_vars *vars)
 {
 	int i = 0;
 	int j = 0;
 	int l = 0;
-	char **ptr;
-	
-	ptr = ft_split(str, ' ');
-	if (!ptr)
-		return;
+	char *str;
 	while (ptr[i])
 	{
 		if (ft_strncmp(ptr[i], "|", ft_strlen("|")) != 0)
@@ -303,9 +317,12 @@ void pipeline(char *str, t_vars *vars)
 		}
 		if (ft_strncmp(ptr[i], "|", ft_strlen("|")) == 0)
 			l++;
+		// printf("---%s\n", ptr[i]);
+		// printf()
 		i++;
 	}
-
+	str = swap(ptr);
+	// printf("%s\n", str);
 	vars->cmds = malloc(sizeof(t_cmds) * (l));
 	char **split_pip = ft_split(str, '|');
 	i = 0;
@@ -322,7 +339,7 @@ void pipeline(char *str, t_vars *vars)
 		}
 		i++;
 	}
-	// printf ("%d\n", vars->cmds->size);
+	// printf ("---%d\n", i);
 	pipe_commands(vars, i);
 
 }
@@ -376,10 +393,10 @@ int main(int c, char **v, char **env)
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);
-			if (ft_strchr(input, '|') == NULL)
+			// if (ft_strchr(input, '|') == NULL)
 				run(tokens[0]->content, cmds, &vars, input);
-			else 
-				pipeline(input, &vars);
+			// else 
+			// 	pipeline(cmds, &vars);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
 			// table(str, tokens);
