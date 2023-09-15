@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/14 13:31:16 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:57:57 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ int is_char(char *str)
     }
     return 0;
 }
+
+int is_char_in2d(char **str) 
+{
+    int i = 0;
+    int j;
+    while (str[i]) 
+    {
+        j  = 0;
+         while (str[i][j]) 
+        {
+            if ((str[i][j] >= 'a' && str[i][j] <= 'z') || (str[i][j] >= 'A' && str[i][j] <= 'Z'))
+            return 1;
+           j++; 
+        }
+        i++;
+    }
+    return 0;
+}
+
 
 int lenght_of_the_2d(char **p)
 {
@@ -308,9 +327,7 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 inf[i]->type = "PIPE";
             else if (inf[i]->content[0] == '\"')
                 inf[i]->type = "DBCOTE";
-            else if (inf[i]->content[0] == '$')
-            
-            
+            else if (inf[i]->content[0] == '$' && ((inf[i]->content[1] >= 'a' && inf[i]->content[1] <= 'z') || (inf[i]->content[1] >= 'A' && inf[i]->content[0] <= 'Z')))
             {
                 char *var = ft_getenv(inf[i]->content + 1, vars);     
                     if(!var)

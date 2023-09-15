@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/15 15:43:46 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/15 16:07:07 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 
     if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0 && (ft_strchr(str, '>') == 0 && ft_strchr(str, '<') == 0  && ft_strchr(str, '|') == 0 ))
     {
+		// printf ("%s\n", args[1]);
         run_echo(args, vars);
     }
 	
@@ -371,7 +372,7 @@ int main(int c, char **v, char **env)
 			cmds = get_cmds(tokens);
 			if (!cmds)
 				return (0);
-			syn_err(cmds);
+			syn_err(cmds, &vars);
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);
@@ -381,7 +382,7 @@ int main(int c, char **v, char **env)
 				pipeline(input, &vars);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
-			table(str, tokens);
+			// table(str, tokens);
         }
 		// if (str[0] != NULL)
 		// {
