@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/14 11:42:05 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/15 15:43:46 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,6 +327,16 @@ void pipeline(char *str, t_vars *vars)
 }
 
 
+void sigintHandler(int signal) 
+{
+	 if (signal == SIGINT)
+    {
+        // printf("\n");
+        rl_on_new_line();
+        // rl_replace_line("", 0);
+        rl_redisplay();
+    }
+}
 
 int main(int c, char **v, char **env)
 {
@@ -343,11 +353,14 @@ int main(int c, char **v, char **env)
 	vars.env_number = count_argiment(vars.envp);
     char *input;
     t_info **tokens = NULL; 
+	signal(SIGINT, sigintHandler);
     while(1)
     {
         input = read_input();
         if (input == NULL)
             return (vars.exit_status);
+		if (!input[0])
+			continue;
 		str =  make_token(input);
         // str = ft_split(input, ' ');
 		if(str)
@@ -358,6 +371,7 @@ int main(int c, char **v, char **env)
 			cmds = get_cmds(tokens);
 			if (!cmds)
 				return (0);
+			syn_err(cmds);
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);
