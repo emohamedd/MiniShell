@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:01:08 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/15 16:06:22 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/15 21:46:57 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void syn_err(char **str, t_vars *vars)
     {
         while(str[i][j])
         {
-            if((str[i][0] == '>' || str[i][0] == '<' || str[i][j] == '|'))
+            if(str[i][0] == '>' || str[i][j] == '|')
             {
                 printf("minishell: syntax error\n");
                 vars->exit_status = 2;

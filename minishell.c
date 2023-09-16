@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/15 20:18:07 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/16 19:54:50 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 
     if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0 && (ft_strchr(str, '>') == 0 && ft_strchr(str, '<') == 0  && ft_strchr(str, '|') == 0 ))
     {
-		// printf ("%s\n", args[1]);
-        run_echo(args, vars);
+		if (ft_strncmp(args[1], "$?", ft_strlen("$?")) == 0)
+			printf ("%d\n",vars->exit_status);
+		else
+        	run_echo(args, vars);
     }
 	
     else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
@@ -164,10 +166,10 @@ void	setup_redirs(char **args, t_vars *vars)
 			int fd = open(args[i], O_RDONLY , 0644);
 			dup2(fd, 0);
 		}
-		else if (ft_strchr(args[i], '|'))
-		{
-			pipeline(args, vars);
-		}
+		// else if (ft_strchr(args[i], '|'))
+		// {
+		// 	pipeline(args, vars);
+		// }
 		i++;
 	}	
 }
@@ -393,13 +395,13 @@ int main(int c, char **v, char **env)
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);
-			// if (ft_strchr(input, '|') == NULL)
+			if (ft_strchr(input, '|') == NULL)
 				run(tokens[0]->content, cmds, &vars, input);
-			// else 
-			// 	pipeline(cmds, &vars);
+			else 
+				pipeline(cmds, &vars);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
-			// table(str, tokens);
+			table(str, tokens);
         }
 		// if (str[0] != NULL)
 		// {

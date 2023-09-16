@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/15 20:18:14 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/16 19:53:00 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_vars
     void syn_err(char **str, t_vars *vars);
     void pipeline(char **ptr, t_vars *vars);
     void	setup_redirs(char **args, t_vars *vars);
+    char **red_to_herdoc(char **tokens);
     // t_info **ft_splite(char *s) ;
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
