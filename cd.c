@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_err.c                                       :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 17:01:08 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/17 13:00:12 by haarab           ###   ########.fr       */
+/*   Created: 2023/09/17 18:41:04 by haarab            #+#    #+#             */
+/*   Updated: 2023/09/17 18:41:27 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-void syn_err(char **str, t_vars *vars)
+
+void run_cd(char **args, t_vars *vars)
 {
-
-    int i = 0;
-    int j = 0;
-    while(str[i])
-    {
-        while(str[i][j])
-        {
-            if((str[i][0] == '>' || str[i][j] == '|'))
-            {
-                printf("minishell: syntax error\n");
-                vars->exit_status = 2;
-            }
-
-            j++;
-        }
-        i++;
-    }
+    if (args[1])
+        chdir(args[1]);
+	else if (!args[1])
+		chdir(ft_getenv("HOME", vars));
 }

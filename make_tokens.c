@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/15 15:57:57 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:41:37 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ int is_char_in2d(char **str)
 
 int lenght_of_the_2d(char **p)
 {
+    if (!p[0])
+        return 0;
     int i = 0;
     while(p[i])
-
     {
         i++;
     }
@@ -58,17 +59,19 @@ int lenght_of_the_2d(char **p)
 
 char **split(char *s, char *delimiters) 
 {
-    t_info *inf;
 
-    int max_tokens = inf->size; // to fix hadi ba9i makanacllokich the right size
+    
+    int max_tokens = strlen(s); // to fix hadi ba9i makanacllokich the right size
+        // printf("**********\n");
+        // exit(1);
     char **tokens = (char **)malloc(max_tokens * sizeof(char *));
+    
     if (!tokens) 
     
     {
        printf("allocation err\n");
         exit(1);
     }
-
     int token_count = 0;
     char *start = s;
     char *end = s;
@@ -272,8 +275,6 @@ char** expand_quotes(char** tokens)
         }
         i++;
     }
-
-
     expanded_tokens[j] = NULL;
 
     return expanded_tokens;
@@ -285,8 +286,12 @@ char **make_token(char *s)
 {
     char *special_chars = "<>|";
     char **tokens = split(s, special_chars);
-    tokens = expand_quotes(tokens);
-    return tokens;
+    char **quote = expand_quotes(tokens);
+    int len = lenght_of_the_2d(quote);
+    // printf("*****%d", len);
+    char **new_tokens = malloc(sizeof(char *) * len);
+    return red_to_herdoc(tokens);
+    // return tokens;
 }
 
 t_info **allocat_token(char **s,  t_vars *vars)
@@ -295,7 +300,6 @@ t_info **allocat_token(char **s,  t_vars *vars)
    
      t_info **inf = malloc(sizeof(t_info*) * (lenght_of_the_2d(s)+1));
          if (!inf) 
-            
             
             {
                 printf("Err\n");
