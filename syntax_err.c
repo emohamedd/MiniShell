@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   syntax_err.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 17:33:44 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/13 20:19:27 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/14 17:01:08 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/15 22:42:05 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void env_cmd(t_vars *vars)
+void syn_err(char **str, t_vars *vars)
 {
-    int i = 0;
-    while (i < vars->env_number)
-	{
-        if (vars->env[i].is_equal)
-		{
-            printf("%s", vars->env[i].key);
-            printf("=");
-            printf("%s\n", vars->env[i].value);
 
+    int i = 0;
+    int j = 0;
+    while(str[i])
+    {
+        while(str[i][j])
+        {
+            if((str[i][0] == '>' || str[i][j] == '|'))
+            {
+                printf("minishell: syntax error\n");
+                vars->exit_status = 2;
+            }
+
+            j++;
         }
         i++;
     }

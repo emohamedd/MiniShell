@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/08 08:46:46 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/11 20:12:57 by haarab           ###   ########.fr       */
+/*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/15 15:57:57 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ int is_char(char *str)
     }
     return 0;
 }
+
+int is_char_in2d(char **str) 
+{
+    int i = 0;
+    int j;
+    while (str[i]) 
+    {
+        j  = 0;
+         while (str[i][j]) 
+        {
+            if ((str[i][j] >= 'a' && str[i][j] <= 'z') || (str[i][j] >= 'A' && str[i][j] <= 'Z'))
+            return 1;
+           j++; 
+        }
+        i++;
+    }
+    return 0;
+}
+
 
 int lenght_of_the_2d(char **p)
 {
@@ -274,43 +293,41 @@ t_info **allocat_token(char **s,  t_vars *vars)
 {
     int  i = 0;
    
-    t_info **inf = malloc(sizeof(t_info*) * (lenght_of_the_2d(s)+1));
-	if (!inf) 
-	{
-		printf("Err\n");
-		exit(1);
-	}
+     t_info **inf = malloc(sizeof(t_info*) * (lenght_of_the_2d(s)+1));
+         if (!inf) 
+            
+            
+            {
+                printf("Err\n");
+                exit(1);
+            }
     while(s[i])
-    
-    
     {
         inf[i] = malloc(sizeof(t_info));
         inf[i]->content = s[i];
         inf[i]->size = lenght_of_the_2d(s);
-            if (inf[i]->content[0] == '<')
+            if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
+        {
+                char *str = ft_strtrim(inf[i]->content, "\'");
+                // printf("%s\n", str);
+                 char *var ;
+                var = ft_getenv(str + 1, vars);     
+                    if(!var)
+                        return 0;
+                    inf[i]->content = ft_strdup(var);
+                    // printf("%s\n", inf[i]->content);
+                    inf[i]->type = "ENV_EXPANDED"; 
+                    inf[i]->lenght = strlen(inf[i]->content);   
+        }
+            if (inf[i]->content[0] == '<')   
                 inf[i]->type = "RDIN";
             else if (inf[i]->content[0] == '>')
                 inf[i]->type = "RDOUT";
-			////////////////////////////////////////
             else if (inf[i]->content[0] == '|')
-			{
-				// int pipe_fd[2];
-				// pid_t pid;
-
-				// // Create a pipe
-				// if (pipe(pipe_fd) == -1)
-				// {
-				// 	printf ("hello\n");
-				// 	perror("pipe");
-				// 	exit(EXIT_FAILURE);
-				// }
-				
-			}
+                inf[i]->type = "PIPE";
             else if (inf[i]->content[0] == '\"')
                 inf[i]->type = "DBCOTE";
-            else if (inf[i]->content[0] == '$')
-            
-            
+            else if (inf[i]->content[0] == '$' && ((inf[i]->content[1] >= 'a' && inf[i]->content[1] <= 'z') || (inf[i]->content[1] >= 'A' && inf[i]->content[0] <= 'Z')))
             {
                 char *var = ft_getenv(inf[i]->content + 1, vars);     
                     if(!var)
@@ -329,6 +346,3 @@ t_info **allocat_token(char **s,  t_vars *vars)
     }
     return inf;
 }
-
-// #include <stdio.h>
-

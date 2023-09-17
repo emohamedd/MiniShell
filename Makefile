@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
+#    By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/11 15:04:21 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/16 12:03:18 by haarab           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = 
-LDFLAGS = -lreadline
+CFLAGS = #-g -fsanitize=address
+LDFLAGS = -lreadline 
 
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)

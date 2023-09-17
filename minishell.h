@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/13 20:06:36 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/16 19:29:16 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <fcntl.h>
 
 #define GRN  "\x1B[32m"
 #define BLU  "\x1B[34m"
@@ -38,20 +39,13 @@
 #define RESET   "\x1B[0m"
 #define PURPLE  "\x1B[35m"
 
-// enum golbal_token
+// typedef enum e_token
 // {
-//     WORD,
-//     PIPE ='|',
-//     ENV_VAR = '$',
-//     space = ' ',
-//     DOUBLE_QUOTE = '\"',
-//     SINGLE_QUOTE ='\'',
-//     R_OUT = '>',
-//     R_IN = '<',
-//     DR,
-//     HERE_DOC,
-// }
-
+// 	CMD,
+// 	PIPE,
+// 	RED_IN
+// 	RED_OUT
+// }	t_token;
 
 typedef struct s_info
 {
@@ -62,12 +56,20 @@ typedef struct s_info
     
 } t_info;
 
+// typedef struct s_cmds
+// {
+// 	char *cmd;
+// 	t_token	type;
+// } t_cmds;
+
+
 typedef struct s_cmds
 {
 	char *cmd;
 	char **cmds_args;
+	char *smbol;
+	int is_nex_pip;
 } t_cmds;
-
 
 // enum state{
 //     IN_SQ,
@@ -93,6 +95,7 @@ typedef struct s_vars
 	int exit_status;
 	t_cmds *cmds;
     t_env *env;
+	int	n_commandes;
 	
 }	t_vars;
 
@@ -106,7 +109,7 @@ typedef struct s_vars
   char	*ft_strdup(const char *s1);
 //   size_t	ft_strlen(const char *s);
 	char	*ft_getenv(char *key, t_vars *vars);
-	void	exec_cmds(t_vars *vars, char *cmd, char **args);
+	void	exec_cmds(t_vars *vars, int i);
     void	display_prompt();
     char	*read_input();
     char	**ft_split(char const *s, char c);
@@ -119,6 +122,10 @@ typedef struct s_vars
 	void 	env_cmd(t_vars *vars);
     void 	table(char **str, t_info **tokens);
 	int 	count_argiment(char **str);
+    void syn_err(char **str, t_vars *vars);
+    void pipeline(char **ptr, t_vars *vars);
+    void	setup_redirs(char **args, t_vars *vars);
+	void pipe_commands(t_vars *vars, int i) ;
     // t_info **ft_splite(char *s) ;
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
