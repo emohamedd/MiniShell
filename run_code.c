@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_code.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/17 18:38:46 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/17 20:27:57 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,62 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 		// int fdin = dup(STDIN_FILENO);
 		// int fdou = dup(STDOUT_FILENO);
 		int i = 0;
-		while (i < vars->n_commandes)
+		// while (i < vars->n_commandes)
+		// {
+		// 	if (vars->cmds[i].is_nex_pip)
+		// 	{
+		// 		// exec_cmds(vars, i);
+		// 		pipe_commands(vars, i);
+		// 	}
+		// 	else
+		// 	{
+		// 		exec_cmds(vars, i);
+		// 	// 	printf ("hamza\n");
+		// 	}
+		// 	i++;
+		// }
+		while(i < vars->n_commandes)
 		{
+			int j = 0;
+			int fd = 0;
 			if (vars->cmds[i].is_nex_pip)
-			{
-				// exec_cmds(vars, i);
-				pipe_commands(vars, i);
+		 	{ 
+		 		pipe_commands(vars, i);
 			}
-			else
+			if (vars->cmds[i].has_redirections)
 			{
+				while(vars->cmds[i].opera_derec[j])
+				{
+					if (!strcmp(vars->cmds[i].opera_derec[j], ">"))
+					{
+							fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_TRUNC | O_RDWR, 0644);
+							dup2(fd, 1);
+					}
+					else if (!strcmp(vars->cmds[i].opera_derec[j], "<"))
+					{
+						fd = open(vars->cmds[i].file_derec[j],  O_RDWR);
+						dup2(fd, 0);
+					}else if (!strcmp(vars->cmds[i].opera_derec[j], ">>")) {
+							fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_APPEND | O_RDWR, 0644);
+							dup2(fd, 1);
+					}
+					j++;
+				}	
+			}
+			if (!vars->cmds[i].is_nex_pip)
 				exec_cmds(vars, i);
-			// 	printf ("hamza\n");
-			}
+		// if (!vars->cmds[i].is_nex_pip && !vars->cmds[i].has_redirections)
 			i++;
 		}
+		// if (!strcmp(args[i], "<"))
+		// {
+		// 	++i;
+		// 	int fd = open(args[i], O_CREAT | O_APPEND | O_RDWR, 0644);
+		// 	dup2(fd, 0);
+		// }
+		// 		}
+		// 	}
+		// }
 		// dup2(fdin, 0);
 		// dup2(fdou, 1);
 		// i = 0;
