@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/16 19:53:00 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/17 19:00:57 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,13 @@
 #define RESET   "\x1B[0m"
 #define PURPLE  "\x1B[35m"
 
-// enum golbal_token
+// typedef enum e_token
 // {
-//     WORD,
-//     PIPE ='|',
-//     ENV_VAR = '$',
-//     space = ' ',
-//     DOUBLE_QUOTE = '\"',
-//     SINGLE_QUOTE ='\'',
-//     R_OUT = '>',
-//     R_IN = '<',
-//     DR,
-//     HERE_DOC,
-// }
-
+// 	CMD,
+// 	PIPE,
+// 	RED_IN
+// 	RED_OUT
+// }	t_token;
 
 typedef struct s_info
 {
@@ -63,12 +56,23 @@ typedef struct s_info
     
 } t_info;
 
+// typedef struct s_cmds
+// {
+// 	char *cmd;
+// 	t_token	type;
+// } t_cmds;
+
+
 typedef struct s_cmds
 {
 	char *cmd;
 	char **cmds_args;
+	char *smbol;
+	char **opera_derec;
+	char **file_derec;
+	int	is_nex_pip;
+	int has_redirections;
 } t_cmds;
-
 
 // enum state{
 //     IN_SQ,
@@ -94,10 +98,12 @@ typedef struct s_vars
 	int exit_status;
 	t_cmds *cmds;
     t_env *env;
+	int	n_commandes;
 	
 }	t_vars;
-
+char **clear_cmds_arg_from_direct(char **args);
   char *read_input();
+  char **get_files(int size, char **old_stac);
   // t_info **ft_split(char *s);
   char **make_token(char *s) ;
   int lenght_of_the_2d(char **p);
@@ -107,7 +113,7 @@ typedef struct s_vars
   char	*ft_strdup(const char *s1);
 //   size_t	ft_strlen(const char *s);
 	char	*ft_getenv(char *key, t_vars *vars);
-	void	exec_cmds(t_vars *vars, char *, char **, char**);
+	void	exec_cmds(t_vars *vars, int i);
     void	display_prompt();
     char	*read_input();
     char	**ft_split(char const *s, char c);
@@ -121,9 +127,12 @@ typedef struct s_vars
     void 	table(char **str, t_info **tokens);
 	int 	count_argiment(char **str);
     void syn_err(char **str, t_vars *vars);
-    void pipeline(char **ptr, t_vars *vars);
+    void fill_commands(char **ptr, t_vars *vars);
     void	setup_redirs(char **args, t_vars *vars);
-    char **red_to_herdoc(char **tokens);
+	void pipe_commands(t_vars *vars, int i) ;
+	char **red_to_herdoc(char **tokens);
+	char *get_path(t_vars *vars, char *cmd);
+	int is_redirection(char *arg);
     // t_info **ft_splite(char *s) ;
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
@@ -136,5 +145,6 @@ typedef struct s_vars
 
 
 
+	char **get_redirectinsv(int size, char **old_stack);
 	
 #endif
