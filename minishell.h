@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 12:15:30 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:29:53 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <fcntl.h>
+#include <signal.h>
+
 
 #define GRN  "\x1B[32m"
 #define BLU  "\x1B[34m"
