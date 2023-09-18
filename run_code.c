@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/17 22:28:02 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:10:41 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,7 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 	else
 	{
 		fill_commands(args, vars);
-		// int fdin = dup(STDIN_FILENO);
-		// int fdou = dup(STDOUT_FILENO);
 		int i = 0;
-		// while (i < vars->n_commandes)
-		// {
-		// 	if (vars->cmds[i].is_nex_pip)
-		// 	{
-		// 		// exec_cmds(vars, i);
-		// 		pipe_commands(vars, i);
-		// 	}
-		// 	else
-		// 	{
-		// 		exec_cmds(vars, i);
-		// 	// 	printf ("hamza\n");
-		// 	}
-		// 	i++;
-		// }
 		while(i < vars->n_commandes)
 		{
 			int j = 0;
@@ -119,53 +103,7 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 			}
 			if (!vars->cmds[i].is_nex_pip)
 				exec_cmds(vars, i);
-		// if (!vars->cmds[i].is_nex_pip && !vars->cmds[i].has_redirections)
 			i++;
 		}
-		// if (!strcmp(args[i], "<"))
-		// {
-		// 	++i;
-		// 	int fd = open(args[i], O_CREAT | O_APPEND | O_RDWR, 0644);
-		// 	dup2(fd, 0);
-		// }
-		// 		}
-		// 	}
-		// }
-		// dup2(fdin, 0);
-		// dup2(fdou, 1);
-		// i = 0;
-		// while(args[i])
-		// {
-		// 	printf("cmd ===    %s\n", args[i]);
-		// 	i++;
-		// }
-
-		// int x = 0;
-		// while(vars->cmds[x].cmds_args)
-		// {
-		// 	i = 0;
-		// 	while(vars->cmds[x].cmds_args[i])
-		// 	{
-		// 		printf(" args === %s\n", vars->cmds[x].cmds_args[i]);
-		// 		i++;
-		// 	}
-		// 	x++;
-		// }
-		// x++;
-		// i = 0;
-		// while(vars->cmds[i].smbol)
-		// {
-		// 	printf(" smbol ===%s\n", vars->cmds[i].smbol);
-		// 	i++;
-		// }
-		// if (!ft_strchr(str, '|'))
-		// {
-		// 	exec_cmds(vars, cmd, e_cmd);
-		// }
-		// else
-		// {
-		// 	setup_redirs(args, vars);
-		// 	fill_commands(e_cmd, vars);
-		// }
 	}
 }

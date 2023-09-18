@@ -6,7 +6,7 @@
 #    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/09 14:09:05 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/18 10:10:01 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,18 +17,26 @@ OBJS = $(SRCS:.c=.o)
 
 NAME = libft.a
 
+YEL = \033[0;33m
+RESET = \033[0m
+
+
 all : $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^
+	@$(CC) $(CFLAGS) -c $^
+	@echo "$(YEL)✅ Compiled: $<$(RESET)"
 
 $(NAME): $(OBJS) 
-	ar -rcs $@ $^
+	@echo "$(YEL)✅  LIBFT : Compilation successful!$(RESET)"
+	@ar -rcs $@ $^
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
+	@echo "$(YEL)✅ Cleaned up object files$(RESET)"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(YEL)✅ Cleaned up executable$(RESET)"
 
 re: fclean all

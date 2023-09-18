@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 09:41:23 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 09:56:09 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,21 +231,11 @@ int main(int c, char **v, char **env)
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);
-			// if (ft_strchr(input, '|') == NULL)
 			run(tokens[0]->content, cmds, &vars, input);
-			// else 
-			// 	fill_commands(cmds, &vars);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
 			// table(str, tokens);
         }
-		// if (str[0] != NULL)
-		// {
-		// 	char* command = str[0];
-		// 	char **args = str;
-		// 	vars.count_argiment = count_argiment(args);
-		// 	run(command, args, &vars);
-		// }
     }
 	
     return 0;

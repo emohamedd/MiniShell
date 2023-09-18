@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 17:01:08 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/17 19:01:05 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 09:55:26 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void syn_err(char **str, t_vars *vars)
                 printf("minishell: syntax error\n");
                 vars->exit_status = 2;
             }
-
             j++;
         }
         i++;
