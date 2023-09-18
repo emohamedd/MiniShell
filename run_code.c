@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/18 10:10:41 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:26:18 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,18 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 	char *cwd = getcwd(NULL, 1024);
 	
 
-    if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
-    {
-		if (ft_strncmp(args[1], "$?", ft_strlen("$?")) == 0)
-		{
-			printf ("%d\n", vars->exit_status);
-		}
-		// printf ("%s\n", args[1]);
-		else
-        	run_echo(args, vars);
-    }
-	
-	 else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
-    {
-        run_cd(args, vars);
-    }
-	
+	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
+	{
+			if (args[1] != NULL && ft_strncmp(args[1], "$?", ft_strlen("$?")) == 0)
+			{
+				printf ("%d\n", vars->exit_status);
+			}
+			else
+			{
+				run_echo(args, vars);
+			}
+	}
+
 	
     else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
     {

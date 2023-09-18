@@ -6,7 +6,7 @@
 #    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/18 10:17:16 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/18 10:22:39 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,3 @@ fclean: clean
 	@echo "$(GREEN)✅ Cleaned up executable$(RESET)"
 
 re: fclean all
-
-run: all
-	@./$(NAME)
