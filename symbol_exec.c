@@ -31,7 +31,7 @@ void rot13(char *str)
     }
 }
 
-int create_temp_file( char *base_filename) 
+int create_temp_file(char *base_filename) 
 {
     char *file =  malloc(sizeof(char) * (ft_strlen(base_filename) + 1));
 
@@ -47,19 +47,22 @@ int create_temp_file( char *base_filename)
     return fd;
 }
 
-void collect_and_write_heredoc(int fd, const char *heredoc_delimiter) {
+void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
     char *read = NULL;
+    char *line;
 
     while (1) 
     {
-        read = get_next_line(fd);
-        printf(" this is the read function : %s\n", read);
-        if (!read) 
-        {
-            perror("get_next_line");
-            exit(1);
-        }
-
+        read = readline("> ");
+        // read = get_next_line(0);
+        ft_putstr_fd(read, fd);
+        ft_putstr_fd("\n", fd);
+        // printf(" this is the read function : %s\n", read);
+        // if (!read) 
+        // {
+        //     perror("get_next_line");
+        //     exit(1);
+        // }
         if (strcmp(read, heredoc_delimiter) == 0) 
         {
              printf("U got the delimiter\n");
@@ -106,14 +109,14 @@ void pipe_red(t_vars *vars) {
                 } 
                 else if (!strcmp(vars->cmds[i].opera_derec[j], "<<")) 
                 {
-                    if ( vars->cmds[i].file_derec[j]) 
+                    if (vars->cmds[i].file_derec[j]) 
                     {
                         char *heredoc_delimiter = vars->cmds[i].file_derec[j];
+                        printf("the delim : %s\n", heredoc_delimiter);
                         fd = create_temp_file(base_filename);
 						
-                        collect_and_write_heredoc(fd, heredoc_delimiter);
+                        collect_and_write_heredoc(fd,  heredoc_delimiter);
                         // fd = create_temp_file(base_filename);
-                        dup2(fd, 0);
                         close(fd);
                     }
                 }
