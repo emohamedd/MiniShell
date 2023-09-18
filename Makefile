@@ -10,38 +10,32 @@
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -I./includes #-g -fsanitize=address
-NAME = minishell
-READLINE = -L/Users/emohamed/.brew/opt/readline/lib -I/Users/emohamed/.brew/opt/readline/include
-LIBFT = -L./libft -lft
-
+CC = cc
+ #CFLAGS = -g -fsanitize=address
+LDFLAGS = -lreadline 
 RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline
 RLOFLGS = -I/Users/emohamed/.brew/opt/readline/include
 
-SRCS = *.c
+SRCS = $(wildcard *.c)
+OBJS = $(SRCS:.c=.o)
 
-GREEN = \033[0;32m
-RESET = \033[0m
+NAME = minishell
 
-all : $(NAME)
-
-$(NAME) : $(OBJS)
-	@make -C libft all
-	@echo "$(GREEN)✅ MINISHELL : Compilation successful!$(RESET)"
-	@$(CC) $(CFLAGS) $(LIBFT) $(RLFLGS) $^ -o $@
+all: $(NAME)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) $(RLOFLGS) -c $< -o $@
-	@echo "$(GREEN)✅ Compiled: $<$(RESET)"
+	make -C libft
+	$(CC) $(CFLAGS) $(RLOFLGS) -c $< -o $@
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) libft/libft.a  -o $(NAME) $(LDFLAGS)  $(RLFLGS)
 
 clean:
-	@make -C libft clean
-	@rm -f $(OBJS)
-	@echo "$(GREEN)✅ Cleaned up object files$(RESET)"
+	make -C libft/ fclean
+	rm -f $(OBJS)
 
 fclean: clean
-	@make -C libft fclean
-	@rm -f $(NAME)
-	@echo "$(GREEN)✅ Cleaned up executable$(RESET)"
+	make -C libft/ fclean
+	rm -f $(NAME)
 
 re: fclean all
