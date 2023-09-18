@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 12:10:47 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:00:41 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ int main(int c, char **v, char **env)
     while(1)
     {
         input = read_input();
+		if (input == NULL)
+		{	
+    		return (vars.exit_status);
+		}
 		char *trimed = ft_strtrim(input , " \t\r\n");
         if (trimed == NULL)
 		{	

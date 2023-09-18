@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_code.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/18 12:15:40 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 13:02:03 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 {
 	char *cwd = getcwd(NULL, 1024);
 	
-
 	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
 	{
 			if (args[1] != NULL && ft_strncmp(args[1], "$?", ft_strlen("$?")) == 0)
