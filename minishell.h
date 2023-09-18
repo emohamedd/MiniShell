@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 11:02:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:15:30 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ typedef struct s_vars
     void fell_env_struct(t_vars *vars);
     void fell_env_struct(t_vars *vars);
     char *ft_getenv(char *key, t_vars *vars);
+    void pipe_red(t_vars *vars);
 	
 #endif
