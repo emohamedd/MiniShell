@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 10:13:33 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 11:02:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,6 @@
 #define RESET   "\x1B[0m"
 #define PURPLE  "\x1B[35m"
 
-// typedef enum e_token
-// {
-// 	CMD,
-// 	PIPE,
-// 	RED_IN
-// 	RED_OUT
-// }	t_token;
-
 typedef struct s_info
 {
     char *content;
@@ -56,11 +48,6 @@ typedef struct s_info
     
 } t_info;
 
-// typedef struct s_cmds
-// {
-// 	char *cmd;
-// 	t_token	type;
-// } t_cmds;
 
 
 typedef struct s_cmds
@@ -74,11 +61,6 @@ typedef struct s_cmds
 	int has_redirections;
 } t_cmds;
 
-// enum state{
-//     IN_SQ,
-//     IN_DQ,
-//     GENR
-// }
 
 typedef struct s_env
 {
@@ -101,20 +83,18 @@ typedef struct s_vars
 	int	n_commandes;
 	
 }	t_vars;
-char **clear_cmds_arg_from_direct(char **args);
-  char *read_input();
-  char **get_files(int size, char **old_stac);
-  // t_info **ft_split(char *s);
-  char **make_token(char *s) ;
-  int lenght_of_the_2d(char **p);
-  int	count_s_lenght(const char *s, char c);
-//   char	**ft_split_token(char *s, char c);
-  t_info **allocat_token(char **s, t_vars *cvars);
-  char	*ft_strdup(const char *s1);
-//   size_t	ft_strlen(const char *s);
+
+
+    char **clear_cmds_arg_from_direct(char **args);
+    char *read_input();
+    char **get_files(int size, char **old_stac);
+    char **make_token(char *s) ;
+    int lenght_of_the_2d(char **p);
+    int	count_s_lenght(const char *s, char c);
+    t_info **allocat_token(char **s, t_vars *cvars);
+    char	*ft_strdup(const char *s1);
 	char	*ft_getenv(char *key, t_vars *vars);
 	void	exec_cmds(t_vars *vars, int i);
-    void	display_prompt();
     char	*read_input();
     char	**ft_split(char const *s, char c);
 	void 	run(char *cmd, char **args, t_vars *vars, char *str);
@@ -128,24 +108,16 @@ char **clear_cmds_arg_from_direct(char **args);
 	int 	count_argiment(char **str);
     void syn_err(char **str, t_vars *vars);
     void fill_commands(char **ptr, t_vars *vars);
-    void	setup_redirs(char **args, t_vars *vars);
 	void pipe_commands(t_vars *vars, int i) ;
 	char **red_to_herdoc(char **tokens);
 	char *get_path(t_vars *vars, char *cmd);
 	int is_redirection(char *arg);
     char *ft_getenv(char *key, t_vars *vars);
-    // t_info **ft_splite(char *s) ;
-    // size_t	ft_strlen(const char *s);
-    // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);
-    // int		ft_atoi(const char *str);
-    // void	*ft_calloc(size_t count, size_t size);
-    // char	*ft_strdup(const char *s1);
-    // char	*ft_substr(char const *s, unsigned int start, size_t len);
-    // char	*ft_strjoin(char const *s1, char const *s2);
-    // char	*ft_itoa(int n);
-
-
-
 	char **get_redirectinsv(int size, char **old_stack);
+    char	**get_cmds(t_info **info);
+    void sigintHandler(int signal);
+    void fell_env_struct(t_vars *vars);
+    void fell_env_struct(t_vars *vars);
+    char *ft_getenv(char *key, t_vars *vars);
 	
 #endif
