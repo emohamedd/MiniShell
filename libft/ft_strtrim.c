@@ -6,12 +6,13 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:47:21 by emohamed          #+#    #+#             */
-/*   Updated: 2023/05/14 10:01:15 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:10:34 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+#include <stdio.h>
 int	check_char(char const c, char const *set)
 {
 	int	j;
@@ -32,6 +33,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int	end;
 
 	begin = 0;
+	if (s1[0] == '\0')
+		return (ft_strdup(""));
 	if (!s1 || !set)
 		return (NULL);
 	begin = 0;

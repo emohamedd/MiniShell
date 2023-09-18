@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 11:05:15 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 12:10:47 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,17 @@ int main(int c, char **v, char **env)
     while(1)
     {
         input = read_input();
-        if (input == NULL)
-            return (vars.exit_status);
-		if (!input[0])
+		char *trimed = ft_strtrim(input , " \t\r\n");
+        if (trimed == NULL)
+		{	
+    		return (vars.exit_status);
+		}
+		if (!trimed[0])
+		{
 			continue;
-		str =  make_token(input);
-        // str = ft_split(input, ' ');
+		}
+		str =  make_token(trimed);
+        // str = ft_split(trimed, ' ');
 		if(str)
         {
 			tokens = allocat_token(str, &vars);
@@ -49,7 +54,7 @@ int main(int c, char **v, char **env)
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);
-			run(tokens[0]->content, cmds, &vars, input);
+			run(tokens[0]->content, cmds, &vars, trimed);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
 			// table(str, tokens);

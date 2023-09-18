@@ -6,11 +6,11 @@
 #    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/18 11:03:07 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/18 11:13:27 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -I./includes
+CFLAGS = -I./includes #-g -fsanitize=address
 NAME = minishell
 READLINE = -L/Users/emohamed/.brew/opt/readline/lib -I/Users/emohamed/.brew/opt/readline/include
 LIBFT = -L./libft -lft
