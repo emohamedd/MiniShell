@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/17 19:00:57 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 10:13:33 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ char **clear_cmds_arg_from_direct(char **args);
 	char **red_to_herdoc(char **tokens);
 	char *get_path(t_vars *vars, char *cmd);
 	int is_redirection(char *arg);
+    char *ft_getenv(char *key, t_vars *vars);
     // t_info **ft_splite(char *s) ;
     // size_t	ft_strlen(const char *s);
     // size_t	ft_strlcat(char *dst, char *src, size_t dstsize);

@@ -6,7 +6,7 @@
 #    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/18 10:10:10 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/18 10:17:16 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT = -L./libft -lft
 RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline
 RLOFLGS = -I/Users/emohamed/.brew/opt/readline/include
 
-SRCS = *.c
+SRCS = cd.c echo.c env.c exec_cmds.c export.c ft_split_token.c ft_strdup.c ft_strlen.c herdo_parse.c make_tokens.c minishell.c pipes.c print_table.c read_input.c redirection.c run_code.c syntax_err.c token.c unset.c
 OBJS = $(SRCS:.c=.o)
 
 GREEN = \033[0;32m
