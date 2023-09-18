@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/17 19:00:17 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/17 22:44:52 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,7 +290,7 @@ char **make_token(char *s)
     int len = lenght_of_the_2d(quote);
     // printf("*****%d", len);
     char **new_tokens = malloc(sizeof(char *) * len);
-    return red_to_herdoc(tokens);
+    return red_to_herdoc(quote);
     // return tokens;
 }
 

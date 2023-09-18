@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/17 20:27:57 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/17 22:28:02 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
         	run_echo(args, vars);
     }
 	
-    else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
+	 else if (ft_strncmp(cmd, "cd", ft_strlen("cd")) == 0)
     {
         run_cd(args, vars);
     }

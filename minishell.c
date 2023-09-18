@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/17 19:00:43 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/18 09:41:23 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,9 +187,9 @@ void sigintHandler(int signal)
 {
 	 if (signal == SIGINT)
     {
-        // printf("\n");
+        printf("\n");
         rl_on_new_line();
-        // rl_replace_line("", 0);
+        rl_replace_line("", 0);
         rl_redisplay();
     }
 }
