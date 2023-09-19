@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:55:52 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 15:55:00 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:35:50 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void sigintHandler(int signal)
     {
         printf("\n");
         rl_on_new_line();
-        rl_replace_line("", 0);
+        // rl_replace_line("", 0);
         rl_redisplay();
     }
 }
