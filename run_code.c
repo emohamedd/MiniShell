@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/18 23:56:22 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:30:30 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 			}
 			else if (i == 0)
 			{
-				if (vars->n_commandes == 1)
+				if (!vars->cmds[i].has_redirections)
+				{
 					run_echo(vars->cmds[i].cmds_args, vars);
-				else if (vars->n_commandes > 0)
+				}
+				else if (vars->cmds[i].has_redirections || vars->cmds[i].is_nex_pip)
 				{
 					pipe_red(vars, i);
 				}
@@ -65,7 +67,7 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 				if (!vars->cmds[i].cmds_args[1])
 					export_cmd(vars, NULL, NULL);
 				int k = 1;
-				while (args[k])
+				while (vars->cmds[i].cmds_args[k])
 				{
 					export_cmd(vars, vars->cmds[i].cmds_args[k], vars->cmds[i].cmds_args);
 					k++;
@@ -73,7 +75,13 @@ void run(char *cmd, char **args, t_vars *vars, char *str)
 			}
 			// else if (vars->n_commandes > 0)
 			// {
-			// 	pipe_red(vars, i);
+			// 	int k = 1;
+			// 	export_cmd(vars, vars->cmds[i].cmds_args[k], vars->cmds[i].cmds_args);
+			// 	if (vars->cmds[i].is_nex_pip)
+			// 	{
+			// 		pipe_commands(vars, i);
+			// 		vars->exit_status = 0;
+			// 	}
 			// }
 		}
 		else if (ft_strcmp("env", vars->cmds[i].cmd) == 0)
