@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_herdo.c                                       :+:      :+:    :+:   */
+/*   herdo_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:08:39 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 09:55:18 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:37:43 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char **red_to_herdoc(char **tokens)
 
     int i = 0;
     int j = 0;
+	// hadi forbiden function strcmp
+
 
     while (tokens[i]) 
     {

@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/18 13:02:03 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:39:09 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,58 +15,103 @@
 void run(char *cmd, char **args, t_vars *vars, char *str)
 {
 	char *cwd = getcwd(NULL, 1024);
-	
-	if (ft_strncmp(cmd, "echo", ft_strlen("echo")) == 0)
+	fill_commands(args, vars);
+	int i = 0;
+	while (i < vars->n_commandes)
 	{
-			if (args[1] != NULL && ft_strncmp(args[1], "$?", ft_strlen("$?")) == 0)
+		if ((ft_strcmp("echo", vars->cmds[i].cmd) == 0))
+		{
+			if (vars->cmds[i].cmds_args[1] != NULL && ft_strcmp("$?", vars->cmds[i].cmds_args[1]) == 0)
 			{
 				printf ("%d\n", vars->exit_status);
 			}
-			else
+			else if (i == 0)
 			{
-				run_echo(args, vars);
+				if (!vars->cmds[i].has_redirections)
+				{
+					run_echo(vars->cmds[i].cmds_args, vars);
+				}
+				else if (vars->cmds[i].has_redirections || vars->cmds[i].is_nex_pip)
+				{
+					pipe_red(vars, i);
+				}
 			}
-	}
-
-	
-    else if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
-    {
-		printf("%s\n", cwd);
-		vars->exit_status = 0;
-    }
-
-	else if (ft_strncmp(cmd, "export", ft_strlen("export")) == 0)
-	{
-		if (!args[1])
-			export_cmd(vars, NULL, NULL);
-		int i = 1;
-		while (args[i])
-		{
-			export_cmd(vars, args[i], args);
-			i++;
 		}
-	}
-	
-	else if (ft_strncmp(cmd, "env", ft_strlen("env")) == 0)
-	{
-		env_cmd(vars);
-	}
-	else if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
-	{
-		int i = 1;
-		while (args[i])
+		else if (ft_strcmp("cd", vars->cmds[i].cmd) == 0)
+    	{
+			if (vars->n_commandes == 1)
+			{
+        		run_cd(vars->cmds[i].cmds_args, vars);
+			}
+			// else if (vars->n_commandes > 0)
+			// 	pipe_red(vars, i);
+    	}
+		else if (ft_strcmp("pwd", vars->cmds[i].cmd) == 0)
 		{
-			check_unset(args, vars, i);
-			i++;
+			if (!vars->cmds[i].has_redirections)
+			{
+				printf("%s\n", cwd);
+				vars->exit_status = 0;
+			}
+			else if (vars->cmds[i].has_redirections)
+				pipe_red(vars, i);
+			while (vars->cmds[i].is_nex_pip && (ft_strcmp(vars->cmds[i].cmd, vars->cmds[i + 1].cmd) == 0))
+			{
+				i++;
+			}
+		}
+		else if (ft_strcmp("export", vars->cmds[i].cmd) == 0)
+		{
+			if (vars->n_commandes == 1)
+			{
+				if (!vars->cmds[i].cmds_args[1])
+					export_cmd(vars, NULL, NULL);
+				int k = 1;
+				while (vars->cmds[i].cmds_args[k])
+				{
+					export_cmd(vars, vars->cmds[i].cmds_args[k], vars->cmds[i].cmds_args);
+					k++;
+				}
+			}
+			// else if (vars->n_commandes > 0)
+			// {
+			// 	int k = 1;
+			// 	export_cmd(vars, vars->cmds[i].cmds_args[k], vars->cmds[i].cmds_args);
+			// 	if (vars->cmds[i].is_nex_pip)
+			// 	{
+			// 		pipe_commands(vars, i);
+			// 		vars->exit_status = 0;
+			// 	}
+			// }
+		}
+		else if (ft_strcmp("env", vars->cmds[i].cmd) == 0)
+		{
+			if (vars->n_commandes == 1)
+				env_cmd(vars);
+			else if (vars->n_commandes > 0)
+			{
+				pipe_red(vars, i);
+			}
+		}
+		else if (ft_strcmp("unset", vars->cmds[i].cmd) == 0)
+		{
+			int k = 1;
+			while (vars->cmds[i].cmds_args[k])
+			{
+				check_unset(vars->cmds[i].cmds_args, vars, k);
+				k++;
+			}
+			
+		}
+		else if (ft_strcmp("exit", vars->cmds[i].cmd) == 0)
+		{
+			exit (vars->exit_status);
 		}
 		
-	}
-    else if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
-        exit (1);
-	
-	else
-	{
-		fill_commands(args, vars);
-		pipe_red(vars);
-	}
+		else if (vars->cmds[i].has_redirections || !vars->cmds[i].is_nex_pip || vars->cmds[i].is_nex_pip)
+		{
+			pipe_red(vars, i);
+		}
+		i++;
+	}		
 }

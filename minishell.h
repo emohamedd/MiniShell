@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 15:29:53 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:41:42 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ typedef struct s_vars
 	int	n_commandes;
 	
 }	t_vars;
-
-
+	void	has_redirections(t_vars *vars, int i);
+	int	ft_strcmp(char *s1, char *s2);
     char **clear_cmds_arg_from_direct(char **args);
     char *read_input();
     char **get_files(int size, char **old_stac);
     char **make_token(char *s) ;
     int lenght_of_the_2d(char **p);
-    int	count_s_lenght(const char *s, char c);
+    int		count_s_lenght(const char *s, char c);
     t_info **allocat_token(char **s, t_vars *cvars);
     char	*ft_strdup(const char *s1);
 	char	*ft_getenv(char *key, t_vars *vars);
@@ -121,6 +121,6 @@ typedef struct s_vars
     void fell_env_struct(t_vars *vars);
     void fell_env_struct(t_vars *vars);
     char *ft_getenv(char *key, t_vars *vars);
-    void pipe_red(t_vars *vars);
+    void pipe_red(t_vars *vars, int i);
 	
 #endif

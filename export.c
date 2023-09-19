@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/13 20:19:41 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:11:14 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,13 +144,14 @@ void export_cmd(t_vars *vars, char *args, char **str)
 			}
 			if (!vars->env[count].is_equal)
 			{
-				printf("%s%s", vars->env[count].key, GRN);
+				printf("%s", vars->env[count].key);
 				if (vars->env[count].value)
 				{
 					printf("=");
-					printf("\"%s%s\"""", vars->env[count].value, RED);
+					printf("\"%s\"""", vars->env[count].value);
 				}
 				printf("\n");
+				vars->exit_status = 0;
 			}
 			count++;
 		}
@@ -220,6 +221,7 @@ void export_cmd(t_vars *vars, char *args, char **str)
 	if (ft_isalpha(args[0]) != 1 || check_equal(args) == 1)
 	{
 		printf("export : `%s' : not a valid identifier\n", args);
+		vars->exit_status = 1;
 	}
 	free(tmp);
 	
