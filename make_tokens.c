@@ -221,14 +221,13 @@ char** expand_quotes(char** tokens)
     while (tokens[i]) 
     {
         if (strchr(tokens[i], '\"')) 
-        
         {
             num_quotes++;
         }
         i++;
     }
 
-    char** expanded_tokens = (char**)malloc((i + num_quotes + 1) * sizeof(char*));
+    char** expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char*));
     if (expanded_tokens == NULL) 
     {
         return NULL;
@@ -242,7 +241,7 @@ char** expand_quotes(char** tokens)
         if (strchr(current_token, '\"')) 
         {
             int token_length = strlen(current_token);
-            char* modified_token = (char*)malloc(token_length * sizeof(char));
+            char* modified_token = malloc(token_length * sizeof(char));
             if (modified_token == NULL) 
             {
                 return NULL; 
@@ -274,7 +273,6 @@ char** expand_quotes(char** tokens)
         i++;
     }
     expanded_tokens[j] = NULL;
-
     return expanded_tokens;
 }
 

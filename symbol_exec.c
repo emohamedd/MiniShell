@@ -16,29 +16,29 @@
 
 
 
-void rot13(char *str) 
-{
-    for (int i = 0; str[i]; i++) 
-    {
-        if ((str[i] >= 'A' && str[i] <= 'Z')) 
-        {
-            str[i] = 'A' + ((str[i] - 'A' + 13) % 26);
-        } 
-        else if ((str[i] >= 'a' && str[i] <= 'z')) 
-        {
-            str[i] = 'a' + ((str[i] - 'a' + 13) % 26);
-        }
-    }
-}
+// void rot13(char *str) 
+// {
+//     for (int i = 0; str[i]; i++) 
+//     {
+//         if ((str[i] >= 'A' && str[i] <= 'Z')) 
+//         {
+//             str[i] = 'A' + ((str[i] - 'A' + 13) % 26);
+//         } 
+//         else if ((str[i] >= 'a' && str[i] <= 'z')) 
+//         {
+//             str[i] = 'a' + ((str[i] - 'a' + 13) % 26);
+//         }
+//     }
+// }
 
 int create_temp_file(char *base_filename) 
 {
-    char *file =  malloc(sizeof(char) * (ft_strlen(base_filename) + 1));
+    // char *file =  malloc(sizeof(char) * (ft_strlen(base_filename) + 1));
 
 
-    strcpy(file, base_filename);
-    rot13(file);
-    int fd = open(file, O_CREAT | O_TRUNC | O_RDWR, 0644);
+    // strcpy(file, base_filename);
+    // rot13(file);
+    int fd = open(base_filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
     if (fd == -1) 
     {
         perror("open");
@@ -66,6 +66,7 @@ void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
         if (strcmp(read, heredoc_delimiter) == 0) 
         {
              printf("U got the delimiter\n");
+             dup2(0, fd);
              break;
         }
 
