@@ -54,6 +54,12 @@ int main(int c, char **v, char **env)
 			cmds = get_cmds(tokens);
 			if (!cmds)
 				return (0);
+			// int x = 0;
+			// while (x < 4)
+			// {
+			// 	printf("***%s\n", cmds[x]);
+			// 	x++;
+			// }
 			syn_err(cmds, &vars);
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);

@@ -63,6 +63,11 @@ void	has_redirections(t_vars *vars, int i)
         {
             while (vars->cmds[i].opera_derec[j])
             {
+                if (vars->cmds[i].file_derec[j][0] == '$')
+                {
+                    printf("minishell: ambiguous redirect\n");
+                    vars->exit_status = 1;               
+                }
                 if (!strcmp(vars->cmds[i].opera_derec[j], ">")) 
                 {
                     fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_TRUNC | O_RDWR, 0644);
