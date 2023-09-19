@@ -6,34 +6,43 @@
 #    By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/17 13:39:07 by haarab           ###   ########.fr        #
+#    Updated: 2023/09/18 20:59:15 by haarab           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
- #CFLAGS = -g -fsanitize=address
-LDFLAGS = -lreadline 
+CFLAGS = -I./includes #-g -fsanitize=address
+NAME = minishell
+READLINE = -L/Users/emohamed/.brew/opt/readline/lib -I/Users/emohamed/.brew/opt/readline/include
+LIBFT = -L./libft -lft
 
-SRCS = $(wildcard *.c)
+RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline
+RLOFLGS = -I/Users/emohamed/.brew/opt/readline/include
+
+SRCS =cd.c echo.c env.c exec_cmds.c export.c fell_env_struct.c fill_commands.c from_2d_to_one.c ft_get_env.c ft_split_token.c ft_strdup.c ft_strlen.c get_cmds.c herdo_parse.c make_tokens.c minishell.c pipes.c print_table.c read_input.c redirection.c run_code.c signal_handler.c syntax_err.c token.c unset.c symbol_exec.c ft_strcmp.c has_redirections.c
 OBJS = $(SRCS:.c=.o)
 
-NAME = minishell
+GREEN = \033[0;32m
+RESET = \033[0m
 
-all: $(NAME)
+all : $(NAME)
+
+$(NAME) : $(OBJS)
+	@make -C libft all
+	@echo "$(GREEN)✅ MINISHELL : Compilation successful!$(RESET)"
+	@$(CC) $(CFLAGS) $(LIBFT) $(RLFLGS) $^ -o $@
 
 %.o: %.c
-	make -C libft
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) libft/libft.a  -o $(NAME) $(LDFLAGS)
+	@$(CC) $(CFLAGS) $(RLOFLGS) -c $< -o $@
+	@echo "$(GREEN)✅ Compiled: $<$(RESET)"
 
 clean:
-	make -C libft/ fclean
-	rm -f $(OBJS)
+	@make -C libft clean
+	@rm -f $(OBJS)
+	@echo "$(GREEN)✅ Cleaned up object files$(RESET)"
 
 fclean: clean
-	make -C libft/ fclean
-	rm -f $(NAME)
+	@make -C libft fclean
+	@rm -f $(NAME)
+	@echo "$(GREEN)✅ Cleaned up executable$(RESET)"
 
 re: fclean all

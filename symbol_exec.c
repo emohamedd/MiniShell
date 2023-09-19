@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   symbol_exec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 18:41:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/18 22:23:45 by haarab           ###   ########.fr       */
+/*   Created: 2023/09/18 12:13:31 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/18 21:56:30 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void run_cd(char **args, t_vars *vars)
+void pipe_red(t_vars *vars, int i)
 {
-    if (args[1])
+	if (vars->cmds[i].is_nex_pip)
 	{
-        chdir(args[1]);
-		vars->exit_status = 0;
-		if (!ft_getenv("HOME", vars))
-		{		
-			printf ("minishell: No such file or directory\n");
-			vars->exit_status = 1;
-			return ;
-		}
+		pipe_commands(vars, i);
 	}
-	else if (!args[1])
+	if (vars->cmds[i].has_redirections)
 	{
-		if (!ft_getenv("HOME", vars))
-		{		
-			printf ("minishell: cd: HOME not set\n");
-			return ;
-		}
-		chdir(ft_getenv("HOME", vars));
+		has_redirections(vars, i);
 	}
+	if (!vars->cmds[i].is_nex_pip)
+		exec_cmds(vars, i);
 }

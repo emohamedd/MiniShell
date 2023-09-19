@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_err.c                                       :+:      :+:    :+:   */
+/*   from_2d_to_one.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 17:01:08 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 09:55:26 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/18 10:57:21 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/18 10:57:35 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-void syn_err(char **str, t_vars *vars)
-{
 
-    int i = 0;
-    int j = 0;
+char *swap(char **str)
+{
+    int  i = 0;
+    char *s = NULL;
     while(str[i])
     {
-        while(str[i][j])
-        {
-            if((str[i][0] == '>' || str[i][j] == '|'))
-            {
-                printf("minishell: syntax error\n");
-                vars->exit_status = 2;
-            }
-            j++;
-        }
-        i++;
+
+      s = ft_strjoin(s, str[i]);
+      i++;
+      if (str[i])
+        s = ft_strjoin(s, " ");
     }
+    return s;
 }

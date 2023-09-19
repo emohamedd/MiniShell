@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_err.c                                       :+:      :+:    :+:   */
+/*   fell_env_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 17:01:08 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 09:55:26 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/18 10:59:43 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/18 10:59:54 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-void syn_err(char **str, t_vars *vars)
-{
 
+void fell_env_struct(t_vars *vars)
+{
     int i = 0;
-    int j = 0;
-    while(str[i])
-    {
-        while(str[i][j])
-        {
-            if((str[i][0] == '>' || str[i][j] == '|'))
-            {
-                printf("minishell: syntax error\n");
-                vars->exit_status = 2;
-            }
-            j++;
+    char *key;
+    while (vars->envp[i])
+	{
+        key = ft_split(vars->envp[i], '=')[0];
+        vars->env[i].key = key;
+        if (ft_strchr(vars->envp[i], '='))
+		{
+            vars->env[i].is_equal = 1;
+            vars->env[i].value = ft_strchr(vars->envp[i], '=') + 1;
         }
         i++;
     }
