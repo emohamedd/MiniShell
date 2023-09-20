@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+
 int create_temp_file(char *base_filename) 
 {
     // char *file =  malloc(sizeof(char) * (ft_strlen(base_filename) + 1));
@@ -30,28 +31,20 @@ int create_temp_file(char *base_filename)
 
 void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
     char *read = NULL;
+    char *buff;
     char *line;
 
+    buff = "";
     while (1) 
     {
         read = readline("> ");
-        // read = get_next_line(0);
-        ft_putstr_fd(read, fd);
-        ft_putstr_fd("\n", fd);
-        // printf(" this is the read function : %s\n", read);
-        // if (!read) 
-        // {
-        //     perror("get_next_line");
-        //     exit(1);
-        // }
         if (strcmp(read, heredoc_delimiter) == 0) 
-        {
-			dup2(0, fd);
              break;
-        }
-
+        buff = ft_strjoin(buff, read);
+        buff = ft_strjoin(buff, "\n");
     }
-    close(fd);
+    ft_putstr_fd(buff, 2);
+    ft_putstr_fd(buff, fd);
 }
 
 void	has_redirections(t_vars *vars, int i)
@@ -91,14 +84,17 @@ void	has_redirections(t_vars *vars, int i)
                     if (vars->cmds[i].file_derec[j]) 
                     {
                         char *heredoc_delimiter = vars->cmds[i].file_derec[j];
-                        fd = create_temp_file(base_filename);
-						
-                        collect_and_write_heredoc(fd,  heredoc_delimiter);
+                        vars->here_fd = create_temp_file(base_filename);
+						her_hand = 1;
+                        collect_and_write_heredoc(vars->here_fd,  heredoc_delimiter);
                         // fd = create_temp_file(base_filename);
-                        close(fd);
+                        her_hand = 0;
                     }
                 }
                 j++;
             }
         }
 }
+
+
+// Heredoc y save file descriptor

@@ -41,6 +41,8 @@
 #define RESET   "\x1B[0m"
 #define PURPLE  "\x1B[35m"
 
+ int her_hand;
+
 typedef struct s_info
 {
     char *content;
@@ -83,6 +85,7 @@ typedef struct s_vars
 	t_cmds *cmds;
     t_env *env;
 	int	n_commandes;
+	int here_fd;
 	
 }	t_vars;
 	void	has_redirections(t_vars *vars, int i);
@@ -122,5 +125,6 @@ typedef struct s_vars
     void fell_env_struct(t_vars *vars);
     char *ft_getenv(char *key, t_vars *vars);
     void pipe_red(t_vars *vars, int i);
+	void sigintHandler2();
 	
 #endif

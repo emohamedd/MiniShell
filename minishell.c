@@ -67,7 +67,7 @@ int main(int c, char **v, char **env)
 			run(tokens[0]->content, cmds, &vars, trimed);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
-			// table(str, tokens);
+			// table(cmds, tokens);
         }
     }
 	

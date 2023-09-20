@@ -14,7 +14,7 @@
 
 char *read_input()
 {
-    char *in =  readline("amineoaarab$ ");
+    char *in =  readline("amineoaarab-00$ ");
     
     if (in)
         add_history(in);
