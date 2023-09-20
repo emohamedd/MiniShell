@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:35:50 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/18 17:04:00 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/20 16:41:40 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void pipe_commands(t_vars *vars, int i)
 	{
 		close(pipe_fd[1]);
 		dup2(pipe_fd[0], STDIN_FILENO);
+		if (vars->here_fd)
+			dup2(vars->here_fd, 0);
+		// close(vars->here_fd);
+		vars->here_fd = 0;
 		// if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
 		// {
 		// 	perror("dup2");
@@ -56,16 +60,6 @@ void pipe_commands(t_vars *vars, int i)
 		// }
 		close(pipe_fd[0]);
 		path = get_path(vars, vars->cmds[i + 1].cmd);
-		// int id  = fork();
-		// if (id == -1) 
-		// {
-		// 	perror("fork");
-		// 	exit(1);
-		// }
-		// if (id  == 0)	
-		// 	execve(path, vars->cmds[i + 1].cmds_args, vars->envp);
-		// else
-		// 	waitpid(id, &status, 0);
 		waitpid(child1, &status, 0);
 	}
 }

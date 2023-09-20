@@ -15,9 +15,9 @@
 char *ft_getenv(char *key, t_vars *vars)
 {
 	int i;
-
 	i = 0;
-	while (i < vars->env_number) {
+	while (i < vars->env_number) 
+	{
 		if (!ft_strncmp(vars->env[i].key, key, ft_strlen(key))) {
 			return (vars->env[i].value);
 		}

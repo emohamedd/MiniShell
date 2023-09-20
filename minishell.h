@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 21:02:59 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/20 19:38:48 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 #include <unistd.h>
 #include <string.h>
 #include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include "get_next_line.h"
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
 #include <fcntl.h>
+#include <signal.h>
+
 
 #define GRN  "\x1B[32m"
 #define BLU  "\x1B[34m"
@@ -38,6 +40,8 @@
 #define YELLOW  "\x1B[33m"
 #define RESET   "\x1B[0m"
 #define PURPLE  "\x1B[35m"
+
+ int her_hand;
 
 typedef struct s_info
 {
@@ -81,6 +85,7 @@ typedef struct s_vars
 	t_cmds *cmds;
     t_env *env;
 	int	n_commandes;
+	int here_fd;
 	
 }	t_vars;
 	void	has_redirections(t_vars *vars, int i);
@@ -97,11 +102,11 @@ typedef struct s_vars
 	void	exec_cmds(t_vars *vars, int i);
     char	*read_input();
     char	**ft_split(char const *s, char c);
-	void 	run(char *cmd, char **args, t_vars *vars, char *str);
+	void 	run(char **args, t_vars *vars);
 	void 	fell_env_struct(t_vars *vars);
 	void	run_cd(char **args, t_vars *vars);
 	void 	run_echo (char **args, t_vars *vars);
-	void 	export_cmd(t_vars *vars, char *args, char **str);
+	void 	export_cmd(t_vars *vars, char *args);
 	void 	check_unset(char **args, t_vars *vars, int check);
 	void 	env_cmd(t_vars *vars);
     void 	table(char **str, t_info **tokens);
@@ -120,5 +125,6 @@ typedef struct s_vars
     void fell_env_struct(t_vars *vars);
     char *ft_getenv(char *key, t_vars *vars);
     void pipe_red(t_vars *vars, int i);
+	void sigintHandler2();
 	
 #endif

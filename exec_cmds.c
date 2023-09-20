@@ -47,6 +47,12 @@ void exec_cmds(t_vars *vars, int i)
 	id = fork();
 	if (id == 0) 
 	{
+		if (vars->here_fd)
+		{
+			dup2(vars->here_fd, 0);
+			close(vars->here_fd);
+			vars->here_fd = 0;
+		}
 		if (path == NULL)
 		{
 			ft_putstr_fd("minishell : ", 2);

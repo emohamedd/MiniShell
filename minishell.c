@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 22:49:43 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/20 19:33:01 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,15 @@ int main(int c, char **v, char **env)
 			if(!tokens)
 				continue;
 			cmds = get_cmds(tokens);
-			if (!cmds)
 				return (0);
 			syn_err(cmds, &vars);
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);
-			run(tokens[0]->content, cmds, &vars, trimed);
+			run(cmds, &vars);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
-			// table(str, tokens);
+			// table(cmds, tokens);
         }
     }
 	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 11:13:50 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:12:45 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,14 +221,13 @@ char** expand_quotes(char** tokens)
     while (tokens[i]) 
     {
         if (strchr(tokens[i], '\"')) 
-        
         {
             num_quotes++;
         }
         i++;
     }
 
-    char** expanded_tokens = (char**)malloc((i + num_quotes + 1) * sizeof(char*));
+    char** expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char*));
     if (expanded_tokens == NULL) 
     {
         return NULL;
@@ -242,7 +241,7 @@ char** expand_quotes(char** tokens)
         if (strchr(current_token, '\"')) 
         {
             int token_length = strlen(current_token);
-            char* modified_token = (char*)malloc(token_length * sizeof(char));
+            char* modified_token = malloc(token_length * sizeof(char));
             if (modified_token == NULL) 
             {
                 return NULL; 
@@ -274,7 +273,6 @@ char** expand_quotes(char** tokens)
         i++;
     }
     expanded_tokens[j] = NULL;
-
     return expanded_tokens;
 }
 
@@ -285,9 +283,7 @@ char **make_token(char *s)
     char *special_chars = "<>|";
     char **tokens = split(s, special_chars);
     char **quote = expand_quotes(tokens);
-    int len = lenght_of_the_2d(quote);
     // printf("*****%d", len);
-    char **new_tokens = malloc(sizeof(char *) * len);
     return red_to_herdoc(quote);
     // return tokens;
 }
@@ -329,8 +325,10 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 inf[i]->type = "PIPE";
             else if (inf[i]->content[0] == '\"')
                 inf[i]->type = "DBCOTE";
-            else if (inf[i]->content[0] == '$' && ((inf[i]->content[1] >= 'a' && inf[i]->content[1] <= 'z') || (inf[i]->content[1] >= 'A' && inf[i]->content[0] <= 'Z')))
+            else if (inf[i]->content[0] == '$' && ((inf[i]->content[1] >= 'a' && inf[i]->content[1] <= 'z') || (inf[i]->content[1] >= 'A' && inf[i]->content[0] <= 'Z')) &&(strcmp(inf[i - 1]->content, "<<")))
             {
+                // printf("**%s\n", inf[i]->content);
+                // printf("--%s\n", inf[i - 1]->content);
                 char *var = ft_getenv(inf[i]->content + 1, vars);     
                     if(!var)
                         return 0;

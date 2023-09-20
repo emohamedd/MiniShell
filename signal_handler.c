@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:55:52 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 12:55:51 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:39:14 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void sigintHandler(int signal) 
 {
-	 if (signal == SIGINT)
+	if (signal == SIGINT || her_hand)
     {
         printf("\n");
         rl_on_new_line();
