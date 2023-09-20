@@ -6,13 +6,14 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/20 19:15:50 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/20 19:54:10 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_builtin(char *cmd)  {
+int is_builtin(char *cmd) 
+{
 	if (ft_strcmp("echo", cmd) == 0 || ft_strcmp("cd", cmd) == 0  || ft_strcmp("export", cmd) == 0
 		|| ft_strcmp("env", cmd) == 0 || ft_strcmp("pwd", cmd) == 0 || ft_strcmp("exit", cmd) == 0
 			|| ft_strcmp("unset", cmd) == 0)
@@ -41,11 +42,11 @@ void cmd_builtins(t_vars *vars, int i)
 	else if (ft_strcmp("export", vars->cmds[i].cmd) == 0)
 	{
 		if (!vars->cmds[i].cmds_args[1])
-			export_cmd(vars, NULL);
+			export_cmd(vars, NULL, NULL);
 		int k = 1;
 		while (vars->cmds[i].cmds_args[k])
 		{
-			export_cmd(vars, vars->cmds[i].cmds_args[k]);
+			export_cmd(vars, vars->cmds[i].cmds_args[k], vars->cmds[i].cmds_args);
 			k++;
 		}
 	}
@@ -70,7 +71,7 @@ void cmd_builtins(t_vars *vars, int i)
 
 
 
-void run(char **args, t_vars *vars)
+void 	run(char *cmd, char **args, t_vars *vars, char *str)
 {
 	fill_commands(args, vars);
 	int i = 0;

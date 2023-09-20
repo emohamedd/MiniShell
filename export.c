@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/20 19:06:40 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:11:14 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int check_doubelcouts(char *args)
 	return (count);
 }
 
-void export_cmd(t_vars *vars, char *args)
+void export_cmd(t_vars *vars, char *args, char **str)
 {
 	char *key = NULL;
 	char *value;

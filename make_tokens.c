@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/20 19:12:45 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/18 11:13:50 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,7 +283,9 @@ char **make_token(char *s)
     char *special_chars = "<>|";
     char **tokens = split(s, special_chars);
     char **quote = expand_quotes(tokens);
+    int len = lenght_of_the_2d(quote);
     // printf("*****%d", len);
+    char **new_tokens = malloc(sizeof(char *) * len);
     return red_to_herdoc(quote);
     // return tokens;
 }

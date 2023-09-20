@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/20 19:10:57 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:50:53 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int create_temp_file(char *base_filename)
 void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
     char *read = NULL;
     char *buff;
+    char *line;
 
     buff = "";
     while (1) 
