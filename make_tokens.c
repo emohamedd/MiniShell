@@ -342,7 +342,7 @@ char** expand_s_quotes(char** tokens)
 // hna fin kantokinazi
 char **make_token(char *s) 
 {
-    char *special_chars = "<>|$";
+    char *special_chars = "<>|";
     char **tokens = split(s, special_chars);
     char **quote = expand_quotes(tokens);
     char **sgl = expand_s_quotes(quote);
@@ -413,9 +413,9 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 inf[i]->type = "PIPE";
             else if (inf[i]->content[0] == '\"')
                 inf[i]->type = "DBCOTE";
-            else if (inf[i]->content[0] == '$')
+            else if (inf[i]->content[0] == '$' && ((inf[i]->content[1] >= 'a' && inf[i]->content[1] <= 'z') || (inf[i]->content[1] >= 'A' && inf[i]->content[0] <= 'Z')))
             {
-                char *var = ft_getenv(inf[i + 1]->content, vars);     
+                char *var = ft_getenv(inf[i]->content + 1, vars);     
                     if(!var)
                         return 0;
                     inf[i]->content = ft_strdup(var);
