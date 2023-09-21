@@ -327,10 +327,8 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 inf[i]->type = "PIPE";
             else if (inf[i]->content[0] == '\"')
                 inf[i]->type = "DBCOTE";
-            else if (inf[i]->content[0] == '$' && ((inf[i]->content[1] >= 'a' && inf[i]->content[1] <= 'z') || (inf[i]->content[1] >= 'A' && inf[i]->content[0] <= 'Z')) &&(strcmp(inf[i - 1]->content, "<<")))
+            else if (inf[i]->content[0] == '$' && ((inf[i]->content[1] >= 'a' && inf[i]->content[1] <= 'z') || (inf[i]->content[1] >= 'A' && inf[i]->content[0] <= 'Z')))
             {
-                // printf("**%s\n", inf[i]->content);
-                // printf("--%s\n", inf[i - 1]->content);
                 char *var = ft_getenv(inf[i]->content + 1, vars);     
                     if(!var)
                         return 0;
