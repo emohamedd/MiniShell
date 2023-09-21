@@ -342,7 +342,7 @@ char** expand_s_quotes(char** tokens)
 // hna fin kantokinazi
 char **make_token(char *s) 
 {
-    char *special_chars = "<>|";
+    char *special_chars = "<>|$";
     char **tokens = split(s, special_chars);
     char **quote = expand_quotes(tokens);
     char **sgl = expand_s_quotes(quote);
@@ -356,31 +356,55 @@ t_info **allocat_token(char **s,  t_vars *vars)
 {
     int  i = 0;
    
-     t_info **inf = malloc(sizeof(t_info*) * (lenght_of_the_2d(s)+1));
-         if (!inf) 
-            
-            {
-                printf("Err\n");
-                exit(1);
-            }
-    while(s[i])
+    t_info **inf = malloc(sizeof(t_info *) * (lenght_of_the_2d(s) + 1));
+    if (!inf)
+    {
+        printf("Err\n");
+        exit(1);
+    }
+    while (s[i] && i < lenght_of_the_2d(s))
     {
         inf[i] = malloc(sizeof(t_info));
+        inf[i]->content = ft_strdup("");
+        i++;
+    }
+    // exit(0);
+    i = 0;
+    while(s[i])
+    {
+        // inf[i] = malloc(sizeof(t_info));
+        // if (!inf[i])
+        //     return (NULL);
         inf[i]->content = s[i];
         inf[i]->size = lenght_of_the_2d(s);
-            if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
+        // printf("i = %d | size = %d \n", i, inf[i]->size);
+        if (i < inf[i]->size - 1)
         {
+            inf[i + 1]->content = s[i + 1];
+                // exit(1);
+            // printf("HERE inf[i]->content = %s | \n", inf[i + 1]->content);
+        }
+        // if(!inf[i]->content[0])
+        // {
+        //     printf("ERR\n");
+        //     pause();
+        // }
+        // inf[i]->size = lenght_of_the_2d(s);
+        if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
+        {
+                // printf("%s\n", "str");//
                 char *str = ft_strtrim(inf[i]->content, "\'");
-                // printf("%s\n", str);
                  char *var ;
                 var = ft_getenv(str + 1, vars);     
                     if(!var)
                         return 0;
                     inf[i]->content = ft_strdup(var);
+
                     // printf("%s\n", inf[i]->content);
                     inf[i]->type = "ENV_EXPANDED"; 
                     inf[i]->lenght = strlen(inf[i]->content);   
         }
+        // printf("*****%s****\n", inf[i + 1]->content);
             if (inf[i]->content[0] == '<')   
                 inf[i]->type = "RDIN";
             else if (inf[i]->content[0] == '>')
@@ -389,9 +413,9 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 inf[i]->type = "PIPE";
             else if (inf[i]->content[0] == '\"')
                 inf[i]->type = "DBCOTE";
-            else if (inf[i]->content[0] == '$' && ((inf[i]->content[1] >= 'a' && inf[i]->content[1] <= 'z') || (inf[i]->content[1] >= 'A' && inf[i]->content[0] <= 'Z')))
+            else if (inf[i]->content[0] == '$')
             {
-                char *var = ft_getenv(inf[i]->content + 1, vars);     
+                char *var = ft_getenv(inf[i + 1]->content, vars);     
                     if(!var)
                         return 0;
                     inf[i]->content = ft_strdup(var);
