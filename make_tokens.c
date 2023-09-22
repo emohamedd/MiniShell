@@ -342,12 +342,10 @@ char** expand_s_quotes(char** tokens)
 // hna fin kantokinazi
 char **make_token(char *s) 
 {
-    char *special_chars = "<>=| ";
+    char *special_chars = "<>|";
     char **tokens = split(s, special_chars);
     char **quote = expand_quotes(tokens);
     char **sgl = expand_s_quotes(quote);
-    int len = lenght_of_the_2d(sgl);
-    char **new_tokens = malloc(sizeof(char *) * len);
     return red_to_herdoc(sgl);
     // return tokens;
 }
@@ -355,7 +353,6 @@ char **make_token(char *s)
 char	*alloc_s(char const *s, unsigned int start, int len)
 {
 	char	*stock;
-
 	if (!s || !s[0])
 		return (NULL);
 	if (start >= ft_strlen(s))
@@ -407,20 +404,20 @@ t_info **allocat_token(char **s,  t_vars *vars)
         //     pause();
         // }
         // inf[i]->size = lenght_of_the_2d(s);
-        if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
-        {
-                // printf("%s\n", "str");//
-                char *str = ft_strtrim(inf[i]->content, "\'");
-                 char *var ;
-                var = ft_getenv(str + 1, vars);     
-                    if(!var)
-                        return 0;
-                    inf[i]->content = ft_strdup(var);
+        // if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
+        // {
+        //         // printf("%s\n", "str");//
+        //         char *str = ft_strtrim(inf[i]->content, "\'");
+        //          char *var ;
+        //         var = ft_getenv(str + 1, vars);     
+        //             if(!var)
+        //                 return 0;
+        //             inf[i]->content = ft_strdup(var);
 
-                    // printf("%s\n", inf[i]->content);
-                    inf[i]->type = "ENV_EXPANDED"; 
-                    inf[i]->lenght = strlen(inf[i]->content);   
-        }
+        //             // printf("%s\n", inf[i]->content);
+        //             inf[i]->type = "ENV_EXPANDED"; 
+        //             inf[i]->lenght = strlen(inf[i]->content);   
+        // }
         // printf("*****%s****\n", inf[i + 1]->content);
             int j = 0;
             if (inf[i]->content[0] == '<')   
@@ -431,21 +428,24 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 inf[i]->type = "PIPE";
             else if (inf[i]->content[0] == '\"')
                 inf[i]->type = "DBCOTE";
-            while(j < 10)
+            while(j < ft_strlen(inf[i]->content))
             { 
                 if (inf[i]->content[j] == '$' && ft_isalpha(inf[i]->content[j + 1]))
                 {
                     int len = ft_strlen(inf[i]->content) - j;
-                   char *expand = alloc_s(inf[i]->content, j + 1, len );
-                    char *var = ft_getenv(expand, vars);     
+                   char *expand = alloc_s(inf[i]->content, j + 1, len);
+                    char *var = ft_getenv(expand, vars);
                         if(!var)
+                        {
                             return 0;
+                        }
                         inf[i]->content = ft_strdup(var);
                         // printf("%s\n", inf[i]->content);
                         inf[i]->type = "ENV_EXPANDED"; 
                         inf[i]->lenght = strlen(inf[i]->content);
                 }
                 j++;
+            }
              if (inf[i]->content[0] == '\'')
                 inf[i]->type = "SGCOTE";
              if (is_char(s[i]))

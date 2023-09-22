@@ -6,7 +6,6 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-
 /*   Updated: 2023/09/20 19:54:10 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -27,20 +26,20 @@ int is_builtin(char *cmd)
 void cmd_builtins(t_vars *vars, int i)
 {
 	char *cwd = getcwd(NULL, 1024);
-	if ((ft_strcmp("echo", vars->cmds[i].cmd) == 0))
+	if ((ft_strncmp("echo", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0))
 	{
 		run_echo(vars->cmds[i].cmds_args, vars);
 	}
-	else if (ft_strcmp("cd", vars->cmds[i].cmd) == 0)
+	else if (ft_strncmp("cd", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 	{
 		run_cd(vars->cmds[i].cmds_args, vars);
 	}
-	else if (ft_strcmp("pwd", vars->cmds[i].cmd) == 0)
+	else if (ft_strncmp("pwd", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 	{
 		printf("%s\n", cwd);
 		vars->exit_status = 0;
 	}
-	else if (ft_strcmp("export", vars->cmds[i].cmd) == 0)
+	else if (ft_strncmp("./mi	", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 	{
 		if (!vars->cmds[i].cmds_args[1])
 			export_cmd(vars, NULL, NULL);
@@ -52,11 +51,11 @@ void cmd_builtins(t_vars *vars, int i)
 		}
 		
 	}
-	else if (ft_strncmp("env", vars->cmds[i].cmd, ft_strlen("env")) == 0)
+	else if (ft_strncmp("env", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 	{
 		env_cmd(vars);
 	}
-	else if (ft_strcmp("unset", vars->cmds[i].cmd) == 0)
+	else if (ft_strncmp("unset", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 	{
 		int k = 1;
 		while (vars->cmds[i].cmds_args[k])
@@ -65,7 +64,7 @@ void cmd_builtins(t_vars *vars, int i)
 			k++;
 		}
 	}
-	else if (ft_strcmp("exit", vars->cmds[i].cmd) == 0)
+	else if (ft_strncmp("exit", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 	{
 		exit (vars->exit_status);
 	}
