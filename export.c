@@ -163,7 +163,7 @@ void export_cmd(t_vars *vars, char *args, char **str)
 		return ;
 	while (count < vars->env_number)
 	{
-		if (!ft_strncmp(vars->env[count].key, var_, ft_strlen(var_)))
+		if (!ft_strncmp(vars->env[count].key, var_, ft_strlen(vars->env[count].key)))
 		{
 			if (ft_strchr(args, '=') != NULL)
 			{
@@ -189,7 +189,7 @@ void export_cmd(t_vars *vars, char *args, char **str)
 		int p = 0;
 		while (vars->env[d].key)
 		{
-			if (ft_strncmp(vars->env[d].key, key, ft_strlen(key)) == 0)
+			if (ft_strncmp(vars->env[d].key, key, ft_strlen(vars->env[d].key)) == 0)
 				p = 1;
 			d++;
 		}

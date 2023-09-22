@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:35:50 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/18 17:04:00 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/20 20:00:13 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void pipe_commands(t_vars *vars, int i)
 		dup2(pipe_fd[0], STDIN_FILENO);
 		if (vars->here_fd)
 			dup2(vars->here_fd, 0);
-		close(vars->here_fd);
+
+		// close(vars->here_fd);
+
 		vars->here_fd = 0;
 		// if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
 		// {

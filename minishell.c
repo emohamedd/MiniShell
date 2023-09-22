@@ -45,6 +45,12 @@ int main(int c, char **v, char **env)
 			continue;
 		}
 		str =  make_token(trimed);
+		// 	int x = 0;
+		// while (x < 8)
+		// {
+		// 	printf("***--[%s]--***\n", str[x]);
+		// 	x++;
+		// }
         // str = ft_split(trimed, ' ');
 		if(str)
         {

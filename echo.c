@@ -21,7 +21,7 @@ int check_n(char *args)
 			return (1);
 		if (args[1] != '\0')
 		{
-			while (args[i] == 'n')
+			while (args[i] == 'n' && args[i] != '\0')
 			{
 				i++;
 			}
@@ -36,27 +36,24 @@ void run_echo (char **args, t_vars *vars)
 {
     int i = 1;
     int check = 0;
-    // int g = 1;
-	// if (args[1] == NULL)
-	// 	return;
     while (args[i])
     {
-		// printf ("string ==== %s\n", args[i]);
-        // if (args[i])
-            // g = ft_strncmp(args[i], "-n", ft_strlen("-n"));
-            // g = check_n(args[i]);
-        while (check_n(args[i]) == 0)
+		// printf("%s\n",args[i]);
+        while (args[i] && check_n(args[i]) == 0)
         {
             check = 1;
             i++;
         }
-		if (check_n(args[i]) == 1)
+		if (args[i] && check_n(args[i]) == 1)
 			vars->exit_status = 0;
         while (args[i])
 		{
-            printf("%s", args[i]);
-			if (args[i] != NULL && args[i + 1] != NULL)
-				printf(" ");
+			if (args[i] != NULL)
+			{
+				printf("%s", args[i]);
+				if (args[i] != NULL && args[i + 1] != NULL)
+					printf(" ");
+			}
         	i++;
 		}
     }
