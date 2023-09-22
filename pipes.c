@@ -51,7 +51,9 @@ void pipe_commands(t_vars *vars, int i)
 		dup2(pipe_fd[0], STDIN_FILENO);
 		if (vars->here_fd)
 			dup2(vars->here_fd, 0);
+
 		// close(vars->here_fd);
+
 		vars->here_fd = 0;
 		// if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
 		// {

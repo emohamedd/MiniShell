@@ -446,7 +446,6 @@ t_info **allocat_token(char **s,  t_vars *vars)
                         inf[i]->lenght = strlen(inf[i]->content);
                 }
                 j++;
-            }
              if (inf[i]->content[0] == '\'')
                 inf[i]->type = "SGCOTE";
              if (is_char(s[i]))
