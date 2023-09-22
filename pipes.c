@@ -6,70 +6,44 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:35:50 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/20 20:00:13 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/21 22:05:35 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void pipe_commands(t_vars *vars, int i) 
+void pipe_commands(t_vars *vars, int i, pid_t  *childs) 
 {
-	int status;
-	char *path;
-    int pipe_fd[2];
-    if (pipe(pipe_fd) == -1) 
-    {
-        perror("pipe");
-        exit(1);
-    }
-
-
-	pid_t child1;
-	child1 = fork();
-	if (child1 == -1) 
-	{
-		perror("fork");
-		exit(1);
-	}
-	if (child1 == 0) 
-	{
-		close(pipe_fd[0]);
-		dup2(pipe_fd[1], STDOUT_FILENO);
-		// if (dup2(pipe_fd[1], STDOUT_FILENO) == -1) 
-		// {
-		// 	perror("dup2");
-		// 	exit(1);
-		// }
-		close(pipe_fd[1]);
+	int status, fd[2], prev_fd;
+	char *path = NULL;
+	if (pipe(fd) == -1)
+		return ;
+	
+	childs[i] = fork();
+	if (childs[i] < 0)
+		return ;
+	else if (childs[i] == 0) {
+		if (i == vars->n_commandes - 1) {
+			dup2(prev_fd, 0);
+		}
+		else if (i == 0) {
+			dup2(fd[1], 1);
+		}
+		else {
+			dup2(prev_fd, 0);
+			dup2(fd[1], 1);
+		}
+		close(fd[0]);
+		close(fd[1]);
+		if (i > 0)
+			close(prev_fd);
 		path = get_path(vars, vars->cmds[i].cmd);
 		execve(path, vars->cmds[i].cmds_args, vars->envp);
-		exit(0);
-	} 
-	else 
-	{
-		close(pipe_fd[1]);
-		dup2(pipe_fd[0], STDIN_FILENO);
-		if (vars->here_fd)
-			dup2(vars->here_fd, 0);
-		// close(vars->here_fd);
-		vars->here_fd = 0;
-		// if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
-		// {
-		// 	perror("dup2");
-		// 	exit(1);
-		// }
-		close(pipe_fd[0]);
-		path = get_path(vars, vars->cmds[i + 1].cmd);
-		// int id  = fork();
-		// if (id == -1) 
-		// {
-		// 	perror("fork");
-		// 	exit(1);
-		// }
-		// if (id  == 0)	
-		// 	execve(path, vars->cmds[i + 1].cmds_args, vars->envp);
-		// else
-		// 	waitpid(id, &status, 0);
-		waitpid(child1, &status, 0);
+	}
+	else {
+		if (i > 0)
+			close(prev_fd);
+		prev_fd = fd[0];
+		close(fd[1]);
 	}
 }

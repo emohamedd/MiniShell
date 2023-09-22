@@ -23,7 +23,7 @@ int is_builtin(char *cmd)
 	return 0;
 }
 
-void cmd_builtins(t_vars *vars, int i)
+void cmd_builtins(t_vars *vars, int i, char **str)
 {
 	char *cwd = getcwd(NULL, 1024);
 	if ((ft_strncmp("echo", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0))
@@ -39,7 +39,7 @@ void cmd_builtins(t_vars *vars, int i)
 		printf("%s\n", cwd);
 		vars->exit_status = 0;
 	}
-	else if (ft_strncmp("./mi	", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
+	else if (ft_strncmp("export", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 	{
 		if (!vars->cmds[i].cmds_args[1])
 			export_cmd(vars, NULL, NULL);
@@ -49,7 +49,6 @@ void cmd_builtins(t_vars *vars, int i)
 			export_cmd(vars, vars->cmds[i].cmds_args[k], vars->cmds[i].cmds_args);
 			k++;
 		}
-		
 	}
 	else if (ft_strncmp("env", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 	{
@@ -72,10 +71,14 @@ void cmd_builtins(t_vars *vars, int i)
 
 
 
-void 	run(char *cmd, char **args, t_vars *vars, char *str)
+void 	run(char *cmd, char **args, t_vars *vars, char **str)
 {
 	fill_commands(args, vars);
+	
 	int i = 0;
+	int status;
+	pid_t *childs = malloc(sizeof(int) * vars->n_commandes);
+
 	while (i < vars->n_commandes)
 	{
 		if (is_builtin(vars->cmds[i].cmd))
@@ -85,14 +88,15 @@ void 	run(char *cmd, char **args, t_vars *vars, char *str)
 			if (vars->cmds[i].is_nex_pip)
 			{
 				int fd[2];
+				int id;
 				pipe(fd);
-				int id = fork();
+				id = fork();
 				if (id == 0)
 				{
-					close(fd[0]);
 					dup2(fd[1], 1);
+					close(fd[0]);
 					close(fd[1]);					
-					cmd_builtins(vars, i);
+					cmd_builtins(vars, i, str);
 					exit(0);
 				}
 				else
@@ -103,17 +107,30 @@ void 	run(char *cmd, char **args, t_vars *vars, char *str)
 					close(fd[0]);
 				}
 			}
-			else
+			else 
 			{
-				cmd_builtins(vars, i);
+				cmd_builtins(vars, i, str);
 			}
 		}
-		else
+		else 
 		{
+			// printf("test\n");
+		// if (vars->cmds[i].is_nex_pip)
 			if (vars->cmds[i].has_redirections)
 				has_redirections(vars, i);
-			pipe_red(vars, i);
+			while (i < vars->n_commandes)
+			{
+				pipe_commands(vars, i, childs);
+				i++;
+			}
 		}
 		i++;
 	}
+	i = -1;
+	while (i < vars->n_commandes)
+	{
+		waitpid(childs[i], &status, 0);
+		i++;
+	}
+
 }
