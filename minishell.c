@@ -46,7 +46,7 @@ int main(int c, char **v, char **env)
 		}
 		str =  make_token(trimed);
 		// 	int x = 0;
-		// while (x < 4)
+		// while (x < 8)
 		// {
 		// 	printf("***--[%s]--***\n", str[x]);
 		// 	x++;

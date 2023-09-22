@@ -49,8 +49,9 @@ void cmd_builtins(t_vars *vars, int i)
 			export_cmd(vars, vars->cmds[i].cmds_args[k], vars->cmds[i].cmds_args);
 			k++;
 		}
+		
 	}
-	else if (ft_strcmp("env", vars->cmds[i].cmd) == 0)
+	else if (ft_strncmp("env", vars->cmds[i].cmd, ft_strlen("env")) == 0)
 	{
 		env_cmd(vars);
 	}
