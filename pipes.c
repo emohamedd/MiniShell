@@ -37,8 +37,9 @@ void pipe_commands(t_vars *vars, int i, pid_t  *childs)
 		close(fd[1]);
 		if (i > 0)
 			close(prev_fd);
-		path = get_path(vars, vars->cmds[i].cmd);
-		execve(path, vars->cmds[i].cmds_args, vars->envp);
+		char **expand = expand_s_quotes(vars->cmds[i].cmds_args);
+		path = get_path(vars, expand[0]);
+		execve(path, expand, vars->envp);
 	}
 	else {
 		if (i > 0)

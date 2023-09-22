@@ -346,8 +346,8 @@ char **make_token(char *s)
     char *special_chars = "<>|";
     char **tokens = split(s, special_chars);
     char **quote = expand_quotes(tokens);
-    char **sgl = expand_s_quotes(quote);
-    return red_to_herdoc(sgl);
+    // char **sgl = expand_s_quotes(quote);
+    return red_to_herdoc(quote);
     // return tokens;
 }
 
@@ -383,12 +383,12 @@ t_info **allocat_token(char **s,  t_vars *vars)
         inf[i] = malloc(sizeof(t_info));
         inf[i]->content = s[i];
         inf[i]->size = lenght_of_the_2d(s);
-            if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
-        {
-            inf[i + 1]->content = s[i + 1];
-                // exit(1);
-            // printf("HERE inf[i]->content = %s | \n", inf[i + 1]->content);
-        }
+        //     if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
+        // {
+        //     inf[i + 1]->content = s[i + 1];
+        //         // exit(1);
+        //     // printf("HERE inf[i]->content = %s | \n", inf[i + 1]->content);
+        // }
         // if(!inf[i]->content[0])
         // {
         //     printf("ERR\n");

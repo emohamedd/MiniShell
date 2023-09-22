@@ -126,5 +126,5 @@ typedef struct s_vars
     char *ft_getenv(char *key, t_vars *vars);
     void pipe_red(t_vars *vars, int i, pid_t *childs);
 	void sigintHandler2();
-	
+	char** expand_s_quotes(char** tokens);
 #endif

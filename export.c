@@ -167,6 +167,11 @@ void export_cmd(t_vars *vars, char *args, char **str)
 		
 		if (!ft_strncmp(vars->env[count].key, var_, ft_strlen(vars->env[count].key)))
 		{
+			if (ft_strchr(args, '=') != NULL)
+			{
+				vars->env[count].value = ft_strchr(args, '=') + 1;
+				return;
+			}
 			int j = 0;
 			while (j < vars->env_number)
 			{
@@ -177,11 +182,6 @@ void export_cmd(t_vars *vars, char *args, char **str)
 					return;
 				}
 				j++;
-			}
-			if (ft_strchr(args, '=') != NULL)
-			{
-				vars->env[count].value = ft_strchr(args, '=') + 1;
-				return;
 			}
 		}
 		count++;
@@ -208,9 +208,9 @@ void export_cmd(t_vars *vars, char *args, char **str)
 		}
 		if (p != 1)
 		{
-			vars->env[count].key = key;
 			if(!ft_strchr(args, '$'))
 			{
+				vars->env[count].key = key;
 				value = ft_strchr(args, '=') + 1;
 				if (ft_strchr(args, '=') != NULL)
 				{

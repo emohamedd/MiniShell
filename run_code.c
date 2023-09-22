@@ -65,7 +65,7 @@ void cmd_builtins(t_vars *vars, int i, char **str)
 	}
 	else if (ft_strncmp("exit", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 	{
-		exit (vars->exit_status);
+		exit(vars->exit_status);
 	}
 }
 
