@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = cc
-#CFLAGS = -g -fsanitize=address
+ #CFLAGS = -g -fsanitize=address
 LDFLAGS = -lreadline 
 RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline
 RLOFLGS = -I/Users/emohamed/.brew/opt/readline/include

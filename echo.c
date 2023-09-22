@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:49:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/18 10:25:08 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:34:34 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int check_n(char *args)
 			return (1);
 		if (args[1] != '\0')
 		{
-			while (args[i] == 'n' && args[i] != '\0')
+			while (args[i] && args[i] == 'n')
 			{
 				i++;
 			}
@@ -36,24 +36,27 @@ void run_echo (char **args, t_vars *vars)
 {
     int i = 1;
     int check = 0;
+    // int g = 1;
+	// if (args[1] == NULL)
+	// 	return;
     while (args[i])
     {
-		// printf("%s\n",args[i]);
+		// printf ("string ==== %s\n", args[i]);
+        // if (args[i])
+            // g = ft_strncmp(args[i], "-n", ft_strlen("-n"));
+            // g = check_n(args[i]);
         while (args[i] && check_n(args[i]) == 0)
         {
             check = 1;
             i++;
         }
-		if (args[i] && check_n(args[i]) == 1)
+		if (args[i] &&check_n(args[i]) == 1)
 			vars->exit_status = 0;
         while (args[i])
 		{
-			if (args[i] != NULL)
-			{
-				printf("%s", args[i]);
-				if (args[i] != NULL && args[i + 1] != NULL)
-					printf(" ");
-			}
+            printf("%s", args[i]);
+			if (args[i] != NULL && args[i + 1] != NULL)
+				printf(" ");
         	i++;
 		}
     }

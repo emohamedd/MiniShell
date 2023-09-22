@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/19 19:50:53 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/21 22:35:33 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,49 +51,49 @@ void	has_redirections(t_vars *vars, int i)
 {
 	int j = 0;
 	int fd = 0;
-	 char *base_filename = "emohamed"; 
-	 if (vars->cmds[i].has_redirections) 
-        {
-            while (vars->cmds[i].opera_derec[j])
-            {
-                // if (vars->cmds[i].file_derec[j][0] == '$')
-                // {
-                //     printf("minishell: ambiguous redirect\n");
-                //     vars->exit_status = 1;               
-                // }
-                if (!strcmp(vars->cmds[i].opera_derec[j], ">")) 
-                {
-                    fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_TRUNC | O_RDWR, 0644);
-                    dup2(fd, 1);
-                    close(fd);
-                } 
-                else if (!strcmp(vars->cmds[i].opera_derec[j], "<")) 
-                {
-                    fd = open(vars->cmds[i].file_derec[j], O_RDWR);
-                    dup2(fd, 0);
-                    close(fd);
-                } 
-                else if (!strcmp(vars->cmds[i].opera_derec[j], ">>")) 
-                {
-                    fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_APPEND | O_RDWR, 0644);
-                    dup2(fd, 1);
-                    close(fd);
-                } 
-                else if (!strcmp(vars->cmds[i].opera_derec[j], "<<")) 
-                {
-                    if (vars->cmds[i].file_derec[j]) 
-                    {
-                        char *heredoc_delimiter = vars->cmds[i].file_derec[j];
-                        vars->here_fd = create_temp_file(base_filename);
-						her_hand = 1;
-                        collect_and_write_heredoc(vars->here_fd,  heredoc_delimiter);
-                        // fd = create_temp_file(base_filename);
-                        her_hand = 0;
-                    }
-                }
-                j++;
-            }
-        }
+	char *base_filename = "emohamed"; 
+	if (vars->cmds[i].has_redirections) 
+	{
+		while (vars->cmds[i].opera_derec[j])
+		{
+			// if (vars->cmds[i].file_derec[j][0] == '$')
+			// {
+			//     printf("minishell: ambiguous redirect\n");
+			//     vars->exit_status = 1;               
+			// }
+			if (!strcmp(vars->cmds[i].opera_derec[j], ">")) 
+			{
+				fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_TRUNC | O_RDWR, 0644);
+				dup2(fd, 1);
+				close(fd);
+			} 
+			else if (!strcmp(vars->cmds[i].opera_derec[j], "<")) 
+			{
+				fd = open(vars->cmds[i].file_derec[j], O_RDWR);
+				dup2(fd, 0);
+				close(fd);
+			} 
+			else if (!strcmp(vars->cmds[i].opera_derec[j], ">>")) 
+			{
+				fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_APPEND | O_RDWR, 0644);
+				dup2(fd, 1);
+				close(fd);
+			} 
+			else if (!strcmp(vars->cmds[i].opera_derec[j], "<<")) 
+			{
+				if (vars->cmds[i].file_derec[j]) 
+				{
+					char *heredoc_delimiter = vars->cmds[i].file_derec[j];
+					vars->here_fd = create_temp_file(base_filename);
+					her_hand = 1;
+					collect_and_write_heredoc(vars->here_fd,  heredoc_delimiter);
+					// fd = create_temp_file(base_filename);
+					her_hand = 0;
+				}
+			}
+			j++;
+		}
+	}
 }
 
 

@@ -6,11 +6,12 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/19 19:11:14 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/22 06:59:56 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 int check_equal(char *args)
 {
@@ -163,8 +164,20 @@ void export_cmd(t_vars *vars, char *args, char **str)
 		return ;
 	while (count < vars->env_number)
 	{
+		
 		if (!ft_strncmp(vars->env[count].key, var_, ft_strlen(vars->env[count].key)))
 		{
+			int j = 0;
+			while (j < vars->env_number)
+			{
+				
+				if (!ft_strncmp(vars->env[j].key, ft_strchr(args, '$') + 1, ft_strlen(vars->env[j].key)))
+				{
+					vars->env[count].value = vars->env[j].value;
+					return;
+				}
+				j++;
+			}
 			if (ft_strchr(args, '=') != NULL)
 			{
 				vars->env[count].value = ft_strchr(args, '=') + 1;
@@ -195,28 +208,42 @@ void export_cmd(t_vars *vars, char *args, char **str)
 		}
 		if (p != 1)
 		{
-			// // printf ("str === %s\n", key);
-			// printf ("str === %d\n", p);
 			vars->env[count].key = key;
-			value = ft_strchr(args, '=') + 1;
-			if (ft_strchr(args, '=') != NULL)
+			if(!ft_strchr(args, '$'))
 			{
-				vars->env[count].is_equal = 1;
-				vars->env[count].value = value;
+				value = ft_strchr(args, '=') + 1;
+				if (ft_strchr(args, '=') != NULL)
+				{
+					vars->env[count].is_equal = 1;
+					vars->env[count].value = value;
+				}
+				if (!ft_strchr(args, '=') && p == 1)
+				{
+					vars->env[count].key = args;
+				}
 			}
-			if (!ft_strchr(args, '=') && p == 1)
+			else if(ft_strchr(args, '$'))
 			{
-				// printf ("hdfd\n");
-				vars->env[count].key = args;
+				int j = 0;
+				while (j < vars->env_number)
+				{
+					if (!ft_strncmp(vars->env[j].key, ft_strchr(args, '$') + 1, ft_strlen(vars->env[j].key)))
+					{
+						if (ft_strchr(args, '$') != NULL)
+						{
+							vars->env[count].value = vars->env[j].value;
+							vars->env[count].is_equal = 1;
+						}
+					}
+					j++; 
+				}
+				if (!ft_strchr(args, '$') && p == 1)
+				{
+					vars->env[count].key = args;
+				}
 			}
 			vars->env_number++;
 		}
-		// if (vars->env[count].key != key)
-		// else if (vars->env[count].key == key && value == NULL)
-		// {
-		// 	vars->env[count].is_equal = 1;
-		// 	vars->env[count].value = value;
-		// }
 	}
 	if (ft_isalpha(args[0]) != 1 || check_equal(args) == 1)
 	{

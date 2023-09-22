@@ -16,13 +16,7 @@ void run_cd(char **args, t_vars *vars)
 {
     if (args[1])
 	{
-        // chdir(args[1]);
-		if (chdir(args[1]) == -1)
-		{
-			printf ("minishell: No such file or directory\n");
-			vars->exit_status = 1;
-			return ;
-		}
+        chdir(args[1]);
 		vars->exit_status = 0;
 		if (!ft_getenv("HOME", vars))
 		{		
@@ -39,6 +33,5 @@ void run_cd(char **args, t_vars *vars)
 			return ;
 		}
 		chdir(ft_getenv("HOME", vars));
-		// printf("%s\n", "minishell: No such file or directory\n");`
 	}
 }

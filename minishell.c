@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/19 19:38:40 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/22 03:57:56 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main(int c, char **v, char **env)
         input = read_input();
 		if (input == NULL)
 		{	
+			// printf("hamza\n");
     		return (vars.exit_status);
 		}
 		char *trimed = ft_strtrim(input , " \t\r\n");
@@ -45,12 +46,6 @@ int main(int c, char **v, char **env)
 			continue;
 		}
 		str =  make_token(trimed);
-		// 	int x = 0;
-		// while (x < 8)
-		// {
-		// 	printf("***--[%s]--***\n", str[x]);
-		// 	x++;
-		// }
         // str = ft_split(trimed, ' ');
 		if(str)
         {
@@ -60,22 +55,16 @@ int main(int c, char **v, char **env)
 			cmds = get_cmds(tokens);
 			if (!cmds)
 				return (0);
-			// int x = 0;
-			// while (x < 4)
-			// {
-			// 	printf("***%s\n", cmds[x]);
-			// 	x++;
-			// }
+			int x = 0;
 			syn_err(cmds, &vars);
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);
-			run(tokens[0]->content, cmds, &vars, trimed);
+			run(tokens[0]->content, cmds, &vars, str);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
 			// table(cmds, tokens);
-        }
+        }	
     }
-	
     return 0;
 }
