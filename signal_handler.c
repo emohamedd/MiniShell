@@ -14,7 +14,7 @@
 
 void sigintHandler(int signal) 
 {
-	if (signal == SIGINT || her_hand)
+	if (signal == SIGINT)
     {
         printf("\n");
         rl_on_new_line();

@@ -6,94 +6,112 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/22 06:59:56 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/23 08:29:05 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-int check_equal(char *args)
+int check_key(char *args)
 {
-	if (args[0] == '=' && args[1] == '\0')
+	int i = 0;
+	int j = 0;
+	while (args[i])
 	{
-		printf ("export: `%s' : not a valid identifier\n", args);
-		return (1);
+		if ((args[i] >= 'a' && args[i] <= 'z') || (args[i] >= 'A' && args[i] <= 'Z') || args[i] == '_')
+			j++;
+		if (i > 0)
+			if ((args[i] >= '0' && args[i] <= '9'))
+				j++;
+		i++;
 	}
+	if (args[j] == '\0')
+		return (1);
 	return (0);
 }
 
-char *skip_quots(char *str)
-{
-	int i = 0;
-	int j = 0;
-	if (!str)
-		return (NULL);
-	while(str[i])
-	{
-		if (str[i] == 34 || str[i] == 39)
-			j++;
-		i++;
-	}
-	char *ptr = malloc(sizeof(char *) * ft_strlen(str) - j + 1);
-	i = 0;
-	j = 0;
-	while(str[i])
-	{
-		if (str[i] != 34 && str[i] != 39)
-		{
-			ptr[j] = str[i];
-			j++;
-		}
-		i++;
-	}
-	ptr[j] = '\0';
-	free(str);
-	return (ptr);
-}
 
-char *skip_quotsinquots(char *str)
-{
-	int i = 0;
-	int j = 0;
-	if (!str)
-		return (NULL);
-	char *ptr = NULL;
-	while (str[i])
-	{
-		if (str[i] != 34 && str[i] != 39)
-		{
-			j++;
-		}
-		i++;
-	}
-	// while (str[x])
-	// {
-	// 	if (str[x] != 39)
-	// 	{
-	// 		z++;
-	// 	}
-	// 	x++;
-	// }
-	ptr = malloc(sizeof(char) * ft_strlen(str) - j + 1);
-	// if (!ptr)
-	// 	return (NULL);
-	// // printf("%s == %d\n", str, k);
-	int k = ft_strlen(str) - j;
-	i = 0;
-	j = 0;
-	while(i < k)
-	{
-		if (str[i] != 34 && str[i] != 39)
-		{
-			ptr[j] = str[i];
-			j++;
-		}
-		i++;
-	}
-	ptr[j] = '\0';
-	return (ptr);
-}
+// int check_equal(char *args)
+// {
+// 	if (args[0] == '=' && args[1] == '\0')
+// 	{
+// 		printf ("export: `%s' : not a valid identifier\n", args);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
+
+// char *skip_quots(char *str)
+// {
+// 	int i = 0;
+// 	int j = 0;
+// 	if (!str)
+// 		return (NULL);
+// 	while(str[i])
+// 	{
+// 		if (str[i] == 34 || str[i] == 39)
+// 			j++;
+// 		i++;
+// 	}
+// 	char *ptr = malloc(sizeof(char *) * ft_strlen(str) - j + 1);
+// 	i = 0;
+// 	j = 0;
+// 	while(str[i])
+// 	{
+// 		if (str[i] != 34 && str[i] != 39)
+// 		{
+// 			ptr[j] = str[i];
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	ptr[j] = '\0';
+// 	free(str);
+// 	return (ptr);
+// }
+
+// char *skip_quotsinquots(char *str)
+// {
+// 	int i = 0;
+// 	int j = 0;
+// 	if (!str)
+// 		return (NULL);
+// 	char *ptr = NULL;
+// 	while (str[i])
+// 	{
+// 		if (str[i] != 34 && str[i] != 39)
+// 		{
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	// while (str[x])
+// 	// {
+// 	// 	if (str[x] != 39)
+// 	// 	{
+// 	// 		z++;
+// 	// 	}
+// 	// 	x++;
+// 	// }
+// 	ptr = malloc(sizeof(char) * ft_strlen(str) - j + 1);
+// 	// if (!ptr)
+// 	// 	return (NULL);
+// 	// // printf("%s == %d\n", str, k);
+// 	int k = ft_strlen(str) - j;
+// 	i = 0;
+// 	j = 0;
+// 	while(i < k)
+// 	{
+// 		if (str[i] != 34 && str[i] != 39)
+// 		{
+// 			ptr[j] = str[i];
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	ptr[j] = '\0';
+// 	return (ptr);
+// }
 
 int check_doubelcouts(char *args)
 {
@@ -119,25 +137,20 @@ void export_cmd(t_vars *vars, char *args, char **str)
     int count = 0;
 	t_env *tmp = vars->env;
 	count = 0;
-	// char *str; 
 	if (args == NULL)
 	{
 		while (count < vars->env_number)
 		{
 			if (vars->env[count].is_equal)
 			{
-				printf("%s", vars->env[count].key );
+				printf("declare -x %s", vars->env[count].key);
 				printf("=");
 				if (vars->env[count].value && check_doubelcouts(vars->env[count].value) < 2)
 				{
-					// int sss = check_doubelcouts(vars->env[count].value);
-					// printf("%d", sss);
 					printf("\"%s\"""\n", vars->env[count].value);
 				}
 				if (vars->env[count].value && check_doubelcouts(vars->env[count].value) >= 2)
 				{
-					// int sss = check_doubelcouts(vars->env[count].value);
-					// printf("%d", sss);
 					printf("%s\n", vars->env[count].value);
 				}
 				if(!vars->env[count].value)
@@ -145,7 +158,7 @@ void export_cmd(t_vars *vars, char *args, char **str)
 			}
 			if (!vars->env[count].is_equal)
 			{
-				printf("%s", vars->env[count].key);
+				printf("declare -x %s", vars->env[count].key);
 				if (vars->env[count].value)
 				{
 					printf("=");
@@ -162,26 +175,36 @@ void export_cmd(t_vars *vars, char *args, char **str)
 	char *var_ = ft_split(args, '=')[0];
 	if (var_ == NULL)
 		return ;
+	if (check_key(var_) == 0)
+	{
+		printf("minishell: not a valid identifier\n");
+		vars->exit_status = 1;
+	}
 	while (count < vars->env_number)
 	{
 		
-		if (!ft_strncmp(vars->env[count].key, var_, ft_strlen(vars->env[count].key)))
+		if (!ft_strncmp(vars->env[count].key, var_, ft_strlen(vars->env[count].key) + 1))
 		{
-			int j = 0;
-			while (j < vars->env_number)
+			if (ft_strchr(args, '=') == NULL)
 			{
-				
-				if (!ft_strncmp(vars->env[j].key, ft_strchr(args, '$') + 1, ft_strlen(vars->env[j].key)))
-				{
-					vars->env[count].value = vars->env[j].value;
-					return;
-				}
-				j++;
+				vars->env[count].value = vars->env[count].value;
+				return;
 			}
 			if (ft_strchr(args, '=') != NULL)
 			{
 				vars->env[count].value = ft_strchr(args, '=') + 1;
 				return;
+			}
+			int j = 0;
+			while (j < vars->env_number)
+			{
+				
+				if (!ft_strncmp(vars->env[j].key, ft_strchr(args, '$') + 1, ft_strlen(vars->env[j].key) + 1))
+				{
+					vars->env[count].value = vars->env[j].value;
+					return;
+				}
+				j++;
 			}
 		}
 		count++;
@@ -193,24 +216,23 @@ void export_cmd(t_vars *vars, char *args, char **str)
 		vars->env[count] = tmp[count];
 		count++;
 	}
-	if (ft_isalpha(args[0]) == 1)
+	if (check_key(var_) == 1)
 	{
 		key = ft_split(args, '=')[0];
-		// printf ("key === %s ===== %zu\n", key, ft_strlen(key));
 		
 		int d = 0;
 		int p = 0;
 		while (vars->env[d].key)
 		{
-			if (ft_strncmp(vars->env[d].key, key, ft_strlen(vars->env[d].key)) == 0)
+			if (ft_strncmp(vars->env[d].key, key, ft_strlen(vars->env[d].key) + 1) == 0)
 				p = 1;
 			d++;
 		}
 		if (p != 1)
 		{
-			vars->env[count].key = key;
 			if(!ft_strchr(args, '$'))
 			{
+				vars->env[count].key = key;
 				value = ft_strchr(args, '=') + 1;
 				if (ft_strchr(args, '=') != NULL)
 				{
@@ -224,10 +246,11 @@ void export_cmd(t_vars *vars, char *args, char **str)
 			}
 			else if(ft_strchr(args, '$'))
 			{
+				vars->env[count].key = key;
 				int j = 0;
 				while (j < vars->env_number)
 				{
-					if (!ft_strncmp(vars->env[j].key, ft_strchr(args, '$') + 1, ft_strlen(vars->env[j].key)))
+					if (!ft_strncmp(vars->env[j].key, ft_strchr(args, '$') + 1, ft_strlen(vars->env[j].key) + 1))
 					{
 						if (ft_strchr(args, '$') != NULL)
 						{
@@ -245,11 +268,12 @@ void export_cmd(t_vars *vars, char *args, char **str)
 			vars->env_number++;
 		}
 	}
-	if (ft_isalpha(args[0]) != 1 || check_equal(args) == 1)
-	{
-		printf("export : `%s' : not a valid identifier\n", args);
-		vars->exit_status = 1;
-	}
+	// if (ft_isalpha(args[0]) != 1 || check_equal(args) == 1)
+	// {
+	// 	printf("minishell: not a valid identifier\n");
+	// 	vars->exit_status = 1;
+	// }
+	
 	free(tmp);
 	
 }
