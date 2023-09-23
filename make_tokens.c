@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/22 05:48:13 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/23 13:12:06 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,8 +346,9 @@ char **make_token(char *s)
     char *special_chars = "<>|";
     char **tokens = split(s, special_chars);
     char **quote = expand_quotes(tokens);
-    char **sgl = expand_s_quotes(quote);
-    return red_to_herdoc(sgl);
+    // char **sgl = expand_s_quotes(quote);
+    return red_to_herdoc(quote);
+    exit(1);
     // return tokens;
 }
 
@@ -383,60 +384,49 @@ t_info **allocat_token(char **s,  t_vars *vars)
         inf[i] = malloc(sizeof(t_info));
         inf[i]->content = s[i];
         inf[i]->size = lenght_of_the_2d(s);
-            if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
-        {
-            inf[i + 1]->content = s[i + 1];
-                // exit(1);
-            // printf("HERE inf[i]->content = %s | \n", inf[i + 1]->content);
-        }
-        // if(!inf[i]->content[0])
-        // {
-        //     printf("ERR\n");
-        //     pause();
-        // }
-        // inf[i]->size = lenght_of_the_2d(s);
-        // if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'') 
-        // {
-        //         // printf("%s\n", "str");//
-        //         char *str = ft_strtrim(inf[i]->content, "\'");
-        //          char *var ;
-        //         var = ft_getenv(str + 1, vars);     
-        //             if(!var)
-        //                 return 0;
-        //             inf[i]->content = ft_strdup(var);
 
-        //             // printf("%s\n", inf[i]->content);
-        //             inf[i]->type = "ENV_EXPANDED"; 
-        //             inf[i]->lenght = strlen(inf[i]->content);   
-        // }
-        // printf("*****%s****\n", inf[i + 1]->content);
-            int j = 0;
-            if (inf[i]->content[0] == '<')   
-                inf[i]->type = "RDIN";
-            else if (inf[i]->content[0] == '>')
-                inf[i]->type = "RDOUT";
-            else if (inf[i]->content[0] == '|')
-                inf[i]->type = "PIPE";
-            else if (inf[i]->content[0] == '\"')
-                inf[i]->type = "DBCOTE";
-            // while(j < ft_strlen(inf[i]->content))
-            // { 
-                if (inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1]))
+            if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'' )
+            {
+                if (inf[i]->content[1] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'')
                 {
-                //     int len = ft_strlen(inf[i]->content) - j;
-                //    char *expand = alloc_s(inf[i]->content, j + 1, len);
-                    char *var = ft_getenv(inf[i]->content + 1, vars);
-                        if(!var)
+                        char *trimmed_content = ft_strtrim(inf[i]->content, "\'");
+                        if (strlen(trimmed_content) > 0)
                         {
-                            return 0;
+                            
+                            if (trimmed_content[0] == '$' && ft_isalpha(trimmed_content[1]))
+                            {
+                                char *var = ft_getenv(trimmed_content + 1, vars);
+                                if(!var)
+                                {
+                                    return 0;
+                                }
+                                inf[i]->content = ft_strdup(var);
+                                inf[i]->type = "ENV_EXPANDED"; 
+                                inf[i]->lenght = strlen(inf[i]->content);
+                            }
                         }
-                        inf[i]->content = ft_strdup(var);
-                        // printf("%s\n", inf[i]->content);
-                        inf[i]->type = "ENV_EXPANDED"; 
-                        inf[i]->lenght = strlen(inf[i]->content);
                 }
-                // j++;
-            // }
+
+            }
+        else if (inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1]))
+        {
+            char *var = ft_getenv(inf[i]->content + 1, vars);
+                if(!var)
+                {
+                    return 0;
+                }
+                inf[i]->content = ft_strdup(var);
+                inf[i]->type = "ENV_EXPANDED"; 
+                inf[i]->lenght = strlen(inf[i]->content);
+        }
+        else if (inf[i]->content[0] == '<')   
+            inf[i]->type = "RDIN";
+        else if (inf[i]->content[0] == '>')
+            inf[i]->type = "RDOUT";
+        else if (inf[i]->content[0] == '|')
+            inf[i]->type = "PIPE";
+        else if (inf[i]->content[0] == '\"')
+            inf[i]->type = "DBCOTE";
              if (inf[i]->content[0] == '\'')
                 inf[i]->type = "SGCOTE";
             else if (is_char(s[i]))

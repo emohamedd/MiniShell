@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:35:50 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/23 07:15:44 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/23 12:46:50 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void pipe_commands(t_vars *vars, int i, pid_t  *childs)
 		execve(path, vars->cmds[i].cmds_args, vars->envp);
 		ft_putstr_fd("minishell: No such file or directory\n", 2);
 	}
-	else {
+	else 
+	{
 		if (i > 0)
 			close(prev_fd);
 		prev_fd = fd[0];

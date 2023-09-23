@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/23 08:14:14 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/23 23:43:39 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,76 @@ void cmd_builtins(t_vars *vars, int i, char **str)
 	}
 }
 
+int ft_error(char **str)
+{
+	int i = 0;
+	while (str[i])
+	{
+		int j = 0;
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		int d = 0;
+		int e = 0;
+		int f = 0;
+		int h = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == '<')
+				a++;
+			if (str[i][j] == '>')
+				b++;
+			if (str[i][j] == '|')
+				c++;
+			if (str[i][j] == '|' || str[i][j] == '<')
+				d++;
+			if (str[i][j] == '|' || str[i][j] == '>')
+				e++;
+			// if (str[i][j] == '<' || str[i][j] == '>')
+			// 	f++;
+			// if (str[i][j] == 34 || str[i][j] == 39)
+			// 	h++;
+			j++;
+		}
+		if (a > 2 || b > 2 || c > 1 || d > 1 || e > 1 || f > 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+
+
 int syntax_errors(char **args, t_vars *vars)
 {
 	int i = 0;
 	int j = 0;
+
+	if (ft_error(args))
+		return (1);
 	while (args[i])
 	{
-		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<", args[i + 1], ft_strlen(args[i + 1])) && args[i + 2] == NULL))
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<", args[i + 1], ft_strlen(args[i + 1]))))
 			j++;
-		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">", args[i + 1], ft_strlen(args[i + 1])) && args[i + 2] == NULL))
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">", args[i + 1], ft_strlen(args[i + 1]))))
 			j++;
-		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<<", args[i + 1], ft_strlen(args[i + 1])) && args[i + 2] == NULL))
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<<", args[i + 1], ft_strlen(args[i + 1]))))
 			j++;
-		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">>", args[i + 1], ft_strlen(args[i + 1])) && args[i + 2] == NULL))
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">>", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("<", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp(">", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp(">", args[i], ft_strlen(args[i])) && (!ft_strncmp("<", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("<", args[i], ft_strlen(args[i])) && (!ft_strncmp(">", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("<<", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && args[i + 1] == NULL)
+			j++;
+		if (!ft_strncmp("|", args[0], ft_strlen(args[0])))
 			j++;
 		i++;
 	}
@@ -154,8 +211,8 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 		i++;
 	}
 	
-	if (vars->n_commandes > 1)
-	{
+	// if (vars->n_commandes > 1)
+	// {
 		i = -1;
 		while (i < vars->n_commandes)
 		{
@@ -163,5 +220,5 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 			waitpid(childs[i], &status, 0);
 			i++;
 		}
-	}
+	// }
 }

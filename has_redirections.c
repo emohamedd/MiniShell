@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/21 22:35:33 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/23 19:54:00 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
     char *line;
 
     buff = "";
+	// rl_catch_signals = 1;
     while (1) 
     {
         read = readline("> ");
@@ -85,10 +86,10 @@ void	has_redirections(t_vars *vars, int i)
 				{
 					char *heredoc_delimiter = vars->cmds[i].file_derec[j];
 					vars->here_fd = create_temp_file(base_filename);
-					her_hand = 1;
+
 					collect_and_write_heredoc(vars->here_fd,  heredoc_delimiter);
 					// fd = create_temp_file(base_filename);
-					her_hand = 0;
+
 				}
 			}
 			j++;
