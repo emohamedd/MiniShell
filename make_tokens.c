@@ -399,7 +399,7 @@ t_info **allocat_token(char **s,  t_vars *vars)
         // {
         //         // printf("%s\n", "str");//
         //         char *str = ft_strtrim(inf[i]->content, "\'");
-        //          char *var ;
+        //          char *var ;m
         //         var = ft_getenv(str + 1, vars);     
         //             if(!var)
         //                 return 0;

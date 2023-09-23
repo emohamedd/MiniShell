@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/22 05:38:45 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/23 05:07:51 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_vars
 	
 }	t_vars;
 
+
+	void cmd_exit(char **str, t_vars *vars);
 	void	has_redirections(t_vars *vars, int i);
 	int		ft_strcmp(char *s1, char *s2);
     char 	**clear_cmds_arg_from_direct(char **args);

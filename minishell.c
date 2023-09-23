@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/22 03:57:56 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/23 07:40:31 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int main(int c, char **v, char **env)
     {
         input = read_input();
 		if (input == NULL)
-		{	
-			// printf("hamza\n");
+		{
     		return (vars.exit_status);
 		}
 		char *trimed = ft_strtrim(input , " \t\r\n");
@@ -55,18 +54,15 @@ int main(int c, char **v, char **env)
 			cmds = get_cmds(tokens);
 			if (!cmds)
 				return (0);
-				// while (x < lenght_of_the_2d(cmds))
-				// {
-				// 	printf("***--[%s]--***\n", cmds[x]);
-				// 	x++;
-				// }
-			syn_err(cmds, &vars);
+			// syn_err(cmds, &vars);
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);
 			run(tokens[0]->content, cmds, &vars, str);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
+			// close (fdin);
+			// close (fdou);
 			// table(cmds, tokens);
         }	
     }
