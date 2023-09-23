@@ -92,12 +92,12 @@ int syntax_errors(char **args, t_vars *vars)
 void 	run(char *cmd, char **args, t_vars *vars, char **str)
 {
 	fill_commands(args, vars);
-	if (syntax_errors(args, vars) > 0)
-	{
-		printf ("minishell: syntax error\n");
-		vars->exit_status = 2;
-		return;
-	}
+	// if (syntax_errors(args, vars) > 0)
+	// {
+	// 	printf ("minishell: syntax error\n");
+	// 	vars->exit_status = 2;
+	// 	return;
+	// }
 	int i = 0;
 	int status;
 	pid_t *childs = malloc(sizeof(int) * vars->n_commandes);
@@ -154,8 +154,8 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 		i++;
 	}
 	
-	if (vars->n_commandes > 1)
-	{
+	// if (vars->n_commandes > 1)
+	// {
 		i = -1;
 		while (i < vars->n_commandes)
 		{
@@ -163,5 +163,5 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 			waitpid(childs[i], &status, 0);
 			i++;
 		}
-	}
+	// }
 }

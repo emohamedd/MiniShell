@@ -14,11 +14,15 @@
 
 void sigintHandler(int signal) 
 {
+    if (rl_catch_signals == 1)
+    {
+        close(0);
+    }
 	if (signal == SIGINT)
     {
         printf("\n");
         rl_on_new_line();
-        // rl_replace_line("", 0);
+        rl_replace_line("", 0);
         rl_redisplay();
     }
 }

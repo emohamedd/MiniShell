@@ -35,12 +35,10 @@ void pipe_commands(t_vars *vars, int i, pid_t  *childs)
 		if (i == vars->n_commandes - 1) {
 			dup2(prev_fd, 0);
 		}
-		else if (i == 0) 
-		{
+		else if (i == 0) {
 			dup2(fd[1], 1);
 		}
-		else 
-		{
+		else {
 			dup2(prev_fd, 0);
 			dup2(fd[1], 1);
 		}
@@ -48,8 +46,8 @@ void pipe_commands(t_vars *vars, int i, pid_t  *childs)
 		close(fd[1]);
 		if (i > 0)
 			close(prev_fd);
-		
-		
+		execve(path, vars->cmds[i].cmds_args, vars->envp);
+		ft_putstr_fd("minishell: No such file or directory\n", 2);
 	}
 	else 
 	{

@@ -348,6 +348,7 @@ char **make_token(char *s)
     char **quote = expand_quotes(tokens);
     // char **sgl = expand_s_quotes(quote);
     return red_to_herdoc(quote);
+    exit(1);
     // return tokens;
 }
 
@@ -400,7 +401,6 @@ t_info **allocat_token(char **s,  t_vars *vars)
                                     return 0;
                                 }
                                 inf[i]->content = ft_strdup(var);
-                                // printf("%s\n", inf[i]->content);
                                 inf[i]->type = "ENV_EXPANDED"; 
                                 inf[i]->lenght = strlen(inf[i]->content);
                             }
@@ -408,25 +408,16 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 }
 
             }
-
-        // int j = 0;
-        //  while(j < ft_strlen(inf[i]->content))
-        //     {   
         else if (inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1]))
         {
-        //     int len = ft_strlen(inf[i]->content) - j;
-        //    char *expand = alloc_s(inf[i]->content, j + 1, len);
             char *var = ft_getenv(inf[i]->content + 1, vars);
                 if(!var)
                 {
                     return 0;
                 }
                 inf[i]->content = ft_strdup(var);
-                // printf("%s\n", inf[i]->content);
                 inf[i]->type = "ENV_EXPANDED"; 
                 inf[i]->lenght = strlen(inf[i]->content);
-            //   }
-            //   j++;
         }
         else if (inf[i]->content[0] == '<')   
             inf[i]->type = "RDIN";

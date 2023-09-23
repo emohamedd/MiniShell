@@ -44,8 +44,10 @@ int main(int c, char **v, char **env)
 		{
 			continue;
 		}
+		// syn_err(str, &vars);
 		str =  make_token(trimed);
         // str = ft_split(trimed, ' ');
+		rl_catch_signals = 0;
 		if(str)
         {
 			tokens = allocat_token(str, &vars);
@@ -54,7 +56,6 @@ int main(int c, char **v, char **env)
 			cmds = get_cmds(tokens);
 			if (!cmds)
 				return (0);
-			// syn_err(cmds, &vars);
 			vars.count_argiment = lenght_of_the_2d(str);
 			int fdin = dup(STDIN_FILENO);
 			int fdou = dup(STDOUT_FILENO);

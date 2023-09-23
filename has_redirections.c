@@ -35,6 +35,7 @@ void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
     char *line;
 
     buff = "";
+	rl_catch_signals = 1;
     while (1) 
     {
         read = readline("> ");
