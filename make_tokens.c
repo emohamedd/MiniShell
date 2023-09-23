@@ -399,14 +399,14 @@ t_info **allocat_token(char **s,  t_vars *vars)
         //         j++;
         //     }
         // }
-        int j = 0;
-         while(j < ft_strlen(inf[i]->content))
-            {   
-                if (inf[i]->content[j] == '$' && ft_isalpha(inf[i]->content[j + 1]))
+        // int j = 0;
+        //  while(j < ft_strlen(inf[i]->content))
+        //     {   
+                if (inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1]))
                 {
-                    int len = ft_strlen(inf[i]->content) - j;
-                   char *expand = alloc_s(inf[i]->content, j + 1, len);
-                    char *var = ft_getenv(expand, vars);
+                //     int len = ft_strlen(inf[i]->content) - j;
+                //    char *expand = alloc_s(inf[i]->content, j + 1, len);
+                    char *var = ft_getenv(inf[i]->content + 1, vars);
                         if(!var)
                         {
                             return 0;
@@ -415,9 +415,9 @@ t_info **allocat_token(char **s,  t_vars *vars)
                         // printf("%s\n", inf[i]->content);
                         inf[i]->type = "ENV_EXPANDED"; 
                         inf[i]->lenght = strlen(inf[i]->content);
+            //     }
+            //     j++;
                 }
-                j++;
-            }
         if (inf[i]->content[0] == '<')   
             inf[i]->type = "RDIN";
         else if (inf[i]->content[0] == '>')
