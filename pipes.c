@@ -18,18 +18,21 @@ void pipe_commands(t_vars *vars, int i, pid_t  *childs)
 	char *path = NULL;
 	if (pipe(fd) == -1)
 		return ;
-	
 	childs[i] = fork();
 	if (childs[i] < 0)
 		return ;
-	else if (childs[i] == 0) {
-		if (i == vars->n_commandes - 1) {
+	else if (childs[i] == 0) 
+	{
+		if (i == vars->n_commandes - 1) 
+		{
 			dup2(prev_fd, 0);
 		}
-		else if (i == 0) {
+		else if (i == 0) 
+		{
 			dup2(fd[1], 1);
 		}
-		else {
+		else 
+		{
 			dup2(prev_fd, 0);
 			dup2(fd[1], 1);
 		}
@@ -41,7 +44,8 @@ void pipe_commands(t_vars *vars, int i, pid_t  *childs)
 		path = get_path(vars, expand[0]);
 		execve(path, expand, vars->envp);
 	}
-	else {
+	else 
+	{
 		if (i > 0)
 			close(prev_fd);
 		prev_fd = fd[0];
