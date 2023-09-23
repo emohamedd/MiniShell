@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/23 06:54:14 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/23 12:46:54 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ char *get_path(t_vars *vars, char *cmd)
 void exec_cmds(t_vars *vars, int i) 
 {
 	int id;
+	char **expand = expand_s_quotes(vars->cmds[i].cmds_args);
 	char *path;
-	path = get_path(vars, vars->cmds[i].cmd);
+		path = get_path(vars, expand[0]);
 	
 	// setup_redirs(red, vars);
 	// printf(">>%s<<\n", path);
@@ -54,7 +55,7 @@ void exec_cmds(t_vars *vars, int i)
 			ft_putstr_fd(": command not found\n", 2);
 			exit(127);
 		}
-		execve(path, vars->cmds[i].cmds_args, vars->envp);
+		execve(path, expand, vars->envp);
 		ft_putstr_fd("minishell: No such file or directory\n", 2);
 		// perror("execve");
 		exit(127);

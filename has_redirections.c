@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   has_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/21 22:35:33 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/23 12:33:34 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void	has_redirections(t_vars *vars, int i)
 				{
 					char *heredoc_delimiter = vars->cmds[i].file_derec[j];
 					vars->here_fd = create_temp_file(base_filename);
-					her_hand = 1;
+
 					collect_and_write_heredoc(vars->here_fd,  heredoc_delimiter);
 					// fd = create_temp_file(base_filename);
-					her_hand = 0;
+
 				}
 			}
 			j++;
