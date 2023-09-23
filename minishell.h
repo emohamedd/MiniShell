@@ -83,7 +83,7 @@ typedef struct s_vars
 
 
 	void cmd_exit(char **str, t_vars *vars);
-	void	has_redirections(t_vars *vars, int i);
+	int	has_redirections(t_vars *vars, int i);
 	int		ft_strcmp(char *s1, char *s2);
     char 	**clear_cmds_arg_from_direct(char **args);
     char 	*read_input();

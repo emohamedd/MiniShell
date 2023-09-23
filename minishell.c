@@ -27,6 +27,7 @@ int main(int c, char **v, char **env)
 	vars.env_number = count_argiment(vars.envp);
     char *input;
     t_info **tokens = NULL; 
+	rl_catch_signals = 0;
 	signal(SIGINT, sigintHandler);
     while(1)
     {
@@ -47,7 +48,6 @@ int main(int c, char **v, char **env)
 		// syn_err(str, &vars);
 		str =  make_token(trimed);
         // str = ft_split(trimed, ' ');
-		rl_catch_signals = 0;
 		if(str)
         {
 			tokens = allocat_token(str, &vars);

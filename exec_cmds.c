@@ -36,7 +36,6 @@ char *get_path(t_vars *vars, char *cmd)
 	return (NULL);
 }
 
-
 void exec_cmds(t_vars *vars, int i) 
 {
 	int id;
@@ -45,17 +44,9 @@ void exec_cmds(t_vars *vars, int i)
 		// path = get_path(vars, expand[0]);
 	char *exp = ft_strtrim(vars->cmds[i].cmd, "\'");
 	path = get_path(vars, exp);
-	// setup_redirs(red, vars);
-	// printf(">>%s<<\n", path);
 	id = fork();
 	if (id == 0) 
 	{
-		// if (vars->here_fd)
-		// {
-		// 	dup2(vars->here_fd, 0);
-		// 	close(vars->here_fd);
-		// 	vars->here_fd = 0;
-		// }
 		if (path == NULL)
 		{
 			ft_putstr_fd("minishell : ", 2);

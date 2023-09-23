@@ -39,6 +39,8 @@ void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
     while (1) 
     {
         read = readline("> ");
+		if (!read)
+			return;
         if (strcmp(read, heredoc_delimiter) == 0) 
              break;
         buff = ft_strjoin(buff, read);
@@ -48,7 +50,7 @@ void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
     ft_putstr_fd(buff, fd);
 }
 
-void	has_redirections(t_vars *vars, int i)
+int 	has_redirections(t_vars *vars, int i)
 {
 	int j = 0;
 	int fd = 0;
@@ -57,28 +59,50 @@ void	has_redirections(t_vars *vars, int i)
 	{
 		while (vars->cmds[i].opera_derec[j])
 		{
-			// if (vars->cmds[i].file_derec[j][0] == '$')
-			// {
-			//     printf("minishell: ambiguous redirect\n");
-			//     vars->exit_status = 1;               
-			// }
 			if (!strcmp(vars->cmds[i].opera_derec[j], ">")) 
 			{
-				fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_TRUNC | O_RDWR, 0644);
-				dup2(fd, 1);
-				close(fd);
+				if (vars->cmds[i].file_derec[j])
+				{
+					fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_TRUNC | O_RDWR, 0644);
+					dup2(fd, 1);
+					close(fd);
+				}
+				else
+				{
+					printf("syntax error near unexpected token\n");
+					vars->exit_status = 258;
+					return 1;
+				}
 			} 
 			else if (!strcmp(vars->cmds[i].opera_derec[j], "<")) 
 			{
-				fd = open(vars->cmds[i].file_derec[j], O_RDWR);
-				dup2(fd, 0);
-				close(fd);
+				if (vars->cmds[i].file_derec[j])
+				{
+					fd = open(vars->cmds[i].file_derec[j], O_RDWR);
+					dup2(fd, 0);
+					close(fd);
+				}
+				else
+				{
+					printf("syntax error near unexpected token\n");
+					vars->exit_status = 258;
+					return 1;
+				}
 			} 
 			else if (!strcmp(vars->cmds[i].opera_derec[j], ">>")) 
 			{
-				fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_APPEND | O_RDWR, 0644);
-				dup2(fd, 1);
-				close(fd);
+				if (vars->cmds[i].file_derec[j])
+				{
+					fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_APPEND | O_RDWR, 0644);
+					dup2(fd, 1);
+					close(fd);
+				}
+				else
+				{
+					printf("syntax error near unexpected token\n");
+					vars->exit_status = 258;
+					return 1;
+				}
 			} 
 			else if (!strcmp(vars->cmds[i].opera_derec[j], "<<")) 
 			{
@@ -89,12 +113,18 @@ void	has_redirections(t_vars *vars, int i)
 
 					collect_and_write_heredoc(vars->here_fd,  heredoc_delimiter);
 					// fd = create_temp_file(base_filename);
-
+				}
+				else
+				{
+					printf("syntax error near unexpected token\n");
+					vars->exit_status = 258;
+					return 1;
 				}
 			}
 			j++;
 		}
 	}
+	return 0;
 }
 
 

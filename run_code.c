@@ -106,7 +106,10 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 		if (is_builtin(vars->cmds[i].cmd))
 		{
 			if (vars->cmds[i].has_redirections)
-				has_redirections(vars, i);
+			{
+				if (has_redirections(vars, i))
+					return ;
+			}
 			if (vars->cmds[i].is_nex_pip)
 			{
 				int fd[2];
@@ -137,7 +140,10 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 		else 
 		{
 			if (vars->cmds[i].has_redirections)
-				has_redirections(vars, i);
+			{
+				if (has_redirections(vars, i))
+					return ;
+			}
 			if (vars->n_commandes > 1)
 			{
 				while (i < vars->n_commandes)
