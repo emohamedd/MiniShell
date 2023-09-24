@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 12:57:10 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:45:49 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int lenght_of_the_2d(char **p)
 
 char **split(char *s, char *delimiters) 
 {
-    int max_tokens = strlen(s);
+    int max_tokens = ft_strlen(s);
     char **tokens = (char **)malloc(max_tokens * sizeof(char *));
     
     if (!tokens) 
@@ -99,7 +99,7 @@ char **split(char *s, char *delimiters)
                 escaped = !escaped;
             }
         }
-        else if ((!in_quotes && strchr(delimiters, end[i]) != NULL) || (!in_quotes && (end[i] == ' ' || end[i] == '\t'))) 
+        else if ((!in_quotes && ft_strchr(delimiters, end[i]) != NULL) || (!in_quotes && (end[i] == ' ' || end[i] == '\t'))) 
         {
             if (start != end) 
             {
@@ -131,7 +131,7 @@ char **split(char *s, char *delimiters)
                 tokens[token_count][end - start] = '\0';
                 token_count++;
             }
-            if (strchr(delimiters, end[i]) != NULL) 
+            if (ft_strchr(delimiters, end[i]) != NULL) 
             {
                 if (token_count >= max_tokens) 
                 {
@@ -216,7 +216,7 @@ char** expand_quotes(char** tokens)
     
     while (tokens[i]) 
     {
-        if (strchr(tokens[i], '\"')) 
+        if (ft_strchr(tokens[i], '\"')) 
         {
             num_quotes++;
         }
@@ -234,9 +234,9 @@ char** expand_quotes(char** tokens)
     while (tokens[i]) 
     {
         char* current_token = tokens[i];
-        if (strchr(current_token, '\"')) 
+        if (ft_strchr(current_token, '\"')) 
         {
-            int token_length = strlen(current_token);
+            int token_length = ft_strlen(current_token);
             char* modified_token = malloc(token_length * sizeof(char));
             if (modified_token == NULL) 
             {
@@ -259,7 +259,7 @@ char** expand_quotes(char** tokens)
             j++;
         } else 
         {
-            expanded_tokens[j] = strdup(current_token);
+            expanded_tokens[j] = ft_strdup(current_token);
             if (expanded_tokens[j] == NULL) 
             {
                 return NULL; 
@@ -318,12 +318,12 @@ t_info **allocat_token(char **s,  t_vars *vars)
         inf[i]->content = s[i];
         inf[i]->size = lenght_of_the_2d(s);
 
-            if (inf[i]->content[0] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'' )
+            if (inf[i]->content[0] == '\'' && inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'' )
             {
-                if (inf[i]->content[1] == '\'' && inf[i]->content[strlen(inf[i]->content) - 1] == '\'')
+                if (inf[i]->content[1] == '\'' && inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'')
                 {
                         char *trimmed_content = ft_strtrim(inf[i]->content, "\'");
-                        if (strlen(trimmed_content) > 0)
+                        if (ft_strlen(trimmed_content) > 0)
                         {
                             
                             if (trimmed_content[0] == '$' && ft_isalpha(trimmed_content[1]))
@@ -335,7 +335,7 @@ t_info **allocat_token(char **s,  t_vars *vars)
                                 }
                                 inf[i]->content = ft_strdup(var);
                                 inf[i]->type = "ENV_EXPANDED"; 
-                                inf[i]->lenght = strlen(inf[i]->content);
+                                inf[i]->lenght = ft_strlen(inf[i]->content);
                             }
                         }
                 }
@@ -350,7 +350,7 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 }
                 inf[i]->content = ft_strdup(var);
                 inf[i]->type = "ENV_EXPANDED"; 
-                inf[i]->lenght = strlen(inf[i]->content);
+                inf[i]->lenght = ft_strlen(inf[i]->content);
         }
         else if (inf[i]->content[0] == '<')   
             inf[i]->type = "RDIN";
@@ -364,7 +364,7 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 inf[i]->type = "SGCOTE";
             else if (is_char(s[i]))
                 inf[i]->type = "STR";
-            inf[i]->lenght = strlen(inf[i]->content);
+            inf[i]->lenght = ft_strlen(inf[i]->content);
         i++;
     }
     return inf;

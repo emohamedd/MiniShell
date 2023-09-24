@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/24 12:56:47 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:40:56 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
         read = readline("> ");
 		if (!read)
 			return;
-        if (strcmp(read, heredoc_delimiter) == 0) 
+        if (ft_strcmp(read, heredoc_delimiter) == 0) 
              break;
         buff = ft_strjoin(buff, read);
         buff = ft_strjoin(buff, "\n");
@@ -59,7 +59,7 @@ int 	has_redirections(t_vars *vars, int i)
 	{
 		while (vars->cmds[i].opera_derec[j])
 		{
-			if (!strcmp(vars->cmds[i].opera_derec[j], ">")) 
+			if (!ft_strcmp(vars->cmds[i].opera_derec[j], ">")) 
 			{
 				if (vars->cmds[i].file_derec[j])
 				{
@@ -74,7 +74,7 @@ int 	has_redirections(t_vars *vars, int i)
 					return 1;
 				}
 			} 
-			else if (!strcmp(vars->cmds[i].opera_derec[j], "<")) 
+			else if (!ft_strcmp(vars->cmds[i].opera_derec[j], "<")) 
 			{
 				if (vars->cmds[i].file_derec[j])
 				{
@@ -89,7 +89,7 @@ int 	has_redirections(t_vars *vars, int i)
 					return 1;
 				}
 			} 
-			else if (!strcmp(vars->cmds[i].opera_derec[j], ">>")) 
+			else if (!ft_strcmp(vars->cmds[i].opera_derec[j], ">>")) 
 			{
 				if (vars->cmds[i].file_derec[j])
 				{
@@ -104,7 +104,7 @@ int 	has_redirections(t_vars *vars, int i)
 					return 1;
 				}
 			} 
-			else if (!strcmp(vars->cmds[i].opera_derec[j], "<<")) 
+			else if (!ft_strcmp(vars->cmds[i].opera_derec[j], "<<")) 
 			{
 				if (vars->cmds[i].file_derec[j]) 
 				{

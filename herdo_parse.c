@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:08:39 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 10:07:31 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 14:46:36 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ char **red_to_herdoc(char **tokens)
 
     while (tokens[i]) 
     {
-        if (strcmp(tokens[i], ">") == 0 || strcmp(tokens[i], "<") == 0) {
-            new_tokens[j] = (char *)malloc(sizeof(char) * (strlen(tokens[i]) + 1));
+        if (ft_strcmp(tokens[i], ">") == 0 || ft_strcmp(tokens[i], "<") == 0) {
+            new_tokens[j] = (char *)malloc(sizeof(char) * (ft_strlen(tokens[i]) + 1));
             strcpy(new_tokens[j], tokens[i]);
-            while (tokens[i + 1] && (strcmp(tokens[i], tokens[i + 1]) == 0)) 
+            while (tokens[i + 1] && (ft_strcmp(tokens[i], tokens[i + 1]) == 0)) 
             {
                 strcat(new_tokens[j], tokens[i + 1]);
                 i++;
@@ -38,7 +38,7 @@ char **red_to_herdoc(char **tokens)
         }
         else 
         {
-            new_tokens[j] = (char *)malloc(strlen(tokens[i]) + 1);
+            new_tokens[j] = (char *)malloc(ft_strlen(tokens[i]) + 1);
             strcpy(new_tokens[j], tokens[i]);
             j++;
         }
