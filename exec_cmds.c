@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/24 14:38:40 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:59:13 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void exec_cmds(t_vars *vars, int i)
 		// 	close(vars->here_fd);
 		// 	vars->here_fd = 0;
 		// }
-		if (path == NULL)
+		if (path == NULL && !vars->cmds[i].has_redirections)
 		{
 			ft_putstr_fd("minishell : ", 2);
 			ft_putstr_fd(exp, 2);
@@ -64,8 +64,8 @@ void exec_cmds(t_vars *vars, int i)
 			exit(127);
 		}
 		// execve(path, expand, vars->envp);
-		execve(path, vars->cmds[i].cmds_args, vars->envp);
-		ft_putstr_fd("minishell: No such file or directory\n", 2);
+		if (!execve(path, vars->cmds[i].cmds_args, vars->envp))
+			ft_putstr_fd("minishell: No such file or directory\n", 2);
 		// perror("execve");
 		exit(127);
 	}
