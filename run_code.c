@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/23 23:43:39 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/24 10:18:00 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int is_builtin(char *cmd)
 void cmd_builtins(t_vars *vars, int i, char **str)
 {
 	char *cwd = getcwd(NULL, 1024);
+
+	
 	if ((ft_strncmp("echo", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd) + 1) == 0))
 	{
 		run_echo(vars->cmds[i].cmds_args, vars);
@@ -155,6 +157,14 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 		vars->exit_status = 2;
 		return;
 	}
+	// int kl = 0;
+	
+	// while (str[kl])
+	// {
+	// 	printf ("%s\n", str[kl]);
+	// 	kl++;
+	// }
+	
 	int i = 0;
 	int status;
 	pid_t *childs = malloc(sizeof(int) * vars->n_commandes);
