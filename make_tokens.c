@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 11:11:40 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 12:57:10 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ char **make_token(char *s)
     char **quote = expand_quotes(tokens);
     // char **sgl = expand_s_quotes(quote);
     return red_to_herdoc(quote);
-    // exit(1);
+    exit(1);
     // return tokens;
 }
 

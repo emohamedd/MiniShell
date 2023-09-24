@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 11:32:37 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 12:57:18 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int main(int c, char **v, char **env)
 		// syn_err(str, &vars);
 		str =  make_token(trimed);
         // str = ft_split(trimed, ' ');
+		// rl_catch_signals = 0;
 		if(str)
         {
 			tokens = allocat_token(str, &vars);

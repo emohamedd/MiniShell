@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/23 12:46:54 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 12:56:15 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char *get_path(t_vars *vars, char *cmd)
 	return (NULL);
 }
 
+
 void exec_cmds(t_vars *vars, int i) 
 {
 	int id;
@@ -44,9 +45,17 @@ void exec_cmds(t_vars *vars, int i)
 		// path = get_path(vars, expand[0]);
 	char *exp = ft_strtrim(vars->cmds[i].cmd, "\'");
 	path = get_path(vars, exp);
+	// setup_redirs(red, vars);
+	// printf(">>%s<<\n", path);
 	id = fork();
 	if (id == 0) 
 	{
+		// if (vars->here_fd)
+		// {
+		// 	dup2(vars->here_fd, 0);
+		// 	close(vars->here_fd);
+		// 	vars->here_fd = 0;
+		// }
 		if (path == NULL)
 		{
 			ft_putstr_fd("minishell : ", 2);
