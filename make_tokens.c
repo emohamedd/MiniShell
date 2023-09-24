@@ -276,69 +276,6 @@ char** expand_quotes(char** tokens)
     return expanded_tokens;
 }
 
-char** expand_s_quotes(char** tokens)
-{
-    int i = 0;
-    int num_quotes = 0;
-    
-    while (tokens[i]) 
-    {
-        if (strchr(tokens[i], '\'')) 
-        {
-            num_quotes++;
-        }
-        i++;
-    }
-
-    char** str_s = malloc((i + num_quotes + 1) * sizeof(char*));
-    if (str_s == NULL) 
-    {
-        return NULL;
-    }
-
-    int j = 0;
-    i = 0;
-    while (tokens[i]) 
-    {
-        char* current_token = tokens[i];
-        if (strchr(current_token, '\'')) 
-        {
-            int token_length = strlen(current_token);
-            char* modified_token = malloc(token_length * sizeof(char));
-            if (modified_token == NULL) 
-            {
-                return NULL; 
-            }
-
-            int k = 0;
-            int l = 0;
-            while (l < token_length) 
-            {
-                if (current_token[l] != '\'') 
-                {
-                    modified_token[k] = current_token[l];
-                    k++;
-                }
-                l++;
-            }
-            modified_token[k] = '\0';
-            str_s[j] = modified_token;
-            j++;
-        } else 
-        {
-            str_s[j] = strdup(current_token);
-            if (str_s[j] == NULL) 
-            {
-                return NULL; 
-            }
-            j++;
-        }
-        i++;
-    }
-    str_s[j] = NULL;
-    return str_s;
-}
-
 
 // hna fin kantokinazi
 char **make_token(char *s) 

@@ -17,7 +17,6 @@ void sigintHandler(int signal)
     if (rl_catch_signals == 1)
     {
         close(0);
-        
     }
 	else if (signal == SIGINT)
     {

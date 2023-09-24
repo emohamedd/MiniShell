@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/23 12:33:20 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 10:08:00 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,5 @@ typedef struct s_vars
     void	fell_env_struct(t_vars *vars);
     char	*ft_getenv(char *key, t_vars *vars);
     void	pipe_red(t_vars *vars, int i, pid_t *childs);
-	void	sigintHandler2();
-	char**  expand_s_quotes(char** tokens);
 
 #endif

@@ -28,7 +28,7 @@ void pipe_commands(t_vars *vars, int i, pid_t  *childs)
 		if (path == NULL)
 		{
 			ft_putstr_fd("minishell : ", 2);
-			ft_putstr_fd(vars->cmds[0].cmd, 2);
+			ft_putstr_fd(vars->cmds[i].cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
 			exit (127);
 		}
