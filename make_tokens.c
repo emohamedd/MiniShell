@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/23 13:12:06 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:11:40 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ int lenght_of_the_2d(char **p)
 
 char **split(char *s, char *delimiters) 
 {
-    int max_tokens = strlen(s); // to fix hadi ba9i makanacllokich the right size
-        // printf("**********\n");
-        // exit(1);
+    int max_tokens = strlen(s);
     char **tokens = (char **)malloc(max_tokens * sizeof(char *));
     
     if (!tokens) 
@@ -176,12 +174,10 @@ char **split(char *s, char *delimiters)
     if (start != end) 
     {
         if (token_count >= max_tokens) 
-        
         {
             max_tokens *= 2;
             char **new_tokens = (char **)malloc(max_tokens * sizeof(char *));
             if (!new_tokens) 
-            
             {
                printf("allocation err\n");
                 exit(1);
@@ -285,7 +281,7 @@ char **make_token(char *s)
     char **quote = expand_quotes(tokens);
     // char **sgl = expand_s_quotes(quote);
     return red_to_herdoc(quote);
-    exit(1);
+    // exit(1);
     // return tokens;
 }
 
