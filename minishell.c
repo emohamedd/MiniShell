@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 12:57:18 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 15:10:33 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main(int c, char **v, char **env)
     t_info **tokens = NULL; 
 	rl_catch_signals = 0;
 	signal(SIGINT, sigintHandler);
+	signal(SIGQUIT, SIG_IGN);
     while(1)
     {
         input = read_input();
