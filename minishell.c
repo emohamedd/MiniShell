@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 17:09:05 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:18:28 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int main(int c, char **v, char **env)
 			dup2(fdou, 1);
 			// close (fdin);
 			// close (fdou);
-			table(cmds, tokens);
+			// table(cmds, tokens);
         }	
     }
     return 0;

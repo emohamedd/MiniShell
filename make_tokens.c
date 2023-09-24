@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 14:45:49 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:17:04 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int lenght_of_the_2d(char **p)
 
 char **split(char *s, char *delimiters) 
 {
-    int max_tokens = ft_strlen(s);
+    int max_tokens = ft_strlen(s) + 1;
     char **tokens = (char **)malloc(max_tokens * sizeof(char *));
     
     if (!tokens) 
