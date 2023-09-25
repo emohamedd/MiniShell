@@ -14,16 +14,19 @@
 
 char	**get_cmds(t_info **info)
 {
-	int		len = 0;
+	int		len;
 	int		i;
-	char	*cmd = NULL;
+	char	*cmd;
+	char	**dst;
 
+	len = 0;
+	cmd = NULL;
 	len = (*info)->size;
 	i = 0;
-	char **dst = malloc(sizeof(char *) * ((*info)->size + 1));
+	dst = malloc(sizeof(char *) * ((*info)->size + 1));
 	while (i < len)
 	{
-		dst[i] =  info[i]->content;
+		dst[i] = info[i]->content;
 		i++;
 	}
 	dst[i] = 0;

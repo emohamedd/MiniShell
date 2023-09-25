@@ -12,50 +12,50 @@
 
 #include "minishell.h"
 
-
-int is_numeric(const char *str) 
+int	is_numeric(const char *str)
 {
-	int i = 0;
-	while(str[i])
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (!ft_isdigit(str[i])) 
+		if (!ft_isdigit(str[i]))
 		{
-            return 0;
-        }
+			return (0);
+		}
 		i++;
 	}
-    return 1;
+	return (1);
 }
 
-void cmd_exit(char **str, t_vars *vars) 
+void	cmd_exit(char **str, t_vars *vars)
 {
-    int i = 0;
-    while (str[i]) 
+	int	i;
+	int	res;
+
+	i = 0;
+	while (str[i])
 	{
-        i++;
-    }
+		i++;
+	}
 	if (!ft_strncmp("exit", str[0], (ft_strlen(str[0]) + 1)))
 	{
 		ft_putstr_fd("exit\n", 2);
 		vars->exit_status = 0;
-		
 	}
-    if (i == 2 && is_numeric(str[1])) 
+	if (i == 2 && is_numeric(str[1]))
 	{
-        int res = ft_atoi(str[1]);
-        vars->exit_status = res;
-    } 
-	else if (i == 2) 
+		res = ft_atoi(str[1]);
+		vars->exit_status = res;
+	}
+	else if (i == 2)
 	{
-        printf("minishell: exit: %s: numeric argument required\n", str[1]);
-        vars->exit_status = 255;
-    } 
-	else if (i > 2) 
+		printf("minishell: exit: %s: numeric argument required\n", str[1]);
+		vars->exit_status = 255;
+	}
+	else if (i > 2)
 	{
-        printf("minishell: exit: too many arguments\n");
-        vars->exit_status = 1;
-    }
+		printf("minishell: exit: too many arguments\n");
+		vars->exit_status = 1;
+	}
 }
-
-
-

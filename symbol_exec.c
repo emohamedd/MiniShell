@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void pipe_red(t_vars *vars, int i, pid_t *childs)
+void	pipe_red(t_vars *vars, int i, pid_t *childs)
 {
 	if (vars->cmds[i].is_nex_pip)
 	{

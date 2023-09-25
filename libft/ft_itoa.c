@@ -39,7 +39,7 @@ char	*ft_itoa(int n)
 	if (!p)
 		return (NULL);
 	p[i] = '\0';
-		i--;
+	i--;
 	if (n == 0)
 		p[i] = 0 + '0';
 	if (n < 0)

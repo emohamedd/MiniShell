@@ -12,53 +12,63 @@
 
 #include "minishell.h"
 
-
-int create_temp_file(char *base_filename) 
+int	create_temp_file(char *base_filename)
 {
-    int fd = open(base_filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
-    if (fd == -1) 
-    {
-        perror("open");
-        exit(1);
-    }
-    return fd;
+	int	fd;
+
+	fd = open(base_filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	if (fd == -1)
+	{
+		perror("open");
+		exit(1);
+	}
+	return (fd);
 }
 
-void collect_and_write_heredoc(int fd, char *heredoc_delimiter) {
-    char *read = NULL;
-    char *buff;
-    char *line;
+void	collect_and_write_heredoc(int fd, char *heredoc_delimiter)
+{
+	char	*read;
+	char	*buff;
+	char	*line;
 
-    buff = "";
+	read = NULL;
+	buff = "";
 	rl_catch_signals = 1;
-    while (1) 
-    {
-        read = readline("> ");
+	while (1)
+	{
+		read = readline("> ");
 		if (!read)
-			return;
-        if (ft_strcmp(read, heredoc_delimiter) == 0) 
-             break;
-        buff = ft_strjoin(buff, read);
-        buff = ft_strjoin(buff, "\n");
-    }
-    ft_putstr_fd(buff, 2);
-    ft_putstr_fd(buff, fd);
+			return ;
+		if (ft_strcmp(read, heredoc_delimiter) == 0)
+			break ;
+		buff = ft_strjoin(buff, read);
+		buff = ft_strjoin(buff, "\n");
+	}
+	ft_putstr_fd(buff, 2);
+	ft_putstr_fd(buff, fd);
 }
 
-int 	has_redirections(t_vars *vars, int i)
+int	has_redirections(t_vars *vars, int i)
 {
-	int j = 0;
-	int fd = 0;
-	char *base_filename = "emohamed"; 
-	if (vars->cmds[i].has_redirections) 
+	int		j;
+	int		fd;
+	char	*base_filename;
+	char	*heredoc_delimiter;
+
+	j = 0;
+	fd = 0;
+	base_filename = "emohamed";
+	if (vars->cmds[i].has_redirections)
 	{
 		while (vars->cmds[i].opera_derec[j])
 		{
-			if (!ft_strncmp(vars->cmds[i].opera_derec[j], ">", ft_strlen(">") + 1))
+			if (!ft_strncmp(vars->cmds[i].opera_derec[j], ">", ft_strlen(">")
+					+ 1))
 			{
 				if (vars->cmds[i].file_derec[j])
 				{
-					fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_TRUNC | O_RDWR, 0644);
+					fd = open(vars->cmds[i].file_derec[j],
+							O_CREAT | O_TRUNC | O_RDWR, 0644);
 					dup2(fd, 1);
 					close(fd);
 				}
@@ -66,10 +76,11 @@ int 	has_redirections(t_vars *vars, int i)
 				{
 					printf("syntax error near unexpected token\n");
 					vars->exit_status = 258;
-					return 1;
+					return (1);
 				}
-			} 
-			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], "<", ft_strlen("<") + 1))
+			}
+			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], "<",
+					ft_strlen("<") + 1))
 			{
 				if (vars->cmds[i].file_derec[j])
 				{
@@ -81,14 +92,16 @@ int 	has_redirections(t_vars *vars, int i)
 				{
 					printf("syntax error near unexpected token\n");
 					vars->exit_status = 258;
-					return 1;
+					return (1);
 				}
-			} 
-			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], ">>", ft_strlen(">>") + 1))
+			}
+			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], ">>",
+					ft_strlen(">>") + 1))
 			{
 				if (vars->cmds[i].file_derec[j])
 				{
-					fd = open(vars->cmds[i].file_derec[j], O_CREAT | O_APPEND | O_RDWR, 0644);
+					fd = open(vars->cmds[i].file_derec[j],
+							O_CREAT | O_APPEND | O_RDWR, 0644);
 					dup2(fd, 1);
 					close(fd);
 				}
@@ -96,27 +109,27 @@ int 	has_redirections(t_vars *vars, int i)
 				{
 					printf("syntax error near unexpected token\n");
 					vars->exit_status = 258;
-					return 1;
+					return (1);
 				}
-			} 
-			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], "<<", ft_strlen("<<") + 1))
+			}
+			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], "<<",
+					ft_strlen("<<") + 1))
 			{
-				if (vars->cmds[i].file_derec[j]) 
+				if (vars->cmds[i].file_derec[j])
 				{
-					char *heredoc_delimiter = vars->cmds[i].file_derec[j];
+					heredoc_delimiter = vars->cmds[i].file_derec[j];
 					vars->here_fd = create_temp_file(base_filename);
-
-					collect_and_write_heredoc(vars->here_fd,  heredoc_delimiter);
+					collect_and_write_heredoc(vars->here_fd, heredoc_delimiter);
 				}
 				else
 				{
 					printf("syntax error near unexpected token\n");
 					vars->exit_status = 258;
-					return 1;
+					return (1);
 				}
 			}
 			j++;
 		}
 	}
-	return 0;
+	return (0);
 }

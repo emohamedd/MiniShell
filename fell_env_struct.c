@@ -12,19 +12,21 @@
 
 #include "minishell.h"
 
-void fell_env_struct(t_vars *vars)
+void	fell_env_struct(t_vars *vars)
 {
-    int i = 0;
-    char *key;
-    while (vars->envp[i])
+	int		i;
+	char	*key;
+
+	i = 0;
+	while (vars->envp[i])
 	{
-        key = ft_split(vars->envp[i], '=')[0];
-        vars->env[i].key = key;
-        if (ft_strchr(vars->envp[i], '='))
+		key = ft_split(vars->envp[i], '=')[0];
+		vars->env[i].key = key;
+		if (ft_strchr(vars->envp[i], '='))
 		{
-            vars->env[i].is_equal = 1;
-            vars->env[i].value = ft_strchr(vars->envp[i], '=') + 1;
-        }
-        i++;
-    }
+			vars->env[i].is_equal = 1;
+			vars->env[i].value = ft_strchr(vars->envp[i], '=') + 1;
+		}
+		i++;
+	}
 }
