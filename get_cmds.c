@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:57:54 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 11:36:24 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:10:25 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,3 @@ char	**get_cmds(t_info **info)
 	dst[i] = 0;
 	return (dst);
 }
-
-// int count = 0;
-// while (cmds[count]) {
-// 	printf("arg => %s\n", cmds[count]);
-// 	count++;
-// }
-// exit(0);

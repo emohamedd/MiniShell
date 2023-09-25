@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/24 18:59:23 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:10:54 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,9 @@ char *get_path(t_vars *vars, char *cmd)
 void exec_cmds(t_vars *vars, int i) 
 {
 	int id;
-	// char **expand = expand_s_quotes(vars->cmds[i].cmds_args);
 	char *path;
-		// path = get_path(vars, expand[0]);
 	char *exp = ft_strtrim(vars->cmds[i].cmd, "\'");
 	path = get_path(vars, exp);
-	// setup_redirs(red, vars);
-	// printf(">>%s<<\n", path);
 	id = fork();
 	if (id == 0) 
 	{
