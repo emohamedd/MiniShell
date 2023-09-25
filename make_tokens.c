@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 17:17:04 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:02:31 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,7 +341,7 @@ t_info **allocat_token(char **s,  t_vars *vars)
                 }
 
             }
-        else if (inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1]))
+        else if ((inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1])))
         {
             char *var = ft_getenv(inf[i]->content + 1, vars);
                 if(!var)

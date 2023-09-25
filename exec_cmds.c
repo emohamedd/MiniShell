@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/24 16:59:13 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:59:23 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void exec_cmds(t_vars *vars, int i)
 	id = fork();
 	if (id == 0) 
 	{
-		// if (vars->here_fd)
-		// {
-		// 	dup2(vars->here_fd, 0);
-		// 	close(vars->here_fd);
-		// 	vars->here_fd = 0;
-		// }
+		if (vars->here_fd)
+		{
+			dup2(vars->here_fd, 0);
+			close(vars->here_fd);
+			vars->here_fd = 0;
+		}
 		if (path == NULL && !vars->cmds[i].has_redirections)
 		{
 			ft_putstr_fd("minishell : ", 2);

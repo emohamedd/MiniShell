@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/24 17:09:55 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:56:39 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int 	has_redirections(t_vars *vars, int i)
 	{
 		while (vars->cmds[i].opera_derec[j])
 		{
-			if (!ft_strncmp(vars->cmds[i].opera_derec[j], "<", ft_strlen("<") + 1))
+			if (!ft_strncmp(vars->cmds[i].opera_derec[j], ">", ft_strlen(">") + 1))
 			{
 				if (vars->cmds[i].file_derec[j])
 				{
@@ -74,7 +74,7 @@ int 	has_redirections(t_vars *vars, int i)
 					return 1;
 				}
 			} 
-			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], ">", ft_strlen(">") + 1))
+			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], "<", ft_strlen("<") + 1))
 			{
 				if (vars->cmds[i].file_derec[j])
 				{
