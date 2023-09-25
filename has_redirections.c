@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/25 11:56:39 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:28:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 
 int create_temp_file(char *base_filename) 
 {
-    // char *file =  malloc(sizeof(char) * (ft_strlen(base_filename) + 1));
-
-
-    // strcpy(file, base_filename);
-    // rot13(file);
     int fd = open(base_filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
     if (fd == -1) 
     {
@@ -112,7 +107,6 @@ int 	has_redirections(t_vars *vars, int i)
 					vars->here_fd = create_temp_file(base_filename);
 
 					collect_and_write_heredoc(vars->here_fd,  heredoc_delimiter);
-					// fd = create_temp_file(base_filename);
 				}
 				else
 				{
@@ -126,6 +120,3 @@ int 	has_redirections(t_vars *vars, int i)
 	}
 	return 0;
 }
-
-
-// Heredoc y save file descriptor
