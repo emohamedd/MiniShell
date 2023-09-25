@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/23 19:54:19 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/24 20:26:42 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main(int c, char **v, char **env)
 	vars.env_number = count_argiment(vars.envp);
     char *input;
     t_info **tokens = NULL; 
+	// rl_catch_signals = 0;
 	signal(SIGINT, sigintHandler);
     while(1)
     {
@@ -62,9 +63,6 @@ int main(int c, char **v, char **env)
 			run(tokens[0]->content, cmds, &vars, str);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
-			// close (fdin);
-			// close (fdou);
-			// table(cmds, tokens);
         }	
     }
     return 0;

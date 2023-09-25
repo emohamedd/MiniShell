@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/23 13:12:06 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 12:57:10 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ int lenght_of_the_2d(char **p)
 
 char **split(char *s, char *delimiters) 
 {
-    int max_tokens = strlen(s); // to fix hadi ba9i makanacllokich the right size
-        // printf("**********\n");
-        // exit(1);
+    int max_tokens = strlen(s);
     char **tokens = (char **)malloc(max_tokens * sizeof(char *));
     
     if (!tokens) 
@@ -176,12 +174,10 @@ char **split(char *s, char *delimiters)
     if (start != end) 
     {
         if (token_count >= max_tokens) 
-        
         {
             max_tokens *= 2;
             char **new_tokens = (char **)malloc(max_tokens * sizeof(char *));
             if (!new_tokens) 
-            
             {
                printf("allocation err\n");
                 exit(1);
@@ -274,69 +270,6 @@ char** expand_quotes(char** tokens)
     }
     expanded_tokens[j] = NULL;
     return expanded_tokens;
-}
-
-char** expand_s_quotes(char** tokens)
-{
-    int i = 0;
-    int num_quotes = 0;
-    
-    while (tokens[i]) 
-    {
-        if (strchr(tokens[i], '\'')) 
-        {
-            num_quotes++;
-        }
-        i++;
-    }
-
-    char** str_s = malloc((i + num_quotes + 1) * sizeof(char*));
-    if (str_s == NULL) 
-    {
-        return NULL;
-    }
-
-    int j = 0;
-    i = 0;
-    while (tokens[i]) 
-    {
-        char* current_token = tokens[i];
-        if (strchr(current_token, '\'')) 
-        {
-            int token_length = strlen(current_token);
-            char* modified_token = malloc(token_length * sizeof(char));
-            if (modified_token == NULL) 
-            {
-                return NULL; 
-            }
-
-            int k = 0;
-            int l = 0;
-            while (l < token_length) 
-            {
-                if (current_token[l] != '\'') 
-                {
-                    modified_token[k] = current_token[l];
-                    k++;
-                }
-                l++;
-            }
-            modified_token[k] = '\0';
-            str_s[j] = modified_token;
-            j++;
-        } else 
-        {
-            str_s[j] = strdup(current_token);
-            if (str_s[j] == NULL) 
-            {
-                return NULL; 
-            }
-            j++;
-        }
-        i++;
-    }
-    str_s[j] = NULL;
-    return str_s;
 }
 
 

@@ -6,15 +6,15 @@
 #    By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/19 19:41:33 by haarab           ###   ########.fr        #
+#    Updated: 2023/09/24 17:46:23 by haarab           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 #CFLAGS = -g -fsanitize=address
 LDFLAGS = -lreadline 
-RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline
-RLOFLGS = -I/Users/emohamed/.brew/opt/readline/include
+RLFLGS = -L/Users/haarab/.brew/opt/readline/lib -lreadline
+RLOFLGS = -I/Users/haarab/.brew/opt/readline/include
 
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)

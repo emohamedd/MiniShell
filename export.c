@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/23 08:29:05 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/24 10:06:27 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,89 +29,6 @@ int check_key(char *args)
 		return (1);
 	return (0);
 }
-
-
-// int check_equal(char *args)
-// {
-// 	if (args[0] == '=' && args[1] == '\0')
-// 	{
-// 		printf ("export: `%s' : not a valid identifier\n", args);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
-// char *skip_quots(char *str)
-// {
-// 	int i = 0;
-// 	int j = 0;
-// 	if (!str)
-// 		return (NULL);
-// 	while(str[i])
-// 	{
-// 		if (str[i] == 34 || str[i] == 39)
-// 			j++;
-// 		i++;
-// 	}
-// 	char *ptr = malloc(sizeof(char *) * ft_strlen(str) - j + 1);
-// 	i = 0;
-// 	j = 0;
-// 	while(str[i])
-// 	{
-// 		if (str[i] != 34 && str[i] != 39)
-// 		{
-// 			ptr[j] = str[i];
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	ptr[j] = '\0';
-// 	free(str);
-// 	return (ptr);
-// }
-
-// char *skip_quotsinquots(char *str)
-// {
-// 	int i = 0;
-// 	int j = 0;
-// 	if (!str)
-// 		return (NULL);
-// 	char *ptr = NULL;
-// 	while (str[i])
-// 	{
-// 		if (str[i] != 34 && str[i] != 39)
-// 		{
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	// while (str[x])
-// 	// {
-// 	// 	if (str[x] != 39)
-// 	// 	{
-// 	// 		z++;
-// 	// 	}
-// 	// 	x++;
-// 	// }
-// 	ptr = malloc(sizeof(char) * ft_strlen(str) - j + 1);
-// 	// if (!ptr)
-// 	// 	return (NULL);
-// 	// // printf("%s == %d\n", str, k);
-// 	int k = ft_strlen(str) - j;
-// 	i = 0;
-// 	j = 0;
-// 	while(i < k)
-// 	{
-// 		if (str[i] != 34 && str[i] != 39)
-// 		{
-// 			ptr[j] = str[i];
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	ptr[j] = '\0';
-// 	return (ptr);
-// }
 
 int check_doubelcouts(char *args)
 {
@@ -268,12 +185,6 @@ void export_cmd(t_vars *vars, char *args, char **str)
 			vars->env_number++;
 		}
 	}
-	// if (ft_isalpha(args[0]) != 1 || check_equal(args) == 1)
-	// {
-	// 	printf("minishell: not a valid identifier\n");
-	// 	vars->exit_status = 1;
-	// }
-	
 	free(tmp);
 	
 }

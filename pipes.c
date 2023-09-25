@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:35:50 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/23 12:46:50 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/24 19:36:10 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,19 @@ void pipe_commands(t_vars *vars, int i, pid_t  *childs)
 		return ;
 	
 	path = get_path(vars, vars->cmds[i].cmd);
+	if (path == NULL)
+	{
+		ft_putstr_fd("minishell : ", 2);
+		ft_putstr_fd(vars->cmds[i].cmd, 2);
+		ft_putstr_fd(": command not found\n", 2);
+		vars->exit_status = 127;
+		return ;
+	}
 	childs[i] = fork();
 	if (childs[i] < 0)
 		return ;
 	else if (childs[i] == 0)
 	{
-		if (path == NULL)
-		{
-			ft_putstr_fd("minishell : ", 2);
-			ft_putstr_fd(vars->cmds[0].cmd, 2);
-			ft_putstr_fd(": command not found\n", 2);
-			exit (127);
-		}
 		if (i == vars->n_commandes - 1) {
 			dup2(prev_fd, 0);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:56:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/23 01:20:24 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/24 11:37:17 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void  fill_commands(char **ptr, t_vars *vars)
 		// printf()
 		i++;
 	}
-	
 	vars->cmds = malloc(sizeof(t_cmds) * (l + 1));
 	i = 0;
 	int h = 0;

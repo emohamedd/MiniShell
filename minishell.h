@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/23 12:33:20 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:01:22 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 #include <unistd.h>
 #include <string.h>
 #include "libft/libft.h"
-#include "get_next_line.h"
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -81,9 +80,9 @@ typedef struct s_vars
 	
 }	t_vars;
 
-
-	void cmd_exit(char **str, t_vars *vars);
-	void	has_redirections(t_vars *vars, int i);
+	int 	is_builtin(char *cmd);
+	void 	cmd_exit(char **str, t_vars *vars);
+	int		has_redirections(t_vars *vars, int i);
 	int		ft_strcmp(char *s1, char *s2);
     char 	**clear_cmds_arg_from_direct(char **args);
     char 	*read_input();
@@ -120,7 +119,17 @@ typedef struct s_vars
     void	fell_env_struct(t_vars *vars);
     char	*ft_getenv(char *key, t_vars *vars);
     void	pipe_red(t_vars *vars, int i, pid_t *childs);
-	void	sigintHandler2();
-	char**  expand_s_quotes(char** tokens);
-
+	void 	ft_builtins(t_vars *vars, int i, char **str, pid_t *childs);
+	void 	cmd_builtins(t_vars *vars, int i, char **str);
+	void 	is_notbuiltins(t_vars *vars, int i, pid_t *childs);
+	int 	syntax_err(char **args, t_vars *vars);
+	int		command_notfound(char **args, t_vars *vars);
+	int 	syntax_errors(char **args, t_vars *vars);
+	
 #endif
+
+
+
+
+
+// l's' .

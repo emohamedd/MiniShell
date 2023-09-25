@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   symbol_exec.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:13:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/21 22:01:56 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/24 10:09:55 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,5 @@ void pipe_red(t_vars *vars, int i, pid_t *childs)
 	if (vars->cmds[i].is_nex_pip)
 	{
 		pipe_commands(vars, i, childs);
-		
-	// 	// int fdin = dup(STDIN_FILENO);
-	// 	// int fdou = dup(STDOUT_FILENO);
-	// 	pipe_commands(vars, i, childs);
-	// 	// dup2(fdin, 0);
-	// 	// dup2(fdou, 1);
-	// 	// close(fdin);
-	// 	// close (fdou);
-	// }
 	}
 }
-// 	else if (!vars->cmds[i].is_nex_pip)
-// 	{
-// 		exec_cmds(vars, i);
-// 	}
-// }
