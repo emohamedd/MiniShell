@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/25 15:55:32 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:39:12 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int c, char **v, char **env)
 	fell_env_struct(&vars);
 	vars.env_number = count_argiment(vars.envp);
 	tokens = NULL;
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
 	signal(SIGINT, siginthandler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -52,7 +52,7 @@ int	main(int c, char **v, char **env)
 		}
 		// syn_err(str, &vars);
 		str = make_token(trimed);
-		rl_catch_signals = 0;
+		// rl_catch_signals = 0;
 		if (str)
 		{
 			tokens = allocat_token(str, &vars);
