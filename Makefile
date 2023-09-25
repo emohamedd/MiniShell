@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
+#    By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/25 12:53:17 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/25 20:41:14 by haarab           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 #CFLAGS = -g -fsanitize=address
 LDFLAGS = -lreadline 
-RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline
-RLOFLGS = -I/Users/emohamed/.brew/opt/readline/include
+RLFLGS = -L/Users/haarab/.brew/opt/readline/lib -lreadline
+RLOFLGS = -I/Users/haarab/.brew/opt/readline/include
 
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)

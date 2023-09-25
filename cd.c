@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/25 15:28:52 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:51:06 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	run_cd(char **args, t_vars *vars)
+void run_cd(char **args, t_vars *vars)
 {
 	if (args[1])
 	{

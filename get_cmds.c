@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:57:54 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/25 12:10:25 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:47:00 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,16 @@ char	**get_cmds(t_info **info)
 	dst = malloc(sizeof(char *) * ((*info)->size + 1));
 	while (i < len)
 	{
-		dst[i] = info[i]->content;
+		dst[i] =  info[i]->content;
 		i++;
 	}
 	dst[i] = 0;
 	return (dst);
 }
+
+// int count = 0;
+// while (cmds[count]) {
+// 	printf("arg => %s\n", cmds[count]);
+// 	count++;
+// }
+// exit(0);

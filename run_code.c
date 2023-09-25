@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_code.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/25 15:54:22 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:50:02 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,29 +97,24 @@ int	ft_error(char **str)
 	i = 0;
 	while (str[i])
 	{
-		j = 0;
-		a = 0;
-		b = 0;
-		c = 0;
-		d = 0;
-		e = 0;
-		f = 0;
-		h = 0;
+		int j = 0;
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		int d = 0;
 		while (str[i][j])
 		{
 			if (str[i][j] == '<')
 				a++;
 			if (str[i][j] == '>')
 				b++;
-			if (str[i][j] == '|')
+			if (str[i][j] == 39)
 				c++;
-			if (str[i][j] == '|' || str[i][j] == '<')
+			if (str[i][j] == 34)
 				d++;
-			if (str[i][j] == '|' || str[i][j] == '>')
-				e++;
 			j++;
 		}
-		if (a > 2 || b > 2 || c > 1 || d > 1 || e > 1 || f > 1)
+		if (a > 2 || b > 2 || c % 2 != 0 || d % 2 != 0)
 			return (1);
 		i++;
 	}
@@ -140,8 +135,9 @@ int	syntax_errors(char **args, t_vars *vars)
 		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<",
 					args[i + 1], ft_strlen(args[i + 1]))))
 			j++;
-		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">",
-					args[i + 1], ft_strlen(args[i + 1]))))
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">", args[i + 1], ft_strlen(args[i + 1]))))
 			j++;
 		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<<",
 					args[i + 1], ft_strlen(args[i + 1]))))
@@ -164,78 +160,48 @@ int	syntax_errors(char **args, t_vars *vars)
 		if (!ft_strncmp("<<", args[i], ft_strlen(args[i])) && (!ft_strncmp("|",
 					args[i + 1], ft_strlen(args[i + 1]))))
 			j++;
-		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && args[i + 1] == NULL)
+		if (!ft_strncmp(">>", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
 			j++;
-		if (!ft_strncmp("|", args[0], ft_strlen(args[0])))
+		if (!ft_strncmp("|", args[0], ft_strlen(args[0])) && args[1] != NULL)
 			j++;
 		i++;
 	}
 	return (j);
 }
 
-void	run(char *cmd, char **args, t_vars *vars, char **str)
+int	command_notfound(char **args, t_vars *vars)
 {
-	int		i;
-	int		status;
-	pid_t	*childs;
-	int		fd[2];
+	int i = 0;
+	int j = 0;
+	while (args[i])
+	{
+		if (!ft_strncmp("''", args[0], ft_strlen(args[0])) && (!ft_strncmp("|", args[1], ft_strlen(args[1]))))
+			j++;
+		if (!ft_strncmp("""", args[0], ft_strlen(args[0])) && (!ft_strncmp("|", args[1], ft_strlen(args[1]))))
+			j++;
+		i++;
+	}
+	return (j);
+}
 
+
+void 	run(char *cmd, char **args, t_vars *vars, char **str)
+{
+	if (syntax_errors(args, vars))
+		return ;
 	fill_commands(args, vars);
-	i = 0;
-	childs = malloc(sizeof(int) * vars->n_commandes);
+	int i = 0;
+	int status;
+	pid_t *childs = malloc(sizeof(int) * vars->n_commandes);
 	while (i < vars->n_commandes)
 	{
 		if (is_builtin(vars->cmds[i].cmd))
 		{
-			if (vars->cmds[i].has_redirections)
-			{
-				if (has_redirections(vars, i))
-					return ;
-			}
-			if (vars->cmds[i].is_nex_pip)
-			{
-				pipe(fd);
-				childs[i] = fork();
-				if (childs[i] == 0)
-				{
-					dup2(fd[1], 1);
-					close(fd[0]);
-					close(fd[1]);
-					cmd_builtins(vars, i, str);
-					exit(0);
-				}
-				else
-				{
-					close(fd[1]);
-					dup2(fd[0], 0);
-					close(fd[0]);
-				}
-				wait(&childs[i]);
-			}
-			else
-			{
-				cmd_builtins(vars, i, str);
-			}
+			ft_builtins(vars, i, str, childs);
 		}
 		else
 		{
-			if (vars->cmds[i].has_redirections)
-			{
-				if (has_redirections(vars, i))
-					return ;
-			}
-			if (vars->n_commandes > 1)
-			{
-				while (i < vars->n_commandes)
-				{
-					pipe_commands(vars, i, childs);
-					i++;
-				}
-			}
-			if (vars->n_commandes == 1 && i == 0)
-			{
-				exec_cmds(vars, i);
-			}
+			is_notbuiltins(vars, i, childs);
 		}
 		i++;
 	}

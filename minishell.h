@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/25 16:04:37 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:50:30 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,9 @@ void		fell_env_struct(t_vars *vars);
 void		fell_env_struct(t_vars *vars);
 char		*ft_getenv(char *key, t_vars *vars);
 void		pipe_red(t_vars *vars, int i, pid_t *childs);
+void		cmd_builtins(t_vars *vars, int i, char **str);
+int			syntax_errors(char **args, t_vars *vars);
+void 		is_notbuiltins(t_vars *vars, int i, pid_t *childs);
+void 		ft_builtins(t_vars *vars, int i, char **str, pid_t *childs);
 
 #endif
