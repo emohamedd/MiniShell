@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/26 15:48:45 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:41:30 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,6 +382,12 @@ t_info	**allocat_token(char **s, t_vars *vars)
 			inf[i]->content = ft_strdup(var);
 			inf[i]->type = "ENV_EXPANDED";
 			inf[i]->lenght = ft_strlen(inf[i]->content);
+		}
+		else if (inf[i]->content[0] == '$' && inf[i]->content[1] == '?')
+		{
+			inf[i]->content = ft_itoa(vars->exit_status); // Convert exit status to a string
+    		inf[i]->type = "EXIT_STATUS"; // Set the type accordingly
+    		inf[i]->lenght = ft_strlen(inf[i]->content);
 		}
 		else if (inf[i]->content[0] == '<')
 			inf[i]->type = "RDIN";

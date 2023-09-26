@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:49:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/25 15:29:22 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:33:23 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	run_echo(char **args, t_vars *vars)
 			j = 0;
 			while (args[i][j])
 			{
-				if (args[i][j] == '$' && args[i][j + 1] == '?')
-				{
-					printf("%d", vars->exit_status);
-					j = j + 1;
-				}
-				else
+				// if (args[i][j] == '$' && args[i][j + 1] == '?')
+				// {
+				// 	printf("%d", vars->exit_status);
+				// 	j = j + 1;
+				// }
+				// else
 					printf("%c", args[i][j]);
 				j++;
 			}
