@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:56:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/26 01:37:34 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/26 22:51:10 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	fill_commands(char **ptr, t_vars *vars)
 	i = 0;
 	j = 0;
 	l = 1;
-	while (ptr[i])
+	while (ptr[i] && ptr[0])
 	{
 		if (ptr[i + 1] && (ft_strncmp("|", ptr[i + 1], ft_strlen(ptr[i + 1])) == 0))
 			l++;
@@ -76,7 +76,7 @@ void	fill_commands(char **ptr, t_vars *vars)
 		}
 		else
 			vars->cmds[i].has_redirections = 0;
-		if (ptr[b] && !ft_strncmp("|", ptr[b], ft_strlen(ptr[b])))
+		if (ptr[b] && ptr[b][0] != '\0' && (!ft_strncmp("|", ptr[b], ft_strlen(ptr[b]))))
 		{
 			vars->cmds[i].is_nex_pip = 1;
 			k++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_code.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/26 03:09:13 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/26 22:52:45 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,8 +167,8 @@ int	command_notfound(char **args, t_vars *vars)
 
 void 	run(char *cmd, char **args, t_vars *vars, char **str)
 {
-	if (syntax_err(args, vars))
-		return ;
+	// if (syntax_err(args, vars))
+	// 	return ;
 	fill_commands(args, vars);
 	int i = 0;
 	int status;
@@ -192,9 +192,7 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 	{
 		
 		if (is_builtin(vars->cmds[i].cmd))
-		{
 			ft_builtins(vars, i, str, childs);
-		}
 		else
 		{
 			is_notbuiltins(vars, i, childs);

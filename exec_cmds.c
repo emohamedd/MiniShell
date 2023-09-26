@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/26 03:25:37 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/26 17:39:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void exec_cmds(t_vars *vars, int i)
 	id = fork();
 	if (id == 0) 
 	{
-		// if (vars->here_fd)
-		// {
-		// 	dup2(vars->here_fd, 0);
-		// 	close(vars->here_fd);
-		// 	vars->here_fd = 0;
-		// }
+		if (vars->here_fd)
+		{
+			dup2(vars->here_fd, 0);
+			close(vars->here_fd);
+			vars->here_fd = 0;
+		}
 		if (path == NULL)
 		{
 			ft_putstr_fd("minishell : ", 2);

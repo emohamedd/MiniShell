@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:48:09 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/25 15:56:50 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:27:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_unset(char **args, t_vars *vars, int check)
 	key = args[check];
 	while (i < vars->env_number)
 	{
-		if (ft_strncmp(vars->env[i].key, key, ft_strlen(key) + 1) == 0)
+		if (ft_strncmp(vars->env[i].key, key, ft_strlen(key) + 1) == 0 )
 		{
 			while (i < vars->env_number)
 			{

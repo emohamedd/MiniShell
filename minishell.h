@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/26 03:09:53 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/26 22:23:16 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ char		**red_to_herdoc(char **tokens);
 char		*get_path(t_vars *vars, char *cmd);
 int			is_redirection(char *arg);
 char		*ft_getenv(char *key, t_vars *vars);
+char		**expand_quotes(char **tokens);
+char		**expand_s_quotes(char **tokens);
 char		**get_redirectinsv(int size, char **old_stack);
 char		**get_cmds(t_info **info);
 void		siginthandler(int signal);
