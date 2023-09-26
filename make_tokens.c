@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/25 20:41:08 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/26 15:48:45 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -361,6 +361,17 @@ t_info	**allocat_token(char **s, t_vars *vars)
 				}
 			}
 		}
+	if (inf[i]->content[0] == '\'' &&
+   		inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'' &&
+    	ft_strlen(inf[i]->content) > 2)
+		{
+
+    	trimmed_content = ft_strtrim(inf[i]->content, "'");
+    	inf[i]->content = ft_strdup(trimmed_content);
+    	inf[i]->type = "STR";
+    	inf[i]->lenght = ft_strlen(inf[i]->content);
+	}
+
 		else if ((inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1])))
 		{
 			var = ft_getenv(inf[i]->content + 1, vars);
