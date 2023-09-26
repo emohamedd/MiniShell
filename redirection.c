@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:42:46 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/25 15:52:55 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/26 01:37:28 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,13 @@ char	**get_files(int size, char **old_stack)
 	char	**stack;
 	int		suui; 
 	int		count; 
+
+	// int j = 0;
+	// while (old_stack[j])
+	// {
+	// 	printf ("opera_derec ==== %s\n", old_stack[j]);	
+	// 	j++;
+	// }
 
 	suui = 0;
 	count = 0;

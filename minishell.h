@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/25 20:50:30 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/26 03:09:53 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char		*read_input(void);
 char		**ft_split(char const *s, char c);
 void		run(char *cmd, char **args, t_vars *vars, char **str);
 void		fell_env_struct(t_vars *vars);
-void		run_cd(char **args, t_vars *vars);
+void		run_cd(char **args, t_vars *vars, char *pwd);
 void		run_echo(char **args, t_vars *vars);
 void		export_cmd(t_vars *vars, char *args, char **str);
 void		check_unset(char **args, t_vars *vars, int check);
@@ -121,5 +121,8 @@ void		cmd_builtins(t_vars *vars, int i, char **str);
 int			syntax_errors(char **args, t_vars *vars);
 void 		is_notbuiltins(t_vars *vars, int i, pid_t *childs);
 void 		ft_builtins(t_vars *vars, int i, char **str, pid_t *childs);
-
+int			command_notfound(char **args, t_vars *vars);
+int 		syntax_err(char **args, t_vars *vars);
+void		change_pwd(t_vars *vars, char *pwd);
+void		change_oldpwd(t_vars *vars, char *pwd);
 #endif

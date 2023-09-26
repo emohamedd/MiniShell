@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:56:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/25 20:39:43 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/26 01:37:34 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@ void	fill_commands(char **ptr, t_vars *vars)
 		while (ptr[b] && ft_strncmp("|", ptr[b], ft_strlen(ptr[b])))
 		{
 			if (is_redirection(ptr[b]))
+			{
 				size_of_direc++;
+			}
 			vars->cmds[i].cmds_args[k] = ptr[b];
 			b++;
 			k++;
 		}
+		// printf ("size_of_direc ==== %d\n", size_of_direc); 	
 		vars->cmds[i].cmds_args[k] = 0;
 		if (size_of_direc > 0)
 		{
@@ -84,4 +87,16 @@ void	fill_commands(char **ptr, t_vars *vars)
 		i++;
 	}
 	vars->n_commandes = l;
+	// i = 0;
+	// if (vars->cmds[i].has_redirections)
+	// {
+	// 	int j = 0;
+	// 	printf ("opera_derec === %s\n", vars->cmds[i].opera_derec[j]);
+	// 	while (vars->cmds[i].opera_derec[j])
+	// 	{
+	// 		printf ("file_derec === %s\n", vars->cmds[i].file_derec[j]);
+	// 		j++;
+	// 	}
+	// }
+	// exit (1);
 }

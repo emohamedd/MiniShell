@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/25 20:40:46 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/25 23:09:12 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ int	has_redirections(t_vars *vars, int i)
 	int		fd;
 	char	*base_filename;
 	char	*heredoc_delimiter;
-
-	j = 0;
+	
 	fd = 0;
 	base_filename = "emohamed";
+
 	if (vars->cmds[i].has_redirections)
 	{
+		j = 0;
 		while (vars->cmds[i].opera_derec[j])
 		{
 			if (!ft_strncmp(vars->cmds[i].opera_derec[j], ">", ft_strlen(">")
