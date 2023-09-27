@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:56:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 10:25:53 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:10:23 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ void	fill_commands(char **ptr, t_vars *vars)
 		while (ptr[b] && ft_strncmp("|", ptr[b], ft_strlen(ptr[b])))
 		{
 			if (is_redirection(ptr[b]))
-			{
 				size_of_direc++;
-			}
 			vars->cmds[i].cmds_args[k] = ptr[b];
 			b++;
 			k++;
@@ -76,7 +74,7 @@ void	fill_commands(char **ptr, t_vars *vars)
 		}
 		else
 			vars->cmds[i].has_redirections = 0;
-		if (ptr[b] && ptr[b][0] != '\0' && (!ft_strncmp("|", ptr[b], ft_strlen(ptr[b]))))
+		if (ptr[b] && (!ft_strncmp("|", ptr[b], ft_strlen(ptr[b]))))
 		{
 			vars->cmds[i].is_nex_pip = 1;
 			k++;
@@ -87,16 +85,4 @@ void	fill_commands(char **ptr, t_vars *vars)
 		i++;
 	}
 	vars->n_commandes = l;
-	// i = 0;
-	// if (vars->cmds[i].has_redirections)
-	// {
-	// 	int j = 0;
-	// 	printf ("opera_derec === %s\n", vars->cmds[i].opera_derec[j]);
-	// 	while (vars->cmds[i].opera_derec[j])
-	// 	{
-	// 		printf ("file_derec === %s\n", vars->cmds[i].file_derec[j]);
-	// 		j++;
-	// 	}
-	// }
-	// exit (1);
 }

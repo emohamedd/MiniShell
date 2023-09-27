@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmds.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 10:39:56 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:31:31 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,12 @@ void exec_cmds(t_vars *vars, int i)
 		}
 		// execve(path, expand, vars->envp);
 		if (!execve(path, vars->cmds[i].cmds_args, vars->envp))
+		{
 			ft_putstr_fd("minishell: No such file or directory\n", 2);
+			exit(127);
+		}
 		// perror("execve");
-		exit(127);
 	}
-	wait(&vars->exit_status);
-	vars->exit_status = WEXITSTATUS(vars->exit_status);
+	wait(&exit_status);
+	exit_status = WEXITSTATUS(exit_status);
 }

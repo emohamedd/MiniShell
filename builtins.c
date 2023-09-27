@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:44:19 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/26 22:51:55 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:43:50 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void ft_builtins(t_vars *vars, int i, char **str, pid_t *childs)
 	if (vars->cmds[i].has_redirections)
 		if (has_redirections(vars, i))
 			return ;
-	if (vars->cmds[i].is_nex_pip) {
-		// printf("dd => %d\n");
+	if (vars->cmds[i].is_nex_pip)
+	{
 		builtins_pipes(vars, i, str, childs);
 	}
 	else {

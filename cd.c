@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 10:52:13 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:07:22 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,27 @@ void run_cd(char **args, t_vars *vars, char *pwd)
 		if (chdir(args[1]) == -1)
 		{
 			ft_putendl_fd("minishell: No such file or directory", 2);
-			vars->exit_status = 1;
+			exit_status = 1;
 			return ;
 		}
-		if (ft_strncmp(args[1], "/", ft_strlen(args[1])) == 0 && vars->cmds[0].is_nex_pip)
+		if (vars->cmds[0].is_nex_pip)
 		{
-        	// chdir(args[1]);
-			chdir(ft_getenv("HOME", vars));
+			exit_status = 0;
 			return ;
 		}
 		change_oldpwd(vars, pwd);
-		vars->exit_status = 0;
+		exit_status = 0;
 	}
 	else if (!args[1])
 	{
 		if (!ft_getenv("HOME", vars))
 		{
 			ft_putendl_fd("minishell: cd: HOME not set", 2);
+			exit_status = 1;
 			return ;
 		}
 		chdir(ft_getenv("HOME", vars));
 		change_oldpwd(vars, pwd);
+		exit_status = 0;
 	}
 }

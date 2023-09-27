@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 10:15:21 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:34:27 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,19 +441,28 @@ char *expand_var(char *arg, t_vars *vars) {
 	char *dst3;
 	char *exp_value;
 
-	while (i < ft_strlen(arg)) {
-		if (arg[i] == '$' && !is_var_inside_sq(arg, i)) {
+	while (i < ft_strlen(arg)) 
+	{
+		if (arg[i] == '$' && !is_var_inside_sq(arg, i)) 
+		{
 			dst1 = ft_strndup(arg, i);
-			if (arg[i + 1] && (arg[i + 1] == '?')) {
+			if (arg[i + 1] && (arg[i + 1] == '?')) 
+			{
 				i++;
-				exp_value = ft_itoa(vars->exit_status);
-			}else {				
+				exp_value = ft_itoa(exit_status);
+			
+			}
+			else 
+			{				
 				key = ft_strndup(&arg[i + 1], get_var_size(&arg[i + 1]));
 				exp_value = ft_getenv(key, vars);
-				if (!exp_value)
+				if (!exp_value) {
 					exp_value = "";
+				}
 			}
 			dst3 = arg + ((i + 1) + get_var_size(&arg[i + 1]));
+			if (!dst3)
+				dst3 = "";
 			dst2 = ft_strjoin(dst1, exp_value);
 			arg = ft_strjoin(dst2, dst3);
 			i = 0;
@@ -477,79 +486,38 @@ t_info	**allocat_token(char **s, t_vars *vars)
 		printf("Err\n");
 		exit(1);
 	}
-	while (s[i])
+	char *tmp;
+	int c = 0;
+	int size = 0;
+	while (s[c])
 	{
-		inf[i] = malloc(sizeof(t_info));
-		inf[i]->content = s[i];
-		inf[i]->size = lenght_of_the_2d(s);
-		inf[i]->content = expand_var(inf[i]->content, vars);
-		
-		// if (inf[i]->content[0] == '\''
-		// 	&& inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'')
-		// {
-		// 	if (inf[i]->content[1] == '\''
-		// 		&& inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'')
-		// 	{
-		// 		trimmed_content = ft_strtrim(inf[i]->content, "\'");
-		// 		if (ft_strlen(trimmed_content) > 0)
-		// 		{
-		// 			if (trimmed_content[0] == '$'
-		// 				&& ft_isalpha(trimmed_content[1]))
-		// 			{
-		// 				var = ft_getenv(trimmed_content + 1, vars);
-		// 				if (!var)
-		// 				{
-		// 					return (0);
-		// 				}
-		// 				inf[i]->content = ft_strdup(var);
-		// 				inf[i]->type = "ENV_EXPANDED";
-		// 				inf[i]->lenght = ft_strlen(inf[i]->content);
-		// 			}
-		// 		}
-		// 	}
-		// }
-	// if (inf[i]->content[0] == '\'' &&
-   	// 	inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'' &&
-    // 	ft_strlen(inf[i]->content) > 2)
-	// 	{
-
-    // 	trimmed_content = ft_strtrim(inf[i]->content, "'");
-    // 	inf[i]->content = ft_strdup(trimmed_content);
-    // 	inf[i]->type = "STR";
-    // 	inf[i]->lenght = ft_strlen(inf[i]->content);
-	// }
-
-	// 	else if ((inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1])))
-	// 	{
-	// 		var = ft_getenv(inf[i]->content + 1, vars);
-	// 		if (!var)
-	// 		{
-	// 			return (0);
-	// 		}
-	// 		inf[i]->content = ft_strdup(var);
-	// 		inf[i]->type = "ENV_EXPANDED";
-	// 		inf[i]->lenght = ft_strlen(inf[i]->content);
-	// 	}
-	// 	else if (inf[i]->content[0] == '$' && inf[i]->content[1] == '?')
-	// 	{
-	// 		inf[i]->content = ft_itoa(vars->exit_status);
-    // 		inf[i]->type = "EXIT_STATUS"; 
-    // 		inf[i]->lenght = ft_strlen(inf[i]->content);
-	// 	}
-		 if (inf[i]->content[0] == '<')
-			inf[i]->type = "RDIN";
-		else if (inf[i]->content[0] == '>')
-			inf[i]->type = "RDOUT";
-		else if (inf[i]->content[0] == '|')
-			inf[i]->type = "PIPE";
-		else if (inf[i]->content[0] == '\"')
-			inf[i]->type = "DBCOTE";
-		if (inf[i]->content[0] == '\'')
-			inf[i]->type = "SGCOTE";
-		else if (is_char(s[i]))
-			inf[i]->type = "STR";
-		inf[i]->lenght = ft_strlen(inf[i]->content);
-		i++;
+		tmp =  expand_var(s[c], vars);
+		if (*tmp) {
+			inf[i] = malloc(sizeof(t_info));
+			inf[i]->content = tmp;
+			// if (inf[i]->content[0] == '<')
+			// 	inf[i]->type = "RDIN";
+			// else if (inf[i]->content[0] == '>')
+			// 	inf[i]->type = "RDOUT";
+			// else if (inf[i]->content[0] == '|')
+			// 	inf[i]->type = "PIPE";
+			// else if (inf[i]->content[0] == '\"')
+			// 	inf[i]->type = "DBCOTE";
+			// if (inf[i]->content[0] == '\'')
+			// 	inf[i]->type = "SGCOTE";
+			// else if (is_char(s[c]))
+			// 	inf[i]->type = "STR";
+			inf[i]->lenght = ft_strlen(inf[i]->content);
+			i++;
+		}else {
+			size++;
+		}
+		c++;
+	}
+	int count = 0;
+	while (count < i) {
+		inf[count]->size = i;
+		count++;
 	}
 	return (inf);
 }

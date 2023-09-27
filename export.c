@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/25 20:39:38 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 12:07:22 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 					printf("\"%s\"""", vars->env[count].value);
 				}
 				printf("\n");
-				vars->exit_status = 0;
 			}
 			count++;
 		}
@@ -109,7 +108,7 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 	if (check_key(var_) == 0)
 	{
 		printf("minishell: not a valid identifier\n");
-		vars->exit_status = 1;
+		exit_status = 1;
 	}
 	while (count < vars->env_number)
 	{
@@ -119,11 +118,13 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 			if (ft_strchr(args, '=') == NULL)
 			{
 				vars->env[count].value = vars->env[count].value;
+				exit_status = 0;
 				return ;
 			}
 			if (ft_strchr(args, '=') != NULL)
 			{
 				vars->env[count].value = ft_strchr(args, '=') + 1;
+				exit_status = 0;
 				return ;
 			}
 			j = 0;
@@ -133,6 +134,7 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 						ft_strlen(vars->env[j].key) + 1))
 				{
 					vars->env[count].value = vars->env[j].value;
+					exit_status = 0;
 					return ;
 				}
 				j++;
@@ -169,10 +171,12 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 				{
 					vars->env[count].is_equal = 1;
 					vars->env[count].value = value;
+					exit_status = 0;
 				}
 				if (!ft_strchr(args, '=') && p == 1)
 				{
 					vars->env[count].key = args;
+					exit_status = 0;
 				}
 			}
 			else if (ft_strchr(args, '$'))
@@ -188,6 +192,7 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 						{
 							vars->env[count].value = vars->env[j].value;
 							vars->env[count].is_equal = 1;
+							exit_status = 0;
 						}
 					}
 					j++;
@@ -195,6 +200,7 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 				if (!ft_strchr(args, '$') && p == 1)
 				{
 					vars->env[count].key = args;
+					exit_status = 0;
 				}
 			}
 			vars->env_number++;
