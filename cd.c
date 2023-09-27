@@ -6,12 +6,11 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 16:03:38 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 16:30:46 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	change_oldpwd(t_vars *vars, char *pwd)
 {

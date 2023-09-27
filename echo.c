@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:49:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 15:35:10 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 16:32:07 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,18 @@ void	run_echo(char **args, t_vars *vars)
 			check = 1;
 			i++;
 		}
-		if (args[i] && check_n(args[i]) == 1)
-			exit_status = 0;
 		while (args[i])
 		{
 			j = 0;
 			while (args[i][j])
 			{
-				printf("%c", args[i][j]);
+				if (args[i][j] == '$' && args[i][j + 1] == '?')
+				{
+					printf("%d", exit_status);
+					j = j + 1;
+				}
+				else
+					printf("%c", args[i][j]);
 				j++;
 			}
 			if (args[i] != NULL && args[i + 1] != NULL)

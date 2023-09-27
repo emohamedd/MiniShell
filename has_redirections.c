@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 15:49:34 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 16:32:07 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	has_redirections(t_vars *vars, int i)
 					dup2(fd, 1);
 					close(fd);
 				}
-				else 
+				else
 				{
 					printf("syntax error near unexpected token\n");
 					exit_status = 258;

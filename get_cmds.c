@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:57:54 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 15:28:32 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/25 20:47:00 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ char	**get_cmds(t_info **info)
 		i++;
 	}
 	dst[i] = 0;
-	dst = expand_quotes(dst);
-	dst = expand_s_quotes(dst);
 	return (dst);
 }
 

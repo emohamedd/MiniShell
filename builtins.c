@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:44:19 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 12:43:50 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/26 18:40:43 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ void ft_builtins(t_vars *vars, int i, char **str, pid_t *childs)
 	{
 		builtins_pipes(vars, i, str, childs);
 	}
-	else {
+	else
 		cmd_builtins(vars, i, str);
-	}
 }
 
 void is_notbuiltins(t_vars *vars, int i, pid_t *childs)
@@ -57,6 +56,6 @@ void is_notbuiltins(t_vars *vars, int i, pid_t *childs)
 	}
 	if (vars->n_commandes > 1)
 		pipe_commands(vars, i, childs);
-	if (vars->n_commandes == 1 && i == 0)
+	else if (vars->n_commandes == 1 && i == 0)
 		exec_cmds(vars, i);
 }

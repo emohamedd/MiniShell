@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:33:44 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 13:57:01 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 16:40:31 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	env_cmd(t_vars *vars)
 			printf("%s", vars->env[i].key);
 			printf("=");
 			printf("%s\n", vars->env[i].value);
-			exit_status = 0;
 		}
 		i++;
 	}
