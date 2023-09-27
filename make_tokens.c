@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 18:25:47 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 20:55:16 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ char	**split(char *s, char *delimiters)
 	char	**new_tokens;
 
 	max_tokens = ft_strlen(s) + 1;
-	// tokens = (char **)malloc(max_tokens * sizeof(char *));
-	tokens = ft_malloc((max_tokens * sizeof(char *)), NULL, 0, NULL);
+	tokens = (char **)malloc(max_tokens * sizeof(char *));
 	if (!tokens)
 	{
 		printf("allocation err\n");
@@ -121,8 +120,7 @@ char	**split(char *s, char *delimiters)
 				if (token_count >= max_tokens)
 				{
 					max_tokens *= 2;
-					// new_tokens = (char **)malloc(max_tokens * sizeof(char *));
-					new_tokens = ft_malloc((max_tokens * sizeof(char *)), NULL, 0, NULL);
+					new_tokens = (char **)malloc(max_tokens * sizeof(char *));
 					if (!new_tokens)
 					{
 						printf("allocation err\n");
@@ -137,9 +135,8 @@ char	**split(char *s, char *delimiters)
 					free(tokens);
 					tokens = new_tokens;
 				}
-				// tokens[token_count] = (char *)malloc((end - start + 1)
-				// 		* sizeof(char));
-				tokens[token_count] = ft_malloc(((end - start + 1) * sizeof(char)), NULL, 0, NULL);
+				tokens[token_count] = (char *)malloc((end - start + 1)
+						* sizeof(char));
 				if (!tokens[token_count])
 				{
 					printf("allocation err\n");
@@ -154,8 +151,7 @@ char	**split(char *s, char *delimiters)
 				if (token_count >= max_tokens)
 				{
 					max_tokens *= 2;
-					// new_tokens = (char **)malloc(max_tokens * sizeof(char *));
-					new_tokens = ft_malloc((max_tokens * sizeof(char *)), NULL, 0, NULL);
+					new_tokens = (char **)malloc(max_tokens * sizeof(char *));
 					if (!new_tokens)
 					{
 						printf("allocation err\n");
@@ -170,8 +166,7 @@ char	**split(char *s, char *delimiters)
 					free(tokens);
 					tokens = new_tokens;
 				}
-				// tokens[token_count] = (char *)malloc(2 * sizeof(char));
-				tokens[token_count] = ft_malloc((2 * sizeof(char)), NULL, 0, NULL);
+				tokens[token_count] = (char *)malloc(2 * sizeof(char));
 				if (!tokens[token_count])
 				{
 					printf("allocation err\n");
@@ -194,8 +189,7 @@ char	**split(char *s, char *delimiters)
 		if (token_count >= max_tokens)
 		{
 			max_tokens *= 2;
-			// new_tokens = (char **)malloc(max_tokens * sizeof(char *));
-			new_tokens = ft_malloc((max_tokens * sizeof(char *)), NULL, 0, NULL);
+			new_tokens = (char **)malloc(max_tokens * sizeof(char *));
 			if (!new_tokens)
 			{
 				printf("allocation err\n");
@@ -210,8 +204,7 @@ char	**split(char *s, char *delimiters)
 			free(tokens);
 			tokens = new_tokens;
 		}
-		// tokens[token_count] = (char *)malloc((end - start + 1) * sizeof(char));
-		tokens[token_count] = ft_malloc(((end - start + 1) * sizeof(char)), NULL, 0, NULL);
+		tokens[token_count] = (char *)malloc((end - start + 1) * sizeof(char));
 		if (!tokens[token_count])
 		{
 			printf("allocation err\n");
@@ -247,8 +240,7 @@ char	**expand_quotes(char **tokens)
 		}
 		i++;
 	}
-	// expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char *));
-	expanded_tokens = ft_malloc(((i + num_quotes + 1) * sizeof(char *)), NULL, 0, NULL);
+	expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char *));
 	if (expanded_tokens == NULL)
 	{
 		return (NULL);
@@ -261,8 +253,7 @@ char	**expand_quotes(char **tokens)
 		if (ft_strchr(current_token, '\"'))
 		{
 			token_length = ft_strlen(current_token);
-			// modified_token = malloc(token_length * sizeof(char));
-			modified_token = ft_malloc((token_length * sizeof(char)), NULL, 0, NULL);
+			modified_token = malloc(token_length * sizeof(char));
 			if (modified_token == NULL)
 			{
 				return (NULL);
@@ -299,7 +290,7 @@ char	**expand_quotes(char **tokens)
 
 char	**expand_s_quotes(char **tokens)
 {
-		int		i;
+	int		i;
 	int		num_quotes;
 	char	**expanded_tokens;
 	int		j;
@@ -319,8 +310,7 @@ char	**expand_s_quotes(char **tokens)
 		}
 		i++;
 	}
-	// expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char *));
-	expanded_tokens = ft_malloc(((i + num_quotes + 1) * sizeof(char *)), NULL, 0, NULL);
+	expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char *));
 	if (expanded_tokens == NULL)
 	{
 		return (NULL);
@@ -333,8 +323,7 @@ char	**expand_s_quotes(char **tokens)
 		if (ft_strchr(current_token, '\''))
 		{
 			token_length = ft_strlen(current_token);
-			// modified_token = malloc(token_length * sizeof(char));
-			modified_token = ft_malloc((token_length * sizeof(char)), NULL, 0, NULL);
+			modified_token = malloc(token_length * sizeof(char));
 			if (modified_token == NULL)
 			{
 				return (NULL);
@@ -404,8 +393,7 @@ char	*ft_strndup(char const *str, size_t max)
 	char	*dst;
 
 	index = 0;
-	// dst = malloc(sizeof(char) * (max + 1));
-	dst = ft_malloc((sizeof(char) * (max + 1)), NULL, 0, NULL);
+	dst = malloc(sizeof(char) * (max + 1));
 	if (!dst)
 	{
 		return (0);
@@ -453,28 +441,19 @@ char *expand_var(char *arg, t_vars *vars) {
 	char *dst3;
 	char *exp_value;
 
-	while (i < ft_strlen(arg)) 
-	{
-		if (arg[i] == '$' && !is_var_inside_sq(arg, i)) 
-		{
+	while (i < ft_strlen(arg)) {
+		if (arg[i] == '$' && !is_var_inside_sq(arg, i)) {
 			dst1 = ft_strndup(arg, i);
-			if (arg[i + 1] && (arg[i + 1] == '?')) 
-			{
+			if (arg[i + 1] && (arg[i + 1] == '?')) {
 				i++;
-				exp_value = ft_itoa(exit_status);
-			
-			}
-			else 
-			{				
+				exp_value = ft_itoa(vars->exit_status);
+			}else {				
 				key = ft_strndup(&arg[i + 1], get_var_size(&arg[i + 1]));
 				exp_value = ft_getenv(key, vars);
-				if (!exp_value) {
+				if (!exp_value)
 					exp_value = "";
-				}
 			}
 			dst3 = arg + ((i + 1) + get_var_size(&arg[i + 1]));
-			if (!dst3)
-				dst3 = "";
 			dst2 = ft_strjoin(dst1, exp_value);
 			arg = ft_strjoin(dst2, dst3);
 			i = 0;
@@ -492,46 +471,85 @@ t_info	**allocat_token(char **s, t_vars *vars)
 	char	*var;
 
 	i = 0;
-	// inf = malloc(sizeof(t_info *) * (lenght_of_the_2d(s) + 1));
-	inf = ft_malloc((sizeof(t_info *) * (lenght_of_the_2d(s) + 1)), NULL, 0, NULL);
+	inf = malloc(sizeof(t_info *) * (lenght_of_the_2d(s) + 1));
 	if (!inf)
 	{
 		printf("Err\n");
 		exit(1);
 	}
-	char *tmp;
-	int c = 0;
-	int size = 0;
-	while (s[c])
+	while (s[i])
 	{
-		tmp =  expand_var(s[c], vars);
-		if (*tmp) {
-			// inf[i] = malloc(sizeof(t_info));
-			inf[i] = ft_malloc((sizeof(t_info)), NULL, 0, NULL);
-			inf[i]->content = tmp;
-			// if (inf[i]->content[0] == '<')
-			// 	inf[i]->type = "RDIN";
-			// else if (inf[i]->content[0] == '>')
-			// 	inf[i]->type = "RDOUT";
-			// else if (inf[i]->content[0] == '|')
-			// 	inf[i]->type = "PIPE";
-			// else if (inf[i]->content[0] == '\"')
-			// 	inf[i]->type = "DBCOTE";
-			// if (inf[i]->content[0] == '\'')
-			// 	inf[i]->type = "SGCOTE";
-			// else if (is_char(s[c]))
-			// 	inf[i]->type = "STR";
-			inf[i]->lenght = ft_strlen(inf[i]->content);
-			i++;
-		}else {
-			size++;
-		}
-		c++;
-	}
-	int count = 0;
-	while (count < i) {
-		inf[count]->size = i;
-		count++;
+		inf[i] = malloc(sizeof(t_info));
+		inf[i]->content = s[i];
+		inf[i]->size = lenght_of_the_2d(s);
+		inf[i]->content = expand_var(inf[i]->content, vars);
+		
+		// if (inf[i]->content[0] == '\''
+		// 	&& inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'')
+		// {
+		// 	if (inf[i]->content[1] == '\''
+		// 		&& inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'')
+		// 	{
+		// 		trimmed_content = ft_strtrim(inf[i]->content, "\'");
+		// 		if (ft_strlen(trimmed_content) > 0)
+		// 		{
+		// 			if (trimmed_content[0] == '$'
+		// 				&& ft_isalpha(trimmed_content[1]))
+		// 			{
+		// 				var = ft_getenv(trimmed_content + 1, vars);
+		// 				if (!var)
+		// 				{
+		// 					return (0);
+		// 				}
+		// 				inf[i]->content = ft_strdup(var);
+		// 				inf[i]->type = "ENV_EXPANDED";
+		// 				inf[i]->lenght = ft_strlen(inf[i]->content);
+		// 			}
+		// 		}
+		// 	}
+		// }
+	// if (inf[i]->content[0] == '\'' &&
+   	// 	inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'' &&
+    // 	ft_strlen(inf[i]->content) > 2)
+	// 	{
+
+    // 	trimmed_content = ft_strtrim(inf[i]->content, "'");
+    // 	inf[i]->content = ft_strdup(trimmed_content);
+    // 	inf[i]->type = "STR";
+    // 	inf[i]->lenght = ft_strlen(inf[i]->content);
+	// }
+
+	// 	else if ((inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1])))
+	// 	{
+	// 		var = ft_getenv(inf[i]->content + 1, vars);
+	// 		if (!var)
+	// 		{
+	// 			return (0);
+	// 		}
+	// 		inf[i]->content = ft_strdup(var);
+	// 		inf[i]->type = "ENV_EXPANDED";
+	// 		inf[i]->lenght = ft_strlen(inf[i]->content);
+	// 	}
+	// 	else if (inf[i]->content[0] == '$' && inf[i]->content[1] == '?')
+	// 	{
+	// 		inf[i]->content = ft_itoa(vars->exit_status);
+    // 		inf[i]->type = "EXIT_STATUS"; 
+    // 		inf[i]->lenght = ft_strlen(inf[i]->content);
+	// 	}
+		 if (inf[i]->content[0] == '<')
+			inf[i]->type = "RDIN";
+		else if (inf[i]->content[0] == '>')
+			inf[i]->type = "RDOUT";
+		else if (inf[i]->content[0] == '|')
+			inf[i]->type = "PIPE";
+		else if (inf[i]->content[0] == '\"')
+			inf[i]->type = "DBCOTE";
+		if (inf[i]->content[0] == '\'')
+			inf[i]->type = "SGCOTE";
+		else if (is_char(s[i]))
+			inf[i]->type = "STR";
+		inf[i]->lenght = ft_strlen(inf[i]->content);
+		i++;
 	}
 	return (inf);
 }
