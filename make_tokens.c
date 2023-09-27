@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 16:35:30 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 18:25:47 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ char	**split(char *s, char *delimiters)
 	char	**new_tokens;
 
 	max_tokens = ft_strlen(s) + 1;
-	tokens = (char **)malloc(max_tokens * sizeof(char *));
+	// tokens = (char **)malloc(max_tokens * sizeof(char *));
+	tokens = ft_malloc((max_tokens * sizeof(char *)), NULL, 0, NULL);
 	if (!tokens)
 	{
 		printf("allocation err\n");
@@ -120,7 +121,8 @@ char	**split(char *s, char *delimiters)
 				if (token_count >= max_tokens)
 				{
 					max_tokens *= 2;
-					new_tokens = (char **)malloc(max_tokens * sizeof(char *));
+					// new_tokens = (char **)malloc(max_tokens * sizeof(char *));
+					new_tokens = ft_malloc((max_tokens * sizeof(char *)), NULL, 0, NULL);
 					if (!new_tokens)
 					{
 						printf("allocation err\n");
@@ -135,8 +137,9 @@ char	**split(char *s, char *delimiters)
 					free(tokens);
 					tokens = new_tokens;
 				}
-				tokens[token_count] = (char *)malloc((end - start + 1)
-						* sizeof(char));
+				// tokens[token_count] = (char *)malloc((end - start + 1)
+				// 		* sizeof(char));
+				tokens[token_count] = ft_malloc(((end - start + 1) * sizeof(char)), NULL, 0, NULL);
 				if (!tokens[token_count])
 				{
 					printf("allocation err\n");
@@ -151,7 +154,8 @@ char	**split(char *s, char *delimiters)
 				if (token_count >= max_tokens)
 				{
 					max_tokens *= 2;
-					new_tokens = (char **)malloc(max_tokens * sizeof(char *));
+					// new_tokens = (char **)malloc(max_tokens * sizeof(char *));
+					new_tokens = ft_malloc((max_tokens * sizeof(char *)), NULL, 0, NULL);
 					if (!new_tokens)
 					{
 						printf("allocation err\n");
@@ -166,7 +170,8 @@ char	**split(char *s, char *delimiters)
 					free(tokens);
 					tokens = new_tokens;
 				}
-				tokens[token_count] = (char *)malloc(2 * sizeof(char));
+				// tokens[token_count] = (char *)malloc(2 * sizeof(char));
+				tokens[token_count] = ft_malloc((2 * sizeof(char)), NULL, 0, NULL);
 				if (!tokens[token_count])
 				{
 					printf("allocation err\n");
@@ -189,7 +194,8 @@ char	**split(char *s, char *delimiters)
 		if (token_count >= max_tokens)
 		{
 			max_tokens *= 2;
-			new_tokens = (char **)malloc(max_tokens * sizeof(char *));
+			// new_tokens = (char **)malloc(max_tokens * sizeof(char *));
+			new_tokens = ft_malloc((max_tokens * sizeof(char *)), NULL, 0, NULL);
 			if (!new_tokens)
 			{
 				printf("allocation err\n");
@@ -204,7 +210,8 @@ char	**split(char *s, char *delimiters)
 			free(tokens);
 			tokens = new_tokens;
 		}
-		tokens[token_count] = (char *)malloc((end - start + 1) * sizeof(char));
+		// tokens[token_count] = (char *)malloc((end - start + 1) * sizeof(char));
+		tokens[token_count] = ft_malloc(((end - start + 1) * sizeof(char)), NULL, 0, NULL);
 		if (!tokens[token_count])
 		{
 			printf("allocation err\n");
@@ -240,7 +247,8 @@ char	**expand_quotes(char **tokens)
 		}
 		i++;
 	}
-	expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char *));
+	// expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char *));
+	expanded_tokens = ft_malloc(((i + num_quotes + 1) * sizeof(char *)), NULL, 0, NULL);
 	if (expanded_tokens == NULL)
 	{
 		return (NULL);
@@ -253,7 +261,8 @@ char	**expand_quotes(char **tokens)
 		if (ft_strchr(current_token, '\"'))
 		{
 			token_length = ft_strlen(current_token);
-			modified_token = malloc(token_length * sizeof(char));
+			// modified_token = malloc(token_length * sizeof(char));
+			modified_token = ft_malloc((token_length * sizeof(char)), NULL, 0, NULL);
 			if (modified_token == NULL)
 			{
 				return (NULL);
@@ -290,7 +299,7 @@ char	**expand_quotes(char **tokens)
 
 char	**expand_s_quotes(char **tokens)
 {
-	int		i;
+		int		i;
 	int		num_quotes;
 	char	**expanded_tokens;
 	int		j;
@@ -310,7 +319,8 @@ char	**expand_s_quotes(char **tokens)
 		}
 		i++;
 	}
-	expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char *));
+	// expanded_tokens = malloc((i + num_quotes + 1) * sizeof(char *));
+	expanded_tokens = ft_malloc(((i + num_quotes + 1) * sizeof(char *)), NULL, 0, NULL);
 	if (expanded_tokens == NULL)
 	{
 		return (NULL);
@@ -323,7 +333,8 @@ char	**expand_s_quotes(char **tokens)
 		if (ft_strchr(current_token, '\''))
 		{
 			token_length = ft_strlen(current_token);
-			modified_token = malloc(token_length * sizeof(char));
+			// modified_token = malloc(token_length * sizeof(char));
+			modified_token = ft_malloc((token_length * sizeof(char)), NULL, 0, NULL);
 			if (modified_token == NULL)
 			{
 				return (NULL);
@@ -393,7 +404,8 @@ char	*ft_strndup(char const *str, size_t max)
 	char	*dst;
 
 	index = 0;
-	dst = malloc(sizeof(char) * (max + 1));
+	// dst = malloc(sizeof(char) * (max + 1));
+	dst = ft_malloc((sizeof(char) * (max + 1)), NULL, 0, NULL);
 	if (!dst)
 	{
 		return (0);
@@ -480,7 +492,8 @@ t_info	**allocat_token(char **s, t_vars *vars)
 	char	*var;
 
 	i = 0;
-	inf = malloc(sizeof(t_info *) * (lenght_of_the_2d(s) + 1));
+	// inf = malloc(sizeof(t_info *) * (lenght_of_the_2d(s) + 1));
+	inf = ft_malloc((sizeof(t_info *) * (lenght_of_the_2d(s) + 1)), NULL, 0, NULL);
 	if (!inf)
 	{
 		printf("Err\n");
@@ -493,7 +506,8 @@ t_info	**allocat_token(char **s, t_vars *vars)
 	{
 		tmp =  expand_var(s[c], vars);
 		if (*tmp) {
-			inf[i] = malloc(sizeof(t_info));
+			// inf[i] = malloc(sizeof(t_info));
+			inf[i] = ft_malloc((sizeof(t_info)), NULL, 0, NULL);
 			inf[i]->content = tmp;
 			// if (inf[i]->content[0] == '<')
 			// 	inf[i]->type = "RDIN";

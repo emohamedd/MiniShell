@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:42:46 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/26 01:37:28 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 18:06:31 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ char	**clear_cmds_arg_from_direct(char **args)
 		}
 		count++;
 	}
-	stack_args = malloc(sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)
-				+ 1));
+	// stack_args = malloc(sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)
+	// 			+ 1));
+	stack_args = ft_malloc((sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)+ 1)), NULL, 0, NULL);
 	count = 0;
 	size = 0;
 	while (args[count])
@@ -63,7 +64,8 @@ char	**get_redirectinsv(int size, char **old_stack)
 	int		suui;
 	int		count;
 
-	stack = malloc(sizeof(char *) * (size + 1));
+	// stack = malloc(sizeof(char *) * (size + 1));
+	stack = ft_malloc((sizeof(char *) * (size + 1)), NULL, 0, NULL);
 	suui = 0;
 	count = 0;
 	while (old_stack[count] && suui < size)
@@ -94,7 +96,8 @@ char	**get_files(int size, char **old_stack)
 
 	suui = 0;
 	count = 0;
-	stack = malloc(sizeof(char *) * (size + 1));
+	// stack = malloc(sizeof(char *) * (size + 1));
+	stack = ft_malloc((sizeof(char *) * (size + 1)), NULL, 0, NULL);
 	while (old_stack[count] && suui < size)
 	{
 		if (is_redirection(old_stack[count]))

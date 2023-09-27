@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:33:44 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 12:07:32 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:41:51 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*ft_strdup(const char *s1)
 	char	*p;
 
 	i = 0;
-	p = malloc(sizeof(char) * ft_strlen(s1) + 1);
+	// p = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	p = ft_malloc((ft_strlen(s1) + 1), NULL, 0, NULL);
 	if (!p)
 		return (NULL);
 	while (s1[i])

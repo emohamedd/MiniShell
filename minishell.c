@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 16:31:24 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 18:24:17 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int c, char **v, char **env)
 	exit_status = 0;
 	vars.envp = env;
 	vars.env = malloc(sizeof(t_env) * (count_argiment(vars.envp)));
+	// vars.env = ft_malloc((sizeof(t_env) * (count_argiment(vars.envp))), NULL, 0, NULL);
 	fell_env_struct(&vars);
 	vars.env_number = count_argiment(vars.envp);
 	tokens = NULL;
@@ -68,6 +69,7 @@ int	main(int c, char **v, char **env)
 			dup2(fdin, 0);
 			dup2(fdou, 1);
 			// table(cmds, tokens);
+			ft_malloc(0, NULL, 2, NULL);
 		}
 	}
 	return (0);

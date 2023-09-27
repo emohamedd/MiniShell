@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+         #
+#    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/25 20:41:14 by haarab           ###   ########.fr        #
+#    Updated: 2023/09/27 17:23:16 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,16 +32,19 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft
-	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME) $(LDFLAGS) $(RLFLGS)
+	@make -C ft_malloc
+	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a ft_malloc/ft_malloc.a -o $(NAME) $(LDFLAGS) $(RLFLGS)
 	@echo "$(GREEN)✅  MINISHELL : Compilation successful!$(RESET)"
 
 clean:
-	@make -C libft/ fclean
+	@make -C libft/ clean
+	@make -C ft_malloc/ clean
 	@rm -f $(OBJS)
 	@echo "$(GREEN)✅ Cleaned up object files$(RESET)"
 
 fclean: clean
 	@make -C libft/ fclean
+	@make -C ft_malloc/ fclean
 	@rm -f $(NAME)
 	@echo "$(GREEN)✅ Cleaned up $(NAME)$(RESET)"
 

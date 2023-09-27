@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_code.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 17:10:28 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 17:59:14 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,8 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 	fill_commands(args, vars);
 	int i = 0;
 	int status;
-	pid_t *childs = malloc(sizeof(int) * vars->n_commandes);
+	// pid_t *childs = malloc(sizeof(int) * vars->n_commandes);
+	pid_t *childs = ft_malloc((sizeof(int) * vars->n_commandes), NULL, 0, NULL);
 	while (i < vars->n_commandes)
 	{
 		

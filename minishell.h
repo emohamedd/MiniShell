@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 16:31:38 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 17:25:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <string.h>
 # include "libft/libft.h"
+# include "ft_malloc/ft_malloc.h"
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <sys/types.h>
@@ -36,6 +37,7 @@
 # define YELLOW  "\x1B[33m"
 # define RESET   "\x1B[0m"
 # define PURPLE  "\x1B[35m"
+
 
 
 
