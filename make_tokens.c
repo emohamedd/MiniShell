@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/26 22:48:42 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:15:21 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,7 +441,7 @@ char *expand_var(char *arg, t_vars *vars) {
 	char *dst3;
 	char *exp_value;
 
-	while (arg[i]) {
+	while (i < ft_strlen(arg)) {
 		if (arg[i] == '$' && !is_var_inside_sq(arg, i)) {
 			dst1 = ft_strndup(arg, i);
 			if (arg[i + 1] && (arg[i + 1] == '?')) {
@@ -451,7 +451,7 @@ char *expand_var(char *arg, t_vars *vars) {
 				key = ft_strndup(&arg[i + 1], get_var_size(&arg[i + 1]));
 				exp_value = ft_getenv(key, vars);
 				if (!exp_value)
-					exp_value = "\0";
+					exp_value = "";
 			}
 			dst3 = arg + ((i + 1) + get_var_size(&arg[i + 1]));
 			dst2 = ft_strjoin(dst1, exp_value);

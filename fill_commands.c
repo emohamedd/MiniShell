@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:56:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/26 22:51:10 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:25:53 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	fill_commands(char **ptr, t_vars *vars)
 	i = 0;
 	j = 0;
 	l = 1;
-	while (ptr[i] && ptr[0])
+	while (ptr[i])
 	{
-		if (ptr[i + 1] && (ft_strncmp("|", ptr[i + 1], ft_strlen(ptr[i + 1])) == 0))
+		if (ptr[i + 1] && (ptr[i + 1][0] != '\0' && ft_strncmp("|", ptr[i + 1], ft_strlen(ptr[i + 1])) == 0))
 			l++;
 		i++;
 	}

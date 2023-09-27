@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 19:20:00 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/25 15:45:01 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/27 10:18:22 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	ft_strcmp(char *s1, char *s2)
 	i = 0;
 	while (s2[i] != '\0')
 	{
-		if (s1[i] == s2[i])
-			i++;
+		if (s1[i] != '\0' && s1[i] == s2[i])
+		 	i++;
 		else
 		{
 			return (s1[i] - s2[i]);
