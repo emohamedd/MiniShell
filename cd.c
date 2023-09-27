@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 12:07:22 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 16:03:38 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void run_cd(char **args, t_vars *vars, char *pwd)
 {
 	if (args[1])
 	{
+		// printf("%s\n", args[1]);
 		if (chdir(args[1]) == -1)
 		{
 			ft_putendl_fd("minishell: No such file or directory", 2);

@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 15:45:09 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 16:13:03 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 		if (is_builtin(vars->cmds[i].cmd))
 		{
 			ft_builtins(vars, i, str, childs);
-
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 13:31:31 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/27 16:10:37 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,11 @@ void exec_cmds(t_vars *vars, int i)
 			ft_putstr_fd(": command not found\n", 2);
 			exit(127);
 		}
-		// execve(path, expand, vars->envp);
 		if (!execve(path, vars->cmds[i].cmds_args, vars->envp))
 		{
 			ft_putstr_fd("minishell: No such file or directory\n", 2);
 			exit(127);
 		}
-		// perror("execve");
 	}
 	wait(&exit_status);
 	exit_status = WEXITSTATUS(exit_status);
