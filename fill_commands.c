@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:56:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 07:43:38 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 08:52:22 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ void	fill_commands(char **ptr, t_vars *vars)
 	l = 1;
 	while (ptr[i])
 	{
-		if (ptr[i + 1] && (ft_strncmp("|", ptr[i + 1], ft_strlen(ptr[i + 1])) == 0))
+		if (ptr[i + 1] && (ptr[i + 1][0] != '\0' && ft_strncmp("|", ptr[i + 1], ft_strlen(ptr[i + 1])) == 0))
 			l++;
 		i++;
 	}
-	// vars->cmds = malloc(sizeof(t_cmds) * (l + 1));
-	vars->cmds = malloc_((sizeof(t_cmds) * (l + 1)), NULL, 0, NULL);
+	vars->cmds = malloc(sizeof(t_cmds) * (l + 1));
 	i = 0;
 	h = 0;
 	b = 0;
@@ -42,8 +41,7 @@ void	fill_commands(char **ptr, t_vars *vars)
 			b++;
 		if (!ft_strncmp("|", ptr[b], ft_strlen(ptr[b])))
 			b++;
-		// vars->cmds[i].cmds_args = malloc(sizeof(char *) * (b + 1));
-		vars->cmds[i].cmds_args = malloc_((sizeof(char *) * (b + 1)), NULL, 0, NULL);
+		vars->cmds[i].cmds_args = malloc(sizeof(char *) * (b + 1));
 		i++;
 	}
 	i = 0;
@@ -78,7 +76,7 @@ void	fill_commands(char **ptr, t_vars *vars)
 		}
 		else
 			vars->cmds[i].has_redirections = 0;
-		if (ptr[b] && !ft_strncmp("|", ptr[b], ft_strlen(ptr[b])))
+		if (ptr[b] && ptr[b][0] != '\0' && (!ft_strncmp("|", ptr[b], ft_strlen(ptr[b]))))
 		{
 			vars->cmds[i].is_nex_pip = 1;
 			k++;
