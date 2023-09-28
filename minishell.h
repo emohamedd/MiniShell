@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 08:34:56 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:43:14 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,4 +132,7 @@ void		change_pwd(t_vars *vars, char *pwd);
 char		**expand_s_quotes(char **tokens);
 char		**expand_quotes(char **tokens);
 void		change_oldpwd(t_vars *vars, char *pwd);
+char	**ft_split_export(char const *s, char c);
+char	*allocat_s_export(const char *s, char c);
+int	count_s_lenght_export(const char *s, char c);
 #endif

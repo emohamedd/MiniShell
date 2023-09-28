@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:59:43 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 10:59:54 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:43:06 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	fell_env_struct(t_vars *vars)
 	i = 0;
 	while (vars->envp[i])
 	{
-		key = ft_split(vars->envp[i], '=')[0];
+		key = ft_split_export(vars->envp[i], '=')[0];
 		vars->env[i].key = key;
 		if (ft_strchr(vars->envp[i], '='))
 		{

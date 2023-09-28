@@ -6,11 +6,12 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/28 08:29:38 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:41:06 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 int	check_key(char *args)
 {
@@ -102,7 +103,7 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 		return ;
 	}
 	count = 0;
-	var_ = ft_split(args, '=')[0];
+	var_ = ft_split_export(args, '=')[0];
 	if (var_ == NULL)
 		return ;
 	if (check_key(var_) == 0)
@@ -151,7 +152,7 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 	}
 	if (check_key(var_) == 1)
 	{
-		key = ft_split(args, '=')[0];
+		key = ft_split_export(args, '=')[0];
 		d = 0;
 		p = 0;
 		while (vars->env[d].key)

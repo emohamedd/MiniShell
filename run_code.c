@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/28 07:43:38 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:01:52 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,28 +116,28 @@ int syntax_errors(char **args, t_vars *vars)
 	// 	return (1);
 	while (args[i])
 	{
-		// if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<<", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">>", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp("<", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp(">", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp(">", args[i], ft_strlen(args[i])) && (!ft_strncmp("<", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp("<", args[i], ft_strlen(args[i])) && (!ft_strncmp(">", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp("<<", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
-		// 	j++;
-		// if (!ft_strncmp(">>", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
-			// j++;
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("<<", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp(">>", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("<", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp(">", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp(">", args[i], ft_strlen(args[i])) && (!ft_strncmp("<", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("<", args[i], ft_strlen(args[i])) && (!ft_strncmp(">", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp("<<", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
+		if (!ft_strncmp(">>", args[i], ft_strlen(args[i])) && (!ft_strncmp("|", args[i + 1], ft_strlen(args[i + 1]))))
+			j++;
 		if (!ft_strncmp("|", args[0], ft_strlen(args[0]) + 1) && args[1] != NULL)
 			j++;
 		i++;
@@ -147,8 +147,8 @@ int syntax_errors(char **args, t_vars *vars)
 
 void 	run(char *cmd, char **args, t_vars *vars, char **str)
 {
-	// if (syntax_err(args, vars))
-	// 	return ;
+	if (syntax_err(args, vars))
+		return ;
 	fill_commands(args, vars);
 	int i = 0;
 	int status;
