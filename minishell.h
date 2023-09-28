@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 07:54:18 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 08:34:56 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,7 @@ void 		ft_builtins(t_vars *vars, int i, char **str, pid_t *childs);
 int			command_notfound(char **args, t_vars *vars);
 int 		syntax_err(char **args, t_vars *vars);
 void		change_pwd(t_vars *vars, char *pwd);
+char		**expand_s_quotes(char **tokens);
+char		**expand_quotes(char **tokens);
 void		change_oldpwd(t_vars *vars, char *pwd);
 #endif
