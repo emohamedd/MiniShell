@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:57:54 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 17:58:00 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 07:43:38 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**get_cmds(t_info **info)
 	len = (*info)->size;
 	i = 0;
 	// dst = malloc(sizeof(char *) * ((*info)->size + 1));
-	dst = ft_malloc((sizeof(char *) * ((*info)->size + 1)), NULL, 0, NULL);
+	dst = malloc_((sizeof(char *) * ((*info)->size + 1)), NULL, 0, NULL);
 	while (i < len)
 	{
 		dst[i] =  info[i]->content;

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 17:25:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 07:54:18 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <string.h>
 # include "libft/libft.h"
-# include "ft_malloc/ft_malloc.h"
+# include "malloc/ft_malloc.h"
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <sys/types.h>

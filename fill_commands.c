@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:56:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/27 18:25:37 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 07:43:38 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	fill_commands(char **ptr, t_vars *vars)
 		i++;
 	}
 	// vars->cmds = malloc(sizeof(t_cmds) * (l + 1));
-	vars->cmds = ft_malloc((sizeof(t_cmds) * (l + 1)), NULL, 0, NULL);
+	vars->cmds = malloc_((sizeof(t_cmds) * (l + 1)), NULL, 0, NULL);
 	i = 0;
 	h = 0;
 	b = 0;
@@ -43,7 +43,7 @@ void	fill_commands(char **ptr, t_vars *vars)
 		if (!ft_strncmp("|", ptr[b], ft_strlen(ptr[b])))
 			b++;
 		// vars->cmds[i].cmds_args = malloc(sizeof(char *) * (b + 1));
-		vars->cmds[i].cmds_args = ft_malloc((sizeof(char *) * (b + 1)), NULL, 0, NULL);
+		vars->cmds[i].cmds_args = malloc_((sizeof(char *) * (b + 1)), NULL, 0, NULL);
 		i++;
 	}
 	i = 0;

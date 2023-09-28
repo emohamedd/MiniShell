@@ -1,32 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   misc_functions2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 17:33:44 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 07:43:38 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/27 17:20:11 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/28 07:50:09 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-char	*ft_strdup(const char *s1)
+
+#include "ft_malloc.h"
+
+void	print_str_with_int(char *string, unsigned int n)
 {
-	int		i;
-	char	*p;
+	print_string(string);
+	print_number(n);
+	write(1, "\n", 1);
+}
+
+void	print_string(char *string)
+{
+	int	i;
 
 	i = 0;
-	// p = malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	p = malloc_((ft_strlen(s1) + 1), NULL, 0, NULL);
-	if (!p)
-		return (NULL);
-	while (s1[i])
+	while (string[i])
 	{
-		p[i] = s1[i];
+		write(1, &string[i], 1);
 		i++;
 	}
-	p[i] = '\0';
-	return (p);
+}
+
+void	print_number(unsigned int number)
+{
+	char	n;
+
+	if (number >= 0 && number <= 9)
+	{
+		n = number + 48;
+		write(1, &n, 1);
+	}
+	else
+	{
+		print_number(number / 10);
+		print_number(number % 10);
+	}
 }
