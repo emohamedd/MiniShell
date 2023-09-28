@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 13:39:24 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 13:41:58 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:03:56 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**ft_split_export(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	p = malloc((sizeof(char *) * count_s_lenght_export(s, c) + 1));
+	p = ft_calloc(sizeof(char *), count_s_lenght_export(s, c) + 1);
 	// p = malloc_((sizeof(char *) * count_s_lenght(s, c) + 1), NULL, 0, NULL);
 	
 	if (!p)
@@ -78,7 +78,6 @@ char	**ft_split_export(char const *s, char c)
 		while (s[i] && s[i] != c)
 			i++;
 	}
-	p[j] = NULL;
 	return (p);
 }
 

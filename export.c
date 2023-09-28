@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/28 13:41:06 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:11:53 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,12 +155,15 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 		key = ft_split_export(args, '=')[0];
 		d = 0;
 		p = 0;
-		while (vars->env[d].key)
+		int x = 0;
+		while (x < vars->env_number)
 		{
-			if (ft_strncmp(vars->env[d].key, key, ft_strlen(vars->env[d].key)
-					+ 1) == 0)
-				p = 1;
+			if (vars->env[d].key) {
+				if (ft_strcmp(vars->env[d].key, key) == 0)
+					p = 1;
+			}
 			d++;
+			x++;
 		}
 		if (p != 1)
 		{

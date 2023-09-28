@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/28 13:01:52 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:51:05 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,13 +147,13 @@ int syntax_errors(char **args, t_vars *vars)
 
 void 	run(char *cmd, char **args, t_vars *vars, char **str)
 {
-	if (syntax_err(args, vars))
-		return ;
+	// if (syntax_err(args, vars))
+	// 	return ;
 	fill_commands(args, vars);
 	int i = 0;
 	int status;
-	// pid_t *childs = malloc(sizeof(int) * vars->n_commandes);
-	pid_t *childs = malloc_((sizeof(int) * vars->n_commandes), NULL, 0, NULL);
+	pid_t *childs = malloc(sizeof(int) * vars->n_commandes);
+	// pid_t *childs = malloc_((sizeof(int) * vars->n_commandes), NULL, 0, NULL);
 	while (i < vars->n_commandes)
 	{
 		
@@ -168,7 +168,7 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 		i++;
 	}
 	i = -1;
-	while (i < vars->n_commandes)
+	while (++i < vars->n_commandes)
 	{
 		waitpid(childs[i], &status, 0);
 		i++;

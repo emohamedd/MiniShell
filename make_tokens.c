@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 13:15:02 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:14:44 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,7 +355,7 @@ char	**expand_s_quotes(char **tokens)
 		}
 		else
 		{
-			expanded_tokens[j] = ft_strdup(current_token);
+			expanded_tokens[j] = ft_strdexup(current_token);
 			if (expanded_tokens[j] == NULL)
 			{
 				return (NULL);
@@ -404,8 +404,8 @@ char	*ft_strndup(char const *str, size_t max)
 	char	*dst;
 
 	index = 0;
-	// dst = malloc(sizeof(char) * (max + 1));
-	dst = malloc_((sizeof(char) * (max + 1)), NULL, 0, NULL);
+	dst = malloc(sizeof(char) * (max + 1));
+	// dst = malloc_((sizeof(char) * (max + 1)), NULL, 0, NULL);
 	if (!dst)
 	{
 		return (0);
