@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 08:40:02 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 08:43:42 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int c, char **v, char **env)
 			dup2(fdin, 0);
 			dup2(fdou, 1);
 			// table(cmds, tokens);
-			malloc_(0, NULL, 2, NULL);
+			// malloc_(0, NULL, 2, NULL);
 		}
 	}
 	return (0);

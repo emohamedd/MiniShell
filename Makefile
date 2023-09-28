@@ -6,12 +6,12 @@
 #    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/28 07:52:32 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/28 08:44:17 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-#CFLAGS = -g -fsanitize=address
+CFLAGS = -g -fsanitize=address
 LDFLAGS = -lreadline 
 RLFLGS = -L/Users/haarab/.brew/opt/readline/lib -lreadline
 RLOFLGS = -I/Users/haarab/.brew/opt/readline/include
