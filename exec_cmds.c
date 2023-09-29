@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/29 13:57:22 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 20:52:14 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char *get_path(t_vars *vars, char *cmd)
 	int i = 0;
 	char **path;
 	char *res;
+	char *temper1;
 	
 	if (ft_strchr(cmd, '/')) 
 		return (cmd);
@@ -29,7 +30,8 @@ char *get_path(t_vars *vars, char *cmd)
 	struct stat file_info;
 	while (path[i])
 	{
-		fullCmd = ft_strjoin(ft_strjoin(path[i], "/"), cmd);
+		temper1 = ft_strjoin(path[i], "/");
+		fullCmd = ft_strjoin(temper1, cmd);
 		if (stat(fullCmd, &file_info) == 0) {
 			return (fullCmd);
 		}
@@ -72,6 +74,7 @@ void exec_cmds(t_vars *vars, int i)
 	{
 		comande_exec(vars, i, path, exp);
 	}
+	// free(path);
 	waitpid(id, &exit_status, 0);
 	exit_status = WEXITSTATUS(exit_status);
 }

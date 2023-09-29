@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/29 18:44:31 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 21:10:07 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	cmd_builtins(t_vars *vars, int i)
 	cwd = getcwd(NULL, 1024);
 	change_pwd(vars, cwd);
 	run_builtins(vars, i, cwd);
+	free(cwd);
 }
 
 int ft_error(char **str)
@@ -163,7 +164,8 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 	fill_commands(args, vars);
 	int i = 0;
 	int status;
-	pid_t *childs = malloc(sizeof(int) * vars->n_commandes);
+	pid_t *childs = malloc_((sizeof(int) * vars->n_commandes), NULL, 0, NULL);
+	
 	// pid_t *childs = malloc_((sizeof(int) * vars->n_commandes), NULL, 0, NULL);
 	while (i < vars->n_commandes)
 	{

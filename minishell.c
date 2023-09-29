@@ -6,11 +6,20 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 15:30:23 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 21:07:36 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void free_x_max(char **str) {
+	int i = 0;
+	while (str[i]) {
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
 
 int	main(int c, char **v, char **env)
 {
@@ -72,6 +81,8 @@ int	main(int c, char **v, char **env)
 			// table(cmds, tokens);
 			malloc_(0, NULL, 2, NULL);
 		}
+		if (input)
+			free(input);
 	}
 	return (0);
 }

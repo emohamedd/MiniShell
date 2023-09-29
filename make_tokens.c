@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 13:18:47 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 21:08:17 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -458,7 +458,7 @@ char *expand_var(char *arg, t_vars *vars) {
 			dst1 = ft_strndup(arg, i);
 			if (arg[i + 1] && (arg[i + 1] == '?')) {
 				i++;
-				exp_value = ft_itoa(vars->exit_status);
+				exp_value = ft_itoa(exit_status);
 			}else {				
 				key = ft_strndup(&arg[i + 1], get_var_size(&arg[i + 1]));
 				exp_value = ft_getenv(key, vars);
@@ -483,8 +483,8 @@ t_info	**allocat_token(char **s, t_vars *vars)
 	char	*var;
 
 	i = 0;
-	inf = malloc(sizeof(t_info *) * (lenght_of_the_2d(s) + 1));
-	// inf = malloc_((sizeof(t_info *) * (lenght_of_the_2d(s) + 1)), NULL, 0, NULL);
+	// inf = malloc(sizeof(t_info *) * (lenght_of_the_2d(s) + 1));
+	inf = malloc_((sizeof(t_info *) * (lenght_of_the_2d(s) + 1)), NULL, 0, NULL);
 	if (!inf)
 	{
 		printf("Err\n");

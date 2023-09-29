@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 18:38:56 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 21:24:28 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ typedef struct s_vars
 	char	**envp;
 	char	*strarg;
 	char	*strvalue;
-	int		exit_status;
 	t_cmds	*cmds;
 	t_env	*env;
 	int		n_commandes;
@@ -94,7 +93,7 @@ typedef struct s_vars
 
 }			t_vars;
 
-
+void free_x_max(char **str);
 void		cmd_exit(char **str, t_vars *vars);
 int			has_redirections(t_vars *vars, int i);
 int			ft_strcmp(char *s1, char *s2);
@@ -146,5 +145,8 @@ void		change_oldpwd(t_vars *vars, char *pwd);
 char	**ft_split_export(char const *s, char c);
 char	*allocat_s_export(const char *s, char c);
 int	count_s_lenght_export(const char *s, char c);
+void free_x_dmax(char **str);
 int double_quotes(char **args);
+char	*ft_strdup_env(const char *s1);
+char	*ft_strdup_against(const char *s1);
 #endif

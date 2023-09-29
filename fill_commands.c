@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:56:34 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 18:13:18 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 20:56:02 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	fell_redandpipe(t_vars *vars, char **ptr, t_int *intt, int i)
 	intt->b++;
 
 }
-
 
 
 void	fill_commands(char **ptr, t_vars *vars)

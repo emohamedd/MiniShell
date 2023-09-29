@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/29 15:45:39 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 22:45:46 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,18 @@ void print_env(t_vars *vars, int count)
 {
 	while (count < vars->env_number)
 	{
-		if (vars->env[count].is_equal)
-			print_env_equal(vars, count);
-		if (!vars->env[count].is_equal)
-		{
+		// if (vars->env[count].is_equal)
+		// 	print_env_equal(vars, count);
+		// if (!vars->env[count].is_equal)
+		// {
 			printf("declare -x %s", vars->env[count].key);
 			if (vars->env[count].value)
 			{
 				printf("=");
-				printf("\"%s\"""", vars->env[count].value);
+				printf("\"%s\"", vars->env[count].value);
 			}
 			printf("\n");
-		}
+		// }
 		count++;
 	}
 }
@@ -98,7 +98,8 @@ int fell_value(t_vars *vars, char *args, int count)
 	}
 	if (ft_strchr(args, '=') != NULL)
 	{
-		vars->env[count].value = ft_strchr(args, '=') + 1;
+		free(vars->env[count].value);
+		vars->env[count].value =ft_strdup_env(ft_strchr(args, '=') + 1);
 		exit_status = 0;
 		return (0);
 	}
@@ -140,7 +141,7 @@ void	fell_env_isequal(t_vars *vars, int count, char *args, int p)
 	if (ft_strchr(args, '=') != NULL)
 	{
 		vars->env[count].is_equal = 1;
-		vars->env[count].value = value;
+		vars->env[count].value = ft_strdup_env(value);
 		exit_status = 0;
 	}
 	if (!ft_strchr(args, '=') && p == 1)
@@ -163,14 +164,14 @@ void	fell_env_dollar(t_vars *vars, int count, char *args, int p)
 		{
 			if (ft_strchr(args, '$') != NULL)
 			{
-				vars->env[count].value = vars->env[j].value;
+				vars->env[count].value = ft_strdup_env(vars->env[j].value);
 				vars->env[count].is_equal = 1;
 				exit_status = 0;
 			}
 		}
 		j++;
 	}
-	if (!ft_strchr(args, '$') && p == 1)
+	if ( p == 1)
 	{
 		vars->env[count].key = args;
 		exit_status = 0;
@@ -199,14 +200,17 @@ void fell_envirement(t_vars *vars, int count, char *args, char *key)
 	int p;
 	int d;
 	int x;
+	char **tempers;
 	
 	p = 0;
 	d = 0;
-	key = ft_split_export(args, '=')[0];
+	tempers = ft_split_export(args, '=');
+	key = ft_strdup_env(tempers[0]);
 	x = 0;
 	while (x < vars->env_number)
 	{
-		if (vars->env[d].key) {
+		if (vars->env[d].key)
+		{
 			if (ft_strcmp(vars->env[d].key, key) == 0)
 				p = 1;
 		}
@@ -218,6 +222,7 @@ void fell_envirement(t_vars *vars, int count, char *args, char *key)
 		fell_env(vars, count, args, key, p);
 		vars->env_number++;
 	}
+	free_x_dmax(tempers);
 }
 
 int count_env(t_vars *vars, t_env *tmp)
@@ -263,21 +268,26 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 	int		count;
 	t_env	*tmp;
 	char	*var_;
-
-	tmp = vars->env;
+	char 	**tempers;
 	count = 0;
-	key = NULL;
+
 	if (args == NULL)
 	{
 		print_env(vars, count);
 		return ;
 	}
-	var_ = ft_split_export(args, '=')[0];
-	if (export_env(vars, var_, args) == 0)
+	tmp = vars->env;
+	key = NULL;
+	tempers = ft_split_export(args, '=');
+	var_ = tempers[0];
+	if (export_env(vars, var_, args) == 0) {
+		free_x_dmax(tempers);
 		return ;
+	}
 	vars->env = malloc((vars->env_number + 1) * sizeof(t_env));
 	count = count_env(vars, tmp);
 	if (check_key(var_) == 1)
 		fell_envirement(vars, count, args, key);
+	free_x_dmax(tempers);
 	free(tmp);
 }
