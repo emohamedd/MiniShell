@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:42:46 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/28 07:43:38 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:56:26 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,6 @@ char	**get_files(int size, char **old_stack)
 	char	**stack;
 	int		suui; 
 	int		count; 
-
-	// int j = 0;
-	// while (old_stack[j])
-	// {
-	// 	printf ("opera_derec ==== %s\n", old_stack[j]);	
-	// 	j++;
-	// }
 
 	suui = 0;
 	count = 0;

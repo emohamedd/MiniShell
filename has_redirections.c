@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/29 10:48:43 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:04:35 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,89 +48,90 @@ void	collect_and_write_heredoc(int fd, char *heredoc_delimiter)
 	ft_putstr_fd(buff, fd);
 }
 
-int	has_redirections(t_vars *vars, int i)
-{
-	int		j;
-	int		fd;
-	char	*base_filename;
-	char	*heredoc_delimiter;
-	
-	fd = 0;
-	base_filename = "emohamed";
+int handle_output_redirection(char *filename) {
+    if (filename) {
+        int fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
+        if (fd != -1) {
+            dup2(fd, 1);
+            close(fd);
+            return 0; // Success
+        }
+    }
+    printf("syntax error near unexpected token\n");
+    exit_status = 258;
+    return 1; // Failure
+}
 
-	if (vars->cmds[i].has_redirections)
+int handle_input_redirection(char *filename) {
+    if (filename) {
+        int fd = open(filename, O_RDWR);
+        if (fd != -1) {
+            dup2(fd, 0);
+            close(fd);
+            return 0; // Success
+        }
+    }
+    printf("syntax error near unexpected token\n");
+    exit_status = 258;
+    return 1; // Failure
+}
+
+int handle_append_redirection(char *filename) {
+    if (filename) {
+        int fd = open(filename, O_CREAT | O_APPEND | O_RDWR, 0644);
+        if (fd != -1) {
+            dup2(fd, 1);
+            close(fd);
+            return 0; // Success
+        }
+    }
+    printf("syntax error near unexpected token\n");
+    exit_status = 258;
+    return 1; // Failure
+}
+
+int handle_heredoc( char *delimiter) 
+{
+    if (delimiter) 
 	{
-		j = 0;
-		while (vars->cmds[i].opera_derec[j])
+        char *base_filename = "emohamed";
+        int here_fd = create_temp_file(base_filename);
+        if (here_fd != -1) 
 		{
-			if (!ft_strncmp(vars->cmds[i].opera_derec[j], ">", ft_strlen(">")
-					+ 1))
+            collect_and_write_heredoc(here_fd, delimiter);
+            return 0; // Success
+        }
+    }
+    printf("syntax error near unexpected token\n");
+    exit_status = 258;
+    return 1; // Failure
+}
+
+int has_redirections(t_vars *vars, int i) 
+{
+    if (vars->cmds[i].has_redirections) 
+	{
+        int j = 0;
+        while (vars->cmds[i].opera_derec[j]) 
+		{
+            if (!strcmp(vars->cmds[i].opera_derec[j], ">")) 
 			{
-				if (vars->cmds[i].file_derec[j])
-				{
-					fd = open(vars->cmds[i].file_derec[j],
-							O_CREAT | O_TRUNC | O_RDWR, 0644);
-					dup2(fd, 1);
-					close(fd);
-				}
-				else
-				{
-					printf("syntax error near unexpected token\n");
-					exit_status = 258;
-					return (1);
-				}
-			}
-			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], "<",
-					ft_strlen("<") + 1))
+                return handle_output_redirection(vars->cmds[i].file_derec[j]);
+            } 
+			else if (!strcmp(vars->cmds[i].opera_derec[j], "<")) 
 			{
-				if (vars->cmds[i].file_derec[j])
-				{
-					fd = open(vars->cmds[i].file_derec[j], O_RDWR);
-					dup2(fd, 0);
-					close(fd);
-				}
-				else
-				{
-					printf("syntax error near unexpected token\n");
-					exit_status = 258;
-					return (1);
-				}
-			}
-			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], ">>",
-					ft_strlen(">>") + 1))
+                return handle_input_redirection(vars->cmds[i].file_derec[j]);
+            } 
+			else if (!strcmp(vars->cmds[i].opera_derec[j], ">>")) 
 			{
-				if (vars->cmds[i].file_derec[j])
-				{
-					fd = open(vars->cmds[i].file_derec[j],
-							O_CREAT | O_APPEND | O_RDWR, 0644);
-					dup2(fd, 1);
-					close(fd);
-				}
-				else
-				{
-					printf("syntax error near unexpected token\n");
-					exit_status = 258;
-					return (1);
-				}
-			}
-			else if (!ft_strncmp(vars->cmds[i].opera_derec[j], "<<",
-					ft_strlen("<<") + 1))
+                return handle_append_redirection(vars->cmds[i].file_derec[j]);
+            } 
+			else if (!strcmp(vars->cmds[i].opera_derec[j], "<<")) 
 			{
-				if (vars->cmds[i].file_derec[j])
-				{
-					heredoc_delimiter = vars->cmds[i].file_derec[j];
-					vars->here_fd = create_temp_file(base_filename);
-					collect_and_write_heredoc(vars->here_fd, heredoc_delimiter);
-				}
-				else
-				{
-					printf("syntax error near unexpected token\n");
-					exit_status = 258;
-					return (1);
-				}
-			}
-			j++;
-		}
-	}
-	return (0);
+                return handle_heredoc(vars->cmds[i].file_derec[j]);
+            }
+            j++;
+        }
+    }
+    return 0; // No redirections found
 }

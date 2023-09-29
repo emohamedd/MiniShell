@@ -6,12 +6,11 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:56:43 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 10:57:13 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:28:18 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	**split(char *s, char *delimiters)
 {

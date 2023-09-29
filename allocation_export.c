@@ -6,13 +6,14 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:40:05 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 10:43:11 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:59:07 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
 
+// p = malloc_((sizeof(char) * size), NULL, 0, NULL);
 char	*ft_strjoin_export(char const *s1, char const *s2)
 {
 	int		i;
@@ -26,7 +27,6 @@ char	*ft_strjoin_export(char const *s1, char const *s2)
 		return (NULL);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
 	p = malloc(sizeof(char) * size);
-	// p = malloc_((sizeof(char) * size), NULL, 0, NULL);
 	if (!p)
 		return (NULL);
 	while (s1 && s1[i])

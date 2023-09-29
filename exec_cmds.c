@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/28 08:37:55 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:02:37 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,46 @@ char *get_path(t_vars *vars, char *cmd)
 }
 
 
+void execute_child(t_vars *vars, int i, char *exp, char *path) 
+{
+    if (vars->here_fd) {
+        dup2(vars->here_fd, 0);
+        close(vars->here_fd);
+        vars->here_fd = 0;
+    }
+
+    if (path == NULL && !vars->cmds[i].has_redirections) 
+	{
+        ft_putstr_fd("minishell : ", 2);
+        ft_putstr_fd(exp, 2);
+        ft_putstr_fd(": command not found\n", 2);
+        exit(127);
+    }
+
+    if (!execve(path, vars->cmds[i].cmds_args, vars->envp)) 
+	{
+        ft_putstr_fd("minishell: No such file or directory\n", 2);
+        exit(127);
+    }
+}
+
+void execute_command(t_vars *vars, int i) 
+{
+    char *exp = ft_strtrim(vars->cmds[i].cmd, "\'");
+    char *path = get_path(vars, exp);
+    int id = fork();
+
+    if (id == 0) {
+        execute_child(vars, i, exp, path);
+    }
+
+    waitpid(id, &exit_status, 0);
+    exit_status = WEXITSTATUS(exit_status);
+}
+
 void exec_cmds(t_vars *vars, int i) 
 {
-	int id;
-	// char **expand = expand_s_quotes(vars->cmds[i].cmds_args);
-	char *path;
-		// path = get_path(vars, expand[0]);
-	char *exp = ft_strtrim(vars->cmds[i].cmd, "\'");
-	path = get_path(vars, exp);
-	// setup_redirs(red, vars);
-	// printf(">>%s<<\n", path);
-	id = fork();
-	if (id == 0) 
-	{
-		if (vars->here_fd)
-		{
-			dup2(vars->here_fd, 0);
-			close(vars->here_fd);
-			vars->here_fd = 0;
-		}
-		if (path == NULL && !vars->cmds[i].has_redirections)
-		{
-			ft_putstr_fd("minishell : ", 2);
-			ft_putstr_fd(exp, 2);
-			ft_putstr_fd(": command not found\n", 2);
-			exit(127);
-		}
-		if (!execve(path, vars->cmds[i].cmds_args, vars->envp))
-		{
-			ft_putstr_fd("minishell: No such file or directory\n", 2);
-			exit(127);
-		}
-	}
-	waitpid(id, &exit_status, 0);
-	exit_status = WEXITSTATUS(exit_status);
+    execute_command(vars, i);
 }
 
 

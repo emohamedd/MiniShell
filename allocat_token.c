@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:03:07 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:03:15 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:38:05 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,6 @@ t_info	**allocat_token(char **s, t_vars *vars)
 		inf[i]->content = s[i];
 		inf[i]->size = lenght_of_the_2d(s);
 		inf[i]->content = expand_var(inf[i]->content, vars);
-		 if (inf[i]->content[0] == '<')
-			inf[i]->type = "RDIN";
-		else if (inf[i]->content[0] == '>')
-			inf[i]->type = "RDOUT";
-		else if (inf[i]->content[0] == '|')
-			inf[i]->type = "PIPE";
-		else if (inf[i]->content[0] == '\"')
-			inf[i]->type = "DBCOTE";
-		if (inf[i]->content[0] == '\'')
-			inf[i]->type = "SGCOTE";
-		else if (is_char(s[i]))
-			inf[i]->type = "STR";
 		inf[i]->lenght = ft_strlen(inf[i]->content);
 		i++;
 	}
