@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 17:16:51 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:16:01 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,7 +355,7 @@ char	**expand_s_quotes(char **tokens)
 		}
 		else
 		{
-			expanded_tokens[j] = ft_strdup(current_token);
+			expanded_tokens[j] = ft_strdup (current_token);
 			if (expanded_tokens[j] == NULL)
 			{
 				return (NULL);
@@ -497,59 +497,6 @@ t_info	**allocat_token(char **s, t_vars *vars)
 		inf[i]->content = s[i];
 		inf[i]->size = lenght_of_the_2d(s);
 		inf[i]->content = expand_var(inf[i]->content, vars);
-		
-		// if (inf[i]->content[0] == '\''
-		// 	&& inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'')
-		// {
-		// 	if (inf[i]->content[1] == '\''
-		// 		&& inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'')
-		// 	{
-		// 		trimmed_content = ft_strtrim(inf[i]->content, "\'");
-		// 		if (ft_strlen(trimmed_content) > 0)
-		// 		{
-		// 			if (trimmed_content[0] == '$'
-		// 				&& ft_isalpha(trimmed_content[1]))
-		// 			{
-		// 				var = ft_getenv(trimmed_content + 1, vars);
-		// 				if (!var)
-		// 				{
-		// 					return (0);
-		// 				}
-		// 				inf[i]->content = ft_strdup(var);
-		// 				inf[i]->type = "ENV_EXPANDED";
-		// 				inf[i]->lenght = ft_strlen(inf[i]->content);
-		// 			}
-		// 		}
-		// 	}
-		// }
-	// if (inf[i]->content[0] == '\'' &&
-   	// 	inf[i]->content[ft_strlen(inf[i]->content) - 1] == '\'' &&
-    // 	ft_strlen(inf[i]->content) > 2)
-	// 	{
-
-    // 	trimmed_content = ft_strtrim(inf[i]->content, "'");
-    // 	inf[i]->content = ft_strdup(trimmed_content);
-    // 	inf[i]->type = "STR";
-    // 	inf[i]->lenght = ft_strlen(inf[i]->content);
-	// }
-
-	// 	else if ((inf[i]->content[0] == '$' && ft_isalpha(inf[i]->content[1])))
-	// 	{
-	// 		var = ft_getenv(inf[i]->content + 1, vars);
-	// 		if (!var)
-	// 		{
-	// 			return (0);
-	// 		}
-	// 		inf[i]->content = ft_strdup(var);
-	// 		inf[i]->type = "ENV_EXPANDED";
-	// 		inf[i]->lenght = ft_strlen(inf[i]->content);
-	// 	}
-	// 	else if (inf[i]->content[0] == '$' && inf[i]->content[1] == '?')
-	// 	{
-	// 		inf[i]->content = ft_itoa(vars->exit_status);
-    // 		inf[i]->type = "EXIT_STATUS"; 
-    // 		inf[i]->lenght = ft_strlen(inf[i]->content);
-	// 	}
 		 if (inf[i]->content[0] == '<')
 			inf[i]->type = "RDIN";
 		else if (inf[i]->content[0] == '>')

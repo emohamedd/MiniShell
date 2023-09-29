@@ -1,16 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_export.c                                  :+:      :+:    :+:   */
+/*   allocation_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 13:39:24 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 17:03:56 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 10:40:05 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/29 10:43:11 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minishell.h"
+
+char	*ft_strjoin_export(char const *s1, char const *s2)
+{
+	int		i;
+	int		j;
+	int		size;
+	char	*p;
+
+	i = 0;
+	j = 0;
+	if (!s1 && !s2)
+		return (NULL);
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	p = malloc(sizeof(char) * size);
+	// p = malloc_((sizeof(char) * size), NULL, 0, NULL);
+	if (!p)
+		return (NULL);
+	while (s1 && s1[i])
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	while (s2 && s2[j])
+	{
+		p[i + j] = s2[j];
+		j++;
+	}
+	p[i + j] = '\0';
+	return (p);
+}
+
+char	*ft_strdup_export(const char *s1)
+{
+	int		i;
+	char	*p;
+
+	if (!s1)
+		return (0);
+	i = 0;
+	p = malloc(sizeof(char) * ft_strlen(s1) + 1);
+	// p =  malloc_((sizeof(char) * ft_strlen(s1) + 1), NULL, 0, NULL);
+	if (!p)
+		return (NULL);
+	while (s1[i])
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
+}
+
 int	count_s_lenght_export(const char *s, char c)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 17:12:35 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:48:48 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int c, char **v, char **env)
 	fell_env_struct(&vars);
 	vars.env_number = count_argiment(vars.envp);
 	tokens = NULL;
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;
 	signal(SIGINT, siginthandler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
@@ -54,7 +54,7 @@ int	main(int c, char **v, char **env)
 		}
 		// syn_err(str, &vars);
 		str = make_token(trimed);
-		// rl_catch_signals = 0;
+		rl_catch_signals = 0;
 		if (str)
 		{
 			tokens = allocat_token(str, &vars);
@@ -69,7 +69,9 @@ int	main(int c, char **v, char **env)
 			run(tokens[0]->content, cmds, &vars, str);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
+			// free(tokens);
 			// table(cmds, tokens);
+			// free(vars.env);
 			malloc_(0, NULL, 2, NULL);
 		}
 	}

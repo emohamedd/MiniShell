@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   has_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 16:32:07 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 10:48:43 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	collect_and_write_heredoc(int fd, char *heredoc_delimiter)
 
 	read = NULL;
 	buff = "";
-	// rl_catch_signals = 1;
+	rl_catch_signals = 1;
 	while (1)
 	{
 		read = readline("> ");

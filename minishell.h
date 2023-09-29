@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 13:43:14 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:09:38 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int			ft_strcmp(char *s1, char *s2);
 char		**clear_cmds_arg_from_direct(char **args);
 char		*read_input(void);
 char		**get_files(int size, char **old_stac);
+void 		free_2d_array(char **array);
+void 		free_tokens(t_info **tokens);
 char		**make_token(char *s);
 int			lenght_of_the_2d(char **p);
 int			count_s_lenght(const char *s, char c);
@@ -132,7 +134,9 @@ void		change_pwd(t_vars *vars, char *pwd);
 char		**expand_s_quotes(char **tokens);
 char		**expand_quotes(char **tokens);
 void		change_oldpwd(t_vars *vars, char *pwd);
-char	**ft_split_export(char const *s, char c);
-char	*allocat_s_export(const char *s, char c);
-int	count_s_lenght_export(const char *s, char c);
+char		**ft_split_export(char const *s, char c);
+char		*allocat_s_export(const char *s, char c);
+int			count_s_lenght_export(const char *s, char c);
+char		*ft_strjoin_export(char const *s1, char const *s2);
+
 #endif

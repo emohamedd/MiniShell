@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   from_2d_to_one.c                                   :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 10:57:21 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 10:01:07 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/28 21:17:07 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/28 21:20:11 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*swap(char **str)
+void free_2d_array(char **array)
 {
-	int		i;
-	char	*s;
+    if (array)
+    {
+        for (int i = 0; array[i]; i++)
+        {
+            free(array[i]);
+        }
+        free(array);
+    }
+}
 
-	i = 0;
-	s = NULL;
-	while (str[i])
-	{
-		s = ft_strjoin(s, str[i]);
-		i++;
-		if (str[i])
-			s = ft_strjoin(s, " ");
-	}
-	return (s);
+void free_tokens(t_info **tokens)
+{
+    if (tokens)
+    {
+        for (int i = 0; tokens[i]; i++)
+        {
+            free(tokens[i]->content);
+            free(tokens[i]);
+        }
+        free(tokens);
+    }
 }
