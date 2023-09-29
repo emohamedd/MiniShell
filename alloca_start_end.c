@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_tokens.c                                      :+:      :+:    :+:   */
+/*   alloca_start_end.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:03:18 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 10:59:27 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/29 10:59:40 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-char	**make_token(char *s)
+char	*alloc_s(char const *s, unsigned int start, int len)
 {
-	char	*special_chars;
-	char	**tokens;
-	char	**quote;
+	char	*stock;
 
-	special_chars = "<>|";
-	tokens = split(s, special_chars);
-	quote = expand_quotes(tokens);
-	return (red_to_herdoc(tokens));
-	// exit(1);
+	if (!s || !s[0])
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return ("");
+	if (len > ft_strlen(s))
+		len = ft_strlen(s);
+	stock = ft_strdup(s + start);
+	if (!stock)
+		return (NULL);
+	stock[len] = '\0';
+	return (stock);
 }
-

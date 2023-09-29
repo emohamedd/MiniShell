@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 10:09:38 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:07:24 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,17 @@ char		**ft_split_export(char const *s, char c);
 char		*allocat_s_export(const char *s, char c);
 int			count_s_lenght_export(const char *s, char c);
 char		*ft_strjoin_export(char const *s1, char const *s2);
+int 		get_var_size(char *str);
+int 		is_var_inside_sq(char *arg, int index);
+int			lenght_of_the_2d(char **p);
+int			is_char(char *str);
+int			is_char_in2d(char **str);
+char		**split(char *s, char *delimiters);
+char		*ft_strndup(char const *str, size_t max);
+char *expand_var(char *arg, t_vars *vars);
+char	**expand_s_quotes(char **tokens);
+char	**expand_quotes(char **tokens);
+t_info	**allocat_token(char **s, t_vars *vars);
+char	*alloc_s(char const *s, unsigned int start, int len);
 
 #endif

@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_tokens.c                                      :+:      :+:    :+:   */
+/*   variable_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:03:18 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 11:00:32 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/29 11:00:45 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-char	**make_token(char *s)
+int get_var_size(char *str) 
 {
-	char	*special_chars;
-	char	**tokens;
-	char	**quote;
-
-	special_chars = "<>|";
-	tokens = split(s, special_chars);
-	quote = expand_quotes(tokens);
-	return (red_to_herdoc(tokens));
-	// exit(1);
+	int i = 0;
+	while (str[i] && (ft_isalpha(str[i]))) 
+	{
+		i++;
+	}
+	return i;
 }
-

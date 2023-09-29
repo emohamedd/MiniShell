@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_tokens.c                                      :+:      :+:    :+:   */
+/*   the_var_state.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:03:18 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 11:01:16 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/29 11:01:38 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-char	**make_token(char *s)
+int is_var_inside_sq(char *arg, int index) 
 {
-	char	*special_chars;
-	char	**tokens;
-	char	**quote;
-
-	special_chars = "<>|";
-	tokens = split(s, special_chars);
-	quote = expand_quotes(tokens);
-	return (red_to_herdoc(tokens));
-	// exit(1);
+	int count = 0;
+	int count_sq = 0;
+	int count_dq = 0;
+	while (arg[count]) {
+		if (arg[count] == '\'' && count_dq % 2 == 0)
+			count_sq++;
+		if (arg[count] == '\"')
+			count_dq++;
+		if (count == index && count_sq % 2 == 0)
+			return 0;
+		else if (count == index && count_sq % 2 != 0)
+			return 1;
+		count++;
+	}
+	return 0;
 }
-

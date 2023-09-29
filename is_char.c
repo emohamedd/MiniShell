@@ -1,28 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_tokens.c                                      :+:      :+:    :+:   */
+/*   is_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:03:18 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 10:55:29 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/29 10:55:47 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-char	**make_token(char *s)
+int	is_char(char *str)
 {
-	char	*special_chars;
-	char	**tokens;
-	char	**quote;
+	int	i;
 
-	special_chars = "<>|";
-	tokens = split(s, special_chars);
-	quote = expand_quotes(tokens);
-	return (red_to_herdoc(tokens));
-	// exit(1);
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A'
+				&& str[i] <= 'Z'))
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
+int	is_char_in2d(char **str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if ((str[i][j] >= 'a' && str[i][j] <= 'z') || (str[i][j] >= 'A'
+					&& str[i][j] <= 'Z'))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}

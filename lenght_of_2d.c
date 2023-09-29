@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_tokens.c                                      :+:      :+:    :+:   */
+/*   lenght_of_2d.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:03:18 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 10:56:05 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/29 10:56:18 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-char	**make_token(char *s)
+int	lenght_of_the_2d(char **p)
 {
-	char	*special_chars;
-	char	**tokens;
-	char	**quote;
+	int	i;
 
-	special_chars = "<>|";
-	tokens = split(s, special_chars);
-	quote = expand_quotes(tokens);
-	return (red_to_herdoc(tokens));
-	// exit(1);
+	if (!p[0])
+		return (0);
+	i = 0;
+	while (p[i])
+	{
+		i++;
+	}
+	return (i);
 }
-

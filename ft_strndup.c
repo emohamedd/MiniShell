@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_tokens.c                                      :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:03:18 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 10:59:59 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/29 11:00:08 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-char	**make_token(char *s)
+char	*ft_strndup(char const *str, size_t max)
 {
-	char	*special_chars;
-	char	**tokens;
-	char	**quote;
+	size_t	index;
+	char	*dst;
 
-	special_chars = "<>|";
-	tokens = split(s, special_chars);
-	quote = expand_quotes(tokens);
-	return (red_to_herdoc(tokens));
-	// exit(1);
+	index = 0;
+	dst = malloc(sizeof(char) * (max + 1));
+	// dst = malloc_((sizeof(char) * (max + 1)), NULL, 0, NULL);
+	if (!dst)
+	{
+		return (0);
+	}
+	while (str[index] && index < max)
+	{
+		dst[index] = str[index];
+		index++;
+	}
+	dst[index] = '\0';
+	return (dst);
 }
-
