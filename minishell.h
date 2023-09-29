@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 13:00:42 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 18:38:56 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,22 @@ typedef struct s_cmds
 	int		has_redirections;
 }			t_cmds;
 
+
 typedef struct s_env
 {
 	char	*key;
 	int		is_equal;
 	char	*value;
 }			t_env;
+
+
+typedef struct s_int
+{
+	int b;
+	int k;
+	int size_of_direc;
+}			t_int;
+
 
 typedef struct s_vars
 {
@@ -83,6 +93,7 @@ typedef struct s_vars
 	int		here_fd;
 
 }			t_vars;
+
 
 void		cmd_exit(char **str, t_vars *vars);
 int			has_redirections(t_vars *vars, int i);
@@ -122,10 +133,10 @@ void		fell_env_struct(t_vars *vars);
 void		fell_env_struct(t_vars *vars);
 char		*ft_getenv(char *key, t_vars *vars);
 void		pipe_red(t_vars *vars, int i, pid_t *childs);
-void		cmd_builtins(t_vars *vars, int i, char **str);
+void		cmd_builtins(t_vars *vars, int i);
 int			syntax_errors(char **args, t_vars *vars);
 void 		is_notbuiltins(t_vars *vars, int i, pid_t *childs);
-void 		ft_builtins(t_vars *vars, int i, char **str, pid_t *childs);
+void 		ft_builtins(t_vars *vars, int i, pid_t *childs);
 int			command_notfound(char **args, t_vars *vars);
 int 		syntax_err(char **args, t_vars *vars);
 void		change_pwd(t_vars *vars, char *pwd);

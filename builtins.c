@@ -6,13 +6,13 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:44:19 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/29 13:48:34 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 18:38:27 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void builtins_pipes(t_vars *vars, int i, char **str, pid_t *childs)
+void builtins_pipes(t_vars *vars, int i,pid_t *childs)
 {
 	int fd[2];
 	
@@ -22,7 +22,7 @@ void builtins_pipes(t_vars *vars, int i, char **str, pid_t *childs)
 	{
 		close(fd[0]);
 		dup2(fd[1], 1);
-		cmd_builtins(vars, i, str);
+		cmd_builtins(vars, i);
 		close(fd[1]);					
 		exit(0);
 	}
@@ -35,17 +35,17 @@ void builtins_pipes(t_vars *vars, int i, char **str, pid_t *childs)
 	}
 }
 
-void ft_builtins(t_vars *vars, int i, char **str, pid_t *childs)
+void ft_builtins(t_vars *vars, int i, pid_t *childs)
 {
 	if (vars->cmds[i].has_redirections)
 		if (has_redirections(vars, i))
 			return ;
 	if (vars->cmds[i].is_nex_pip)
 	{
-		builtins_pipes(vars, i, str, childs);
+		builtins_pipes(vars, i, childs);
 	}
 	else
-		cmd_builtins(vars, i, str);
+		cmd_builtins(vars, i);
 }
 
 

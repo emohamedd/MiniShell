@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/29 15:05:34 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 15:45:39 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,22 @@ void print_env(t_vars *vars, int count)
 	}
 }
 
-// int fell_value(t_vars *vars)
+int fell_value(t_vars *vars, char *args, int count)
+{
+	if (ft_strchr(args, '=') == NULL)
+	{
+		vars->env[count].value = vars->env[count].value;
+		exit_status = 0;
+		return (0);
+	}
+	if (ft_strchr(args, '=') != NULL)
+	{
+		vars->env[count].value = ft_strchr(args, '=') + 1;
+		exit_status = 0;
+		return (0);
+	}
+	return (1);
+}
 
 
 int fell_env_value(t_vars *vars,char *args, int count, char *var_)
@@ -98,18 +113,8 @@ int fell_env_value(t_vars *vars,char *args, int count, char *var_)
 	if (!ft_strncmp(vars->env[count].key, var_,
 				ft_strlen(vars->env[count].key) + 1))
 	{
-		if (ft_strchr(args, '=') == NULL)
-		{
-			vars->env[count].value = vars->env[count].value;
-			exit_status = 0;
+		if (fell_value(vars, args, count) == 0)
 			return (0);
-		}
-		if (ft_strchr(args, '=') != NULL)
-		{
-			vars->env[count].value = ft_strchr(args, '=') + 1;
-			exit_status = 0;
-			return (0);
-		}
 		j = 0;
 		while (j < vars->env_number)
 		{

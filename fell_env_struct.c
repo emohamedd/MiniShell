@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fell_env_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:59:43 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 16:31:21 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 15:45:59 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	fell_env_struct(t_vars *vars)
 		{
 			vars->env[i].is_equal = 1;
 			vars->env[i].value = ft_strchr(vars->envp[i], '=') + 1;
-
 		}
 		i++;
 	}
