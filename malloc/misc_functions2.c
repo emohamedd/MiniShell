@@ -1,25 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   misc_functions2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/05 00:14:20 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/25 15:45:33 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/27 17:20:11 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/28 07:50:09 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 
-int	count_argiment(char **str)
+
+#include "ft_malloc.h"
+
+void	print_str_with_int(char *string, unsigned int n)
+{
+	print_string(string);
+	print_number(n);
+	write(1, "\n", 1);
+}
+
+void	print_string(char *string)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (string[i])
 	{
+		write(1, &string[i], 1);
 		i++;
 	}
-	return (i);
+}
+
+void	print_number(unsigned int number)
+{
+	char	n;
+
+	if (number >= 0 && number <= 9)
+	{
+		n = number + 48;
+		write(1, &n, 1);
+	}
+	else
+	{
+		print_number(number / 10);
+		print_number(number % 10);
+	}
 }

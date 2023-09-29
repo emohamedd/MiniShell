@@ -6,15 +6,16 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:31:28 by emohamed          #+#    #+#             */
-/*   Updated: 2023/05/16 15:33:44 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/28 07:54:10 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
-# define LIBFT_H	
+# define LIBFT_H
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "../malloc/ft_malloc.h"
 
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);

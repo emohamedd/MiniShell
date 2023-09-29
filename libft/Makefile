@@ -6,7 +6,7 @@
 #    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/18 10:16:48 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/25 12:55:11 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,8 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "$(YEL)✅ Cleaned up object files$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(YEL)✅ Cleaned up executable$(RESET)"
 
 re: fclean all

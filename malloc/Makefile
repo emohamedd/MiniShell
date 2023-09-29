@@ -3,49 +3,42 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+         #
+#    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/29 15:25:37 by haarab           ###   ########.fr        #
+#    Created: 2023/09/27 17:20:20 by emohamed          #+#    #+#              #
+#    Updated: 2023/09/28 07:56:12 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
+NAME = ft_malloc.a
+
+FLAGS = -Wall -Werror -Wextra
+
 CC = cc
-CFLAGS = #-g -fsanitize=address
-LDFLAGS = -lreadline 
-# RLFLGS = -L/Users/haarab/.brew/opt/readline/lib -lreadline
-# RLOFLGS = -I/Users/haarab/.brew/opt/readline/include
-
-SRCS = $(wildcard *.c)
-OBJS = $(SRCS:.c=.o)
-
-NAME = minishell
 
 GREEN = \033[0;32m
 RESET = \033[0m
 
-all: $(NAME)
+SOURCES = $(addprefix ./, ft_malloc.c misc_functions.c misc_functions2.c)
+
+INCLUDE = ft_malloc.h
+
+all: $(NAME) $(SOURCES)
+
+$(NAME): $(SOURCES:.c=.o) $(INCLUDE)
+	ar -r $(NAME) $(SOURCES:.c=.o)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) $(RLOFLGS) -c $< -o $@
+	@$(CC) $(FLAGS) -I $(INCLUDE) -c $<
 	@echo "$(GREEN)✅ Compiled: $<$(RESET)"
 
-$(NAME): $(OBJS)
-	@make -C libft
-	@make -C malloc
-	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a malloc/ft_malloc.a -o $(NAME) $(LDFLAGS) $(RLFLGS)
-	@echo "$(GREEN)✅  MINISHELL : Compilation successful!$(RESET)"
-
 clean:
-	@make -C libft/ clean
-	@make -C malloc/ clean
-	@rm -f $(OBJS)
+	@rm -rf $(SOURCES:.c=.o)
 	@echo "$(GREEN)✅ Cleaned up object files$(RESET)"
 
 fclean: clean
-	@make -C libft/ fclean
-	@make -C malloc/ fclean
-	@rm -f $(NAME)
+	@rm -rf $(NAME)
 	@echo "$(GREEN)✅ Cleaned up $(NAME)$(RESET)"
 
 re: fclean all

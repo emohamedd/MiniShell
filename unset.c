@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:48:09 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/23 01:13:49 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/25 15:56:50 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void check_unset(char **args, t_vars *vars, int check)
+void	check_unset(char **args, t_vars *vars, int check)
 {
-	int i = 0;
-	char *key;
+	int		i;
+	char	*key;
 
+	i = 0;
 	key = args[check];
 	while (i < vars->env_number)
 	{
@@ -28,7 +29,7 @@ void check_unset(char **args, t_vars *vars, int check)
 				i++;
 			}
 			vars->env_number--;
-			return;
+			return ;
 		}
 		i++;
 	}

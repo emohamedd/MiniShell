@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
 #include <stdio.h>
+
 int	check_char(char const c, char const *set)
 {
 	int	j;

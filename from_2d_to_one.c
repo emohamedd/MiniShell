@@ -6,23 +6,25 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:57:21 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/18 10:57:35 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:44:23 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *swap(char **str)
+char	*swap(char **str)
 {
-    int  i = 0;
-    char *s = NULL;
-    while(str[i])
-    {
+	int		i;
+	char	*s;
 
-      s = ft_strjoin(s, str[i]);
-      i++;
-      if (str[i])
-        s = ft_strjoin(s, " ");
-    }
-    return s;
+	i = 0;
+	s = NULL;
+	while (str[i])
+	{
+		s = ft_strjoin(s, str[i]);
+		i++;
+		if (str[i])
+			s = ft_strjoin(s, " ");
+	}
+	return (s);
 }

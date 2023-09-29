@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-char *read_input()
+char	*read_input(void)
 {
-    char *in =  readline("amineoaarab-00$ ");
-    
-    if (in)
-        add_history(in);
-   
-    return in;
+	char	*in;
+
+	in = readline("amineoaarab-00$ ");
+	if (in)
+		add_history(in);
+	return (in);
 }

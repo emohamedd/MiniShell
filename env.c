@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:33:44 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/13 20:19:27 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:52:19 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void env_cmd(t_vars *vars)
+void	env_cmd(t_vars *vars)
 {
-    int i = 0;
-    while (i < vars->env_number)
-	{
-        if (vars->env[i].is_equal)
-		{
-            printf("%s", vars->env[i].key);
-            printf("=");
-            printf("%s\n", vars->env[i].value);
+	int	i;
 
-        }
-        i++;
-    }
+	i = 0;
+	while (i < vars->env_number)
+	{
+		if (vars->env[i].is_equal)
+		{
+			printf("%s", vars->env[i].key);
+			printf("=");
+			printf("%s\n", vars->env[i].value);
+		}
+		i++;
+	}
+	exit_status = 0;
 }

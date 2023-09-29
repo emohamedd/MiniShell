@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:44:19 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/24 20:31:59 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/29 13:48:34 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void builtins_pipes(t_vars *vars, int i, char **str, pid_t *childs)
 {
 	int fd[2];
+	
 	pipe(fd);
 	childs[i] = fork();
 	if (childs[i] == 0)
@@ -47,6 +48,8 @@ void ft_builtins(t_vars *vars, int i, char **str, pid_t *childs)
 		cmd_builtins(vars, i, str);
 }
 
+
+
 void is_notbuiltins(t_vars *vars, int i, pid_t *childs)
 {
 	if (vars->cmds[i].has_redirections)
@@ -56,6 +59,6 @@ void is_notbuiltins(t_vars *vars, int i, pid_t *childs)
 	}
 	if (vars->n_commandes > 1)
 		pipe_commands(vars, i, childs);
-	if (vars->n_commandes == 1 && i == 0)
+	else if (vars->n_commandes == 1 && i == 0)
 		exec_cmds(vars, i);
 }
