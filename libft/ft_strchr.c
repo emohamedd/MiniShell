@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:12:53 by emohamed          #+#    #+#             */
-/*   Updated: 2023/05/14 09:59:13 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 04:53:05 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
+	int		i;
 	char	x;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 04:46:32 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 01:44:13 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 04:49:32 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_numeric(const char *str)
 	return (1);
 }
 
-void	cmd_exit(char **str, t_vars *vars)
+void	cmd_exit(char **str)
 {
 	int	i;
 	int	res;

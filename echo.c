@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:49:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 16:32:07 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 04:43:37 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_n(char *args)
 	return (1);
 }
 
-void	run_echo(char **args, t_vars *vars)
+void	run_echo(char **args)
 {
 	int	i;
 	int	check;

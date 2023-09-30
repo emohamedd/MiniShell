@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:35:50 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 02:41:09 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 05:06:47 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	cmd_execve(char *path, t_vars *vars, int i)
 
 void	pipe_commands(t_vars *vars, int i, pid_t *childs)
 {
-	int		status;
 	int		fd[2];
 	int		prev_fd;
 	char	*path;
 
+	// prev_fd = 0;
 	if (pipe(fd) == -1)
 		return ;
 	path = get_path(vars, vars->cmds[i].cmd);

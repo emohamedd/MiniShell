@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:03:07 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:22:40 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 04:43:17 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ t_info	**allocat_token(char **s, t_vars *vars)
 {
 	int		i;
 	t_info	**inf;
-	char	*trimmed_content;
-	char	*var;
 
 	i = 0;
 	inf = malloc_((sizeof(t_info *) * (lenght_of_the_2d(s) + 1)), NULL, 0,

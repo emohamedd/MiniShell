@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:49:40 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 05:01:27 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_vars
 }			t_vars;
 
 void		free_x_max(char **str);
-void		cmd_exit(char **str, t_vars *vars);
+void		cmd_exit(char **str);
 int			has_redirections(t_vars *vars, int i);
 int			ft_strcmp(char *s1, char *s2);
 char		**clear_cmds_arg_from_direct(char **args);
@@ -103,11 +103,11 @@ char		*ft_getenv(char *key, t_vars *vars);
 void		exec_cmds(t_vars *vars, int i);
 char		*read_input(void);
 char		**ft_split(char const *s, char c);
-void		run(char *cmd, char **args, t_vars *vars, char **str);
+void		run(char **args, t_vars *vars);
 void		fell_env_struct(t_vars *vars);
 void		run_cd(char **args, t_vars *vars, char *pwd);
-void		run_echo(char **args, t_vars *vars);
-void		export_cmd(t_vars *vars, char *args, char **str);
+void		run_echo(char **args);
+void		export_cmd(t_vars *vars, char *args);
 void		check_unset(char **args, t_vars *vars, int check);
 void		env_cmd(t_vars *vars);
 void		table(char **str, t_info **tokens);
@@ -127,11 +127,11 @@ void		fell_env_struct(t_vars *vars);
 char		*ft_getenv(char *key, t_vars *vars);
 void		pipe_red(t_vars *vars, int i, pid_t *childs);
 void		cmd_builtins(t_vars *vars, int i);
-int			syntax_errors(char **args, t_vars *vars);
+int			syntax_errors(char **args);
 void		is_notbuiltins(t_vars *vars, int i, pid_t *childs);
 void		ft_builtins(t_vars *vars, int i, pid_t *childs);
 int			command_notfound(char **args, t_vars *vars);
-int			syntax_err(char **args, t_vars *vars);
+int			syntax_err(char **args);
 void		change_pwd(t_vars *vars, char *pwd);
 char		**expand_s_quotes(char **tokens);
 char		**expand_quotes(char **tokens);

@@ -6,12 +6,12 @@
 #    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/30 01:46:19 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/30 05:02:04 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = #-g -fsanitize=address
+CFLAGS = #-Wall -Werror -Wextra  #-g -fsanitize=address
 LDFLAGS = -lreadline 
 RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline
 RLOFLGS = -I/Users/emohamed/.brew/opt/readline/include

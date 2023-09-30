@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 02:32:36 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 04:50:47 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ void	fell_env_isequal(t_vars *vars, int count, char *args, int p)
 
 void	fell_env_dollar(t_vars *vars, int count, char *args, int p)
 {
-	char	*value;
 	int		j;
 
 	j = 0;
@@ -170,8 +169,6 @@ void	fell_env_dollar(t_vars *vars, int count, char *args, int p)
 
 void	fell_env(t_vars *vars, int count, char *args, char *key, int p)
 {
-	int		j;
-	char	*value;
 
 	if (!ft_strchr(args, '$'))
 	{
@@ -249,10 +246,9 @@ int	export_env(t_vars *vars, char *var_, char *args)
 	return (1);
 }
 
-void	export_cmd(t_vars *vars, char *args, char **str)
+void	export_cmd(t_vars *vars, char *args)
 {
 	char	*key;
-	char	*value;
 	int		count;
 	t_env	*tmp;
 	char	*var_;

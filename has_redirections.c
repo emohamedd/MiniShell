@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 02:38:45 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 04:51:12 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	collect_and_write_heredoc(int fd, char *heredoc_delimiter)
 {
 	char	*read;
 	char	*buff;
-	char	*line;
 
 	read = NULL;
 	buff = "";

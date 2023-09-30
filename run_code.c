@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 02:44:36 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 05:01:35 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	run_export(t_vars *vars, int i)
 	int	k;
 
 	if (!vars->cmds[i].cmds_args[1])
-		export_cmd(vars, NULL, NULL);
+		export_cmd(vars, NULL);
 	k = 1;
 	while (vars->cmds[i].cmds_args[k])
 	{
-		export_cmd(vars, vars->cmds[i].cmds_args[k], vars->cmds[i].cmds_args);
+		export_cmd(vars, vars->cmds[i].cmds_args[k]);
 		k++;
 	}
 }
@@ -52,11 +52,11 @@ void	run_unset(t_vars *vars, int i)
 
 void	run_exit(t_vars *vars, int i)
 {
-	cmd_exit(vars->cmds[i].cmds_args, vars);
+	cmd_exit(vars->cmds[i].cmds_args);
 	exit(exit_status);
 }
 
-void	run_pwd(t_vars *vars, char *cwd)
+void	run_pwd(char *cwd)
 {
 	printf("%s\n", cwd);
 	exit_status = 0;
@@ -66,13 +66,13 @@ void	run_builtins(t_vars *vars, int i, char *cwd)
 {
 	if ((ft_strncmp("echo", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd)
 				+ 1) == 0))
-		run_echo(vars->cmds[i].cmds_args, vars);
+		run_echo(vars->cmds[i].cmds_args);
 	else if (ft_strncmp("cd", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd)
 			+ 1) == 0)
 		run_cd(vars->cmds[i].cmds_args, vars, cwd);
 	else if (ft_strncmp("pwd", vars->cmds[i].cmd, ft_strlen(vars->cmds[i].cmd)
 			+ 1) == 0)
-		run_pwd(vars, cwd);
+		run_pwd(cwd);
 	else if (ft_strncmp("export", vars->cmds[i].cmd,
 			ft_strlen(vars->cmds[i].cmd) + 1) == 0)
 		run_export(vars, i);
@@ -125,7 +125,7 @@ int	ft_error(char **str)
 	return (0);
 }
 
-int	syntax_errors(char **args, t_vars *vars)
+int	syntax_errors(char **args)
 {
 	int	count;
 	int	i;
@@ -164,13 +164,13 @@ int	syntax_errors(char **args, t_vars *vars)
 	return (j);
 }
 
-void	run(char *cmd, char **args, t_vars *vars, char **str)
+void	run(char **args, t_vars *vars)
 {
 	int		i;
 	int		status;
 	pid_t	*childs;
 
-	if (syntax_err(args, vars))
+	if (syntax_err(args))
 		return ;
 	fill_commands(args, vars);
 	i = 0;
