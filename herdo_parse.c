@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:08:39 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 17:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 18:43:23 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,41 @@ static int	get_new_tokens_count(char **tokens)
 	return (count);
 }
 
+static void	copy_w_red(char **tokens, char **new_tokens, t_cp *cp)
+{
+	new_tokens[cp->j] = malloc_((sizeof(char) * (ft_strlen(tokens[cp->i]) + 1)),
+			NULL, 0, NULL);
+	strcpy(new_tokens[cp->j], tokens[cp->i]);
+	while (tokens[cp->i + 1] 
+		&& (ft_strcmp(tokens[cp->i], tokens[cp->i + 1]) == 0))
+	{
+		ft_strcat(new_tokens[cp->j], tokens[cp->i + 1]);
+		cp->i++;
+	}
+	cp->j++;
+}
+
+static void	cpy_n_red(char **tokens, char **new_tokens, t_cp *cp)
+{
+	new_tokens[cp->j] = malloc_((ft_strlen(tokens[cp->i]) + 1),
+			NULL, 0, NULL);
+	ft_strcpy(new_tokens[cp->j], tokens[cp->i]);
+	cp->j++;
+}
+
 static void	copy_tokens_with_redirections(char **tokens, char **new_tokens)
 {
 	t_cp	cp;
 
+	cp.i = 0;
+	cp.j = 0;
 	while (tokens[cp.i])
 	{
 		if (ft_strcmp(tokens[cp.i], ">") == 0 
 			|| ft_strcmp(tokens[cp.i], "<") == 0)
-		{
-			new_tokens[cp.j] = malloc_((sizeof(char) * (ft_strlen(tokens[cp.i]) + 1)),
-					NULL, 0, NULL);
-			strcpy(new_tokens[cp.j], tokens[cp.i]);
-			while (tokens[cp.i + 1] 
-				&& (ft_strcmp(tokens[cp.i], tokens[cp.i + 1]) == 0))
-			{
-				ft_strcat(new_tokens[cp.j], tokens[cp.i + 1]);
-				cp.i++;
-			}
-			cp.j++;
-		}
+			copy_w_red(tokens, new_tokens, &cp);
 		else
-		{
-			new_tokens[cp.j] = malloc_((ft_strlen(tokens[cp.i]) + 1),
-					NULL, 0, NULL);
-			ft_strcpy(new_tokens[cp.j], tokens[cp.i]);
-			cp.j++;
-		}
+			cpy_n_red(tokens, new_tokens, &cp);
 		cp.i++;
 	}
 }

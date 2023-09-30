@@ -6,12 +6,11 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 17:05:12 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 17:26:50 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 18:37:44 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 int	handle_output_redirection(char *filename)
 {
 	int	fd;

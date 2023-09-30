@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 17:28:33 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 18:36:45 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,10 @@ typedef struct s_vars
 int			handle_input_redirection(char *filename);
 int			handle_output_redirection(char *filename);
 int			handle_append_redirection(char *filename);
+t_sp		realloc_tokens(t_sp sp);
+t_sp		handle_token(t_sp sp);
 int			handle_heredoc(char *filename);
+t_sp		handle_last_token(t_sp sp);
 void		free_x_max(char **str);
 void		cmd_exit(char **str);
 int			has_redirections(t_vars *vars, int i);
