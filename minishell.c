@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 12:53:17 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 16:10:32 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int c, char **v, char **env)
 			return (exit_status);
 		}
 		trimed = ft_strtrim(input, " \t\r\n");
-		// free(input);
+		free(input);
 		if (trimed == NULL)
 		{
 			return (exit_status);
@@ -72,8 +72,8 @@ int	main(int c, char **v, char **env)
 			// free(tokens);
 			// table(cmds, tokens);
 			// free(vars.env);
-			malloc_(0, NULL, 2, NULL);
 		}
+		malloc_(0, NULL, 2, NULL);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:08:39 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 12:50:42 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:41:11 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void copy_tokens_with_redirections(char **tokens, char **new_tokens)
     {
         if (ft_strcmp(tokens[i], ">") == 0 || ft_strcmp(tokens[i], "<") == 0)
         {
-            new_tokens[j] = (char *)malloc(sizeof(char) * (ft_strlen(tokens[i]) + 1));
+            // new_tokens[j] = (char *)malloc(sizeof(char) * (ft_strlen(tokens[i]) + 1));
+			new_tokens[j] = malloc_((sizeof(char) * (ft_strlen(tokens[i]) + 1)), NULL, 0, NULL);;
             strcpy(new_tokens[j], tokens[i]);
             while (tokens[i + 1] && (ft_strcmp(tokens[i], tokens[i + 1]) == 0))
             {
@@ -67,7 +68,8 @@ static void copy_tokens_with_redirections(char **tokens, char **new_tokens)
 char **red_to_herdoc(char **tokens)
 {
     int new_tokens_count = get_new_tokens_count(tokens);
-    char **new_tokens = malloc((new_tokens_count + 1) * sizeof(char *));
+    // char **new_tokens = malloc((new_tokens_count + 1) * sizeof(char *));
+	char **new_tokens = malloc_(((new_tokens_count + 1) * sizeof(char *)), NULL, 0, NULL);
 
     if (!new_tokens)
     {

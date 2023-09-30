@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:58:11 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:57:08 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/29 13:43:31 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 #include <stdlib.h>
 
-int count_single_quotes(char **tokens) {
+int count_single_quotes(char **tokens) 
+{
     int count = 0;
     int i = 0;
 
@@ -28,9 +29,11 @@ int count_single_quotes(char **tokens) {
     return count;
 }
 
-char *remove_single_quotes(const char *token) {
+char *remove_single_quotes(const char *token) 
+{
     int token_length = ft_strlen(token);
-    char *modified_token = malloc(token_length * sizeof(char));
+    // char *modified_token = malloc(token_length * sizeof(char));
+	char *modified_token = malloc_((token_length * sizeof(char)), NULL, 0, NULL);
     if (modified_token == NULL) {
         return NULL;
     }
@@ -59,7 +62,8 @@ char **expand_s_quotes(char **tokens) {
         i++;
     }
 
-    char **expanded_tokens = malloc((total_tokens + num_quotes + 1) * sizeof(char *));
+    // char **expanded_tokens = malloc((total_tokens + num_quotes + 1) * sizeof(char *));
+	char **expanded_tokens = malloc_(((total_tokens + num_quotes + 1) * sizeof(char *)), NULL, 0, NULL);;
     if (expanded_tokens == NULL) {
         return NULL;
     }
