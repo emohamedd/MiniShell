@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 17:05:12 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 21:39:41 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 22:54:08 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ int	handle_output_redirection(char *filename)
 
 int	handle_input_redirection(char *filename)
 {
-	int	fd;
+		int	fd;
 
-	if (!(access(filename, F_OK)))
-	{
 		if (filename)
 		{
 			fd = open(filename, O_RDWR);
@@ -50,14 +48,6 @@ int	handle_input_redirection(char *filename)
 			return (1);
 		}
 		return (0);
-	}
-	else
-	{
-		write(2, "No such file or directory\n", 26);
-		g_exit_status = 1;
-		return (1);
-	}
-	return (0);
 }
 
 int	handle_append_redirection(char *filename)
