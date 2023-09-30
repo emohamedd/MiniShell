@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 05:01:27 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:01:21 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,57 @@ typedef struct s_int
 	int		k;
 	int		size_of_direc;
 }			t_int;
+
+typedef struct s_dq
+{
+	int		num_quotes;
+	int		total_tokens;
+	int		i;
+	char	**expanded_tokens;
+	int		j;
+	char	*current_token;
+	char	*modified_token;
+}			t_dq;
+
+typedef struct s_sq
+{
+	int		num_quotes;
+	int		total_tokens;
+	int		i;
+	char	**expanded_tokens;
+	int		j;
+	char	*current_token;
+}			t_sq;
+
+typedef struct s_ev
+{
+	int		i;
+	char	*key;
+	char	*dst1;
+	char	*dst2;
+	char	*dst3;
+	char	*exp_value;
+}			t_ev;
+
+typedef struct s_sp
+{
+	int		max_tokens;
+	char	**tokens;
+	int		token_count;
+	char	*start;
+	char	*end;
+	int		in_quotes;
+	char	quote_char;
+	int		escaped;
+	int		i;
+	char	**new_tokens;
+}			t_sp;
+
+typedef struct s_cp
+{
+	int	i;
+	int	j;
+}			t_cp;
 
 typedef struct s_vars
 {
@@ -152,4 +203,7 @@ char		*ft_strndup(char const *str, size_t max);
 char		*expand_var(char *arg, t_vars *vars);
 int			is_var_inside_sq(char *arg, int index);
 int			get_var_size(char *str);
+char		* ft_strcpy(char* destination, const char* source);
+char		* ft_strcat(char* destination, const char* source);
+char		*ft_strncpy(char* destination,  char* source, int n);
 #endif

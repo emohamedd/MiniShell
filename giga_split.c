@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:56:43 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:37:53 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:01:27 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,152 +14,143 @@
 
 char	**split(char *s, char *delimiters)
 {
-	int		max_tokens;
-	char	**tokens;
-	int		token_count;
-	char	*start;
-	char	*end;
-	int		in_quotes;
-	char	quote_char;
-	int		escaped;
-	int		i;
-	char	**new_tokens;
+	t_sp	sp;
 
-	max_tokens = ft_strlen(s) + 1;
-	tokens = malloc_((max_tokens * sizeof(char *)), NULL, 0, NULL);
-	if (!tokens)
+	sp.max_tokens = ft_strlen(s) + 1;
+	sp.tokens = malloc_((sp.max_tokens * sizeof(char *)), NULL, 0, NULL);
+	if (!sp.tokens)
 	{
 		printf("allocation err\n");
 		exit(1);
 	}
-	token_count = 0;
-	start = s;
-	end = s;
-	in_quotes = 0;
-	quote_char = '\0';
-	escaped = 0;
-	i = 0;
-	while (end[i])
+	sp.token_count = 0;
+	sp.start = s;
+	sp.end = s;
+	sp.in_quotes = 0;
+	sp.quote_char = '\0';
+	sp.escaped = 0;
+	sp.i = 0;
+	while (sp.end[sp.i])
 	{
-		if (end[i] == '\'' || end[i] == '\"')
+		if (sp.end[sp.i] == '\'' || sp.end[sp.i] == '\"')
 		{
-			if (in_quotes && end[i] == quote_char)
+			if (sp.in_quotes && sp.end[sp.i] == sp.quote_char)
 			{
-				in_quotes = 0;
-				quote_char = '\0';
+				sp.in_quotes = 0;
+				sp.quote_char = '\0';
 			}
-			else if (!in_quotes)
+			else if (!sp.in_quotes)
 			{
-				in_quotes = 1;
-				quote_char = end[i];
+				sp.in_quotes = 1;
+				sp.quote_char = sp.end[sp.i];
 			}
-			escaped = 0;
+			sp.escaped = 0;
 		}
-		else if (end[i] == '\\')
+		else if (sp.end[sp.i] == '\\')
 		{
-			if (in_quotes)
+			if (sp.in_quotes)
 			{
-				escaped = !escaped;
+				sp.escaped = !sp.escaped;
 			}
 		}
-		else if ((!in_quotes && ft_strchr(delimiters, end[i]) != NULL)
-			|| (!in_quotes && (end[i] == ' ' || end[i] == '\t')))
+		else if ((!sp.in_quotes && ft_strchr(delimiters, sp.end[sp.i]) != NULL)
+			|| (!sp.in_quotes && (sp.end[sp.i] == ' ' || sp.end[sp.i] == '\t')))
 		{
-			if (start != end)
+			if (sp.start != sp.end)
 			{
-				if (token_count >= max_tokens)
+				if (sp.token_count >= sp.max_tokens)
 				{
-					max_tokens *= 2;
-					new_tokens = malloc_((max_tokens * sizeof(char *)), NULL, 0, NULL);
-					if (!new_tokens)
+					sp.max_tokens *= 2;
+					sp.new_tokens = malloc_((sp.max_tokens * sizeof(char *)), NULL, 0, NULL);
+					if (!sp.new_tokens)
 					{
 						printf("allocation err\n");
 						exit(1);
 					}
-					i = 0;
-					while (i < token_count)
+					sp.i = 0;
+					while (sp.i < sp.token_count)
 					{
-						new_tokens[i] = tokens[i];
-						i++;
+						sp.new_tokens[sp.i] = sp.tokens[sp.i];
+						sp.i++;
 					}
-					tokens = new_tokens;
+					sp.tokens = sp.new_tokens;
 				}
-				tokens[token_count] = malloc_(((end - start + 1) * sizeof(char)), NULL, 0, NULL);
-				if (!tokens[token_count])
+				sp.tokens[sp.token_count] = malloc_(((sp.end - sp.start + 1) * sizeof(char)), NULL, 0, NULL);
+				if (!sp.tokens[sp.token_count])
 				{
 					printf("allocation err\n");
 					exit(1);
 				}
-				strncpy(tokens[token_count], start, end - start);
-				tokens[token_count][end - start] = '\0';
-				token_count++;
+				strncpy(sp.tokens[sp.token_count], sp.start, sp.end - sp.start);
+				sp.tokens[sp.token_count][sp.end - sp.start] = '\0';
+				sp.token_count++;
 			}
-			if (ft_strchr(delimiters, end[i]) != NULL)
+			if (ft_strchr(delimiters, sp.end[sp.i]) != NULL)
 			{
-				if (token_count >= max_tokens)
+				if (sp.token_count >= sp.max_tokens)
 				{
-					max_tokens *= 2;
-					new_tokens = malloc_((max_tokens * sizeof(char *)), NULL, 0, NULL);
-					if (!new_tokens)
+					sp.max_tokens *= 2;
+					sp.new_tokens = malloc_((sp.max_tokens * sizeof(char *)), NULL, 0, NULL);
+					if (!sp.new_tokens)
 					{
 						printf("allocation err\n");
 						exit(1);
 					}
-					i = 0;
-					while (i < token_count)
+					sp.i = 0;
+					while (sp.i < sp.token_count)
 					{
-						new_tokens[i] = tokens[i];
-						i++;
+						sp.new_tokens[sp.i] = sp.tokens[sp.i];
+						sp.i++;
 					}
-					tokens = new_tokens;
+					sp.tokens = sp.new_tokens;
 				}
-				tokens[token_count] = malloc_((2 * sizeof(char)), NULL, 0, NULL);
-				if (!tokens[token_count])
+				sp.tokens[sp.token_count] = malloc_((2 * sizeof(char)), NULL, 0, NULL);
+				if (!sp.tokens[sp.token_count])
 				{
 					printf("allocation err\n");
 					exit(1);
 				}
-				tokens[token_count][0] = end[i];
-				tokens[token_count][1] = '\0';
-				token_count++;
+				sp.tokens[sp.token_count][0] = sp.end[sp.i];
+				sp.tokens[sp.token_count][1] = '\0';
+				sp.token_count++;
 			}
-			start = end + 1;
+			sp.start = sp.end + 1;
 		}
-		else if (escaped)
+		else if (sp.escaped)
 		{
-			escaped = 0;
+			sp.escaped = 0;
 		}
-		end++;
+		sp.end++;
 	}
-	if (start != end)
+	if (sp.start != sp.end)
 	{
-		if (token_count >= max_tokens)
+		if (sp.token_count >= sp.max_tokens)
 		{
-			max_tokens *= 2;
-			new_tokens = malloc_((max_tokens * sizeof(char *)), NULL, 0, NULL);
-			if (!new_tokens)
+			sp.max_tokens *= 2;
+			sp.new_tokens = malloc_((sp.max_tokens * sizeof(char *)), NULL, 0, NULL);
+			if (!sp.new_tokens)
 			{
 				printf("allocation err\n");
 				exit(1);
 			}
-			i = 0;
-			while (i < token_count)
+			sp.i = 0;
+			while (sp.i < sp.token_count)
 			{
-				new_tokens[i] = tokens[i];
-				i++;
+				sp.new_tokens[sp.i] = sp.tokens[sp.i];
+				sp.i++;
 			}
-			tokens = new_tokens;
+			sp.tokens = sp.new_tokens;
 		}
-		tokens[token_count] = malloc_(((end - start + 1) * sizeof(char)), NULL, 0, NULL);
-		if (!tokens[token_count])
+		sp.tokens[sp.token_count] = malloc_(((sp.end - sp.start + 1) * sizeof(char)), NULL, 0, NULL);
+		if (!sp.tokens[sp.token_count])
 		{
 			printf("allocation err\n");
 			exit(1);
 		}
-		strncpy(tokens[token_count], start, end - start);
-		tokens[token_count][end - start] = '\0';
-		token_count++;
+		ft_strncpy(sp.tokens[sp.token_count], sp.start, sp.end - sp.start);
+		sp.tokens[sp.token_count][sp.end - sp.start] = '\0';
+		sp.token_count++;
 	}
-	tokens[token_count] = NULL;
-	return (tokens);
+	sp.tokens[sp.token_count] = NULL;
+	return (sp.tokens);
 }

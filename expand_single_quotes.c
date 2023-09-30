@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:58:11 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 04:49:49 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 15:33:15 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,47 +61,43 @@ char	*remove_single_quotes(const char *token)
 
 char	**expand_s_quotes(char **tokens)
 {
-	int		num_quotes;
-	int		total_tokens;
-	int		i;
-	char	**expanded_tokens;
-	int		j;
-	char	*current_token;
+	t_sq sq;
 
-	num_quotes = count_single_quotes(tokens);
-	total_tokens = 0;
-	i = 0;
-	while (tokens[i])
+
+	sq.num_quotes = count_single_quotes(tokens);
+	sq.total_tokens = 0;
+	sq.i = 0;
+	while (tokens[sq.i])
 	{
-		total_tokens++;
-		i++;
+		sq.total_tokens++;
+		sq.i++;
 	}
-	expanded_tokens = malloc_(((total_tokens + num_quotes + 1)
+	sq.expanded_tokens = malloc_(((sq.total_tokens + sq.num_quotes + 1)
 				* sizeof(char *)), NULL, 0, NULL);
-	if (expanded_tokens == NULL)
+	if (sq.expanded_tokens == NULL)
 	{
 		return (NULL);
 	}
-	i = 0;
-	j = 0;
-	while (tokens[i])
+	sq.i = 0;
+	sq.j = 0;
+	while (tokens[sq.i])
 	{
-		current_token = tokens[i];
-		if (ft_strchr(current_token, '\''))
+		sq.current_token = tokens[sq.i];
+		if (ft_strchr(sq.current_token, '\''))
 		{
-			expanded_tokens[j] = remove_single_quotes(current_token);
+			sq.expanded_tokens[sq.j] = remove_single_quotes(sq.current_token);
 		}
 		else
 		{
-			expanded_tokens[j] = ft_strdup(current_token);
+			sq.expanded_tokens[sq.j] = ft_strdup(sq.current_token);
 		}
-		if (expanded_tokens[j] == NULL)
+		if (sq.expanded_tokens[sq.j] == NULL)
 		{
 			return (NULL);
 		}
-		i++;
-		j++;
+		sq.i++;
+		sq.j++;
 	}
-	expanded_tokens[j] = NULL;
-	return (expanded_tokens);
+	sq.expanded_tokens[sq.j] = NULL;
+	return (sq.expanded_tokens);
 }

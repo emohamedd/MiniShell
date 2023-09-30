@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   has_redirections.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 14:25:40 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 15:48:45 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	collect_and_write_heredoc(int fd, char *heredoc_delimiter)
 
 	read = NULL;
 	buff = "";
-	// rl_catch_signals = 1;
+	rl_catch_signals = 1;
 	while (1)
 	{
 		read = readline("> ");
@@ -54,8 +54,8 @@ int	handle_output_redirection(char *filename)
 	if (filename)
 	{
 		fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
-			dup2(fd, 1);
-			close(fd);
+		dup2(fd, 1);
+		close(fd);
 	}
 	else
 	{
@@ -73,9 +73,8 @@ int	handle_input_redirection(char *filename)
 	if (filename)
 	{
 		fd = open(filename, O_RDWR);
-			dup2(fd, 0);
-			close(fd);
-
+		dup2(fd, 0);
+		close(fd);
 	}
 	else
 	{
@@ -93,8 +92,8 @@ int	handle_append_redirection(char *filename)
 	if (filename)
 	{
 		fd = open(filename, O_CREAT | O_APPEND | O_RDWR, 0644);
-			dup2(fd, 1);
-			close(fd);
+		dup2(fd, 1);
+		close(fd);
 	}
 	else
 	{
@@ -115,7 +114,6 @@ int	handle_heredoc(char *delimiter)
 		base_filename = "emohamed";
 		here_fd = create_temp_file(base_filename);
 		collect_and_write_heredoc(here_fd, delimiter);
-	
 	}
 	else
 	{
@@ -136,21 +134,13 @@ int	has_redirections(t_vars *vars, int i)
 		while (vars->cmds[i].opera_derec[j])
 		{
 			if (!strcmp(vars->cmds[i].opera_derec[j], ">"))
-			{
 				handle_output_redirection(vars->cmds[i].file_derec[j]);
-			}
 			else if (!strcmp(vars->cmds[i].opera_derec[j], "<"))
-			{
 				handle_input_redirection(vars->cmds[i].file_derec[j]);
-			}
 			else if (!strcmp(vars->cmds[i].opera_derec[j], ">>"))
-			{
 				handle_append_redirection(vars->cmds[i].file_derec[j]);
-			}
 			else if (!strcmp(vars->cmds[i].opera_derec[j], "<<"))
-			{
 				handle_heredoc(vars->cmds[i].file_derec[j]);
-			}
 			j++;
 		}
 	}

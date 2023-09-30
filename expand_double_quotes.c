@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:57:41 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:27:06 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 15:29:24 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,54 +61,48 @@ char	*remove_quotes(char *token)
 
 char	**expand_quotes(char **tokens)
 {
-	int		num_quotes;
-	int		total_tokens;
-	int		i;
-	char	**expanded_tokens;
-	int		j;
-	char	*current_token;
-	char	*modified_token;
+	t_dq	dq;
 
-	num_quotes = count_quotes(tokens);
-	total_tokens = 0;
-	i = 0;
-	while (tokens[i])
+	dq.num_quotes = count_quotes(tokens);
+	dq.total_tokens = 0;
+	dq.i = 0;
+	while (tokens[dq.i])
 	{
-		total_tokens++;
-		i++;
+		dq.total_tokens++;
+		dq.i++;
 	}
-	expanded_tokens = malloc_(((total_tokens + num_quotes + 1)
+	dq.expanded_tokens = malloc_(((dq.total_tokens + dq.num_quotes + 1)
 				* sizeof(char *)), NULL, 0, NULL);
-	if (expanded_tokens == NULL)
+	if (dq.expanded_tokens == NULL)
 	{
 		return (NULL);
 	}
-	j = 0;
-	i = 0;
-	while (tokens[i])
+	dq.j = 0;
+	dq.i = 0;
+	while (tokens[dq.i])
 	{
-		current_token = tokens[i];
-		if (ft_strchr(current_token, '\"'))
+		dq.current_token = tokens[dq.i];
+		if (ft_strchr(dq.current_token, '\"'))
 		{
-			modified_token = remove_quotes(current_token);
-			if (modified_token == NULL)
+			dq.modified_token = remove_quotes(dq.current_token);
+			if (dq.modified_token == NULL)
 			{
 				return (NULL);
 			}
-			expanded_tokens[j] = modified_token;
-			j++;
+			dq.expanded_tokens[dq.j] = dq.modified_token;
+			dq.j++;
 		}
 		else
 		{
-			expanded_tokens[j] = ft_strdup(current_token);
-			if (expanded_tokens[j] == NULL)
+			dq.expanded_tokens[dq.j] = ft_strdup(dq.current_token);
+			if (dq.expanded_tokens[dq.j] == NULL)
 			{
 				return (NULL);
 			}
-			j++;
+			dq.j++;
 		}
-		i++;
+		dq.i++;
 	}
-	expanded_tokens[j] = NULL;
-	return (expanded_tokens);
+	dq.expanded_tokens[dq.j] = NULL;
+	return (dq.expanded_tokens);
 }

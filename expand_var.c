@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:02:17 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:30:53 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 15:36:26 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,37 +26,32 @@ char	*expand_var_key(char *key, t_vars *vars)
 
 char	*expand_var(char *arg, t_vars *vars)
 {
-	int		i;
-	char	*key;
-	char	*dst1;
-	char	*dst2;
-	char	*dst3;
-	char	*exp_value;
+	t_ev	ev;
 
-	i = 0;
-	while (i < ft_strlen(arg))
+	ev.i = 0;
+	while (ev.i < ft_strlen(arg))
 	{
-		if (arg[i] == '$' && !is_var_inside_sq(arg, i))
+		if (arg[ev.i] == '$' && !is_var_inside_sq(arg, ev.i))
 		{
-			dst1 = ft_strndup(arg, i);
-			if (arg[i + 1] && (arg[i + 1] == '?'))
+			ev.dst1 = ft_strndup(arg, ev.i);
+			if (arg[ev.i + 1] && (arg[ev.i + 1] == '?'))
 			{
-				i++;
-				exp_value = ft_itoa(exit_status);
+				ev.i++;
+				ev.exp_value = ft_itoa(exit_status);
 			}
 			else
 			{
-				key = ft_strndup(&arg[i + 1], get_var_size(&arg[i + 1]));
-				exp_value = ft_getenv(key, vars);
-				if (!exp_value)
-					exp_value = "";
+				ev.key = ft_strndup(&arg[ev.i + 1], get_var_size(&arg[ev.i + 1]));
+				ev.exp_value = ft_getenv(ev.key, vars);
+				if (!ev.exp_value)
+					ev.exp_value = "";
 			}
-			dst3 = arg + ((i + 1) + get_var_size(&arg[i + 1]));
-			dst2 = ft_strjoin(dst1, exp_value);
-			arg = ft_strjoin(dst2, dst3);
-			i = 0;
+			ev.dst3 = arg + ((ev.i + 1) + get_var_size(&arg[ev.i + 1]));
+			ev.dst2 = ft_strjoin(ev.dst1, ev.exp_value);
+			arg = ft_strjoin(ev.dst2, ev.dst3);
+			ev.i = 0;
 		}
-		i++;
+		ev.i++;
 	}
 	return (arg);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 13:54:01 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 16:03:13 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_x_max(char **str)
 	free(str);
 }
 
-int	main(int c, char **v, char **env)
+int main(int ac __attribute__((unused)), char **av __attribute__((unused)), char **env)
 {
 	char	**str;
 	t_vars	vars;
@@ -37,14 +37,13 @@ int	main(int c, char **v, char **env)
 	int		fdou;
 
 	cmds = NULL;
-	v += c;
 	exit_status = 0;
 	vars.envp = env;
 	vars.env = malloc(sizeof(t_env) * (count_argiment(vars.envp)));
 	fell_env_struct(&vars);
 	vars.env_number = count_argiment(vars.envp);
 	tokens = NULL;
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;	
 	signal(SIGINT, siginthandler);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
