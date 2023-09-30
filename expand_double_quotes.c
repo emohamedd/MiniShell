@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:57:41 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 13:39:28 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:10:56 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int count_quotes(char **tokens) {
     return count;
 }
 
-char *remove_quotes(const char *token) 
+char *remove_quotes(char *token) 
 {
     int token_length = ft_strlen(token);
     // char *modified_token = malloc(token_length * sizeof(char));

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 01:44:33 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:04:44 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,18 +80,6 @@ void print_env(t_vars *vars, int count)
 			if (vars->env[count].value)
 			{
 				printf("=");
-				if (vars->env[count].value
-					&& check_doubelcouts(vars->env[count].value) < 2)
-				{
-					printf("\"%s\"""\n", vars->env[count].value);
-				}
-				if (vars->env[count].value
-					&& check_doubelcouts(vars->env[count].value) >= 2)
-				{
-					printf("%s\n", vars->env[count].value);
-				}
-				if (!vars->env[count].value)
-					printf("");
 				printf("\"%s\"", vars->env[count].value);
 			}
 			printf("\n");
@@ -134,13 +122,6 @@ int fell_env_value(t_vars *vars,char *args, int count, char *var_)
 			if (!ft_strncmp(vars->env[j].key, ft_strchr(args, '$') + 1,
 					ft_strlen(vars->env[j].key) + 1))
 			{
-				printf("declare -x %s", vars->env[count].key);
-				if (vars->env[count].value)
-				{
-					printf("=");
-					printf("\"%s\"""", vars->env[count].value);
-				}
-				printf("\n");
 				vars->env[count].value = vars->env[j].value;
 				exit_status = 0;
 				return (0);

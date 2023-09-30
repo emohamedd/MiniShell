@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:08:39 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 01:45:52 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:08:41 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static void copy_tokens_with_redirections(char **tokens, char **new_tokens)
         }
         else
         {
-            new_tokens[j] = (char *)malloc(ft_strlen(tokens[i]) + 1);
+            // new_tokens[j] = (char *)malloc(ft_strlen(tokens[i]) + 1);
+            new_tokens[j] = malloc_((ft_strlen(tokens[i]) + 1), NULL, 0, NULL);
             strcpy(new_tokens[j], tokens[i]);
             j++;
         }

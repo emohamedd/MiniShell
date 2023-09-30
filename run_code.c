@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 01:53:10 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:15:27 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,31 +120,9 @@ int ft_error(char **str)
 			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
-// int ft_error(char **str)
-// {
-// 	int i = 0;
-// 	while (str[i])
-// 	{
-// 		int j = 0;
-// 		int a = 0;
-// 		int b = 0;
-// 		while (str[i][j])
-// 		{
-// 			if (str[i][j] == '<')
-// 				a++;
-// 			if (str[i][j] == '>')
-// 				b++;
-// 			j++;
-// 		}
-// 		if (a > 2 || b > 2 || c % 2 != 0 || d % 2 != 0)
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
 
 int syntax_errors(char **args, t_vars *vars)
 {
@@ -181,8 +159,8 @@ int syntax_errors(char **args, t_vars *vars)
 
 void 	run(char *cmd, char **args, t_vars *vars, char **str)
 {
-	// if (syntax_err(args, vars))
-	// 	return ;
+	if (syntax_err(args, vars))
+		return ;
 	fill_commands(args, vars);
 	int i = 0;
 	int status;
@@ -191,7 +169,6 @@ void 	run(char *cmd, char **args, t_vars *vars, char **str)
 	// pid_t *childs = malloc_((sizeof(int) * vars->n_commandes), NULL, 0, NULL);
 	while (i < vars->n_commandes)
 	{
-		
 		if (is_builtin(vars->cmds[i].cmd))
 			ft_builtins(vars, i, childs);
 		else
