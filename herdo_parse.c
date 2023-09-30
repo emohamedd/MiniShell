@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:08:39 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 15:57:20 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,14 @@ static void	copy_tokens_with_redirections(char **tokens, char **new_tokens)
 
 	while (tokens[cp.i])
 	{
-		if (ft_strcmp(tokens[cp.i], ">") == 0 || ft_strcmp(tokens[cp.i], "<") == 0)
+		if (ft_strcmp(tokens[cp.i], ">") == 0 
+			|| ft_strcmp(tokens[cp.i], "<") == 0)
 		{
 			new_tokens[cp.j] = malloc_((sizeof(char) * (ft_strlen(tokens[cp.i]) + 1)),
 					NULL, 0, NULL);
 			strcpy(new_tokens[cp.j], tokens[cp.i]);
-			while (tokens[cp.i + 1] && (ft_strcmp(tokens[cp.i], tokens[cp.i + 1]) == 0))
+			while (tokens[cp.i + 1] 
+				&& (ft_strcmp(tokens[cp.i], tokens[cp.i + 1]) == 0))
 			{
 				ft_strcat(new_tokens[cp.j], tokens[cp.i + 1]);
 				cp.i++;
@@ -58,7 +60,8 @@ static void	copy_tokens_with_redirections(char **tokens, char **new_tokens)
 		}
 		else
 		{
-			new_tokens[cp.j] = malloc_((ft_strlen(tokens[cp.i]) + 1), NULL, 0, NULL);
+			new_tokens[cp.j] = malloc_((ft_strlen(tokens[cp.i]) + 1),
+					NULL, 0, NULL);
 			ft_strcpy(new_tokens[cp.j], tokens[cp.i]);
 			cp.j++;
 		}

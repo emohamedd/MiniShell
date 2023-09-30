@@ -6,24 +6,11 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:37:03 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	create_temp_file(char *base_filename)
-{
-	int	fd;
-
-	fd = open(base_filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
-	if (fd == -1)
-	{
-		perror("open");
-		exit(1);
-	}
-	return (fd);
-}
 
 void	collect_and_write_heredoc(int fd, char *heredoc_delimiter)
 {
@@ -47,61 +34,17 @@ void	collect_and_write_heredoc(int fd, char *heredoc_delimiter)
 	ft_putstr_fd(buff, fd);
 }
 
-int	handle_output_redirection(char *filename)
+int	create_temp_file(char *base_filename)
 {
 	int	fd;
 
-	if (filename)
+	fd = open(base_filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	if (fd == -1)
 	{
-		fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
-		dup2(fd, 1);
-		close(fd);
+		perror("open");
+		exit(1);
 	}
-	else
-	{
-		printf("syntax error near unexpected token\n");
-		g_exit_status = 258;
-		return (1);
-	}
-	return (0);
-}
-
-int	handle_input_redirection(char *filename)
-{
-	int	fd;
-
-	if (filename)
-	{
-		fd = open(filename, O_RDWR);
-		dup2(fd, 0);
-		close(fd);
-	}
-	else
-	{
-		printf("syntax error near unexpected token\n");
-		g_exit_status = 258;
-		return (1);
-	}
-	return (0);
-}
-
-int	handle_append_redirection(char *filename)
-{
-	int	fd;
-
-	if (filename)
-	{
-		fd = open(filename, O_CREAT | O_APPEND | O_RDWR, 0644);
-		dup2(fd, 1);
-		close(fd);
-	}
-	else
-	{
-		printf("syntax error near unexpected token\n");
-		g_exit_status = 258;
-		return (1);
-	}
-	return (0);
+	return (fd);
 }
 
 int	handle_heredoc(char *delimiter)

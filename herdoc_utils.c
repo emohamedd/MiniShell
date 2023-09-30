@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:54:53 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 16:01:00 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:37:35 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ char	*ft_strcpy(char *destination, const char *source)
 
 char	*ft_strncpy(char *destination, char *source, int n)
 {
-	char *dest_ptr;
-	int i;
+	char	*dest_ptr;
+	int		i;
 
 	i = 0;
 	dest_ptr = destination;
@@ -60,13 +60,11 @@ char	*ft_strncpy(char *destination, char *source, int n)
 		source++;
 		i++;
 	}
-
 	while (i < n)
 	{
 		*dest_ptr = '\0';
 		dest_ptr++;
 		i++;
 	}
-
 	return (destination);
 }

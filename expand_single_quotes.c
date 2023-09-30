@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:58:11 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 16:11:46 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:53:01 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,38 +65,25 @@ char	**expand_s_quotes(char **tokens)
 
 	sq.num_quotes = count_single_quotes(tokens);
 	sq.total_tokens = 0;
-	sq.i = 0;
-	while (tokens[sq.i])
-	{
+	sq.i = -1;
+	while (tokens[++sq.i])
 		sq.total_tokens++;
-		sq.i++;
-	}
 	sq.expanded_tokens = malloc_(((sq.total_tokens + sq.num_quotes + 1)
 				* sizeof(char *)), NULL, 0, NULL);
 	if (sq.expanded_tokens == NULL)
-	{
 		return (NULL);
-	}
-	sq.i = 0;
+	sq.i = -1;
 	sq.j = 0;
-	while (tokens[sq.i])
+	while (tokens[++sq.i])
 	{
 		sq.current_token = tokens[sq.i];
 		if (ft_strchr(sq.current_token, '\''))
-		{
 			sq.expanded_tokens[sq.j] = remove_single_quotes(sq.current_token);
-		}
 		else
-		{
 			sq.expanded_tokens[sq.j] = ft_strdup(sq.current_token);
-		}
 		if (sq.expanded_tokens[sq.j] == NULL)
-		{
 			return (NULL);
-		}
-		sq.i++;
 		sq.j++;
 	}
-	sq.expanded_tokens[sq.j] = NULL;
-	return (sq.expanded_tokens);
+	return ((sq.expanded_tokens[sq.j] = NULL), sq.expanded_tokens);
 }

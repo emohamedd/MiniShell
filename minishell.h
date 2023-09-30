@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:07 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 17:28:33 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,16 @@ typedef struct s_cp
 	int		j;
 }			t_cp;
 
+typedef struct s_run
+{
+	char	**str;
+	char	*input;
+	char	*trimed;
+	char	**cmds;
+	int		fdin;
+	int		fdou;
+}			t_run;
+
 typedef struct s_vars
 {
 	int		count_argiment;
@@ -138,6 +148,10 @@ typedef struct s_vars
 
 }			t_vars;
 
+int			handle_input_redirection(char *filename);
+int			handle_output_redirection(char *filename);
+int			handle_append_redirection(char *filename);
+int			handle_heredoc(char *filename);
 void		free_x_max(char **str);
 void		cmd_exit(char **str);
 int			has_redirections(t_vars *vars, int i);

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:57:41 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 15:29:24 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:55:51 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,48 +61,29 @@ char	*remove_quotes(char *token)
 
 char	**expand_quotes(char **tokens)
 {
-	t_dq	dq;
+	t_sq	dq;
 
 	dq.num_quotes = count_quotes(tokens);
 	dq.total_tokens = 0;
-	dq.i = 0;
-	while (tokens[dq.i])
-	{
+	dq.i = -1;
+	while (tokens[++dq.i])
 		dq.total_tokens++;
-		dq.i++;
-	}
 	dq.expanded_tokens = malloc_(((dq.total_tokens + dq.num_quotes + 1)
 				* sizeof(char *)), NULL, 0, NULL);
 	if (dq.expanded_tokens == NULL)
-	{
 		return (NULL);
-	}
+	dq.i = -1;
 	dq.j = 0;
-	dq.i = 0;
-	while (tokens[dq.i])
+	while (tokens[++dq.i])
 	{
 		dq.current_token = tokens[dq.i];
 		if (ft_strchr(dq.current_token, '\"'))
-		{
-			dq.modified_token = remove_quotes(dq.current_token);
-			if (dq.modified_token == NULL)
-			{
-				return (NULL);
-			}
-			dq.expanded_tokens[dq.j] = dq.modified_token;
-			dq.j++;
-		}
+			dq.expanded_tokens[dq.j] = remove_quotes(dq.current_token);
 		else
-		{
 			dq.expanded_tokens[dq.j] = ft_strdup(dq.current_token);
-			if (dq.expanded_tokens[dq.j] == NULL)
-			{
-				return (NULL);
-			}
-			dq.j++;
-		}
-		dq.i++;
+		if (dq.expanded_tokens[dq.j] == NULL)
+			return (NULL);
+		dq.j++;
 	}
-	dq.expanded_tokens[dq.j] = NULL;
-	return (dq.expanded_tokens);
+	return ((dq.expanded_tokens[dq.j] = NULL), dq.expanded_tokens);
 }
