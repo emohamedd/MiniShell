@@ -6,7 +6,7 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 21:24:28 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 20:48:07 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@
 # define RESET   "\x1B[0m"
 # define PURPLE  "\x1B[35m"
 
-
-
-
-int exit_status;
+int			exit_status;
 typedef struct s_info
 {
 	char	*content;
@@ -62,7 +59,6 @@ typedef struct s_cmds
 	int		has_redirections;
 }			t_cmds;
 
-
 typedef struct s_env
 {
 	char	*key;
@@ -70,14 +66,27 @@ typedef struct s_env
 	char	*value;
 }			t_env;
 
-
 typedef struct s_int
 {
-	int b;
-	int k;
-	int size_of_direc;
+	int		b;
+	int		k;
+	int		size_of_direc;
 }			t_int;
 
+
+typedef struct s_export
+{
+	int		d;
+	int		x;
+	int		p;
+	int		count;
+}			t_export;
+
+typedef struct s_fill
+{
+	int		i;
+	int		b;
+}			t_fill;
 
 typedef struct s_vars
 {
@@ -90,11 +99,16 @@ typedef struct s_vars
 	t_env	*env;
 	int		n_commandes;
 	int		here_fd;
-
+	int		i;
 }			t_vars;
 
-void free_x_max(char **str);
-void		cmd_exit(char **str, t_vars *vars);
+
+void	run_export(t_vars *vars, int i);
+void	run_unset(t_vars *vars, int i);
+void	run_exit(t_vars *vars, int i);
+void	run_pwd(char *cwd);
+void		free_x_max(char **str);
+void		cmd_exit(char **str);
 int			has_redirections(t_vars *vars, int i);
 int			ft_strcmp(char *s1, char *s2);
 char		**clear_cmds_arg_from_direct(char **args);
@@ -109,11 +123,11 @@ char		*ft_getenv(char *key, t_vars *vars);
 void		exec_cmds(t_vars *vars, int i);
 char		*read_input(void);
 char		**ft_split(char const *s, char c);
-void		run(char *cmd, char **args, t_vars *vars, char **str);
+void		run(char **args, t_vars *vars);
 void		fell_env_struct(t_vars *vars);
 void		run_cd(char **args, t_vars *vars, char *pwd);
-void		run_echo(char **args, t_vars *vars);
-void		export_cmd(t_vars *vars, char *args, char **str);
+void		run_echo(char **args);
+void		export_cmd(t_vars *vars, char *args);
 void		check_unset(char **args, t_vars *vars, int check);
 void		env_cmd(t_vars *vars);
 void		table(char **str, t_info **tokens);
@@ -133,20 +147,36 @@ void		fell_env_struct(t_vars *vars);
 char		*ft_getenv(char *key, t_vars *vars);
 void		pipe_red(t_vars *vars, int i, pid_t *childs);
 void		cmd_builtins(t_vars *vars, int i);
-int			syntax_errors(char **args, t_vars *vars);
-void 		is_notbuiltins(t_vars *vars, int i, pid_t *childs);
-void 		ft_builtins(t_vars *vars, int i, pid_t *childs);
+int			syntax_errors(char **args);
+void		is_notbuiltins(t_vars *vars, int i, pid_t *childs);
+void		ft_builtins(t_vars *vars, int i, pid_t *childs);
 int			command_notfound(char **args, t_vars *vars);
-int 		syntax_err(char **args, t_vars *vars);
+int			syntax_err(char **args);
 void		change_pwd(t_vars *vars, char *pwd);
 char		**expand_s_quotes(char **tokens);
 char		**expand_quotes(char **tokens);
 void		change_oldpwd(t_vars *vars, char *pwd);
-char	**ft_split_export(char const *s, char c);
-char	*allocat_s_export(const char *s, char c);
-int	count_s_lenght_export(const char *s, char c);
-void free_x_dmax(char **str);
-int double_quotes(char **args);
-char	*ft_strdup_env(const char *s1);
-char	*ft_strdup_against(const char *s1);
+char		**ft_split_export(char const *s, char c);
+char		*allocat_s_export(const char *s, char c);
+int			count_s_lenght_export(const char *s, char c);
+void		free_x_dmax(char **str);
+int			double_quotes(char **args);
+char		*ft_strdup_env(const char *s1);
+char		*ft_strdup_against(const char *s1);
+char		*ft_strjoin_export(char const *s1, char const *s2);
+char		*ft_strdup_export(const char *s1);
+void		*ft_calloc_export(size_t count, size_t size);
+char		**ft_split_export(char const *s, char c);
+char		**split(char *s, char *delimiters);
+char		*ft_strndup(char const *str, size_t max);
+char		*expand_var(char *arg, t_vars *vars);
+int			is_var_inside_sq(char *arg, int index);
+int			get_var_size(char *str);
+void		fell_env(t_vars *vars, char *args, char *key, t_export	*export_int);
+int			check_key(char *args);
+int			fell_env_value(t_vars *vars, char *args, int count, char *var_);
+void		print_env(t_vars *vars, int count);
+
+
+
 #endif

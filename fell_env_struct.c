@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   fell_env_struct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:59:43 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 21:02:53 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 02:33:32 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_x_dmax(char **str) {
-	int i = 0;
-	while (str[i]) {
+void	free_x_dmax(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
 		free(str[i]);
 		i++;
 	}
-	// free(str);
 }
 
 char	*ft_strdup_env(const char *s1)
@@ -30,7 +33,6 @@ char	*ft_strdup_env(const char *s1)
 		return (0);
 	i = 0;
 	p = malloc(sizeof(char) * ft_strlen(s1) + 1);
-	// p =  malloc_((sizeof(char) * ft_strlen(s1) + 1), NULL, 0, NULL);
 	if (!p)
 		return (NULL);
 	while (s1[i])
@@ -41,7 +43,6 @@ char	*ft_strdup_env(const char *s1)
 	p[i] = '\0';
 	return (p);
 }
-
 
 void	fell_env_struct(t_vars *vars)
 {
@@ -62,7 +63,7 @@ void	fell_env_struct(t_vars *vars)
 			vars->env[i].value = ft_strchr(vars->envp[i], '=') + 1;
 		}
 		if (tempers)
-			free_x_dmax(tempers); //leakshere
+			free_x_dmax(tempers);
 		tempers = NULL;
 		i++;
 	}

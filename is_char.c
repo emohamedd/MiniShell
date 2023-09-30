@@ -1,36 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmds.c                                         :+:      :+:    :+:   */
+/*   is_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 10:57:54 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:36:30 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 10:55:29 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/30 02:39:48 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**get_cmds(t_info **info)
+int	is_char(char *str)
 {
-	int		len;
-	int		i;
-	char	*cmd;
-	char	**dst;
+	int	i;
 
-	len = 0;
-	cmd = NULL;
-	len = (*info)->size;
 	i = 0;
-	dst = malloc_((sizeof(char *) * ((*info)->size + 1)), NULL, 0, NULL);
-	while (i < len)
+	while (str[i])
 	{
-		dst[i] = info[i]->content;
+		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A'
+				&& str[i] <= 'Z'))
+			return (1);
 		i++;
 	}
-	dst[i] = 0;
-	dst = expand_quotes(dst);
-	dst = expand_s_quotes(dst);
-	return (dst);
+	return (0);
+}
+
+int	is_char_in2d(char **str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if ((str[i][j] >= 'a' && str[i][j] <= 'z') || (str[i][j] >= 'A'
+					&& str[i][j] <= 'Z'))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }

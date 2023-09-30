@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
+/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:42:46 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/28 07:43:38 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:10:27 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,39 @@ int	is_redirection(char *arg)
 	return (0);
 }
 
-char	**clear_cmds_arg_from_direct(char **args)
+int	size_cmds_redirection(char **args)
 {
-	int		count;
-	int		size;
-	char	**stack_args;
+	int	count;
+	int	size;
 
 	count = 0;
 	size = 0;
 	while (args[count])
 	{
 		if (is_redirection(args[count]))
-		{
 			size++;
-		}
 		count++;
 	}
-	// stack_args = malloc(sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)
-	// 			+ 1));
-	stack_args = malloc_((sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)+ 1)), NULL, 0, NULL);
+	return (size);
+}
+
+
+char	**clear_cmds_arg_from_direct(char **args)
+{
+	int		count;
+	int		size;
+	char	**stack_args;
+
+	size = size_cmds_redirection(args);
+	stack_args = malloc_((sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)
+					+ 1)), NULL, 0, NULL);
 	count = 0;
 	size = 0;
 	while (args[count])
 	{
 		if ((count == 0 && !is_redirection(args[count]))
-			|| (!is_redirection(args[count]) && !is_redirection(args[count - 1])))
+			|| (!is_redirection(args[count])
+				&& !is_redirection(args[count - 1])))
 		{
 			stack_args[size] = args[count];
 			size++;
@@ -64,7 +72,6 @@ char	**get_redirectinsv(int size, char **old_stack)
 	int		suui;
 	int		count;
 
-	// stack = malloc(sizeof(char *) * (size + 1));
 	stack = malloc_((sizeof(char *) * (size + 1)), NULL, 0, NULL);
 	suui = 0;
 	count = 0;
@@ -84,19 +91,11 @@ char	**get_redirectinsv(int size, char **old_stack)
 char	**get_files(int size, char **old_stack)
 {
 	char	**stack;
-	int		suui; 
-	int		count; 
-
-	// int j = 0;
-	// while (old_stack[j])
-	// {
-	// 	printf ("opera_derec ==== %s\n", old_stack[j]);	
-	// 	j++;
-	// }
+	int		suui;
+	int		count;
 
 	suui = 0;
 	count = 0;
-	// stack = malloc(sizeof(char *) * (size + 1));
 	stack = malloc_((sizeof(char *) * (size + 1)), NULL, 0, NULL);
 	while (old_stack[count] && suui < size)
 	{

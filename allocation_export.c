@@ -1,16 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_export.c                                  :+:      :+:    :+:   */
+/*   allocation_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 13:39:24 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 17:03:56 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 10:40:05 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/30 02:24:12 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ft_strdup_export(const char *s1)
+{
+	int		i;
+	char	*p;
+
+	if (!s1)
+		return (0);
+	i = 0;
+	p = malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (!p)
+		return (NULL);
+	while (s1[i])
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
+}
+
 int	count_s_lenght_export(const char *s, char c)
 {
 	int	i;
@@ -41,7 +62,6 @@ char	*allocat_s_export(const char *s, char c)
 	while (s[len] && s[len] != c)
 		len++;
 	p = malloc(sizeof(char) * (len + 1));
-	// p = malloc_((sizeof(char) * (len + 1)), NULL, 0, NULL);
 	if (!p)
 		return (NULL);
 	while (i < len)
@@ -50,6 +70,20 @@ char	*allocat_s_export(const char *s, char c)
 		i++;
 	}
 	p[i] = '\0';
+	return (p);
+}
+
+void	*ft_calloc_export(size_t count, size_t size)
+{
+	size_t	sizee;
+	void	*p;
+
+	p = NULL;
+	sizee = count * size;
+	p = malloc(sizee);
+	if (!p)
+		return (NULL);
+	ft_bzero(p, sizee);
 	return (p);
 }
 
@@ -62,8 +96,6 @@ char	**ft_split_export(char const *s, char c)
 	i = 0;
 	j = 0;
 	p = ft_calloc(sizeof(char *), count_s_lenght_export(s, c) + 1);
-	// p = malloc_((sizeof(char *) * count_s_lenght(s, c) + 1), NULL, 0, NULL);
-	
 	if (!p)
 		return (NULL);
 	while (s[i])
@@ -80,4 +112,3 @@ char	**ft_split_export(char const *s, char c)
 	}
 	return (p);
 }
-

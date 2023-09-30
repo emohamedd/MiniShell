@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmds.c                                         :+:      :+:    :+:   */
+/*   ft_strjoin_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 10:57:54 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:36:30 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/30 02:23:52 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/30 02:35:26 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**get_cmds(t_info **info)
+char	*ft_strjoin_export(char const *s1, char const *s2)
 {
-	int		len;
 	int		i;
-	char	*cmd;
-	char	**dst;
+	int		j;
+	int		size;
+	char	*p;
 
-	len = 0;
-	cmd = NULL;
-	len = (*info)->size;
 	i = 0;
-	dst = malloc_((sizeof(char *) * ((*info)->size + 1)), NULL, 0, NULL);
-	while (i < len)
+	j = 0;
+	if (!s1 && !s2)
+		return (NULL);
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	p = malloc(sizeof(char) * size);
+	if (!p)
+		return (NULL);
+	while (s1 && s1[i])
 	{
-		dst[i] = info[i]->content;
+		p[i] = s1[i];
 		i++;
 	}
-	dst[i] = 0;
-	dst = expand_quotes(dst);
-	dst = expand_s_quotes(dst);
-	return (dst);
+	while (s2 && s2[j])
+	{
+		p[i + j] = s2[j];
+		j++;
+	}
+	p[i + j] = '\0';
+	return (p);
 }

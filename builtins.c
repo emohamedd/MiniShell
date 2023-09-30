@@ -6,16 +6,16 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:44:19 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/29 18:38:27 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 21:01:03 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void builtins_pipes(t_vars *vars, int i,pid_t *childs)
+void	builtins_pipes(t_vars *vars, int i, pid_t *childs)
 {
-	int fd[2];
-	
+	int	fd[2];
+
 	pipe(fd);
 	childs[i] = fork();
 	if (childs[i] == 0)
@@ -23,7 +23,7 @@ void builtins_pipes(t_vars *vars, int i,pid_t *childs)
 		close(fd[0]);
 		dup2(fd[1], 1);
 		cmd_builtins(vars, i);
-		close(fd[1]);					
+		close(fd[1]);
 		exit(0);
 	}
 	else
@@ -35,7 +35,7 @@ void builtins_pipes(t_vars *vars, int i,pid_t *childs)
 	}
 }
 
-void ft_builtins(t_vars *vars, int i, pid_t *childs)
+void	ft_builtins(t_vars *vars, int i, pid_t *childs)
 {
 	if (vars->cmds[i].has_redirections)
 		if (has_redirections(vars, i))
@@ -48,9 +48,7 @@ void ft_builtins(t_vars *vars, int i, pid_t *childs)
 		cmd_builtins(vars, i);
 }
 
-
-
-void is_notbuiltins(t_vars *vars, int i, pid_t *childs)
+void	is_notbuiltins(t_vars *vars, int i, pid_t *childs)
 {
 	if (vars->cmds[i].has_redirections)
 	{
@@ -58,7 +56,9 @@ void is_notbuiltins(t_vars *vars, int i, pid_t *childs)
 			return ;
 	}
 	if (vars->n_commandes > 1)
+	{
 		pipe_commands(vars, i, childs);
+	}
 	else if (vars->n_commandes == 1 && i == 0)
 		exec_cmds(vars, i);
 }

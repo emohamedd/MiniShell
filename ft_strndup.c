@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 10:55:52 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 13:56:27 by haarab           ###   ########.fr       */
+/*   Created: 2023/09/29 10:59:59 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/30 18:46:32 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	siginthandler(int signal)
+char	*ft_strndup(char const *str, size_t max)
 {
-	if (signal == SIGINT)
+	size_t	index;
+	char	*dst;
+
+	index = 0;
+	dst = malloc_(sizeof(char) * (max + 1), NULL, 0, NULL);
+	if (!dst)
+		return (0);
+	while (str[index] && index < max)
 	{
-		printf("\n");
-		rl_on_new_line();
-		// rl_replace_line("", 0);
-		rl_redisplay();
+		dst[index] = str[index];
+		index++;
 	}
-	// if (rl_catch_signals == 1)
-	// {
-	// 	close(0);
-	// }
+	dst[index] = '\0';
+	return (dst);
 }

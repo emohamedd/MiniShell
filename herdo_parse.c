@@ -3,33 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   herdo_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:08:39 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:02:03 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 02:39:27 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**red_to_herdoc(char **tokens)
+static int	get_new_tokens_count(char **tokens)
 {
-	int		len;
-	char	**new_tokens;
-	int		i;
-	int		j;
+	int	count;
+	int	i;
 
-	len = lenght_of_the_2d(tokens) + 1;
-	// new_tokens = (char **)malloc(sizeof(char *) * len);
-	new_tokens = malloc_((sizeof(char *) * len), NULL, 0, NULL);
+	count = 0;
+	i = 0;
+	while (tokens[i])
+	{
+		if (ft_strcmp(tokens[i], ">") == 0 || ft_strcmp(tokens[i], "<") == 0)
+		{
+			count++;
+			while (tokens[i + 1] && (ft_strcmp(tokens[i], tokens[i + 1]) == 0))
+			{
+				i++;
+			}
+		}
+		else
+		{
+			count++;
+		}
+		i++;
+	}
+	return (count);
+}
+
+static void	copy_tokens_with_redirections(char **tokens, char **new_tokens)
+{
+	int	i;
+	int	j;
+
 	i = 0;
 	j = 0;
 	while (tokens[i])
 	{
 		if (ft_strcmp(tokens[i], ">") == 0 || ft_strcmp(tokens[i], "<") == 0)
 		{
-			// new_tokens[j] = (char *)malloc(sizeof(char) * (ft_strlen(tokens[i]) + 1));
-			new_tokens[j] = malloc_((sizeof(char) * (ft_strlen(tokens[i]) + ft_strlen(tokens[i + 1]) + 1)), NULL, 0, NULL);
+			new_tokens[j] = malloc_((sizeof(char) * (ft_strlen(tokens[i]) + 1)),
+					NULL, 0, NULL);
 			strcpy(new_tokens[j], tokens[i]);
 			while (tokens[i + 1] && (ft_strcmp(tokens[i], tokens[i + 1]) == 0))
 			{
@@ -40,13 +61,28 @@ char	**red_to_herdoc(char **tokens)
 		}
 		else
 		{
-			// new_tokens[j] = (char *)malloc(ft_strlen(tokens[i]) + 1);
 			new_tokens[j] = malloc_((ft_strlen(tokens[i]) + 1), NULL, 0, NULL);
 			strcpy(new_tokens[j], tokens[i]);
 			j++;
 		}
 		i++;
 	}
-	new_tokens[j] = NULL;
+}
+
+char	**red_to_herdoc(char **tokens)
+{
+	int		new_tokens_count;
+	char	**new_tokens;
+
+	new_tokens_count = get_new_tokens_count(tokens);
+	new_tokens = malloc_(((new_tokens_count + 1) * sizeof(char *)), NULL, 0,
+			NULL);
+	if (!new_tokens)
+	{
+		printf("allocation err\n");
+		exit(1);
+	}
+	copy_tokens_with_redirections(tokens, new_tokens);
+	new_tokens[new_tokens_count] = NULL;
 	return (new_tokens);
 }

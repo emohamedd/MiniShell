@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmds.c                                         :+:      :+:    :+:   */
+/*   the_var_state.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 10:57:54 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:36:30 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/29 11:01:16 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/29 11:01:38 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**get_cmds(t_info **info)
+int	is_var_inside_sq(char *arg, int index)
 {
-	int		len;
-	int		i;
-	char	*cmd;
-	char	**dst;
+	int	count;
+	int	count_sq;
+	int	count_dq;
 
-	len = 0;
-	cmd = NULL;
-	len = (*info)->size;
-	i = 0;
-	dst = malloc_((sizeof(char *) * ((*info)->size + 1)), NULL, 0, NULL);
-	while (i < len)
+	count = 0;
+	count_sq = 0;
+	count_dq = 0;
+	while (arg[count])
 	{
-		dst[i] = info[i]->content;
-		i++;
+		if (arg[count] == '\'' && count_dq % 2 == 0)
+			count_sq++;
+		if (arg[count] == '\"')
+			count_dq++;
+		if (count == index && count_sq % 2 == 0)
+			return (0);
+		else if (count == index && count_sq % 2 != 0)
+			return (1);
+		count++;
 	}
-	dst[i] = 0;
-	dst = expand_quotes(dst);
-	dst = expand_s_quotes(dst);
-	return (dst);
+	return (0);
 }
