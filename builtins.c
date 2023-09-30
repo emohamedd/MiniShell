@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:44:19 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 02:24:25 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:54:44 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	builtins_pipes(t_vars *vars, int i, pid_t *childs)
 void	ft_builtins(t_vars *vars, int i, pid_t *childs)
 {
 	if (vars->cmds[i].has_redirections)
-		if (has_redirections(vars, i))
+		if (has_redirections(vars, i) == 1)
 			return ;
 	if (vars->cmds[i].is_nex_pip)
 	{
@@ -52,7 +52,7 @@ void	is_notbuiltins(t_vars *vars, int i, pid_t *childs)
 {
 	if (vars->cmds[i].has_redirections)
 	{
-		if (has_redirections(vars, i))
+		if (has_redirections(vars, i) == 1)
 			return ;
 	}
 	if (vars->n_commandes > 1)

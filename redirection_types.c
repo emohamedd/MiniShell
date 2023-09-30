@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 17:05:12 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 18:37:44 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:55:43 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,26 @@ int	handle_output_redirection(char *filename)
 int	handle_input_redirection(char *filename)
 {
 	int	fd;
-
-	if (filename)
+	if (!(access(filename, F_OK)))
 	{
-		fd = open(filename, O_RDWR);
-		dup2(fd, 0);
-		close(fd);
+		if (filename)
+		{
+			fd = open(filename, O_RDWR);
+			dup2(fd, 0);
+			close(fd);
+		}
+		else
+		{
+			printf("syntax error near unexpected token\n");
+			g_exit_status = 258;
+			return (1);
+		}
+		return (0);
 	}
 	else
 	{
-		printf("syntax error near unexpected token\n");
-		g_exit_status = 258;
+		write(2, "No such file or directory\n", 26);
+		g_exit_status = 1;
 		return (1);
 	}
 	return (0);
