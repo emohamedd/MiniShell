@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:02:17 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 15:36:26 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*expand_var(char *arg, t_vars *vars)
 			if (arg[ev.i + 1] && (arg[ev.i + 1] == '?'))
 			{
 				ev.i++;
-				ev.exp_value = ft_itoa(exit_status);
+				ev.exp_value = ft_itoa(g_exit_status);
 			}
 			else
 			{

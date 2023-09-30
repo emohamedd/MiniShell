@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 02:25:48 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ void	exec_cmds(t_vars *vars, int i)
 	{
 		comande_exec(vars, i, path, exp);
 	}
-	waitpid(id, &exit_status, 0);
-	exit_status = WEXITSTATUS(exit_status);
+	waitpid(id, &g_exit_status, 0);
+	g_exit_status = WEXITSTATUS(g_exit_status);
 }

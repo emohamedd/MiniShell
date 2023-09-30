@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 04:50:47 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ int	fell_value(t_vars *vars, char *args, int count)
 	if (ft_strchr(args, '=') == NULL)
 	{
 		vars->env[count].value = vars->env[count].value;
-		exit_status = 0;
+		g_exit_status = 0;
 		return (0);
 	}
 	if (ft_strchr(args, '=') != NULL)
 	{
 		free(vars->env[count].value);
 		vars->env[count].value = ft_strdup_env(ft_strchr(args, '=') + 1);
-		exit_status = 0;
+		g_exit_status = 0;
 		return (0);
 	}
 	return (1);
@@ -114,7 +114,7 @@ int	fell_env_value(t_vars *vars, char *args, int count, char *var_)
 					ft_strlen(vars->env[j].key) + 1))
 			{
 				vars->env[count].value = vars->env[j].value;
-				exit_status = 0;
+				g_exit_status = 0;
 				return (0);
 			}
 			j++;
@@ -132,12 +132,12 @@ void	fell_env_isequal(t_vars *vars, int count, char *args, int p)
 	{
 		vars->env[count].is_equal = 1;
 		vars->env[count].value = ft_strdup_env(value);
-		exit_status = 0;
+		g_exit_status = 0;
 	}
 	if (!ft_strchr(args, '=') && p == 1)
 	{
 		vars->env[count].key = args;
-		exit_status = 0;
+		g_exit_status = 0;
 	}
 }
 
@@ -155,7 +155,7 @@ void	fell_env_dollar(t_vars *vars, int count, char *args, int p)
 			{
 				vars->env[count].value = ft_strdup_env(vars->env[j].value);
 				vars->env[count].is_equal = 1;
-				exit_status = 0;
+				g_exit_status = 0;
 			}
 		}
 		j++;
@@ -163,7 +163,7 @@ void	fell_env_dollar(t_vars *vars, int count, char *args, int p)
 	if (p == 1)
 	{
 		vars->env[count].key = args;
-		exit_status = 0;
+		g_exit_status = 0;
 	}
 }
 
@@ -234,7 +234,7 @@ int	export_env(t_vars *vars, char *var_, char *args)
 	if (check_key(var_) == 0)
 	{
 		printf("minishell: not a valid identifier\n");
-		exit_status = 1;
+		g_exit_status = 1;
 	}
 	count = 0;
 	while (count < vars->env_number)

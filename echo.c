@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:49:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 04:43:37 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	run_echo(char **args)
 			{
 				if (args[i][j] == '$' && args[i][j + 1] == '?')
 				{
-					printf("%d", exit_status);
+					printf("%d", g_exit_status);
 					j = j + 1;
 				}
 				else
@@ -67,7 +67,7 @@ void	run_echo(char **args)
 				printf(" ");
 			i++;
 		}
-		exit_status = 0;
+		g_exit_status = 0;
 	}
 	if (check == 0)
 		printf("\n");

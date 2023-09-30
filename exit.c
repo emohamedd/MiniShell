@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 04:46:32 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 04:49:32 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ void	cmd_exit(char **str)
 	if (i == 2 && is_numeric(str[1]))
 	{
 		res = atoi(str[1]);
-		exit_status = res;
+		g_exit_status = res;
 	}
 	else if (i == 2)
 	{
 		printf("minishell: exit: %s: numeric argument required\n", str[1]);
-		exit_status = 255;
+		g_exit_status = 255;
 	}
 	else if (i > 2)
 	{
 		printf("minishell: exit: too many arguments\n");
-		exit_status = 1;
+		g_exit_status = 1;
 	}
 }

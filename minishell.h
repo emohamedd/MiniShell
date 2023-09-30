@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 16:01:21 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:07 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define RESET   "\x1B[0m"
 # define PURPLE  "\x1B[35m"
 
-int			exit_status;
+int			g_exit_status;
 typedef struct s_info
 {
 	char	*content;
@@ -120,8 +120,8 @@ typedef struct s_sp
 
 typedef struct s_cp
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 }			t_cp;
 
 typedef struct s_vars
@@ -203,7 +203,7 @@ char		*ft_strndup(char const *str, size_t max);
 char		*expand_var(char *arg, t_vars *vars);
 int			is_var_inside_sq(char *arg, int index);
 int			get_var_size(char *str);
-char		* ft_strcpy(char* destination, const char* source);
-char		* ft_strcat(char* destination, const char* source);
-char		*ft_strncpy(char* destination,  char* source, int n);
+char		*ft_strcpy(char *destination, const char *source);
+char		*ft_strcat(char *destination, const char *source);
+char		*ft_strncpy(char *destination, char *source, int n);
 #endif

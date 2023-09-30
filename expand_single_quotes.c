@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:58:11 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 15:33:15 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:11:46 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ char	*remove_single_quotes(const char *token)
 
 char	**expand_s_quotes(char **tokens)
 {
-	t_sq sq;
-
+	t_sq	sq;
 
 	sq.num_quotes = count_single_quotes(tokens);
 	sq.total_tokens = 0;

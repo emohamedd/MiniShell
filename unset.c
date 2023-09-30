@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:48:09 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 01:48:21 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	check_unset(char **args, t_vars *vars, int check)
 				i++;
 			}
 			vars->env_number--;
-			exit_status = 0;
+			g_exit_status = 0;
 			return ;
 		}
 		i++;

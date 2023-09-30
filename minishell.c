@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 16:03:13 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)), char
 	int		fdou;
 
 	cmds = NULL;
-	exit_status = 0;
+	g_exit_status = 0;
 	vars.envp = env;
 	vars.env = malloc(sizeof(t_env) * (count_argiment(vars.envp)));
 	fell_env_struct(&vars);
@@ -51,13 +51,13 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)), char
 		input = read_input();
 		if (input == NULL)
 		{
-			return (exit_status);
+			return (g_exit_status);
 		}
 		trimed = ft_strtrim(input, " \t\r\n");
 		// free(input);
 		if (trimed == NULL)
 		{
-			return (exit_status);
+			return (g_exit_status);
 		}
 		if (!trimed[0])
 		{

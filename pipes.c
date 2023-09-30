@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:35:50 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 14:11:24 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	pipes_path(t_vars *vars, int i)
 	ft_putstr_fd("minishell : ", 2);
 	ft_putstr_fd(vars->cmds[i].cmd, 2);
 	ft_putstr_fd(": command not found\n", 2);
-	exit_status = 127;
-	exit(exit_status);
+	g_exit_status = 127;
+	exit(g_exit_status);
 }
 
 void	cmd_execve(char *path, t_vars *vars, int i)

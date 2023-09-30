@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 05:01:35 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	run_unset(t_vars *vars, int i)
 void	run_exit(t_vars *vars, int i)
 {
 	cmd_exit(vars->cmds[i].cmds_args);
-	exit(exit_status);
+	exit(g_exit_status);
 }
 
 void	run_pwd(char *cwd)
 {
 	printf("%s\n", cwd);
-	exit_status = 0;
+	g_exit_status = 0;
 }
 
 void	run_builtins(t_vars *vars, int i, char *cwd)

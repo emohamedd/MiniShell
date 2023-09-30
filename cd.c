@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 01:43:51 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ void	ft_cd(t_vars *vars, char **args, char *pwd)
 	if (chdir(args[1]) == -1)
 	{
 		ft_putendl_fd("minishell: No such file or directory", 2);
-		exit_status = 1;
+		g_exit_status = 1;
 		return ;
 	}
 	if (vars->cmds[0].is_nex_pip)
 	{
-		exit_status = 0;
+		g_exit_status = 0;
 		return ;
 	}
 	change_oldpwd(vars, pwd);
-	exit_status = 0;
+	g_exit_status = 0;
 }
 
 void	run_cd(char **args, t_vars *vars, char *pwd)
@@ -72,11 +72,11 @@ void	run_cd(char **args, t_vars *vars, char *pwd)
 		if (!ft_getenv("HOME", vars))
 		{
 			ft_putendl_fd("minishell: cd: HOME not set", 2);
-			exit_status = 1;
+			g_exit_status = 1;
 			return ;
 		}
 		chdir(ft_getenv("HOME", vars));
 		change_oldpwd(vars, pwd);
-		exit_status = 0;
+		g_exit_status = 0;
 	}
 }

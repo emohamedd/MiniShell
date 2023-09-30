@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 15:48:45 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	handle_output_redirection(char *filename)
 	else
 	{
 		printf("syntax error near unexpected token\n");
-		exit_status = 258;
+		g_exit_status = 258;
 		return (1);
 	}
 	return (0);
@@ -79,7 +79,7 @@ int	handle_input_redirection(char *filename)
 	else
 	{
 		printf("syntax error near unexpected token\n");
-		exit_status = 258;
+		g_exit_status = 258;
 		return (1);
 	}
 	return (0);
@@ -98,7 +98,7 @@ int	handle_append_redirection(char *filename)
 	else
 	{
 		printf("syntax error near unexpected token\n");
-		exit_status = 258;
+		g_exit_status = 258;
 		return (1);
 	}
 	return (0);
@@ -118,7 +118,7 @@ int	handle_heredoc(char *delimiter)
 	else
 	{
 		printf("syntax error near unexpected token\n");
-		exit_status = 258;
+		g_exit_status = 258;
 		return (1);
 	}
 	return (0);
