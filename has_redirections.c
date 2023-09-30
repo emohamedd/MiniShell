@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 19:55:21 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:58:43 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ int	has_redirections(t_vars *vars, int i)
 			if (!ft_strcmp(vars->cmds[i].opera_derec[j], ">"))
 				return (handle_output_redirection(vars->cmds[i].file_derec[j]));
 			else if (!ft_strcmp(vars->cmds[i].opera_derec[j], "<"))
-				return(handle_input_redirection(vars->cmds[i].file_derec[j]));
+				return (handle_input_redirection(vars->cmds[i].file_derec[j]));
 			else if (!ft_strcmp(vars->cmds[i].opera_derec[j], ">>"))
-				return(handle_append_redirection(vars->cmds[i].file_derec[j]));
+				return (handle_append_redirection(vars->cmds[i].file_derec[j]));
 			else if (!ft_strcmp(vars->cmds[i].opera_derec[j], "<<"))
-				return(handle_heredoc(vars->cmds[i].file_derec[j]));
+				return (handle_heredoc(vars->cmds[i].file_derec[j]));
 			j++;
 		}
 	}

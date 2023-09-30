@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 17:05:12 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 19:55:43 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 19:57:29 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,3 @@ int	handle_append_redirection(char *filename)
 	}
 	return (0);
 }
-
