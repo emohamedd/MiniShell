@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:44:19 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 23:56:27 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:43:43 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	ft_builtins(t_vars *vars, int i, pid_t *childs)
 		builtins_pipes(vars, i, childs);
 	}
 	else
+	{
 		cmd_builtins(vars, i);
+	}
 }
 
 void	is_notbuiltins(t_vars *vars, int i, pid_t *childs)
@@ -60,5 +62,7 @@ void	is_notbuiltins(t_vars *vars, int i, pid_t *childs)
 		pipe_commands(vars, i, childs);
 	}
 	else if (vars->n_commandes == 1 && i == 0)
+	{
 		exec_cmds(vars, i);
+	}
 }
