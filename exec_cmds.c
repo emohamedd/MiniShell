@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/10/01 00:43:07 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:51:27 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_path(t_vars *vars, char *cmd)
 
 void	comande_exec(t_vars *vars, int i, char *path, char *exp)
 {
-	if(!path)
+	if (!path)
 	{
 		close(vars->here_fd);
 		exit(0);
