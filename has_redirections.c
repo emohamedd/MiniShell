@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 23:06:16 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:30:01 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,13 @@ int	handle_heredoc(char *delimiter)
 	{
 		base_filename = "emohamed";
 		here_fd = create_temp_file(base_filename);
-		if (here_fd != -1)
-		{
-			collect_and_write_heredoc(here_fd, delimiter);
-			return (0);
-		}
+		collect_and_write_heredoc(here_fd, delimiter);
 	}
-	printf("syntax error near unexpected token\n");
-	g_exit_status = 258;
+	else
+	{
+		printf("syntax error near unexpected token\n");
+		g_exit_status = 258;
+	}
 	return (1);
 }
 
