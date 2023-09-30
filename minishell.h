@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:07:24 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 05:01:27 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@
 # define RESET   "\x1B[0m"
 # define PURPLE  "\x1B[35m"
 
-
-
-
-int exit_status;
+int			exit_status;
 typedef struct s_info
 {
 	char	*content;
@@ -69,6 +66,13 @@ typedef struct s_env
 	char	*value;
 }			t_env;
 
+typedef struct s_int
+{
+	int		b;
+	int		k;
+	int		size_of_direc;
+}			t_int;
+
 typedef struct s_vars
 {
 	int		count_argiment;
@@ -76,7 +80,6 @@ typedef struct s_vars
 	char	**envp;
 	char	*strarg;
 	char	*strvalue;
-	int		exit_status;
 	t_cmds	*cmds;
 	t_env	*env;
 	int		n_commandes;
@@ -84,14 +87,13 @@ typedef struct s_vars
 
 }			t_vars;
 
-void		cmd_exit(char **str, t_vars *vars);
+void		free_x_max(char **str);
+void		cmd_exit(char **str);
 int			has_redirections(t_vars *vars, int i);
 int			ft_strcmp(char *s1, char *s2);
 char		**clear_cmds_arg_from_direct(char **args);
 char		*read_input(void);
 char		**get_files(int size, char **old_stac);
-void 		free_2d_array(char **array);
-void 		free_tokens(t_info **tokens);
 char		**make_token(char *s);
 int			lenght_of_the_2d(char **p);
 int			count_s_lenght(const char *s, char c);
@@ -101,11 +103,11 @@ char		*ft_getenv(char *key, t_vars *vars);
 void		exec_cmds(t_vars *vars, int i);
 char		*read_input(void);
 char		**ft_split(char const *s, char c);
-void		run(char *cmd, char **args, t_vars *vars, char **str);
+void		run(char **args, t_vars *vars);
 void		fell_env_struct(t_vars *vars);
 void		run_cd(char **args, t_vars *vars, char *pwd);
-void		run_echo(char **args, t_vars *vars);
-void		export_cmd(t_vars *vars, char *args, char **str);
+void		run_echo(char **args);
+void		export_cmd(t_vars *vars, char *args);
 void		check_unset(char **args, t_vars *vars, int check);
 void		env_cmd(t_vars *vars);
 void		table(char **str, t_info **tokens);
@@ -124,12 +126,12 @@ void		fell_env_struct(t_vars *vars);
 void		fell_env_struct(t_vars *vars);
 char		*ft_getenv(char *key, t_vars *vars);
 void		pipe_red(t_vars *vars, int i, pid_t *childs);
-void		cmd_builtins(t_vars *vars, int i, char **str);
-int			syntax_errors(char **args, t_vars *vars);
-void 		is_notbuiltins(t_vars *vars, int i, pid_t *childs);
-void 		ft_builtins(t_vars *vars, int i, char **str, pid_t *childs);
+void		cmd_builtins(t_vars *vars, int i);
+int			syntax_errors(char **args);
+void		is_notbuiltins(t_vars *vars, int i, pid_t *childs);
+void		ft_builtins(t_vars *vars, int i, pid_t *childs);
 int			command_notfound(char **args, t_vars *vars);
-int 		syntax_err(char **args, t_vars *vars);
+int			syntax_err(char **args);
 void		change_pwd(t_vars *vars, char *pwd);
 char		**expand_s_quotes(char **tokens);
 char		**expand_quotes(char **tokens);
@@ -137,18 +139,17 @@ void		change_oldpwd(t_vars *vars, char *pwd);
 char		**ft_split_export(char const *s, char c);
 char		*allocat_s_export(const char *s, char c);
 int			count_s_lenght_export(const char *s, char c);
+void		free_x_dmax(char **str);
+int			double_quotes(char **args);
+char		*ft_strdup_env(const char *s1);
+char		*ft_strdup_against(const char *s1);
 char		*ft_strjoin_export(char const *s1, char const *s2);
-int 		get_var_size(char *str);
-int 		is_var_inside_sq(char *arg, int index);
-int			lenght_of_the_2d(char **p);
-int			is_char(char *str);
-int			is_char_in2d(char **str);
+char		*ft_strdup_export(const char *s1);
+void		*ft_calloc_export(size_t count, size_t size);
+char		**ft_split_export(char const *s, char c);
 char		**split(char *s, char *delimiters);
 char		*ft_strndup(char const *str, size_t max);
-char *expand_var(char *arg, t_vars *vars);
-char	**expand_s_quotes(char **tokens);
-char	**expand_quotes(char **tokens);
-t_info	**allocat_token(char **s, t_vars *vars);
-char	*alloc_s(char const *s, unsigned int start, int len);
-
+char		*expand_var(char *arg, t_vars *vars);
+int			is_var_inside_sq(char *arg, int index);
+int			get_var_size(char *str);
 #endif

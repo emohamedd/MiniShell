@@ -6,23 +6,23 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:31:28 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 07:54:10 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 05:12:35 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "../malloc/ft_malloc.h"
 # include <stdlib.h>
 # include <unistd.h>
-# include "../malloc/ft_malloc.h"
 
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
-size_t	ft_strlen(const char *s);
+int		ft_strlen(const char *s);
 int		ft_isprint(int c);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
@@ -41,7 +41,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, int start, int len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);

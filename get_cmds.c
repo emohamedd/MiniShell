@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:57:54 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 16:15:59 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:36:30 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ char	**get_cmds(t_info **info)
 	cmd = NULL;
 	len = (*info)->size;
 	i = 0;
-	// dst = malloc(sizeof(char *) * ((*info)->size + 1));
 	dst = malloc_((sizeof(char *) * ((*info)->size + 1)), NULL, 0, NULL);
 	while (i < len)
 	{
-		dst[i] =  info[i]->content;
+		dst[i] = info[i]->content;
 		i++;
 	}
 	dst[i] = 0;

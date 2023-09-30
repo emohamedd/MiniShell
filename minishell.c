@@ -6,11 +6,24 @@
 /*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 10:45:35 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 13:54:01 by haarab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_x_max(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
 
 int	main(int c, char **v, char **env)
 {
@@ -28,7 +41,6 @@ int	main(int c, char **v, char **env)
 	exit_status = 0;
 	vars.envp = env;
 	vars.env = malloc(sizeof(t_env) * (count_argiment(vars.envp)));
-	// vars.env = malloc_((sizeof(t_env) * (count_argiment(vars.envp))), NULL, 0, NULL);
 	fell_env_struct(&vars);
 	vars.env_number = count_argiment(vars.envp);
 	tokens = NULL;
@@ -66,14 +78,14 @@ int	main(int c, char **v, char **env)
 			vars.count_argiment = lenght_of_the_2d(str);
 			fdin = dup(STDIN_FILENO);
 			fdou = dup(STDOUT_FILENO);
-			run(tokens[0]->content, cmds, &vars, str);
+			run(cmds, &vars);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
-			// free(tokens);
 			// table(cmds, tokens);
-			// free(vars.env);
 			malloc_(0, NULL, 2, NULL);
 		}
+		if (input)
+			free(input);
 	}
 	return (0);
 }

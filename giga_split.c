@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:56:43 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 12:28:18 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:37:53 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ char	**split(char *s, char *delimiters)
 	char	**new_tokens;
 
 	max_tokens = ft_strlen(s) + 1;
-	// tokens = (char **)malloc(max_tokens * sizeof(char *));
 	tokens = malloc_((max_tokens * sizeof(char *)), NULL, 0, NULL);
 	if (!tokens)
 	{
@@ -71,7 +70,6 @@ char	**split(char *s, char *delimiters)
 				if (token_count >= max_tokens)
 				{
 					max_tokens *= 2;
-					// new_tokens = (char **)malloc(max_tokens * sizeof(char *));
 					new_tokens = malloc_((max_tokens * sizeof(char *)), NULL, 0, NULL);
 					if (!new_tokens)
 					{
@@ -84,10 +82,8 @@ char	**split(char *s, char *delimiters)
 						new_tokens[i] = tokens[i];
 						i++;
 					}
-					// free(tokens);
 					tokens = new_tokens;
 				}
-				// tokens[token_count] = (char *)malloc((end - start + 1) * sizeof(char));
 				tokens[token_count] = malloc_(((end - start + 1) * sizeof(char)), NULL, 0, NULL);
 				if (!tokens[token_count])
 				{
@@ -103,7 +99,6 @@ char	**split(char *s, char *delimiters)
 				if (token_count >= max_tokens)
 				{
 					max_tokens *= 2;
-					// new_tokens = (char **)malloc(max_tokens * sizeof(char *));
 					new_tokens = malloc_((max_tokens * sizeof(char *)), NULL, 0, NULL);
 					if (!new_tokens)
 					{
@@ -116,10 +111,8 @@ char	**split(char *s, char *delimiters)
 						new_tokens[i] = tokens[i];
 						i++;
 					}
-					// free(tokens);
 					tokens = new_tokens;
 				}
-				// tokens[token_count] = (char *)malloc(2 * sizeof(char));
 				tokens[token_count] = malloc_((2 * sizeof(char)), NULL, 0, NULL);
 				if (!tokens[token_count])
 				{
@@ -143,7 +136,6 @@ char	**split(char *s, char *delimiters)
 		if (token_count >= max_tokens)
 		{
 			max_tokens *= 2;
-			// new_tokens = (char **)malloc(max_tokens * sizeof(char *));
 			new_tokens = malloc_((max_tokens * sizeof(char *)), NULL, 0, NULL);
 			if (!new_tokens)
 			{
@@ -156,10 +148,8 @@ char	**split(char *s, char *delimiters)
 				new_tokens[i] = tokens[i];
 				i++;
 			}
-			// free(tokens);
 			tokens = new_tokens;
 		}
-		// tokens[token_count] = (char *)malloc((end - start + 1) * sizeof(char));
 		tokens[token_count] = malloc_(((end - start + 1) * sizeof(char)), NULL, 0, NULL);
 		if (!tokens[token_count])
 		{

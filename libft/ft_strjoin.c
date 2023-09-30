@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 11:59:19 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 21:03:47 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:47:51 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	// p = malloc(sizeof(char) * size);
 	p = malloc_((sizeof(char) * size), NULL, 0, NULL);
 	if (!p)
 		return (NULL);

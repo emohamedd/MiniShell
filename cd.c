@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 16:30:46 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 01:43:51 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	change_oldpwd(t_vars *vars, char *pwd)
 {
-	int count = 0;
+	int	count;
+
+	count = 0;
 	while (count < vars->env_number)
 	{
-		if (ft_strncmp(vars->env[count].key, "OLDPWD", ft_strlen(vars->env[count].key) + 1) == 0)
+		if (ft_strncmp(vars->env[count].key, "OLDPWD",
+				ft_strlen(vars->env[count].key) + 1) == 0)
 		{
 			vars->env[count].value = pwd;
 		}
@@ -27,10 +30,13 @@ void	change_oldpwd(t_vars *vars, char *pwd)
 
 void	change_pwd(t_vars *vars, char *pwd)
 {
-	int count = 0;
+	int	count;
+
+	count = 0;
 	while (count < vars->env_number)
 	{
-		if (ft_strncmp(vars->env[count].key, "PWD", ft_strlen(vars->env[count].key) + 1) == 0)
+		if (ft_strncmp(vars->env[count].key, "PWD",
+				ft_strlen(vars->env[count].key) + 1) == 0)
 		{
 			vars->env[count].value = pwd;
 		}
@@ -38,26 +44,28 @@ void	change_pwd(t_vars *vars, char *pwd)
 	}
 }
 
+void	ft_cd(t_vars *vars, char **args, char *pwd)
+{
+	if (chdir(args[1]) == -1)
+	{
+		ft_putendl_fd("minishell: No such file or directory", 2);
+		exit_status = 1;
+		return ;
+	}
+	if (vars->cmds[0].is_nex_pip)
+	{
+		exit_status = 0;
+		return ;
+	}
+	change_oldpwd(vars, pwd);
+	exit_status = 0;
+}
 
-
-void run_cd(char **args, t_vars *vars, char *pwd)
+void	run_cd(char **args, t_vars *vars, char *pwd)
 {
 	if (args[1])
 	{
-		// printf("%s\n", args[1]);
-		if (chdir(args[1]) == -1)
-		{
-			ft_putendl_fd("minishell: No such file or directory", 2);
-			exit_status = 1;
-			return ;
-		}
-		if (vars->cmds[0].is_nex_pip)
-		{
-			exit_status = 0;
-			return ;
-		}
-		change_oldpwd(vars, pwd);
-		exit_status = 0;
+		ft_cd(vars, args, pwd);
 	}
 	else if (!args[1])
 	{

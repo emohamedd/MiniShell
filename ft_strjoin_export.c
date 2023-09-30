@@ -1,21 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   symbol_exec.c                                      :+:      :+:    :+:   */
+/*   ft_strjoin_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 12:13:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/24 10:09:55 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/30 02:23:52 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/30 02:35:26 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	pipe_red(t_vars *vars, int i, pid_t *childs)
+char	*ft_strjoin_export(char const *s1, char const *s2)
 {
-	if (vars->cmds[i].is_nex_pip)
+	int		i;
+	int		j;
+	int		size;
+	char	*p;
+
+	i = 0;
+	j = 0;
+	if (!s1 && !s2)
+		return (NULL);
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	p = malloc(sizeof(char) * size);
+	if (!p)
+		return (NULL);
+	while (s1 && s1[i])
 	{
-		pipe_commands(vars, i, childs);
+		p[i] = s1[i];
+		i++;
 	}
+	while (s2 && s2[j])
+	{
+		p[i + j] = s2[j];
+		j++;
+	}
+	p[i + j] = '\0';
+	return (p);
 }

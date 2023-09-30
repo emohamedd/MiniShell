@@ -6,12 +6,11 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:32:31 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 11:03:18 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:40:18 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	**make_token(char *s)
 {
@@ -23,6 +22,4 @@ char	**make_token(char *s)
 	tokens = split(s, special_chars);
 	quote = expand_quotes(tokens);
 	return (red_to_herdoc(tokens));
-	// exit(1);
 }
-

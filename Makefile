@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
+#    By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/29 10:44:03 by emohamed         ###   ########.fr        #
+#    Updated: 2023/09/30 14:09:37 by haarab           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = #-g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra
 LDFLAGS = -lreadline 
 RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline
 RLOFLGS = -I/Users/emohamed/.brew/opt/readline/include
