@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 20:22:32 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	fell_value(t_vars *vars, char *args, int count)
 	}
 	if (ft_strchr(args, '=') != NULL)
 	{
-		free(vars->env[count].value);
+		// free(vars->env[count].value);
 		vars->env[count].value = ft_strdup_env(ft_strchr(args, '=') + 1);
 		g_exit_status = 0;
 		return (0);

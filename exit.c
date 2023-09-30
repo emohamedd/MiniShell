@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 04:46:32 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 20:00:57 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	cmd_exit(char **str)
 		i++;
 	if (i == 2 && is_numeric(str[1]))
 	{
-		res = atoi(str[1]);
+		res = ft_atoi(str[1]);
 		g_exit_status = res;
 	}
 	else if (i == 2)

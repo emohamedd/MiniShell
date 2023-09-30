@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+         #
+#    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/16 15:27:28 by emohamed          #+#    #+#              #
-#    Updated: 2023/09/30 14:09:37 by haarab           ###   ########.fr        #
+#    Updated: 2023/09/30 20:18:36 by emohamed         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 LDFLAGS = -lreadline 
-RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline
+RLFLGS = -L/Users/emohamed/.brew/opt/readline/lib -lreadline #-fsanitize=address
 RLOFLGS = -I/Users/emohamed/.brew/opt/readline/include
 
 SRCS = $(wildcard *.c)
