@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 22:47:16 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:01:51 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,5 +253,8 @@ void		fell_env(t_vars *vars, char *args, char *key, t_export *export_int);
 int			check_key(char *args);
 int			fell_env_value(t_vars *vars, char *args, int count, char *var_);
 void		print_env(t_vars *vars, int count);
+int			redirect_output(t_vars *vars, int j, int i);
+int			redirect_input(t_vars *vars, int j, int i);
+int			redirect_output_append(t_vars *vars, int j, int i);
 
 #endif
