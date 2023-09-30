@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haarab <haarab@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 04:46:32 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/27 16:36:55 by haarab           ###   ########.fr       */
+/*   Updated: 2023/09/30 01:44:13 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void cmd_exit(char **str, t_vars *vars)
 {
     int i = 0;
     while (str[i]) 
-	{
         i++;
-    }
     if (i == 2 && is_numeric(str[1])) 
 	{
         int res = atoi(str[1]);

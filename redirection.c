@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:42:46 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/29 13:46:36 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 01:47:33 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ char	**clear_cmds_arg_from_direct(char **args)
 		}
 		count++;
 	}
-	stack_args = malloc(sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)
-				+ 1));
-	// stack_args = malloc_((sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)+ 1)), NULL, 0, NULL);
+	// stack_args = malloc(sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)
+	// 			+ 1));
+	stack_args = malloc_((sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)+ 1)), NULL, 0, NULL);
 	count = 0;
 	size = 0;
 	while (args[count])
@@ -64,8 +64,8 @@ char	**get_redirectinsv(int size, char **old_stack)
 	int		suui;
 	int		count;
 
-	stack = malloc(sizeof(char *) * (size + 1));
-	// stack = malloc_((sizeof(char *) * (size + 1)), NULL, 0, NULL);
+	// stack = malloc(sizeof(char *) * (size + 1));
+	stack = malloc_((sizeof(char *) * (size + 1)), NULL, 0, NULL);
 	suui = 0;
 	count = 0;
 	while (old_stack[count] && suui < size)
@@ -87,10 +87,17 @@ char	**get_files(int size, char **old_stack)
 	int		suui; 
 	int		count; 
 
+	// int j = 0;
+	// while (old_stack[j])
+	// {
+	// 	printf ("opera_derec ==== %s\n", old_stack[j]);	
+	// 	j++;
+	// }
+
 	suui = 0;
 	count = 0;
-	stack = malloc(sizeof(char *) * (size + 1));
-	// stack = malloc_((sizeof(char *) * (size + 1)), NULL, 0, NULL);
+	// stack = malloc(sizeof(char *) * (size + 1));
+	stack = malloc_((sizeof(char *) * (size + 1)), NULL, 0, NULL);
 	while (old_stack[count] && suui < size)
 	{
 		if (is_redirection(old_stack[count]))

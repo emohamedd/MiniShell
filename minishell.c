@@ -6,11 +6,20 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/29 16:10:32 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 01:52:41 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void free_x_max(char **str) {
+	int i = 0;
+	while (str[i]) {
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
 
 int	main(int c, char **v, char **env)
 {
@@ -43,7 +52,7 @@ int	main(int c, char **v, char **env)
 			return (exit_status);
 		}
 		trimed = ft_strtrim(input, " \t\r\n");
-		free(input);
+		// free(input);
 		if (trimed == NULL)
 		{
 			return (exit_status);
@@ -69,11 +78,11 @@ int	main(int c, char **v, char **env)
 			run(tokens[0]->content, cmds, &vars, str);
 			dup2(fdin, 0);
 			dup2(fdou, 1);
-			// free(tokens);
 			// table(cmds, tokens);
-			// free(vars.env);
+			malloc_(0, NULL, 2, NULL);
 		}
-		malloc_(0, NULL, 2, NULL);
+		if (input)
+			free(input);
 	}
 	return (0);
 }
