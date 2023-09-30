@@ -6,36 +6,46 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:02:17 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:13:28 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:30:53 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *expand_var_key(char *key, t_vars *vars) 
+char	*expand_var_key(char *key, t_vars *vars)
 {
-    char *exp_value = ft_getenv(key, vars);
-    if (!exp_value) {
-        exp_value = "";
-    }
-    return exp_value;
+	char	*exp_value;
+
+	exp_value = ft_getenv(key, vars);
+	if (!exp_value)
+	{
+		exp_value = "";
+	}
+	return (exp_value);
 }
 
-char *expand_var(char *arg, t_vars *vars) {
-	int i = 0;
-	char *key;
-	char *dst1;
-	char *dst2;
-	char *dst3;
-	char *exp_value;
+char	*expand_var(char *arg, t_vars *vars)
+{
+	int		i;
+	char	*key;
+	char	*dst1;
+	char	*dst2;
+	char	*dst3;
+	char	*exp_value;
 
-	while (i < ft_strlen(arg)) {
-		if (arg[i] == '$' && !is_var_inside_sq(arg, i)) {
+	i = 0;
+	while (i < ft_strlen(arg))
+	{
+		if (arg[i] == '$' && !is_var_inside_sq(arg, i))
+		{
 			dst1 = ft_strndup(arg, i);
-			if (arg[i + 1] && (arg[i + 1] == '?')) {
+			if (arg[i + 1] && (arg[i + 1] == '?'))
+			{
 				i++;
 				exp_value = ft_itoa(exit_status);
-			}else {				
+			}
+			else
+			{
 				key = ft_strndup(&arg[i + 1], get_var_size(&arg[i + 1]));
 				exp_value = ft_getenv(key, vars);
 				if (!exp_value)
@@ -48,5 +58,5 @@ char *expand_var(char *arg, t_vars *vars) {
 		}
 		i++;
 	}
-	return arg;
+	return (arg);
 }

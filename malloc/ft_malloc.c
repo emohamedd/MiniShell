@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_malloc.h"
 
 static void	*allocate_memory(unsigned int size, t_address **addresses)

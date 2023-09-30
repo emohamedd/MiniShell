@@ -6,12 +6,11 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:47:24 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 02:04:44 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:32:36 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	check_key(char *args)
 {
@@ -35,7 +34,7 @@ int	check_key(char *args)
 	return (0);
 }
 
-int check_doubelcouts(char *args)
+int	check_doubelcouts(char *args)
 {
 	int	i;
 	int	count;
@@ -53,13 +52,11 @@ int check_doubelcouts(char *args)
 	return (count);
 }
 
-
-void print_env_equal(t_vars *vars, int count)
+void	print_env_equal(t_vars *vars, int count)
 {
 	printf("declare -x %s", vars->env[count].key);
 	printf("=");
-	if (vars->env[count].value
-		&& check_doubelcouts(vars->env[count].value) < 2)
+	if (vars->env[count].value && check_doubelcouts(vars->env[count].value) < 2)
 		printf("\"%s\"""\n", vars->env[count].value);
 	if (vars->env[count].value
 		&& check_doubelcouts(vars->env[count].value) >= 2)
@@ -68,27 +65,22 @@ void print_env_equal(t_vars *vars, int count)
 		printf("");
 }
 
-void print_env(t_vars *vars, int count)
+void	print_env(t_vars *vars, int count)
 {
 	while (count < vars->env_number)
 	{
-		// if (vars->env[count].is_equal)
-		// 	print_env_equal(vars, count);
-		// if (!vars->env[count].is_equal)
-		// {
-			printf("declare -x %s", vars->env[count].key);
-			if (vars->env[count].value)
-			{
-				printf("=");
-				printf("\"%s\"", vars->env[count].value);
-			}
-			printf("\n");
-		// }
+		printf("declare -x %s", vars->env[count].key);
+		if (vars->env[count].value)
+		{
+			printf("=");
+			printf("\"%s\"", vars->env[count].value);
+		}
+		printf("\n");
 		count++;
 	}
 }
 
-int fell_value(t_vars *vars, char *args, int count)
+int	fell_value(t_vars *vars, char *args, int count)
 {
 	if (ft_strchr(args, '=') == NULL)
 	{
@@ -99,20 +91,19 @@ int fell_value(t_vars *vars, char *args, int count)
 	if (ft_strchr(args, '=') != NULL)
 	{
 		free(vars->env[count].value);
-		vars->env[count].value =ft_strdup_env(ft_strchr(args, '=') + 1);
+		vars->env[count].value = ft_strdup_env(ft_strchr(args, '=') + 1);
 		exit_status = 0;
 		return (0);
 	}
 	return (1);
 }
 
-
-int fell_env_value(t_vars *vars,char *args, int count, char *var_)
+int	fell_env_value(t_vars *vars, char *args, int count, char *var_)
 {
-	int j;
-	
-	if (!ft_strncmp(vars->env[count].key, var_,
-				ft_strlen(vars->env[count].key) + 1))
+	int	j;
+
+	if (!ft_strncmp(vars->env[count].key, var_, ft_strlen(vars->env[count].key)
+			+ 1))
 	{
 		if (fell_value(vars, args, count) == 0)
 			return (0);
@@ -132,11 +123,10 @@ int fell_env_value(t_vars *vars,char *args, int count, char *var_)
 	return (1);
 }
 
-
 void	fell_env_isequal(t_vars *vars, int count, char *args, int p)
 {
-	char *value;
-	
+	char	*value;
+
 	value = ft_strchr(args, '=') + 1;
 	if (ft_strchr(args, '=') != NULL)
 	{
@@ -153,8 +143,8 @@ void	fell_env_isequal(t_vars *vars, int count, char *args, int p)
 
 void	fell_env_dollar(t_vars *vars, int count, char *args, int p)
 {
-	char *value;
-	int j;
+	char	*value;
+	int		j;
 
 	j = 0;
 	while (j < vars->env_number)
@@ -171,19 +161,18 @@ void	fell_env_dollar(t_vars *vars, int count, char *args, int p)
 		}
 		j++;
 	}
-	if ( p == 1)
+	if (p == 1)
 	{
 		vars->env[count].key = args;
 		exit_status = 0;
 	}
 }
 
-
-
 void	fell_env(t_vars *vars, int count, char *args, char *key, int p)
 {
-	int j;
-	char *value;
+	int		j;
+	char	*value;
+
 	if (!ft_strchr(args, '$'))
 	{
 		vars->env[count].key = key;
@@ -195,13 +184,13 @@ void	fell_env(t_vars *vars, int count, char *args, char *key, int p)
 	}
 }
 
-void fell_envirement(t_vars *vars, int count, char *args, char *key)
+void	fell_envirement(t_vars *vars, int count, char *args, char *key)
 {
-	int p;
-	int d;
-	int x;
-	char **tempers;
-	
+	int		p;
+	int		d;
+	int		x;
+	char	**tempers;
+
 	p = 0;
 	d = 0;
 	tempers = ft_split_export(args, '=');
@@ -225,10 +214,10 @@ void fell_envirement(t_vars *vars, int count, char *args, char *key)
 	free_x_dmax(tempers);
 }
 
-int count_env(t_vars *vars, t_env *tmp)
+int	count_env(t_vars *vars, t_env *tmp)
 {
-	int count;
-	
+	int	count;
+
 	count = 0;
 	while (count < vars->env_number)
 	{
@@ -238,9 +227,9 @@ int count_env(t_vars *vars, t_env *tmp)
 	return (count);
 }
 
-int export_env(t_vars *vars, char *var_, char *args)
+int	export_env(t_vars *vars, char *var_, char *args)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (var_ == NULL)
@@ -260,7 +249,6 @@ int export_env(t_vars *vars, char *var_, char *args)
 	return (1);
 }
 
-
 void	export_cmd(t_vars *vars, char *args, char **str)
 {
 	char	*key;
@@ -268,9 +256,9 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 	int		count;
 	t_env	*tmp;
 	char	*var_;
-	char 	**tempers;
-	count = 0;
+	char	**tempers;
 
+	count = 0;
 	if (args == NULL)
 	{
 		print_env(vars, count);
@@ -280,7 +268,8 @@ void	export_cmd(t_vars *vars, char *args, char **str)
 	key = NULL;
 	tempers = ft_split_export(args, '=');
 	var_ = tempers[0];
-	if (export_env(vars, var_, args) == 0) {
+	if (export_env(vars, var_, args) == 0)
+	{
 		free_x_dmax(tempers);
 		return ;
 	}

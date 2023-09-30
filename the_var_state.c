@@ -12,21 +12,26 @@
 
 #include "minishell.h"
 
-int is_var_inside_sq(char *arg, int index) 
+int	is_var_inside_sq(char *arg, int index)
 {
-	int count = 0;
-	int count_sq = 0;
-	int count_dq = 0;
-	while (arg[count]) {
+	int	count;
+	int	count_sq;
+	int	count_dq;
+
+	count = 0;
+	count_sq = 0;
+	count_dq = 0;
+	while (arg[count])
+	{
 		if (arg[count] == '\'' && count_dq % 2 == 0)
 			count_sq++;
 		if (arg[count] == '\"')
 			count_dq++;
 		if (count == index && count_sq % 2 == 0)
-			return 0;
+			return (0);
 		else if (count == index && count_sq % 2 != 0)
-			return 1;
+			return (1);
 		count++;
 	}
-	return 0;
+	return (0);
 }

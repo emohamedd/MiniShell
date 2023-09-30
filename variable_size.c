@@ -12,12 +12,14 @@
 
 #include "minishell.h"
 
-int get_var_size(char *str) 
+int	get_var_size(char *str)
 {
-	int i = 0;
-	while (str[i] && (ft_isalpha(str[i]))) 
+	int	i;
+
+	i = 0;
+	while (str[i] && (ft_isalpha(str[i])))
 	{
 		i++;
 	}
-	return i;
+	return (i);
 }

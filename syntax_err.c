@@ -12,11 +12,11 @@
 
 #include "minishell.h"
 
-int syntax_err(char **args, t_vars *vars)
+int	syntax_err(char **args, t_vars *vars)
 {
 	if (syntax_errors(args, vars) > 0)
 	{
-		printf ("minishell: syntax error\n");
+		printf("minishell: syntax error\n");
 		exit_status = 2;
 		return (1);
 	}

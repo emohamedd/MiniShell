@@ -6,15 +6,19 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 01:52:41 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 02:40:32 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_x_max(char **str) {
-	int i = 0;
-	while (str[i]) {
+void	free_x_max(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
 		free(str[i]);
 		i++;
 	}
@@ -37,7 +41,6 @@ int	main(int c, char **v, char **env)
 	exit_status = 0;
 	vars.envp = env;
 	vars.env = malloc(sizeof(t_env) * (count_argiment(vars.envp)));
-	// vars.env = malloc_((sizeof(t_env) * (count_argiment(vars.envp))), NULL, 0, NULL);
 	fell_env_struct(&vars);
 	vars.env_number = count_argiment(vars.envp);
 	tokens = NULL;

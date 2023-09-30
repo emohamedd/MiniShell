@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 21:17:07 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/28 21:20:11 by emohamed         ###   ########.fr       */
+/*   Created: 2023/09/30 02:23:52 by emohamed          #+#    #+#             */
+/*   Updated: 2023/09/30 02:35:26 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_2d_array(char **array)
+char	*ft_strjoin_export(char const *s1, char const *s2)
 {
-    if (array)
-    {
-        for (int i = 0; array[i]; i++)
-        {
-            free(array[i]);
-        }
-        free(array);
-    }
-}
+	int		i;
+	int		j;
+	int		size;
+	char	*p;
 
-void free_tokens(t_info **tokens)
-{
-    if (tokens)
-    {
-        for (int i = 0; tokens[i]; i++)
-        {
-            free(tokens[i]->content);
-            free(tokens[i]);
-        }
-        free(tokens);
-    }
+	i = 0;
+	j = 0;
+	if (!s1 && !s2)
+		return (NULL);
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	p = malloc(sizeof(char) * size);
+	if (!p)
+		return (NULL);
+	while (s1 && s1[i])
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	while (s2 && s2[j])
+	{
+		p[i + j] = s2[j];
+		j++;
+	}
+	p[i + j] = '\0';
+	return (p);
 }
