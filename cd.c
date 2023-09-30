@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:41:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 22:32:10 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	change_pwd(t_vars *vars, char *pwd)
 		if (ft_strncmp(vars->env[count].key, "PWD",
 				ft_strlen(vars->env[count].key) + 1) == 0)
 		{
-			vars->env[count].value = pwd;
+			free(vars->env[count].value);
+			vars->env[count].value = dp_en(pwd);
 		}
 		count++;
 	}

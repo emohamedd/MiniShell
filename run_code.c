@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:31 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 22:19:34 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,6 @@ int	is_builtin(char *cmd)
 		return (1);
 	}
 	return (0);
-}
-
-void	run_export(t_vars *vars, int i)
-{
-	int	k;
-
-	if (!vars->cmds[i].cmds_args[1])
-		export_cmd(vars, NULL);
-	k = 1;
-	while (vars->cmds[i].cmds_args[k])
-	{
-		export_cmd(vars, vars->cmds[i].cmds_args[k]);
-		k++;
-	}
-}
-
-void	run_unset(t_vars *vars, int i)
-{
-	int	k;
-
-	k = 1;
-	while (vars->cmds[i].cmds_args[k])
-	{
-		check_unset(vars->cmds[i].cmds_args, vars, k);
-		k++;
-	}
-}
-
-void	run_exit(t_vars *vars, int i)
-{
-	cmd_exit(vars->cmds[i].cmds_args);
-	exit(g_exit_status);
-}
-
-void	run_pwd(char *cwd)
-{
-	printf("%s\n", cwd);
-	g_exit_status = 0;
 }
 
 void	run_builtins(t_vars *vars, int i, char *cwd)
@@ -95,73 +57,6 @@ void	cmd_builtins(t_vars *vars, int i)
 	change_pwd(vars, cwd);
 	run_builtins(vars, i, cwd);
 	free(cwd);
-}
-
-int	ft_error(char **str)
-{
-	int	i;
-	int	j;
-	int	a;
-	int	b;
-
-	i = 0;
-	while (str[i])
-	{
-		j = 0;
-		a = 0;
-		b = 0;
-		while (str[i][j])
-		{
-			if (str[i][j] == '<')
-				a++;
-			if (str[i][j] == '>')
-				b++;
-			j++;
-		}
-		if (a > 2 || b > 2)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	syntax_errors(char **args)
-{
-	int	count;
-	int	i;
-	int	j;
-
-	count = 0;
-	if (ft_error(args))
-		return (1);
-	i = 0;
-	j = 0;
-	while (args[i])
-	{
-		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && args[i + 1] == NULL)
-			j++;
-		if (!ft_strncmp(">", args[i], ft_strlen(args[i])) && args[i + 1] == NULL)
-			j++;
-		if (!ft_strncmp("<", args[i], ft_strlen(args[i])) && args[i + 1] == NULL)
-			j++;
-		if (!ft_strncmp("<<", args[i], ft_strlen(args[i])) && args[i + 1] == NULL)
-			j++;
-		else if (!ft_strncmp(">>", args[i], ft_strlen(args[i])) && args[i + 1] == NULL)
-			j++;
-		if (!ft_strncmp("|", args[i], ft_strlen(args[i])) && (!ft_strncmp("|",
-					args[i + 1], ft_strlen(args[i + 1]))))
-			j++;
-		if (!ft_strncmp(">>", args[i], ft_strlen(args[i])) && (!ft_strncmp("|",
-					args[i + 1], ft_strlen(args[i + 1]))))
-			j++;
-		if (!ft_strncmp("<<", args[i], ft_strlen(args[i])) && (!ft_strncmp("|",
-					args[i + 1], ft_strlen(args[i + 1]))))
-			j++;
-		if (!ft_strncmp("|", args[0], ft_strlen(args[0]) + 1))
-			j++;
-		i++;
-	}
-	return (j);
 }
 
 void	run(char **args, t_vars *vars)

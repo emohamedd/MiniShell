@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 19:49:04 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:38:18 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,27 @@ int	check_n(char *args)
 	return (1);
 }
 
+void	print_echo(char **args, int i)
+{
+	int	j;
+
+	j = 0;
+	while (args[i][j])
+	{
+		printf("%c", args[i][j]);
+		j++;
+	}
+	if (args[i] != NULL && args[i + 1] != NULL)
+		printf(" ");
+}
+
 void	run_echo(char **args)
 {
 	int	i;
 	int	check;
-	int	j;
 
-	i = 1;
 	check = 0;
+	i = 1;
 	while (args[i])
 	{
 		while (args[i] && check_n(args[i]) == 0)
@@ -49,22 +62,11 @@ void	run_echo(char **args)
 			check = 1;
 			i++;
 		}
+		if (args[i] && check_n(args[i]) == 1)
+			g_exit_status = 0;
 		while (args[i])
 		{
-			j = 0;
-			while (args[i][j])
-			{
-				if (args[i][j] == '$' && args[i][j + 1] == '?')
-				{
-					printf("%d", g_exit_status);
-					j = j + 1;
-				}
-				else
-					printf("%c", args[i][j]);
-				j++;
-			}
-			if (args[i] != NULL && args[i + 1] != NULL)
-				printf(" ");
+			print_echo(args, i);
 			i++;
 		}
 		g_exit_status = 0;

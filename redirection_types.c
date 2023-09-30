@@ -6,11 +6,12 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 17:05:12 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 19:57:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:39:41 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 int	handle_output_redirection(char *filename)
 {
 	int	fd;
@@ -33,6 +34,7 @@ int	handle_output_redirection(char *filename)
 int	handle_input_redirection(char *filename)
 {
 	int	fd;
+
 	if (!(access(filename, F_OK)))
 	{
 		if (filename)

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:42:46 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 02:42:35 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:43:12 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,29 @@ int	is_redirection(char *arg)
 	return (0);
 }
 
-char	**clear_cmds_arg_from_direct(char **args)
+int	size_cmds_redirection(char **args)
 {
-	int		count;
-	int		size;
-	char	**stack_args;
+	int	count;
+	int	size;
 
 	count = 0;
 	size = 0;
 	while (args[count])
 	{
 		if (is_redirection(args[count]))
-		{
 			size++;
-		}
 		count++;
 	}
+	return (size);
+}
+
+char	**clear_cmds_arg_from_direct(char **args)
+{
+	int		count;
+	int		size;
+	char	**stack_args;
+
+	size = size_cmds_redirection(args);
 	stack_args = malloc_((sizeof(char *) * (lenght_of_the_2d(args) - (size * 2)
 					+ 1)), NULL, 0, NULL);
 	count = 0;
@@ -46,7 +53,8 @@ char	**clear_cmds_arg_from_direct(char **args)
 	while (args[count])
 	{
 		if ((count == 0 && !is_redirection(args[count]))
-			|| (!is_redirection(args[count]) && !is_redirection(args[count - 1])))
+			|| (!is_redirection(args[count])
+				&& !is_redirection(args[count - 1])))
 		{
 			stack_args[size] = args[count];
 			size++;

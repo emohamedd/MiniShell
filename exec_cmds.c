@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:37:07 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 22:00:33 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,26 @@
 
 char	*get_path(t_vars *vars, char *cmd)
 {
-	int			i;
+	struct stat	file_info;
 	char		**path;
 	char		*res;
 	char		*temper1;
 	char		*fullcmd;
-	struct stat	file_info;
 
-	i = 0;
+	vars->i = 0;
 	if (ft_strchr(cmd, '/'))
 		return (cmd);
 	res = ft_getenv("PATH", vars);
 	if (res == NULL)
 		return (NULL);
 	path = ft_split(res, ':');
-	while (path[i])
+	while (path[vars->i])
 	{
-		temper1 = ft_strjoin(path[i], "/");
+		temper1 = ft_strjoin(path[vars->i], "/");
 		fullcmd = ft_strjoin(temper1, cmd);
 		if (stat(fullcmd, &file_info) == 0)
-		{
 			return (fullcmd);
-		}
-		i++;
+		vars->i++;
 	}
 	return (NULL);
 }

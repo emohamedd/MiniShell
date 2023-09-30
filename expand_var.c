@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:02:17 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:59:18 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char	*expand_var(char *arg, t_vars *vars)
 {
 	t_ev	ev;
 
-	ev.i = 0;
-	while (ev.i < ft_strlen(arg))
+	ev.i = -1;
+	while (++ev.i < ft_strlen(arg))
 	{
 		if (arg[ev.i] == '$' && !is_var_inside_sq(arg, ev.i))
 		{
@@ -41,17 +41,14 @@ char	*expand_var(char *arg, t_vars *vars)
 			}
 			else
 			{
-				ev.key = ft_strndup(&arg[ev.i + 1], get_var_size(&arg[ev.i + 1]));
-				ev.exp_value = ft_getenv(ev.key, vars);
-				if (!ev.exp_value)
-					ev.exp_value = "";
+				ev.key = ft_strndup(&arg[ev.i + 1], gvs(&arg[ev.i + 1]));
+				ev.exp_value = expand_var_key(ev.key, vars);
 			}
-			ev.dst3 = arg + ((ev.i + 1) + get_var_size(&arg[ev.i + 1]));
+			ev.dst3 = arg + ((ev.i + 1) + gvs(&arg[ev.i + 1]));
 			ev.dst2 = ft_strjoin(ev.dst1, ev.exp_value);
 			arg = ft_strjoin(ev.dst2, ev.dst3);
 			ev.i = 0;
 		}
-		ev.i++;
 	}
 	return (arg);
 }

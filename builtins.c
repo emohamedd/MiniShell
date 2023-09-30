@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 18:44:19 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 19:54:44 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:32:00 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ void	is_notbuiltins(t_vars *vars, int i, pid_t *childs)
 			return ;
 	}
 	if (vars->n_commandes > 1)
+	{
 		pipe_commands(vars, i, childs);
+	}
 	else if (vars->n_commandes == 1 && i == 0)
 		exec_cmds(vars, i);
 }

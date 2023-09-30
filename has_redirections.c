@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 19:58:43 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:38:48 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ void	collect_and_write_heredoc(int fd, char *heredoc_delimiter)
 		if (!read)
 			return ;
 		if (ft_strcmp(read, heredoc_delimiter) == 0)
+		{
+			free (read);
 			break ;
+		}
 		buff = ft_strjoin(buff, read);
 		buff = ft_strjoin(buff, "\n");
+		free (read);
 	}
-	ft_putstr_fd(buff, 2);
 	ft_putstr_fd(buff, fd);
 }
 

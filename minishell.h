@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 18:36:45 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 22:32:10 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,20 @@ typedef struct s_run
 	int		fdou;
 }			t_run;
 
+typedef struct s_export
+{
+	int		d;
+	int		x;
+	int		p;
+	int		count;
+}			t_export;
+
+typedef struct s_fill
+{
+	int		i;
+	int		b;
+}			t_fill;
+
 typedef struct s_vars
 {
 	int		count_argiment;
@@ -145,7 +159,7 @@ typedef struct s_vars
 	t_env	*env;
 	int		n_commandes;
 	int		here_fd;
-
+	int		i;
 }			t_vars;
 
 int			handle_input_redirection(char *filename);
@@ -155,6 +169,11 @@ t_sp		realloc_tokens(t_sp sp);
 t_sp		handle_token(t_sp sp);
 int			handle_heredoc(char *filename);
 t_sp		handle_last_token(t_sp sp);
+
+void		run_export(t_vars *vars, int i);
+void		run_unset(t_vars *vars, int i);
+void		run_exit(t_vars *vars, int i);
+void		run_pwd(char *cwd);
 void		free_x_max(char **str);
 void		cmd_exit(char **str);
 int			has_redirections(t_vars *vars, int i);
@@ -209,7 +228,7 @@ char		*allocat_s_export(const char *s, char c);
 int			count_s_lenght_export(const char *s, char c);
 void		free_x_dmax(char **str);
 int			double_quotes(char **args);
-char		*ft_strdup_env(const char *s1);
+char		*dp_en(const char *s1);
 char		*ft_strdup_against(const char *s1);
 char		*ft_strjoin_export(char const *s1, char const *s2);
 char		*ft_strdup_export(const char *s1);
@@ -219,8 +238,13 @@ char		**split(char *s, char *delimiters);
 char		*ft_strndup(char const *str, size_t max);
 char		*expand_var(char *arg, t_vars *vars);
 int			is_var_inside_sq(char *arg, int index);
-int			get_var_size(char *str);
+int			gvs(char *str);
 char		*ft_strcpy(char *destination, const char *source);
 char		*ft_strcat(char *destination, const char *source);
 char		*ft_strncpy(char *destination, char *source, int n);
+void		fell_env(t_vars *vars, char *args, char *key, t_export *export_int);
+int			check_key(char *args);
+int			fell_env_value(t_vars *vars, char *args, int count, char *var_);
+void		print_env(t_vars *vars, int count);
+
 #endif

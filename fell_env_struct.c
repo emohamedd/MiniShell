@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:59:43 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 02:33:32 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 22:32:10 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_x_dmax(char **str)
 	}
 }
 
-char	*ft_strdup_env(const char *s1)
+char	*dp_en(const char *s1)
 {
 	int		i;
 	char	*p;
@@ -56,11 +56,11 @@ void	fell_env_struct(t_vars *vars)
 	{
 		tempers = ft_split_export(vars->envp[i], '=');
 		key = tempers[0];
-		vars->env[i].key = ft_strdup_env(key);
+		vars->env[i].key = dp_en(key);
 		if (ft_strchr(vars->envp[i], '='))
 		{
 			vars->env[i].is_equal = 1;
-			vars->env[i].value = ft_strchr(vars->envp[i], '=') + 1;
+			vars->env[i].value = dp_en(ft_strchr(vars->envp[i], '=') + 1);
 		}
 		if (tempers)
 			free_x_dmax(tempers);

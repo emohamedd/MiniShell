@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:35:50 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 16:13:29 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:38:18 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,37 @@ void	cmd_execve(char *path, t_vars *vars, int i)
 	ft_putstr_fd("minishell: No such file or directory\n", 2);
 }
 
-void	pipe_commands(t_vars *vars, int i, pid_t *childs)
+typedef struct s_data
 {
-	int 	status;
+	int		status;
 	int		fd[2];
 	int		prev_fd;
 	char	*path;
+}	t_data;
 
-	prev_fd = fd[0];
-	if (pipe(fd) == -1)
+void	pipe_commands(t_vars *vars, int i, pid_t *childs)
+{
+	t_data	data;
+
+	if (pipe(data.fd) == -1)
 		return ;
-	path = get_path(vars, vars->cmds[i].cmd);
+	data.path = get_path(vars, vars->cmds[i].cmd);
 	childs[i] = fork();
 	if (childs[i] < 0)
 		return ;
 	else if (childs[i] == 0)
 	{
-		if (path == NULL)
+		if (data.path == NULL)
 			pipes_path(vars, i);
-		childs_pipe(vars, i, fd, prev_fd);
-		cmd_execve(path, vars, i);
+		childs_pipe(vars, i, data.fd, data.prev_fd);
+		cmd_execve(data.path, vars, i);
 	}
 	else
 	{
 		if (i > 0)
-			close(prev_fd);
-		prev_fd = fd[0];
-		close(fd[1]);
+			close(data.prev_fd);
+		data.prev_fd = data.fd[0];
+		close(data.fd[1]);
 	}
-	waitpid(childs[i], &status, WNOHANG);
+	waitpid(childs[i], &data.status, 0);
 }
