@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 22:32:10 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 22:47:16 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,13 @@ typedef struct s_vars
 	int		here_fd;
 	int		i;
 }			t_vars;
+
+typedef struct s_data
+{
+	int		fd[2];
+	int		prev_fd;
+	char	*path;
+}	t_data;
 
 int			handle_input_redirection(char *filename);
 int			handle_output_redirection(char *filename);

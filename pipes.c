@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:35:50 by haarab            #+#    #+#             */
-/*   Updated: 2023/09/30 21:38:18 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 22:47:21 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,6 @@ void	cmd_execve(char *path, t_vars *vars, int i)
 	ft_putstr_fd("minishell: No such file or directory\n", 2);
 }
 
-typedef struct s_data
-{
-	int		status;
-	int		fd[2];
-	int		prev_fd;
-	char	*path;
-}	t_data;
-
 void	pipe_commands(t_vars *vars, int i, pid_t *childs)
 {
 	t_data	data;
@@ -80,5 +72,4 @@ void	pipe_commands(t_vars *vars, int i, pid_t *childs)
 		data.prev_fd = data.fd[0];
 		close(data.fd[1]);
 	}
-	waitpid(childs[i], &data.status, 0);
 }
