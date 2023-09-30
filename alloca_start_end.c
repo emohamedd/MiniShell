@@ -6,13 +6,13 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:59:27 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 04:43:05 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/09/30 05:13:12 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*alloc_s(char const *s,  int start, int len)
+char	*alloc_s(char const *s, int start, int len)
 {
 	char	*stock;
 
