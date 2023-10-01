@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:10:25 by emohamed          #+#    #+#             */
-/*   Updated: 2023/09/30 23:19:43 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/01 08:57:10 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,19 @@ int	run_shell_loop_helper(t_vars *vars, t_info **tokens, t_run runs)
 	return (1);
 }
 
-int	run_shell_loop(t_vars *vars, t_info **tokens)
+int	main(int ac __attribute__((unused)), char **av __attribute__((unused)),
+		char **env)
 {
+	t_vars	vars;
+	t_info	**tokens;
 	t_run	runs;
 
+	g_exit_status = 0;
+	initialize_vars(&vars, env);
+	tokens = NULL;
+	rl_catch_signals = 0;
+	signal(SIGINT, siginthandler);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		runs.input = read_input();
@@ -71,24 +80,8 @@ int	run_shell_loop(t_vars *vars, t_info **tokens)
 		if (!runs.trimed[0])
 			continue ;
 		runs.str = make_token(runs.trimed);
-		if (!run_shell_loop_helper(vars, tokens, runs))
+		if (!run_shell_loop_helper(&vars, tokens, runs))
 			return (0);
 	}
-	return (0);
-}
-
-int	main(int ac __attribute__((unused)), char **av __attribute__((unused)),
-		char **env)
-{
-	t_vars	vars;
-	t_info	**tokens;
-
-	g_exit_status = 0;
-	initialize_vars(&vars, env);
-	tokens = NULL;
-	rl_catch_signals = 0;
-	signal(SIGINT, siginthandler);
-	signal(SIGQUIT, SIG_IGN);
-	run_shell_loop(&vars, tokens);
 	return (0);
 }

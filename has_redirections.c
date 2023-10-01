@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 20:59:20 by haarab            #+#    #+#             */
-/*   Updated: 2023/10/01 00:59:32 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/01 09:02:04 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	redirect_heredoc(t_vars *vars, int j, char *base_filename, int i)
 		heredoc_delimiter = vars->cmds[i].file_derec[j];
 		vars->here_fd = create_temp_file(base_filename);
 		collect_and_write_heredoc(vars->here_fd, heredoc_delimiter);
+		rl_catch_signals = 0;
 	}
 	else
 	{
