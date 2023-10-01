@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:31:58 by emohamed          #+#    #+#             */
-/*   Updated: 2023/10/01 00:01:51 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/10/01 09:34:52 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,14 +169,10 @@ typedef struct s_data
 	char	*path;
 }	t_data;
 
-int			handle_input_redirection(char *filename);
-int			handle_output_redirection(char *filename);
-int			handle_append_redirection(char *filename);
 t_sp		realloc_tokens(t_sp sp);
 t_sp		handle_token(t_sp sp);
-int			handle_heredoc(char *filename);
 t_sp		handle_last_token(t_sp sp);
-
+t_info		**allocat_token(char **s, t_vars *cvars);
 void		run_export(t_vars *vars, int i);
 void		run_unset(t_vars *vars, int i);
 void		run_exit(t_vars *vars, int i);
@@ -191,7 +187,6 @@ char		**get_files(int size, char **old_stac);
 char		**make_token(char *s);
 int			lenght_of_the_2d(char **p);
 int			count_s_lenght(const char *s, char c);
-t_info		**allocat_token(char **s, t_vars *cvars);
 char		*ft_strdup(const char *s1);
 char		*ft_getenv(char *key, t_vars *vars);
 void		exec_cmds(t_vars *vars, int i);
@@ -204,9 +199,7 @@ void		run_echo(char **args);
 void		export_cmd(t_vars *vars, char *args);
 void		check_unset(char **args, t_vars *vars, int check);
 void		env_cmd(t_vars *vars);
-void		table(char **str, t_info **tokens);
 int			count_argiment(char **str);
-void		syn_err(char **str, t_vars *vars);
 void		fill_commands(char **ptr, t_vars *vars);
 void		pipe_commands(t_vars *vars, int i, pid_t *childs);
 char		**red_to_herdoc(char **tokens);
@@ -219,12 +212,10 @@ void		siginthandler(int signal);
 void		fell_env_struct(t_vars *vars);
 void		fell_env_struct(t_vars *vars);
 char		*ft_getenv(char *key, t_vars *vars);
-void		pipe_red(t_vars *vars, int i, pid_t *childs);
 void		cmd_builtins(t_vars *vars, int i);
 int			syntax_errors(char **args);
 void		is_notbuiltins(t_vars *vars, int i, pid_t *childs);
 void		ft_builtins(t_vars *vars, int i, pid_t *childs);
-int			command_notfound(char **args, t_vars *vars);
 int			syntax_err(char **args);
 void		change_pwd(t_vars *vars, char *pwd);
 char		**expand_s_quotes(char **tokens);
@@ -234,7 +225,6 @@ char		**ft_split_export(char const *s, char c);
 char		*allocat_s_export(const char *s, char c);
 int			count_s_lenght_export(const char *s, char c);
 void		free_x_dmax(char **str);
-int			double_quotes(char **args);
 char		*dp_en(const char *s1);
 char		*ft_strdup_against(const char *s1);
 char		*ft_strjoin_export(char const *s1, char const *s2);
